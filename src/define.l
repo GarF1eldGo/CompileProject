@@ -1,69 +1,75 @@
 %{
 #include<stdio.h>
 #include"grammar.h"
+#include"ast.h"
 extern int yylval;
 %}
 
-letter = [A-Za-z]
+
 digit = [0-9]
-letgit = letter | digit
+letter = [A-Za-z]
+letgit = digit | letter
+identifier = letter letgit*
 
+integer = digit+ | -digit+
+float = digit+ "." digit+ | -digit+ "." -digit+
+string = "\"" (letgit | "\"")* "\""
 
-INTEGER = [0-9]+ | -[0-9]+
-FLOAT = [0-9]+.[0-9]+ | -[0-9]+.[0-9]+
-
-
-ID = letter digit*
-CHARCONST = '\'' letdit '\''
-STRINGCONST = '"' letgit* '"'
-WhiteSpace = ' ' | '\t' | '\n' | '\r'
-Comment = '//' [^\n]* '\n'
-
-
-while = "while"
-for = "for"
-if = "if"
-else = "else"
-break = "break"
-continue = "continue"
-return = "return"
-
-
-int = "int"
-float = "float"
-char = "char"
-double = "double"
-bool = "bool"
-void = "void"
-
+comment = "//" (letgit | "\n")* "\n"
 
 
 %%
-{INTEGER} {yylval = atoi(yytext); return INTEGER;}
-{FLOAT} {yylval = atof(yytext); return FLOAT;}
-{ID} {yylval = yytext; return ID;}
-{CHARCONST} {yylval = yytext; return CHARCONST;}
-{STRINGCONST} {yylval = yytext; return STRINGCONST;}
+{identifier} {return IDENTIFIER;}
+{float} {return CONSTANT;}
+{integer} {return CONSTANT;}
+{string} {return STRING_LITERAL;}
 
-{WhiteSpace} {//Ignore WhiteSpace}
-{Comment} {//Ignore Comment}
+{comment} {//ignore the comment;}
 
-{while} {return while;}
-{for} {return for;}
-{if} {return if;}
-{else} {return else;}
-{break} {return break;}
-{continue} {return continue;}
-{return} {return return;}
+"++" {return INC_OP;}
+"--" {return DEC_OP;}
+"<<" {return LEFT_OP;}
+">>" {return RIGHT_OP;}
+"<=" {return LE_OP;}
+">=" {return GE_OP;}
+"==" {return EQ_OP;}
+"!=" {return NE_OP;}
 
-{int} {return int;}
-{float} {return float;}
-{char} {return char;}
-{double} {return double;}
-{bool} {return bool;}
-{void} {return void;}
+"&&" {return AND_OP;}
+"||" {return OR_OP;}
 
-. {yylval = yytext;}
+"*=" {return MUL_ASSIGN;}
+"/=" {return DIV_ASSIGN;}
+"%=" {return MOD_ASSIGN;}
+"+=" {return ADD_ASSIGN;}
+"-=" {return SUB_ASSIGN;}
+"<<=" {return LEFT_ASSIGN;}
+">>=" {return RIGHT_ASSIGN;}
+"&=" {return AND_ASSIGN;}
+"^=" {return XOR_ASSIGN;}
+"|=" {return OR_ASSIGN;}
+
+"char" {return CHAR;}
+"chort" {return CHORT;}
+"int" {return INT;}
+"long" {return LONG;}
+"float" {return FLOAT;}
+"double" {return DOUBLE;}
+"void" {return VOID;}
+
+"..." {return ELLIPSIS;}
+
+"if" {return IF;}
+"else" {return ELSE;}
+"while" {return WHILE;}
+"do" {return DO;}
+"for" {return FOR;}
+"continue" {return CONTINUE;}
+"break" {return BREAK;}
+"return" {return RETURN;}
+
+. {//ignore this character}
+
 %%
 
 
