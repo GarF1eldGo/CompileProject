@@ -14,6 +14,7 @@ using namespace std;
 class exprAST{
 public:
     virtual ~exprAST(){}
+    virtual Value *Codegen() = 0;
 };
 
 
