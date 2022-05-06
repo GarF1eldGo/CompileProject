@@ -1,5 +1,7 @@
 # CompileProject
-文法规则参考：[A Grammar for the C- Programming Language (Version S21)](http://marvin.cs.uidaho.edu/Teaching/CS445/c-Grammar.pdf)<br/><br/><br/>
+使用的文法规则为：[Grammar.txt](https://github.com/GarF1eldGo/CompileProject/blob/main/grammar.txt)<br/>
+该文法规则主要参考了[ANSI C Yacc grammar](https://www.lysator.liu.se/c/ANSI-C-grammar-y.html)
+<br/><br/><br/>
 
 
 
@@ -7,5 +9,5 @@
 
 # 待定事项
 
-- [ ] 确定AST结点需要包含的属性  
+- [x] 确定AST结点需要包含的属性  
 
