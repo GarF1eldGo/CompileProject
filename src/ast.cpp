@@ -10,6 +10,9 @@ void exprAST::visualizeAST(string fileName){
     
 }
 
+void nonleafAST::visualizeAST(string fileName){
+    ofstream outFile;
+}
 
 //非终结符结点的构造函数
 nonleafAST::nonleafAST(string name, int type, int childNum, ...)

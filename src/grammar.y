@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
+#include<stack>
 #include "ast.h"
 #include "define.cpp"
 
@@ -9,20 +10,35 @@ int yylex();
 void yyerror(char const *s);
 
 extern exprAST* ROOT;
-vector<exprAST*> toeknStack;
+stack<exprAST*> tokenStack;
 %}
 
 
-%token IDENTIFIER CONSTANT STRING_LITERAL SIZEOF
-%token INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
-%token AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
-%token SUB_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN
-%token XOR_ASSIGN OR_ASSIGN
+%union{
+	class exprAST* exprPtr;
+}
 
-%token CHAR SHORT INT LONG FLOAT DOUBLE VOID
-%token ELLIPSIS
+//终结符定义与其类型定义
+%token <exprPtr> IDENTIFIER CONSTANT STRING_LITERAL SIZEOF
+%token <exprPtr> INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
+%token <exprPtr> AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
+%token <exprPtr> SUB_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN
+%token <exprPtr> XOR_ASSIGN OR_ASSIGN
 
-%token IF ELSE WHILE DO FOR CONTINUE BREAK RETURN
+%token <exprPtr> CHAR SHORT INT LONG FLOAT DOUBLE VOID
+%token <exprPtr> ELLIPSIS
+
+%token <exprPtr> IF ELSE WHILE DO FOR CONTINUE BREAK RETURN
+
+//文法规则类型定义
+%type <exprPtr> translation_unit external_declaration function_definition declaration_specifiers type_specifier
+%type <exprPtr> declarator direct_declarator constant_expression conditional_expression logical_or_expression logical_and_expression
+%type <exprPtr> inclusive_or_expression exclusive_or_expression and_expression equality_expression relational_expression
+%type <exprPtr> shift_expression additive_expression multiplicative_expression cast_expression type_name expression assignment_expression
+%type <exprPtr> unary_expression postfix_expression argument_expression_list unary_operator assignment_operator expression_statement 
+%type <exprPtr> parameter_type_list parameter_list parameter_declaration compound_statement statement_list statement selection_statement
+%type <exprPtr> iteration_statement jump_statement init_declarator init_declarator_list primary_expression declaration declaration_list
+
 
 %start translation_unit
 
@@ -71,13 +87,14 @@ declarator
 //TODO
 direct_declarator
 	: IDENTIFIER { 
-		exprAST* id = toeknStack.pop();
+		exprAST* id = tokenStack.top();
+		tokenStack.pop();
 		$$ = new nonleafAST("direct_declarator", 1, 1, id);
 	}
 	| '(' declarator ')' { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		$$ = new nonleafAST("direct_declarator", 2, 3, left, $1, right);
+		$$ = new nonleafAST("direct_declarator", 2, 3, left, $2, right);
 	}
 	| direct_declarator '[' constant_expression ']' { 
 		exprAST* left = new punctuationAST("[");
@@ -347,15 +364,18 @@ postfix_expression
 //TODO
 primary_expression
 	: IDENTIFIER {
-		exprAST* id = toeknStack.pop();
-		$$ = new nonleafAST("primary_expression", 1, 1, id);
+		exprAST* identifier = tokenStack.top();
+		tokenStack.pop();
+		$$ = new nonleafAST("primary_expression", 1, 1, identifier);
 	}
 	| CONSTANT {
-		exprAST* const = toeknStack.pop();
-		$$ = new nonleafAST("primary_expression", 2, 1, const);
+		exprAST* constant = tokenStack.top();
+		tokenStack.pop();
+		$$ = new nonleafAST("primary_expression", 2, 1, constant);
 	}
 	| STRING_LITERAL {
-		exprAST* str = toeknStack.pop();
+		exprAST* str = tokenStack.top();
+		tokenStack.pop();
 		$$ = new nonleafAST("primary_expression", 3, 1, str);
 	}
 	| '(' expression ')' {
@@ -535,7 +555,7 @@ iteration_statement
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		$$ = new nonleafAST("iteration_statement", 4, 7 oneFOR, left, $3, $4, $5, right, $7);
+		$$ = new nonleafAST("iteration_statement", 4, 7, oneFOR, left, $3, $4, $5, right, $7);
 	}
 	;
 
@@ -592,11 +612,13 @@ init_declarator
 	}
 
 
-
 %%
 
 
 void yyerror(char const *s){
     printf("Error Information\n");
     printf("%s at %s\n",s,yytext);
+	return ;
 }
+
+

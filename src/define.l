@@ -1,9 +1,12 @@
 %{
 #include<stdio.h>
+#include<iostream>
+#include<string.h>
 #include"grammar.hpp"
 #include"ast.h"
-extern int yylval;
+
 extern stack<exprAST*> tokenStack;
+
 %}
 
 
@@ -14,43 +17,32 @@ identifier {letter}{letgit}*
 
 integer {digit}+
 float {digit}+"."{digit}+
-string \"[^"]*\"
+string \"(\\.|[^"\\])*\"
 
-comment \/\/[^"]*
+comment \/\/[^\n]*
 
 %%
-{identifier} {
-    exprAST* id = new identifierAST(yytext);
-    tokenStack.push(id);
-    return IDENTIFIER;
-    }
-{float} {
-    exprAST* oneFloat = new constantAST(2, atof(yytext));
-    tokenStack.push(oneFloat);
-    return CONSTANT;
-    }
-"-"{float} {
-    exprAST* oneFloat = new constantAST(2, atof(yytext));
-    tokenStack.push(oneFloat);
-    return CONSTANT;
-}
-{integer} {
-    exprAST* oneInt = new constantAST(1, (double)atoi(yytext));
-    tokenStack.push(oneInt);
-    return CONSTANT;
-    }
-"-"{integer} {
-    exprAST* oneInt = new constantAST(1, (double)atoi(yytext));
-    tokenStack.push(oneInt);
-    return CONSTANT;
-    }
-{string} {
-    exprAST* oneString = new stringAST(yytext);
-    tokenStack.push(oneString);
-    return STRING_LITERAL;
-    }
+"=" {return '=';}
+"," {return ',';}
+";" {return ';';}
+":" {return ':';}
+"(" {return '(';}
+")" {return ')';}
+"[" {return '[';}
+"]" {return ']';}
+"{" {return '{';}
+"}" {return '}';}
 
-{comment} {//ignore the comment;}
+"&" {return '&';}
+"|" {return '|';}
+"^" {return '^';}
+"*" {return '*';}
+"+" {return '+';}
+"-" {return '-';}
+"~" {return '~';}
+"!" {return '!';}
+"?" {return '?';}
+
 
 "++" {return INC_OP;}
 "--" {return DEC_OP;}
@@ -76,7 +68,7 @@ comment \/\/[^"]*
 "|=" {return OR_ASSIGN;}
 
 "char" {return CHAR;}
-"chort" {return CHORT;}
+"chort" {return SHORT;}
 "int" {return INT;}
 "long" {return LONG;}
 "float" {return FLOAT;}
@@ -94,7 +86,40 @@ comment \/\/[^"]*
 "break" {return BREAK;}
 "return" {return RETURN;}
 
-. {//ignore this character}
+{float} {
+    exprAST* oneFloat = new constantAST(2, atof(yytext));
+    tokenStack.push(oneFloat);
+    return CONSTANT;
+    }
+"-"{float} {
+    exprAST* oneFloat = new constantAST(2, atof(yytext));
+    tokenStack.push(oneFloat);
+    return CONSTANT;
+}
+{integer} {
+    exprAST* oneInt = new constantAST(1, (double)atoi(yytext));
+    tokenStack.push(oneInt);
+    return CONSTANT;
+    }
+"-"{integer} {
+    exprAST* oneInt = new constantAST(1, (double)atoi(yytext));
+    tokenStack.push(oneInt);
+    return CONSTANT;
+    }
+{string} {
+    exprAST* oneString = new stringAST(yytext);
+    tokenStack.push(oneString);
+    return STRING_LITERAL;
+    }
+{identifier} {
+    exprAST* id = new identifierAST(yytext);
+    tokenStack.push(id);
+    return IDENTIFIER;
+    }
+{comment} {}
+
+[ \t\n]+ {}
+. {}
 
 %%
 

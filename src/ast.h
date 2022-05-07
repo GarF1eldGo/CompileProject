@@ -5,13 +5,22 @@
 #include<string.h>
 #include<vector>
 #include<fstream>
-#include <json/json.h>
+//#include <json/json.h>
 
-#include <llvm/IR/Value.h>
+// #include <llvm/IR/Value.h>
+// #include <llvm/IR/BasicBlock.h>
+// #include <llvm/IR/Module.h>
+// #include <llvm/IR/Function.h>
+// #include <llvm/IR/LLVMContext.h>
+// #include <llvm/IR/LegacyPassManager.h>
+// #include <llvm/IR/CallingConv.h>
+// #include <llvm/IR/IRPrintingPasses.h>
+// #include <llvm/IR/IRBuilder.h>
+// #include <llvm/IR/GlobalVariable.h>
 
 
 using namespace std;
-using namespace llvm;
+//using namespace llvm;
 
 //将结点分为两种：叶子结点（终结符token），非叶子结点（非终结符grammar）
 
@@ -20,7 +29,7 @@ using namespace llvm;
 class exprAST{
 public:
     virtual ~exprAST(){}
-    virtual Value *Codegen();
+    //virtual Value *Codegen();
     virtual void visualizeAST(string fileName);
 };
 
@@ -51,6 +60,7 @@ public:
     int type;
     vector<exprAST*> children;
 
+    void visualizeAST(string fileName);
     nonleafAST(string name, int type, int childNum, ...);
     nonleafAST(string name, int type);
 };
