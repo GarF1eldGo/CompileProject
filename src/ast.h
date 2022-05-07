@@ -4,8 +4,14 @@
 #include<iostream>
 #include<string.h>
 #include<vector>
+#include<fstream>
+#include <json/json.h>
+
+#include <llvm/IR/Value.h>
+
 
 using namespace std;
+using namespace llvm;
 
 //将结点分为两种：叶子结点（终结符token），非叶子结点（非终结符grammar）
 
@@ -14,17 +20,20 @@ using namespace std;
 class exprAST{
 public:
     virtual ~exprAST(){}
+    virtual Value *Codegen();
+    virtual void visualizeAST(string fileName);
 };
 
 
 
 //叶子结点
-//终结符包括：constant,string_literal,operator,identifier,type,keyword
+//终结符包括：constant,string_literal,operator,identifier,type,keyword,punctuation
 //constant包括：整数，浮点数，字符串
-//operator包括：+,-,*,/,%,++,--,=,==,!=,>,<,>=,<=,&&,||,!,<<=,>>=,+=,-=,*=,/=,%=,&=,|=,^=
+//operator包括：+,-,*,/,%,++,--,=,==,!=,>,<,>=,<=,&&,||,<<=,>>=,+=,-=,*=,/=,%=,&=,|=,^=,|,&,^,~,!,
 //identifier包括：标识符
 //type包括：void,char,short,int,long,float,double
-//keyword包括：if,else,while,for,break,continue,return
+//keyword包括：if,else,while,for,break,continue,return,sizeof
+//punctuation包括：(,),{,},[,],;
 class leafAST : public exprAST{
 public:
     virtual ~leafAST(){}
@@ -114,6 +123,15 @@ class keywordAST : public leafAST{
 public:
     string name;
     keywordAST(string name);
+};
+
+
+
+//标点结点
+class punctuationAST : public leafAST{
+public:
+    string punctuation;
+    punctuationAST(string punctuation);
 };
 
 #endif

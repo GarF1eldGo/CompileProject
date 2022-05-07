@@ -1,28 +1,54 @@
 %{
 #include<stdio.h>
-#include"grammar.h"
+#include"grammar.hpp"
 #include"ast.h"
 extern int yylval;
+extern stack<exprAST*> tokenStack;
 %}
 
 
-digit = [0-9]
-letter = [A-Za-z]
-letgit = digit | letter
-identifier = letter letgit*
+digit [0-9]
+letter [A-Za-z]
+letgit [A-Za-z0-9]
+identifier {letter}{letgit}*
 
-integer = digit+ | -digit+
-float = digit+ "." digit+ | -digit+ "." -digit+
-string = "\"" (letgit | "\"")* "\""
+integer {digit}+
+float {digit}+"."{digit}+
+string \"[^"]*\"
 
-comment = "//" (letgit | "\n")* "\n"
-
+comment \/\/[^"]*
 
 %%
-{identifier} {return IDENTIFIER;}
-{float} {return CONSTANT;}
-{integer} {return CONSTANT;}
-{string} {return STRING_LITERAL;}
+{identifier} {
+    exprAST* id = new identifierAST(yytext);
+    tokenStack.push(id);
+    return IDENTIFIER;
+    }
+{float} {
+    exprAST* oneFloat = new constantAST(2, atof(yytext));
+    tokenStack.push(oneFloat);
+    return CONSTANT;
+    }
+"-"{float} {
+    exprAST* oneFloat = new constantAST(2, atof(yytext));
+    tokenStack.push(oneFloat);
+    return CONSTANT;
+}
+{integer} {
+    exprAST* oneInt = new constantAST(1, (double)atoi(yytext));
+    tokenStack.push(oneInt);
+    return CONSTANT;
+    }
+"-"{integer} {
+    exprAST* oneInt = new constantAST(1, (double)atoi(yytext));
+    tokenStack.push(oneInt);
+    return CONSTANT;
+    }
+{string} {
+    exprAST* oneString = new stringAST(yytext);
+    tokenStack.push(oneString);
+    return STRING_LITERAL;
+    }
 
 {comment} {//ignore the comment;}
 

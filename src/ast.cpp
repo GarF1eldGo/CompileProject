@@ -4,6 +4,13 @@
 exprAST* ROOT = new exprAST();
 
 
+void exprAST::visualizeAST(string fileName){
+    ofstream outFile;
+    outFile.open(fileName);
+    
+}
+
+
 //非终结符结点的构造函数
 nonleafAST::nonleafAST(string name, int type, int childNum, ...)
 {
@@ -60,4 +67,10 @@ typeAST::typeAST(int type)
 keywordAST::keywordAST(string name)
 {
     this->name = name;
+}
+
+
+punctuationAST::punctuationAST(string punctuation)
+{
+    this->punctuation = punctuation;
 }
