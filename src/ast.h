@@ -5,66 +5,53 @@
 #include<string.h>
 #include<vector>
 #include<fstream>
-//#include <json/json.h>
-
-// #include <llvm/IR/Value.h>
-// #include <llvm/IR/BasicBlock.h>
-// #include <llvm/IR/Module.h>
-// #include <llvm/IR/Function.h>
-// #include <llvm/IR/LLVMContext.h>
-// #include <llvm/IR/LegacyPassManager.h>
-// #include <llvm/IR/CallingConv.h>
-// #include <llvm/IR/IRPrintingPasses.h>
-// #include <llvm/IR/IRBuilder.h>
-// #include <llvm/IR/GlobalVariable.h>
-
+#include <json/json.h>
 
 using namespace std;
 //using namespace llvm;
 
-//将结点分为两种：叶子结点（终结符token），非叶子结点（非终结符grammar）
 
 
 //基类
 class exprAST{
 public:
-    virtual ~exprAST(){}
+    string name;//用于AST可视化
+
     //virtual Value *Codegen();
-    virtual void visualizeAST(string fileName);
+    void createJsonFile(string fileName);
+    virtual Json::Value buildJsonAST(){};
 };
 
 
 
 //叶子结点
-//终结符包括：constant,string_literal,operator,identifier,type,keyword,punctuation
-//constant包括：整数，浮点数，字符串
-//operator包括：+,-,*,/,%,++,--,=,==,!=,>,<,>=,<=,&&,||,<<=,>>=,+=,-=,*=,/=,%=,&=,|=,^=,|,&,^,~,!,
-//identifier包括：标识符
-//type包括：void,char,short,int,long,float,double
-//keyword包括：if,else,while,for,break,continue,return,sizeof
-//punctuation包括：(,),{,},[,],;
 class leafAST : public exprAST{
 public:
-    virtual ~leafAST(){}
+    //virtual ~leafAST(){}
+    
+    void createJsonFile(string fileName);
+    Json::Value buildJsonAST();
 };
 
 
 
 //非叶子结点
-//string name : 表示该非终结符的名称
-//int type : 表示使用该非终结符的第type个文法规则
-//vector<exprAST*> children : 表示所有的孩子结点
 class nonleafAST : public exprAST{
 public:
-    string name;
+    //string name;
     int type;
     vector<exprAST*> children;
 
-    void visualizeAST(string fileName);
+    void createJsonFile(string fileName);
+    Json::Value buildJsonAST();
     nonleafAST(string name, int type, int childNum, ...);
     nonleafAST(string name, int type);
 };
 
+
+/*
+===========================叶子结点的相关类================================
+*/
 
 
 //常量结点
@@ -104,8 +91,8 @@ public:
 //string name : 记录标识符的名称
 class identifierAST : public leafAST{
 public:
-    string name;
-    identifierAST(string name);
+    string identifier;
+    identifierAST(string identifier);
 };
 
 
@@ -131,8 +118,8 @@ public:
 //string name : 记录关键字的名称
 class keywordAST : public leafAST{
 public:
-    string name;
-    keywordAST(string name);
+    string keyword;
+    keywordAST(string keyword);
 };
 
 
@@ -143,5 +130,56 @@ public:
     string punctuation;
     punctuationAST(string punctuation);
 };
+
+
+
+/*
+===========================非叶子结点的相关类================================
+*/
+
+class primaryExprAST : public nonleafAST{};
+class postfixExprAST : public nonleafAST{};
+class argumentExprListAST : public nonleafAST{};
+class unaryExprAST : public nonleafAST{};
+class unaryOpAST : public nonleafAST{};
+class castExprAST : public nonleafAST{};
+class multiplicativeExprAST : public nonleafAST{};
+class additiveExprAST : public nonleafAST{};
+class shiftExprAST : public nonleafAST{};
+class relationalExprAST : public nonleafAST{};
+class equalityExprAST : public nonleafAST{};
+class andExpAST : public nonleafAST{};
+class exclusiveOrExpAST : public nonleafAST{};
+class inclusiveOrExpAST : public nonleafAST{};
+class logicalAndExpAST : public nonleafAST{};
+class logicalOrExpAST : public nonleafAST{};
+class conditionalExpAST : public nonleafAST{};
+class assignmentExprAST : public nonleafAST{};
+class assignmentOpAST : public nonleafAST{};
+class expressionAST : public nonleafAST{};
+class constantExpAST : public nonleafAST{};
+class declarationAST : public nonleafAST{};
+class initDeclaratorAST : public nonleafAST{};
+class initDeclaratorListAST : public nonleafAST{};
+class declarationSpecifierAST : public nonleafAST{};
+class typeSpecifierAST : public nonleafAST{};
+class declaratorAST : public nonleafAST{};
+class directDeclaratorAST : public nonleafAST{};
+class parameterTypeListAST : public nonleafAST{};
+class parameterListAST : public nonleafAST{};
+class parameterDeclarationAST : public nonleafAST{};
+class typeNameAST : public nonleafAST{};
+class statementAST : public nonleafAST{};
+class compoundStatementAST : public nonleafAST{};
+class declarationListAST : public nonleafAST{};
+class statementListAST : public nonleafAST{};
+class expressionStatementAST : public nonleafAST{};
+class selectionStatementAST : public nonleafAST{};
+class iterationStatementAST : public nonleafAST{};
+class jumpStatementAST : public nonleafAST{};
+class translationUnitAST : public nonleafAST{};
+class externalDeclarationAST : public nonleafAST{};
+class functionDefinitionAST : public nonleafAST{};
+
 
 #endif

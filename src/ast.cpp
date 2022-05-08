@@ -4,15 +4,40 @@
 exprAST* ROOT = new exprAST();
 
 
-void exprAST::visualizeAST(string fileName){
+//根据AST创建Json文件
+void exprAST::createJsonFile(string fileName){
     ofstream outFile;
     outFile.open(fileName);
-    
+    if(!outFile.is_open()){
+        cout<<"open file \"" << fileName << "\" failed" << endl;
+        return;
+    }
+    Json::Value root = buildJsonAST();
+    outFile << root;
+    outFile.close();
 }
 
-void nonleafAST::visualizeAST(string fileName){
-    ofstream outFile;
+
+//为非叶子结点创建Json类型的AST
+Json::Value nonleafAST::buildJsonAST(){
+    Json::Value root;
+    root["name"] = name;
+
+    for(int i=0;i<children.size();i++){
+        root["children"].append(children[i]->buildJsonAST());
+    }
+
+    return root;
 }
+
+
+//为叶子结点创建Json类型的AST
+Json::Value leafAST::buildJsonAST(){
+    Json::Value root;
+    root["name"] = name;
+    return root;
+}
+
 
 //非终结符结点的构造函数
 nonleafAST::nonleafAST(string name, int type, int childNum, ...)
@@ -40,40 +65,47 @@ constantAST::constantAST(int type, double value)
 {
     this->type = type;
     this->value = value;
+    this->name = "constant";
 }
 
 
 stringAST::stringAST(string value)
 {
     this->value = value;
+    this->name = "string";
 }
 
 
 operatorAST::operatorAST(string op)
 {
     this->op = op;
+    this->name = "operator";
 }
 
 
-identifierAST::identifierAST(string name)
+identifierAST::identifierAST(string identifier)
 {
-    this->name = name;
+    this->identifier = identifier;
+    this->name = "identifier";
 }
 
 
 typeAST::typeAST(int type)
 {
     this->type = type;
+    this->name = "type";
 }
 
 
-keywordAST::keywordAST(string name)
+keywordAST::keywordAST(string keyword)
 {
-    this->name = name;
+    this->keyword = keyword;
+    this->name = "keyword";
 }
 
 
 punctuationAST::punctuationAST(string punctuation)
 {
     this->punctuation = punctuation;
+    this->name = "punctuation";
 }

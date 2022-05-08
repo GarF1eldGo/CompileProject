@@ -1,16 +1,16 @@
-CC = g++
-OBJECT = main.o ast.o grammar.o define.o
-CPP = main.cpp ast.cpp grammar.cpp
+cc = g++ -std=c++11
+cpp = main.cpp ast.cpp grammar.cpp
 
+# json 相关库
+prefix=/usr/local/Cellar/jsoncpp/1.9.4_1
+libdir=${prefix}/lib
+includedir=${prefix}/include
 
-# build:
-# 	@echo "Building..."
-# 	bison -d -o grammar.cpp grammar.y
-# 	flex -o define.cpp define.l
-# 	$(CC) $(CPP) -o main
+libs = -L${libdir} -ljsoncpp
+cflags = -I${includedir}
 
 
 tempTest:
 	bison -d -o grammar.cpp grammar.y
 	flex -o define.cpp define.l
-	g++ ast.cpp grammar.cpp main.cpp -o yaccTest
+	${cc} ${libs} ${cflags} ${cpp} -o yaccTest -w 
