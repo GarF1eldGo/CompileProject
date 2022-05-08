@@ -76,6 +76,7 @@ external_declaration
 	}
     ;
 
+
 //函数定义
 function_definition
     : declaration_specifiers declarator compound_statement {

@@ -547,20 +547,20 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    49,    49,    55,    67,    72,    81,    92,    97,   107,
-     108,   109,   110,   111,   112,   113,   118,   128,   135,   144,
-     154,   163,   173,   187,   197,   202,   218,   223,   236,   241,
-     254,   259,   272,   277,   290,   295,   308,   313,   321,   334,
-     339,   347,   355,   363,   376,   381,   389,   402,   407,   415,
-     428,   433,   441,   449,   462,   467,   482,   492,   497,   510,
-     515,   527,   532,   539,   546,   552,   559,   575,   580,   590,
-     599,   609,   616,   629,   636,   643,   650,   664,   669,   682,
-     683,   684,   685,   686,   687,   693,   694,   695,   696,   697,
-     698,   699,   700,   701,   702,   703,   709,   714,   728,   733,
-     746,   757,   765,   774,   783,   798,   803,   814,   819,   830,
-     835,   840,   845,   850,   860,   866,   878,   890,   910,   922,
-     938,   951,   970,   978,   986,   994,  1008,  1021,  1026,  1038,
-    1043
+       0,    49,    49,    55,    67,    72,    82,    93,    98,   108,
+     109,   110,   111,   112,   113,   114,   119,   129,   136,   145,
+     155,   164,   174,   188,   198,   203,   219,   224,   237,   242,
+     255,   260,   273,   278,   291,   296,   309,   314,   322,   335,
+     340,   348,   356,   364,   377,   382,   390,   403,   408,   416,
+     429,   434,   442,   450,   463,   468,   483,   493,   498,   511,
+     516,   528,   533,   540,   547,   553,   560,   576,   581,   591,
+     600,   610,   617,   630,   637,   644,   651,   665,   670,   683,
+     684,   685,   686,   687,   688,   694,   695,   696,   697,   698,
+     699,   700,   701,   702,   703,   704,   710,   715,   729,   734,
+     747,   758,   766,   775,   784,   799,   804,   815,   820,   831,
+     836,   841,   846,   851,   861,   867,   879,   891,   911,   923,
+     939,   952,   971,   979,   987,   995,  1009,  1022,  1027,  1039,
+    1044
 };
 #endif
 
@@ -1744,7 +1744,7 @@ yyreduce:
     break;
 
   case 6:
-#line 81 "grammar.y"
+#line 82 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (3)].exprPtr));
@@ -1755,7 +1755,7 @@ yyreduce:
     break;
 
   case 7:
-#line 92 "grammar.y"
+#line 93 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -1764,7 +1764,7 @@ yyreduce:
     break;
 
   case 8:
-#line 97 "grammar.y"
+#line 98 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (2)].exprPtr));
@@ -1774,42 +1774,42 @@ yyreduce:
     break;
 
   case 9:
-#line 107 "grammar.y"
+#line 108 "grammar.y"
     { (yyval.exprPtr) = new typeAST(1); ;}
     break;
 
   case 10:
-#line 108 "grammar.y"
+#line 109 "grammar.y"
     { (yyval.exprPtr) = new typeAST(2);;}
     break;
 
   case 11:
-#line 109 "grammar.y"
+#line 110 "grammar.y"
     { (yyval.exprPtr) = new typeAST(3);;}
     break;
 
   case 12:
-#line 110 "grammar.y"
+#line 111 "grammar.y"
     { (yyval.exprPtr) = new typeAST(4);;}
     break;
 
   case 13:
-#line 111 "grammar.y"
+#line 112 "grammar.y"
     { (yyval.exprPtr) = new typeAST(5);;}
     break;
 
   case 14:
-#line 112 "grammar.y"
+#line 113 "grammar.y"
     { (yyval.exprPtr) = new typeAST(6);;}
     break;
 
   case 15:
-#line 113 "grammar.y"
+#line 114 "grammar.y"
     { (yyval.exprPtr) = new typeAST(7);;}
     break;
 
   case 16:
-#line 118 "grammar.y"
+#line 119 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -1818,7 +1818,7 @@ yyreduce:
     break;
 
   case 17:
-#line 128 "grammar.y"
+#line 129 "grammar.y"
     { 
 		exprAST* id = tokenStack.top();
 		tokenStack.pop();
@@ -1829,7 +1829,7 @@ yyreduce:
     break;
 
   case 18:
-#line 135 "grammar.y"
+#line 136 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -1842,7 +1842,7 @@ yyreduce:
     break;
 
   case 19:
-#line 144 "grammar.y"
+#line 145 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
@@ -1856,7 +1856,7 @@ yyreduce:
     break;
 
   case 20:
-#line 154 "grammar.y"
+#line 155 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
@@ -1869,7 +1869,7 @@ yyreduce:
     break;
 
   case 21:
-#line 163 "grammar.y"
+#line 164 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -1883,7 +1883,7 @@ yyreduce:
     break;
 
   case 22:
-#line 173 "grammar.y"
+#line 174 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -1896,7 +1896,7 @@ yyreduce:
     break;
 
   case 23:
-#line 187 "grammar.y"
+#line 188 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -1905,7 +1905,7 @@ yyreduce:
     break;
 
   case 24:
-#line 197 "grammar.y"
+#line 198 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -1914,7 +1914,7 @@ yyreduce:
     break;
 
   case 25:
-#line 202 "grammar.y"
+#line 203 "grammar.y"
     {
 		exprAST* questionMark = new punctuationAST("?");
 		exprAST* colon = new punctuationAST(":");
@@ -1929,7 +1929,7 @@ yyreduce:
     break;
 
   case 26:
-#line 218 "grammar.y"
+#line 219 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -1938,7 +1938,7 @@ yyreduce:
     break;
 
   case 27:
-#line 223 "grammar.y"
+#line 224 "grammar.y"
     {
 		exprAST* orOp = new operatorAST("||");
 		vector<exprAST*> children;
@@ -1950,7 +1950,7 @@ yyreduce:
     break;
 
   case 28:
-#line 236 "grammar.y"
+#line 237 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -1959,7 +1959,7 @@ yyreduce:
     break;
 
   case 29:
-#line 241 "grammar.y"
+#line 242 "grammar.y"
     {
 		exprAST* andOp = new operatorAST("&&");
 		vector<exprAST*> children;
@@ -1971,7 +1971,7 @@ yyreduce:
     break;
 
   case 30:
-#line 254 "grammar.y"
+#line 255 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -1980,7 +1980,7 @@ yyreduce:
     break;
 
   case 31:
-#line 259 "grammar.y"
+#line 260 "grammar.y"
     {
 		exprAST* orOp = new operatorAST("|");
 		vector<exprAST*> children;
@@ -1992,7 +1992,7 @@ yyreduce:
     break;
 
   case 32:
-#line 272 "grammar.y"
+#line 273 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2001,7 +2001,7 @@ yyreduce:
     break;
 
   case 33:
-#line 277 "grammar.y"
+#line 278 "grammar.y"
     {
 		exprAST* xorOp = new operatorAST("^");
 		vector<exprAST*> children;
@@ -2013,7 +2013,7 @@ yyreduce:
     break;
 
   case 34:
-#line 290 "grammar.y"
+#line 291 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2022,7 +2022,7 @@ yyreduce:
     break;
 
   case 35:
-#line 295 "grammar.y"
+#line 296 "grammar.y"
     {
 		exprAST* andOp = new operatorAST("&");
 		vector<exprAST*> children;
@@ -2034,7 +2034,7 @@ yyreduce:
     break;
 
   case 36:
-#line 308 "grammar.y"
+#line 309 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2043,7 +2043,7 @@ yyreduce:
     break;
 
   case 37:
-#line 313 "grammar.y"
+#line 314 "grammar.y"
     {
 		exprAST* eqOp = new operatorAST("==");
 		vector<exprAST*> children;
@@ -2055,7 +2055,7 @@ yyreduce:
     break;
 
   case 38:
-#line 321 "grammar.y"
+#line 322 "grammar.y"
     {
 		exprAST* neOp = new operatorAST("!=");
 		vector<exprAST*> children;
@@ -2067,7 +2067,7 @@ yyreduce:
     break;
 
   case 39:
-#line 334 "grammar.y"
+#line 335 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2076,7 +2076,7 @@ yyreduce:
     break;
 
   case 40:
-#line 339 "grammar.y"
+#line 340 "grammar.y"
     {
 		exprAST* lessOp = new operatorAST("<");
 		vector<exprAST*> children;
@@ -2088,7 +2088,7 @@ yyreduce:
     break;
 
   case 41:
-#line 347 "grammar.y"
+#line 348 "grammar.y"
     {
 		exprAST* greaterOp = new operatorAST(">");
 		vector<exprAST*> children;
@@ -2100,7 +2100,7 @@ yyreduce:
     break;
 
   case 42:
-#line 355 "grammar.y"
+#line 356 "grammar.y"
     {
 		exprAST* lessEqualOp = new operatorAST("<=");
 		vector<exprAST*> children;
@@ -2112,7 +2112,7 @@ yyreduce:
     break;
 
   case 43:
-#line 363 "grammar.y"
+#line 364 "grammar.y"
     {
 		exprAST* greaterEqualOp = new operatorAST(">=");
 		vector<exprAST*> children;
@@ -2124,7 +2124,7 @@ yyreduce:
     break;
 
   case 44:
-#line 376 "grammar.y"
+#line 377 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2133,7 +2133,7 @@ yyreduce:
     break;
 
   case 45:
-#line 381 "grammar.y"
+#line 382 "grammar.y"
     {
 		exprAST* leftOp = new operatorAST("<<");
 		vector<exprAST*> children;
@@ -2145,7 +2145,7 @@ yyreduce:
     break;
 
   case 46:
-#line 389 "grammar.y"
+#line 390 "grammar.y"
     {
 		exprAST* rightOp = new operatorAST(">>");
 		vector<exprAST*> children;
@@ -2157,7 +2157,7 @@ yyreduce:
     break;
 
   case 47:
-#line 402 "grammar.y"
+#line 403 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2166,7 +2166,7 @@ yyreduce:
     break;
 
   case 48:
-#line 407 "grammar.y"
+#line 408 "grammar.y"
     {
 		exprAST* addOp = new operatorAST("+");
 		vector<exprAST*> children;
@@ -2178,7 +2178,7 @@ yyreduce:
     break;
 
   case 49:
-#line 415 "grammar.y"
+#line 416 "grammar.y"
     {
 		exprAST* subOp = new operatorAST("-");
 		vector<exprAST*> children;
@@ -2190,7 +2190,7 @@ yyreduce:
     break;
 
   case 50:
-#line 428 "grammar.y"
+#line 429 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2199,7 +2199,7 @@ yyreduce:
     break;
 
   case 51:
-#line 433 "grammar.y"
+#line 434 "grammar.y"
     {
 		exprAST* mulOp = new operatorAST("*");
 		vector<exprAST*> children;
@@ -2211,7 +2211,7 @@ yyreduce:
     break;
 
   case 52:
-#line 441 "grammar.y"
+#line 442 "grammar.y"
     {
 		exprAST* divOp = new operatorAST("/");
 		vector<exprAST*> children;
@@ -2223,7 +2223,7 @@ yyreduce:
     break;
 
   case 53:
-#line 449 "grammar.y"
+#line 450 "grammar.y"
     {
 		exprAST* modOp = new operatorAST("%");
 		vector<exprAST*> children;
@@ -2235,7 +2235,7 @@ yyreduce:
     break;
 
   case 54:
-#line 462 "grammar.y"
+#line 463 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2244,7 +2244,7 @@ yyreduce:
     break;
 
   case 55:
-#line 467 "grammar.y"
+#line 468 "grammar.y"
     {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -2258,7 +2258,7 @@ yyreduce:
     break;
 
   case 56:
-#line 482 "grammar.y"
+#line 483 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2267,7 +2267,7 @@ yyreduce:
     break;
 
   case 57:
-#line 492 "grammar.y"
+#line 493 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2276,7 +2276,7 @@ yyreduce:
     break;
 
   case 58:
-#line 497 "grammar.y"
+#line 498 "grammar.y"
     {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
@@ -2288,7 +2288,7 @@ yyreduce:
     break;
 
   case 59:
-#line 510 "grammar.y"
+#line 511 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2297,7 +2297,7 @@ yyreduce:
     break;
 
   case 60:
-#line 515 "grammar.y"
+#line 516 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (3)].exprPtr));
@@ -2308,7 +2308,7 @@ yyreduce:
     break;
 
   case 61:
-#line 527 "grammar.y"
+#line 528 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2317,7 +2317,7 @@ yyreduce:
     break;
 
   case 62:
-#line 532 "grammar.y"
+#line 533 "grammar.y"
     {
 		exprAST* incOp = new operatorAST("++");
 		vector<exprAST*> children;
@@ -2328,7 +2328,7 @@ yyreduce:
     break;
 
   case 63:
-#line 539 "grammar.y"
+#line 540 "grammar.y"
     {
 		exprAST* decOp = new operatorAST("--");
 		vector<exprAST*> children;
@@ -2339,7 +2339,7 @@ yyreduce:
     break;
 
   case 64:
-#line 546 "grammar.y"
+#line 547 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (2)].exprPtr));
@@ -2349,7 +2349,7 @@ yyreduce:
     break;
 
   case 65:
-#line 552 "grammar.y"
+#line 553 "grammar.y"
     {
 		exprAST* sizeOf = new keywordAST("sizeof");
 		vector<exprAST*> children;
@@ -2360,7 +2360,7 @@ yyreduce:
     break;
 
   case 66:
-#line 559 "grammar.y"
+#line 560 "grammar.y"
     {
 		exprAST* sizeOf = new keywordAST("sizeof");
 		exprAST* left = new punctuationAST("(");
@@ -2375,7 +2375,7 @@ yyreduce:
     break;
 
   case 67:
-#line 575 "grammar.y"
+#line 576 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2384,7 +2384,7 @@ yyreduce:
     break;
 
   case 68:
-#line 580 "grammar.y"
+#line 581 "grammar.y"
     {
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
@@ -2398,7 +2398,7 @@ yyreduce:
     break;
 
   case 69:
-#line 590 "grammar.y"
+#line 591 "grammar.y"
     {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -2411,7 +2411,7 @@ yyreduce:
     break;
 
   case 70:
-#line 599 "grammar.y"
+#line 600 "grammar.y"
     {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -2425,7 +2425,7 @@ yyreduce:
     break;
 
   case 71:
-#line 609 "grammar.y"
+#line 610 "grammar.y"
     {
 		exprAST* incOp = new operatorAST("++");
 		vector<exprAST*> children;
@@ -2436,7 +2436,7 @@ yyreduce:
     break;
 
   case 72:
-#line 616 "grammar.y"
+#line 617 "grammar.y"
     {
 		exprAST* decOp = new operatorAST("--");
 		vector<exprAST*> children;
@@ -2447,7 +2447,7 @@ yyreduce:
     break;
 
   case 73:
-#line 629 "grammar.y"
+#line 630 "grammar.y"
     {
 		exprAST* identifier = tokenStack.top();
 		tokenStack.pop();
@@ -2458,7 +2458,7 @@ yyreduce:
     break;
 
   case 74:
-#line 636 "grammar.y"
+#line 637 "grammar.y"
     {
 		exprAST* constant = tokenStack.top();
 		tokenStack.pop();
@@ -2469,7 +2469,7 @@ yyreduce:
     break;
 
   case 75:
-#line 643 "grammar.y"
+#line 644 "grammar.y"
     {
 		exprAST* str = tokenStack.top();
 		tokenStack.pop();
@@ -2480,7 +2480,7 @@ yyreduce:
     break;
 
   case 76:
-#line 650 "grammar.y"
+#line 651 "grammar.y"
     {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -2493,7 +2493,7 @@ yyreduce:
     break;
 
   case 77:
-#line 664 "grammar.y"
+#line 665 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2502,7 +2502,7 @@ yyreduce:
     break;
 
   case 78:
-#line 669 "grammar.y"
+#line 670 "grammar.y"
     {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
@@ -2514,92 +2514,92 @@ yyreduce:
     break;
 
   case 79:
-#line 682 "grammar.y"
+#line 683 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("&"); ;}
     break;
 
   case 80:
-#line 683 "grammar.y"
+#line 684 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("*"); ;}
     break;
 
   case 81:
-#line 684 "grammar.y"
+#line 685 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("+"); ;}
     break;
 
   case 82:
-#line 685 "grammar.y"
+#line 686 "grammar.y"
     {	(yyval.exprPtr) = new operatorAST("-"); ;}
     break;
 
   case 83:
-#line 686 "grammar.y"
+#line 687 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("~"); ;}
     break;
 
   case 84:
-#line 687 "grammar.y"
+#line 688 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("!"); ;}
     break;
 
   case 85:
-#line 693 "grammar.y"
+#line 694 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("="); ;}
     break;
 
   case 86:
-#line 694 "grammar.y"
+#line 695 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("*="); ;}
     break;
 
   case 87:
-#line 695 "grammar.y"
+#line 696 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("/="); ;}
     break;
 
   case 88:
-#line 696 "grammar.y"
+#line 697 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("%="); ;}
     break;
 
   case 89:
-#line 697 "grammar.y"
+#line 698 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("+="); ;}
     break;
 
   case 90:
-#line 698 "grammar.y"
+#line 699 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("-="); ;}
     break;
 
   case 91:
-#line 699 "grammar.y"
+#line 700 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("<<="); ;}
     break;
 
   case 92:
-#line 700 "grammar.y"
+#line 701 "grammar.y"
     { (yyval.exprPtr) = new operatorAST(">>="); ;}
     break;
 
   case 93:
-#line 701 "grammar.y"
+#line 702 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("&="); ;}
     break;
 
   case 94:
-#line 702 "grammar.y"
+#line 703 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("^="); ;}
     break;
 
   case 95:
-#line 703 "grammar.y"
+#line 704 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("|="); ;}
     break;
 
   case 96:
-#line 709 "grammar.y"
+#line 710 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2608,7 +2608,7 @@ yyreduce:
     break;
 
   case 97:
-#line 714 "grammar.y"
+#line 715 "grammar.y"
     {
 		exprAST* comma = new punctuationAST(",");
 		exprAST* ellipsis = new keywordAST("...");
@@ -2621,7 +2621,7 @@ yyreduce:
     break;
 
   case 98:
-#line 728 "grammar.y"
+#line 729 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2630,7 +2630,7 @@ yyreduce:
     break;
 
   case 99:
-#line 733 "grammar.y"
+#line 734 "grammar.y"
     {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
@@ -2642,7 +2642,7 @@ yyreduce:
     break;
 
   case 100:
-#line 746 "grammar.y"
+#line 747 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (2)].exprPtr));
@@ -2652,7 +2652,7 @@ yyreduce:
     break;
 
   case 101:
-#line 757 "grammar.y"
+#line 758 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
@@ -2664,7 +2664,7 @@ yyreduce:
     break;
 
   case 102:
-#line 765 "grammar.y"
+#line 766 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
@@ -2677,7 +2677,7 @@ yyreduce:
     break;
 
   case 103:
-#line 774 "grammar.y"
+#line 775 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
@@ -2690,7 +2690,7 @@ yyreduce:
     break;
 
   case 104:
-#line 783 "grammar.y"
+#line 784 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
@@ -2704,7 +2704,7 @@ yyreduce:
     break;
 
   case 105:
-#line 798 "grammar.y"
+#line 799 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2713,7 +2713,7 @@ yyreduce:
     break;
 
   case 106:
-#line 803 "grammar.y"
+#line 804 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (2)].exprPtr));
@@ -2723,7 +2723,7 @@ yyreduce:
     break;
 
   case 107:
-#line 814 "grammar.y"
+#line 815 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2732,7 +2732,7 @@ yyreduce:
     break;
 
   case 108:
-#line 819 "grammar.y"
+#line 820 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (2)].exprPtr));
@@ -2742,7 +2742,7 @@ yyreduce:
     break;
 
   case 109:
-#line 830 "grammar.y"
+#line 831 "grammar.y"
     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2751,7 +2751,7 @@ yyreduce:
     break;
 
   case 110:
-#line 835 "grammar.y"
+#line 836 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2760,7 +2760,7 @@ yyreduce:
     break;
 
   case 111:
-#line 840 "grammar.y"
+#line 841 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2769,7 +2769,7 @@ yyreduce:
     break;
 
   case 112:
-#line 845 "grammar.y"
+#line 846 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2778,7 +2778,7 @@ yyreduce:
     break;
 
   case 113:
-#line 850 "grammar.y"
+#line 851 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2787,7 +2787,7 @@ yyreduce:
     break;
 
   case 114:
-#line 860 "grammar.y"
+#line 861 "grammar.y"
     { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
@@ -2797,7 +2797,7 @@ yyreduce:
     break;
 
   case 115:
-#line 866 "grammar.y"
+#line 867 "grammar.y"
     { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
@@ -2808,7 +2808,7 @@ yyreduce:
     break;
 
   case 116:
-#line 878 "grammar.y"
+#line 879 "grammar.y"
     { 
 		exprAST* oneIF = new keywordAST("if");
 		exprAST* left = new punctuationAST("(");
@@ -2824,7 +2824,7 @@ yyreduce:
     break;
 
   case 117:
-#line 890 "grammar.y"
+#line 891 "grammar.y"
     { 
 		exprAST* oneIF = new keywordAST("if");
 		exprAST* left = new punctuationAST("(");
@@ -2843,7 +2843,7 @@ yyreduce:
     break;
 
   case 118:
-#line 910 "grammar.y"
+#line 911 "grammar.y"
     { 
 		exprAST* oneWHILE = new keywordAST("while");
 		exprAST* left = new punctuationAST("(");
@@ -2859,7 +2859,7 @@ yyreduce:
     break;
 
   case 119:
-#line 922 "grammar.y"
+#line 923 "grammar.y"
     { 
 		exprAST* oneDO = new keywordAST("do");
 		exprAST* oneWHILE = new keywordAST("while");
@@ -2879,7 +2879,7 @@ yyreduce:
     break;
 
   case 120:
-#line 938 "grammar.y"
+#line 939 "grammar.y"
     { 
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
@@ -2896,7 +2896,7 @@ yyreduce:
     break;
 
   case 121:
-#line 951 "grammar.y"
+#line 952 "grammar.y"
     { 
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
@@ -2914,7 +2914,7 @@ yyreduce:
     break;
 
   case 122:
-#line 970 "grammar.y"
+#line 971 "grammar.y"
     { 
 		exprAST* oneCONTINUE = new keywordAST("continue");
 		exprAST* semiColon = new punctuationAST(";");
@@ -2926,7 +2926,7 @@ yyreduce:
     break;
 
   case 123:
-#line 978 "grammar.y"
+#line 979 "grammar.y"
     { 
 		exprAST* oneBREAK = new keywordAST("break");
 		exprAST* semiColon = new punctuationAST(";");
@@ -2938,7 +2938,7 @@ yyreduce:
     break;
 
   case 124:
-#line 986 "grammar.y"
+#line 987 "grammar.y"
     { 
 		exprAST* oneRETURN = new keywordAST("return");
 		exprAST* semiColon = new punctuationAST(";");
@@ -2950,7 +2950,7 @@ yyreduce:
     break;
 
   case 125:
-#line 994 "grammar.y"
+#line 995 "grammar.y"
     { 
 		exprAST* oneRETURN = new keywordAST("return");
 		exprAST* semiColon = new punctuationAST(";");
@@ -2963,7 +2963,7 @@ yyreduce:
     break;
 
   case 126:
-#line 1008 "grammar.y"
+#line 1009 "grammar.y"
     { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
@@ -2975,7 +2975,7 @@ yyreduce:
     break;
 
   case 127:
-#line 1021 "grammar.y"
+#line 1022 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -2984,7 +2984,7 @@ yyreduce:
     break;
 
   case 128:
-#line 1026 "grammar.y"
+#line 1027 "grammar.y"
     {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
@@ -2996,7 +2996,7 @@ yyreduce:
     break;
 
   case 129:
-#line 1038 "grammar.y"
+#line 1039 "grammar.y"
     {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[(1) - (1)].exprPtr));
@@ -3005,7 +3005,7 @@ yyreduce:
     break;
 
   case 130:
-#line 1043 "grammar.y"
+#line 1044 "grammar.y"
     {
 		exprAST* eqOp = new operatorAST("=");
 		vector<exprAST*> children;
@@ -3232,7 +3232,7 @@ yyreturn:
 }
 
 
-#line 1053 "grammar.y"
+#line 1054 "grammar.y"
 
 
 

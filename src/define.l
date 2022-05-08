@@ -42,6 +42,8 @@ comment \/\/[^\n]*
 "~" {return '~';}
 "!" {return '!';}
 "?" {return '?';}
+">" {return '>';}
+"<" {return '<';}
 
 
 "++" {return INC_OP;}
@@ -91,17 +93,7 @@ comment \/\/[^\n]*
     tokenStack.push(oneFloat);
     return CONSTANT;
     }
-"-"{float} {
-    exprAST* oneFloat = new constantAST(2, atof(yytext));
-    tokenStack.push(oneFloat);
-    return CONSTANT;
-}
 {integer} {
-    exprAST* oneInt = new constantAST(1, (double)atoi(yytext));
-    tokenStack.push(oneInt);
-    return CONSTANT;
-    }
-"-"{integer} {
     exprAST* oneInt = new constantAST(1, (double)atoi(yytext));
     tokenStack.push(oneInt);
     return CONSTANT;
@@ -127,3 +119,16 @@ comment \/\/[^\n]*
 int yywrap(void) {
     return 1;
 }
+
+
+// "-"{integer} {
+//     exprAST* oneInt = new constantAST(1, (double)atoi(yytext));
+//     tokenStack.push(oneInt);
+//     return CONSTANT;
+//     }
+
+// "-"{float} {
+//     exprAST* oneFloat = new constantAST(2, atof(yytext));
+//     tokenStack.push(oneFloat);
+//     return CONSTANT;
+// }
