@@ -160,6 +160,7 @@
 #include<stdlib.h>
 #include<math.h>
 #include<stack>
+#include<vector>
 #include "ast.h"
 #include "define.cpp"
 
@@ -190,12 +191,12 @@ stack<exprAST*> tokenStack;
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 17 "grammar.y"
+#line 18 "grammar.y"
 {
 	class exprAST* exprPtr;
 }
 /* Line 193 of yacc.c.  */
-#line 199 "grammar.cpp"
+#line 200 "grammar.cpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -208,7 +209,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 212 "grammar.cpp"
+#line 213 "grammar.cpp"
 
 #ifdef short
 # undef short
@@ -546,20 +547,20 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    48,    48,    49,    55,    56,    61,    66,    67,    72,
-      73,    74,    75,    76,    77,    78,    83,    89,    94,    99,
-     104,   109,   114,   124,   130,   131,   141,   142,   151,   152,
-     161,   162,   171,   172,   181,   182,   191,   192,   196,   205,
-     206,   210,   214,   218,   227,   228,   232,   241,   242,   246,
-     255,   256,   260,   264,   273,   274,   284,   290,   291,   300,
-     301,   309,   310,   314,   318,   321,   325,   336,   337,   342,
-     347,   352,   356,   366,   371,   376,   381,   391,   392,   401,
-     402,   403,   404,   405,   406,   412,   413,   414,   415,   416,
-     417,   418,   419,   420,   421,   422,   428,   429,   439,   440,
-     449,   455,   460,   465,   470,   480,   481,   487,   488,   494,
-     495,   496,   497,   498,   504,   508,   516,   522,   534,   540,
-     548,   554,   565,   570,   575,   580,   590,   599,   600,   608,
-     609
+       0,    49,    49,    55,    67,    72,    81,    92,    97,   107,
+     108,   109,   110,   111,   112,   113,   118,   128,   135,   144,
+     154,   163,   173,   187,   197,   202,   218,   223,   236,   241,
+     254,   259,   272,   277,   290,   295,   308,   313,   321,   334,
+     339,   347,   355,   363,   376,   381,   389,   402,   407,   415,
+     428,   433,   441,   449,   462,   467,   482,   492,   497,   510,
+     515,   527,   532,   539,   546,   552,   559,   575,   580,   590,
+     599,   609,   616,   629,   636,   643,   650,   664,   669,   682,
+     683,   684,   685,   686,   687,   693,   694,   695,   696,   697,
+     698,   699,   700,   701,   702,   703,   709,   714,   728,   733,
+     746,   757,   765,   774,   783,   798,   803,   814,   819,   830,
+     835,   840,   845,   850,   860,   866,   878,   890,   910,   922,
+     938,   951,   970,   978,   986,   994,  1008,  1021,  1026,  1038,
+    1043
 };
 #endif
 
@@ -1704,884 +1705,1320 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 48 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("translation_unit", 1, 1, (yyvsp[(1) - (1)].exprPtr)); ROOT = (yyval.exprPtr);;}
+#line 49 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new translation_unit("translation_unit", 1, children);
+		ROOT = (yyval.exprPtr);
+	;}
     break;
 
   case 3:
-#line 49 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("translation_unit", 2, 2, (yyvsp[(1) - (2)].exprPtr), (yyvsp[(2) - (2)].exprPtr)); ROOT = (yyval.exprPtr);;}
+#line 55 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		(yyval.exprPtr) = new translation_unit("translation_unit", 2, children);
+		ROOT = (yyval.exprPtr);
+	;}
     break;
 
   case 4:
-#line 55 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("external_declaration", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 67 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new external_declaration("external_declaration", 1, children);
+	;}
     break;
 
   case 5:
-#line 56 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("external_declaration", 2, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 72 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new external_declaration("external_declaration", 2, children);
+	;}
     break;
 
   case 6:
-#line 61 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("function_definition", 1, 3, (yyvsp[(1) - (3)].exprPtr), (yyvsp[(2) - (3)].exprPtr), (yyvsp[(3) - (3)].exprPtr));;}
+#line 81 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new function_definition("function_definition", 1, children);
+	;}
     break;
 
   case 7:
-#line 66 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("declaration_specifiers", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 92 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new declaration_specifiers("declaration_specifiers", 1, children);
+	;}
     break;
 
   case 8:
-#line 67 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("declaration_specifiers", 2, 2, (yyvsp[(1) - (2)].exprPtr), (yyvsp[(2) - (2)].exprPtr));;}
+#line 97 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		(yyval.exprPtr) = new declaration_specifiers("declaration_specifiers", 2, children);
+	;}
     break;
 
   case 9:
-#line 72 "grammar.y"
+#line 107 "grammar.y"
     { (yyval.exprPtr) = new typeAST(1); ;}
     break;
 
   case 10:
-#line 73 "grammar.y"
+#line 108 "grammar.y"
     { (yyval.exprPtr) = new typeAST(2);;}
     break;
 
   case 11:
-#line 74 "grammar.y"
+#line 109 "grammar.y"
     { (yyval.exprPtr) = new typeAST(3);;}
     break;
 
   case 12:
-#line 75 "grammar.y"
+#line 110 "grammar.y"
     { (yyval.exprPtr) = new typeAST(4);;}
     break;
 
   case 13:
-#line 76 "grammar.y"
+#line 111 "grammar.y"
     { (yyval.exprPtr) = new typeAST(5);;}
     break;
 
   case 14:
-#line 77 "grammar.y"
+#line 112 "grammar.y"
     { (yyval.exprPtr) = new typeAST(6);;}
     break;
 
   case 15:
-#line 78 "grammar.y"
+#line 113 "grammar.y"
     { (yyval.exprPtr) = new typeAST(7);;}
     break;
 
   case 16:
-#line 83 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("declarator", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 118 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new declarator("declarator", 1, children);
+	;}
     break;
 
   case 17:
-#line 89 "grammar.y"
+#line 128 "grammar.y"
     { 
 		exprAST* id = tokenStack.top();
 		tokenStack.pop();
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 1, 1, id);
+		vector<exprAST*> children;
+		children.push_back(id);
+		(yyval.exprPtr) = new nonleafAST("direct_declarator", 1, children);
 	;}
     break;
 
   case 18:
-#line 94 "grammar.y"
+#line 135 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 2, 3, left, (yyvsp[(2) - (3)].exprPtr), right);
+		vector<exprAST*> children;
+		children.push_back(left);
+		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back(right);
+		(yyval.exprPtr) = new nonleafAST("direct_declarator", 2, children);
 	;}
     break;
 
   case 19:
-#line 99 "grammar.y"
+#line 144 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 3, 4, (yyvsp[(1) - (4)].exprPtr), left, (yyvsp[(3) - (4)].exprPtr), right);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (4)].exprPtr));
+		children.push_back(left);
+		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back(right);
+		(yyval.exprPtr) = new nonleafAST("direct_declarator", 3, children);
 	;}
     break;
 
   case 20:
-#line 104 "grammar.y"
+#line 154 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 4, 3, (yyvsp[(1) - (3)].exprPtr), left, right);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(left);
+		children.push_back(right);
+		(yyval.exprPtr) = new nonleafAST("direct_declarator", 4, children);
 	;}
     break;
 
   case 21:
-#line 109 "grammar.y"
+#line 163 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 5, 4, (yyvsp[(1) - (4)].exprPtr), left, (yyvsp[(3) - (4)].exprPtr), right);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (4)].exprPtr));
+		children.push_back(left);
+		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back(right);
+		(yyval.exprPtr) = new nonleafAST("direct_declarator", 5, children);
 	;}
     break;
 
   case 22:
-#line 114 "grammar.y"
+#line 173 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 6, 3, (yyvsp[(1) - (3)].exprPtr), left, right);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(left);
+		children.push_back(right);
+		(yyval.exprPtr) = new nonleafAST("direct_declarator", 6, children);
 	;}
     break;
 
   case 23:
-#line 124 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("constant_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 187 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new constant_expression("constant_expression", 1, children);
+	;}
     break;
 
   case 24:
-#line 130 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("conditional_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 197 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new conditional_expression("conditional_expression", 1, children);
+	;}
     break;
 
   case 25:
-#line 131 "grammar.y"
+#line 202 "grammar.y"
     {
 		exprAST* questionMark = new punctuationAST("?");
 		exprAST* colon = new punctuationAST(":");
-		(yyval.exprPtr) = new nonleafAST("conditional_expression", 2, 5, (yyvsp[(1) - (5)].exprPtr), questionMark, (yyvsp[(3) - (5)].exprPtr), colon, (yyvsp[(5) - (5)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (5)].exprPtr));
+		children.push_back(questionMark);
+		children.push_back((yyvsp[(3) - (5)].exprPtr));
+		children.push_back(colon);
+		children.push_back((yyvsp[(5) - (5)].exprPtr));
+		(yyval.exprPtr) = new conditional_expression("conditional_expression", 2, children);
 	;}
     break;
 
   case 26:
-#line 141 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("logical_or_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 218 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new logical_or_expression("logical_or_expression", 1, children);
+	;}
     break;
 
   case 27:
-#line 142 "grammar.y"
+#line 223 "grammar.y"
     {
 		exprAST* orOp = new operatorAST("||");
-		(yyval.exprPtr) = new nonleafAST("logical_or_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), orOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(orOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new logical_or_expression("logical_or_expression", 2, children);
 	;}
     break;
 
   case 28:
-#line 151 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("logical_and_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 236 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new logical_and_expression("logical_and_expression", 1, children);
+	;}
     break;
 
   case 29:
-#line 152 "grammar.y"
+#line 241 "grammar.y"
     {
 		exprAST* andOp = new operatorAST("&&");
-		(yyval.exprPtr) = new nonleafAST("logical_and_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), andOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(andOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new logical_and_expression("logical_and_expression", 2, children);
 	;}
     break;
 
   case 30:
-#line 161 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("inclusive_or_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 254 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new inclusive_or_expression("inclusive_or_expression", 1, children);
+	;}
     break;
 
   case 31:
-#line 162 "grammar.y"
+#line 259 "grammar.y"
     {
 		exprAST* orOp = new operatorAST("|");
-		(yyval.exprPtr) = new nonleafAST("inclusive_or_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), orOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(orOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new inclusive_or_expression("inclusive_or_expression", 2, children);
 	;}
     break;
 
   case 32:
-#line 171 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("exclusive_or_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 272 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new exclusive_or_expression("exclusive_or_expression", 1, children);
+	;}
     break;
 
   case 33:
-#line 172 "grammar.y"
+#line 277 "grammar.y"
     {
 		exprAST* xorOp = new operatorAST("^");
-		(yyval.exprPtr) = new nonleafAST("exclusive_or_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), xorOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(xorOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new exclusive_or_expression("exclusive_or_expression", 2, children);
 	;}
     break;
 
   case 34:
-#line 181 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("and_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 290 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new and_expression("and_expression", 1, children);
+	;}
     break;
 
   case 35:
-#line 182 "grammar.y"
+#line 295 "grammar.y"
     {
 		exprAST* andOp = new operatorAST("&");
-		(yyval.exprPtr) = new nonleafAST("and_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), andOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(andOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new and_expression("and_expression", 2, children);
 	;}
     break;
 
   case 36:
-#line 191 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("equality_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 308 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new equality_expression("equality_expression", 1, children);
+	;}
     break;
 
   case 37:
-#line 192 "grammar.y"
+#line 313 "grammar.y"
     {
 		exprAST* eqOp = new operatorAST("==");
-		(yyval.exprPtr) = new nonleafAST("equality_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), eqOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(eqOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new equality_expression("equality_expression", 2, children);
 	;}
     break;
 
   case 38:
-#line 196 "grammar.y"
+#line 321 "grammar.y"
     {
 		exprAST* neOp = new operatorAST("!=");
-		(yyval.exprPtr) = new nonleafAST("equality_expression", 3, 3, (yyvsp[(1) - (3)].exprPtr), neOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(neOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new equality_expression("equality_expression", 3, children);
 	;}
     break;
 
   case 39:
-#line 205 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("relational_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 334 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new relational_expression("relational_expression", 1, children);
+	;}
     break;
 
   case 40:
-#line 206 "grammar.y"
+#line 339 "grammar.y"
     {
 		exprAST* lessOp = new operatorAST("<");
-		(yyval.exprPtr) = new nonleafAST("relational_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), lessOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(lessOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new relational_expression("relational_expression", 2, children);
 	;}
     break;
 
   case 41:
-#line 210 "grammar.y"
+#line 347 "grammar.y"
     {
 		exprAST* greaterOp = new operatorAST(">");
-		(yyval.exprPtr) = new nonleafAST("relational_expression", 3, 3, (yyvsp[(1) - (3)].exprPtr), greaterOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(greaterOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new relational_expression("relational_expression", 3, children);
 	;}
     break;
 
   case 42:
-#line 214 "grammar.y"
+#line 355 "grammar.y"
     {
 		exprAST* lessEqualOp = new operatorAST("<=");
-		(yyval.exprPtr) = new nonleafAST("relational_expression", 4, 3, (yyvsp[(1) - (3)].exprPtr), lessEqualOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(lessEqualOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new relational_expression("relational_expression", 4, children);
 	;}
     break;
 
   case 43:
-#line 218 "grammar.y"
+#line 363 "grammar.y"
     {
 		exprAST* greaterEqualOp = new operatorAST(">=");
-		(yyval.exprPtr) = new nonleafAST("relational_expression", 5, 3, (yyvsp[(1) - (3)].exprPtr), greaterEqualOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(greaterEqualOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new relational_expression("relational_expression", 5, children);
 	;}
     break;
 
   case 44:
-#line 227 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("shift_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 376 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new shift_expression("shift_expression", 1, children);
+	;}
     break;
 
   case 45:
-#line 228 "grammar.y"
+#line 381 "grammar.y"
     {
 		exprAST* leftOp = new operatorAST("<<");
-		(yyval.exprPtr) = new nonleafAST("shift_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), leftOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(leftOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new shift_expression("shift_expression", 2, children);
 	;}
     break;
 
   case 46:
-#line 232 "grammar.y"
+#line 389 "grammar.y"
     {
 		exprAST* rightOp = new operatorAST(">>");
-		(yyval.exprPtr) = new nonleafAST("shift_expression", 3, 3, (yyvsp[(1) - (3)].exprPtr), rightOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(rightOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new shift_expression("shift_expression", 3, children);
 	;}
     break;
 
   case 47:
-#line 241 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("additive_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 402 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new additive_expression("additive_expression", 1, children);
+	;}
     break;
 
   case 48:
-#line 242 "grammar.y"
+#line 407 "grammar.y"
     {
 		exprAST* addOp = new operatorAST("+");
-		(yyval.exprPtr) = new nonleafAST("additive_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), addOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(addOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new additive_expression("additive_expression", 2, children);
 	;}
     break;
 
   case 49:
-#line 246 "grammar.y"
+#line 415 "grammar.y"
     {
 		exprAST* subOp = new operatorAST("-");
-		(yyval.exprPtr) = new nonleafAST("additive_expression", 3, 3, (yyvsp[(1) - (3)].exprPtr), subOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(subOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new additive_expression("additive_expression", 3, children);
 	;}
     break;
 
   case 50:
-#line 255 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("multiplicative_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 428 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 1, children);
+	;}
     break;
 
   case 51:
-#line 256 "grammar.y"
+#line 433 "grammar.y"
     {
 		exprAST* mulOp = new operatorAST("*");
-		(yyval.exprPtr) = new nonleafAST("multiplicative_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), mulOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(mulOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 2, children);
 	;}
     break;
 
   case 52:
-#line 260 "grammar.y"
+#line 441 "grammar.y"
     {
 		exprAST* divOp = new operatorAST("/");
-		(yyval.exprPtr) = new nonleafAST("multiplicative_expression", 3, 3, (yyvsp[(1) - (3)].exprPtr), divOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(divOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 3, children);
 	;}
     break;
 
   case 53:
-#line 264 "grammar.y"
+#line 449 "grammar.y"
     {
 		exprAST* modOp = new operatorAST("%");
-		(yyval.exprPtr) = new nonleafAST("multiplicative_expression", 4, 3, (yyvsp[(1) - (3)].exprPtr), modOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(modOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 4, children);
 	;}
     break;
 
   case 54:
-#line 273 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("cast_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 462 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new cast_expression("cast_expression", 1, children);
+	;}
     break;
 
   case 55:
-#line 274 "grammar.y"
+#line 467 "grammar.y"
     {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("cast_expression", 2, 4, left, (yyvsp[(2) - (4)].exprPtr), right, (yyvsp[(4) - (4)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back(left);
+		children.push_back((yyvsp[(2) - (4)].exprPtr));
+		children.push_back(right);
+		children.push_back((yyvsp[(4) - (4)].exprPtr));
+		(yyval.exprPtr) = new cast_expression("cast_expression", 2, children);
 	;}
     break;
 
   case 56:
-#line 284 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("type_name", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 482 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new type_name("type_name", 1, children);
+	;}
     break;
 
   case 57:
-#line 290 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 492 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new expression("expression", 1, children);
+	;}
     break;
 
   case 58:
-#line 291 "grammar.y"
+#line 497 "grammar.y"
     {
 		exprAST* comma = new punctuationAST(",");
-		(yyval.exprPtr) = new nonleafAST("expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), comma, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(comma);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new expression("expression", 2, children);
 	;}
     break;
 
   case 59:
-#line 300 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("assignment_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 510 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new assignment_expression("assignment_expression", 1, children);
+	;}
     break;
 
   case 60:
-#line 301 "grammar.y"
+#line 515 "grammar.y"
     { 
-		(yyval.exprPtr) = new nonleafAST("assignment_expression", 2, 3, (yyvsp[(1) - (3)].exprPtr), (yyvsp[(2) - (3)].exprPtr), (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new assignment_expression("assignment_expression", 2, children);
 	;}
     break;
 
   case 61:
-#line 309 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("unary_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 527 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new unary_expression("unary_expression", 1, children);
+	;}
     break;
 
   case 62:
-#line 310 "grammar.y"
+#line 532 "grammar.y"
     {
 		exprAST* incOp = new operatorAST("++");
-		(yyval.exprPtr) = new nonleafAST("unary_expression", 2, 2, incOp, (yyvsp[(2) - (2)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back(incOp);
+		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		(yyval.exprPtr) = new unary_expression("unary_expression", 2, children);
 	;}
     break;
 
   case 63:
-#line 314 "grammar.y"
+#line 539 "grammar.y"
     {
 		exprAST* decOp = new operatorAST("--");
-		(yyval.exprPtr) = new nonleafAST("unary_expression", 3, 2, decOp, (yyvsp[(2) - (2)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back(decOp);
+		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		(yyval.exprPtr) = new unary_expression("unary_expression", 3, children);
 	;}
     break;
 
   case 64:
-#line 318 "grammar.y"
+#line 546 "grammar.y"
     { 
-		(yyval.exprPtr) = new nonleafAST("unary_expression", 4, 2, (yyvsp[(1) - (2)].exprPtr), (yyvsp[(2) - (2)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		(yyval.exprPtr) = new unary_expression("unary_expression", 4, children);
 	;}
     break;
 
   case 65:
-#line 321 "grammar.y"
+#line 552 "grammar.y"
     {
 		exprAST* sizeOf = new keywordAST("sizeof");
-		(yyval.exprPtr) = new nonleafAST("unary_expression", 5, 2, sizeOf, (yyvsp[(2) - (2)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back(sizeOf);
+		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		(yyval.exprPtr) = new unary_expression("unary_expression", 5, children);
 	;}
     break;
 
   case 66:
-#line 325 "grammar.y"
+#line 559 "grammar.y"
     {
 		exprAST* sizeOf = new keywordAST("sizeof");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("unary_expression", 6, 4, sizeOf, left, (yyvsp[(3) - (4)].exprPtr), right);
+		vector<exprAST*> children;
+		children.push_back(sizeOf);
+		children.push_back(left);
+		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back(right);
+		(yyval.exprPtr) = new unary_expression("unary_expression", 6, children);
 	;}
     break;
 
   case 67:
-#line 336 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("postfix_expression", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 575 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new postfix_expression("postfix_expression", 1, children);
+	;}
     break;
 
   case 68:
-#line 337 "grammar.y"
+#line 580 "grammar.y"
     {
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
-		(yyval.exprPtr) = new nonleafAST("postfix_expression", 2, 4, (yyvsp[(1) - (4)].exprPtr), left, (yyvsp[(3) - (4)].exprPtr), right);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (4)].exprPtr));
+		children.push_back(left);
+		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back(right);
+		(yyval.exprPtr) = new postfix_expression("postfix_expression", 2, children);
 	;}
     break;
 
   case 69:
-#line 342 "grammar.y"
+#line 590 "grammar.y"
     {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("postfix_expression", 3, 3, (yyvsp[(1) - (3)].exprPtr), left, right);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(left);
+		children.push_back(right);
+		(yyval.exprPtr) = new postfix_expression("postfix_expression", 3, children);
 	;}
     break;
 
   case 70:
-#line 347 "grammar.y"
+#line 599 "grammar.y"
     {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("postfix_expression", 4, 4, (yyvsp[(1) - (4)].exprPtr), left, (yyvsp[(3) - (4)].exprPtr), right);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (4)].exprPtr));
+		children.push_back(left);
+		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back(right);
+		(yyval.exprPtr) = new postfix_expression("postfix_expression", 4, children);
 	;}
     break;
 
   case 71:
-#line 352 "grammar.y"
+#line 609 "grammar.y"
     {
 		exprAST* incOp = new operatorAST("++");
-		(yyval.exprPtr) = new nonleafAST("postfix_expression", 5, 2, (yyvsp[(1) - (2)].exprPtr), incOp);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back(incOp);
+		(yyval.exprPtr) = new postfix_expression("postfix_expression", 5, children);
 	;}
     break;
 
   case 72:
-#line 356 "grammar.y"
+#line 616 "grammar.y"
     {
 		exprAST* decOp = new operatorAST("--");
-		(yyval.exprPtr) = new nonleafAST("postfix_expression", 6, 2, (yyvsp[(1) - (2)].exprPtr), decOp);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back(decOp);
+		(yyval.exprPtr) = new postfix_expression("postfix_expression", 6, children);
 	;}
     break;
 
   case 73:
-#line 366 "grammar.y"
+#line 629 "grammar.y"
     {
 		exprAST* identifier = tokenStack.top();
 		tokenStack.pop();
-		(yyval.exprPtr) = new nonleafAST("primary_expression", 1, 1, identifier);
+		vector<exprAST*> children;
+		children.push_back(identifier);
+		(yyval.exprPtr) = new primary_expression("primary_expression", 1, children);
 	;}
     break;
 
   case 74:
-#line 371 "grammar.y"
+#line 636 "grammar.y"
     {
 		exprAST* constant = tokenStack.top();
 		tokenStack.pop();
-		(yyval.exprPtr) = new nonleafAST("primary_expression", 2, 1, constant);
+		vector<exprAST*> children;
+		children.push_back(constant);
+		(yyval.exprPtr) = new primary_expression("primary_expression", 2, children);
 	;}
     break;
 
   case 75:
-#line 376 "grammar.y"
+#line 643 "grammar.y"
     {
 		exprAST* str = tokenStack.top();
 		tokenStack.pop();
-		(yyval.exprPtr) = new nonleafAST("primary_expression", 3, 1, str);
+		vector<exprAST*> children;
+		children.push_back(str);
+		(yyval.exprPtr) = new primary_expression("primary_expression", 3, children);
 	;}
     break;
 
   case 76:
-#line 381 "grammar.y"
+#line 650 "grammar.y"
     {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("primary_expression", 1, 3, left, (yyvsp[(2) - (3)].exprPtr), right);
+		vector<exprAST*> children;
+		children.push_back(left);
+		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back(right);
+		(yyval.exprPtr) = new primary_expression("primary_expression", 4, children);
 	;}
     break;
 
   case 77:
-#line 391 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("argument_expression_list", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 664 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new argument_expression_list("argument_expression_list", 1, children);
+	;}
     break;
 
   case 78:
-#line 392 "grammar.y"
+#line 669 "grammar.y"
     {
 		exprAST* comma = new punctuationAST(",");
-		(yyval.exprPtr) = new nonleafAST("argument_expression_list", 2, 3, (yyvsp[(1) - (3)].exprPtr), comma, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(comma);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new argument_expression_list("argument_expression_list", 2, children);
 	;}
     break;
 
   case 79:
-#line 401 "grammar.y"
+#line 682 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("&"); ;}
     break;
 
   case 80:
-#line 402 "grammar.y"
+#line 683 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("*"); ;}
     break;
 
   case 81:
-#line 403 "grammar.y"
+#line 684 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("+"); ;}
     break;
 
   case 82:
-#line 404 "grammar.y"
+#line 685 "grammar.y"
     {	(yyval.exprPtr) = new operatorAST("-"); ;}
     break;
 
   case 83:
-#line 405 "grammar.y"
+#line 686 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("~"); ;}
     break;
 
   case 84:
-#line 406 "grammar.y"
+#line 687 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("!"); ;}
     break;
 
   case 85:
-#line 412 "grammar.y"
+#line 693 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("="); ;}
     break;
 
   case 86:
-#line 413 "grammar.y"
+#line 694 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("*="); ;}
     break;
 
   case 87:
-#line 414 "grammar.y"
+#line 695 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("/="); ;}
     break;
 
   case 88:
-#line 415 "grammar.y"
+#line 696 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("%="); ;}
     break;
 
   case 89:
-#line 416 "grammar.y"
+#line 697 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("+="); ;}
     break;
 
   case 90:
-#line 417 "grammar.y"
+#line 698 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("-="); ;}
     break;
 
   case 91:
-#line 418 "grammar.y"
+#line 699 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("<<="); ;}
     break;
 
   case 92:
-#line 419 "grammar.y"
+#line 700 "grammar.y"
     { (yyval.exprPtr) = new operatorAST(">>="); ;}
     break;
 
   case 93:
-#line 420 "grammar.y"
+#line 701 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("&="); ;}
     break;
 
   case 94:
-#line 421 "grammar.y"
+#line 702 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("^="); ;}
     break;
 
   case 95:
-#line 422 "grammar.y"
+#line 703 "grammar.y"
     { (yyval.exprPtr) = new operatorAST("|="); ;}
     break;
 
   case 96:
-#line 428 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("parameter_type_list", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 709 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new parameter_type_list("parameter_type_list", 1, children);
+	;}
     break;
 
   case 97:
-#line 429 "grammar.y"
+#line 714 "grammar.y"
     {
 		exprAST* comma = new punctuationAST(",");
 		exprAST* ellipsis = new keywordAST("...");
-		(yyval.exprPtr) = new nonleafAST("parameter_type_list", 2, 3, (yyvsp[(1) - (3)].exprPtr), comma, ellipsis);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(comma);
+		children.push_back(ellipsis);
+		(yyval.exprPtr) = new parameter_type_list("parameter_type_list", 2, children);
 	;}
     break;
 
   case 98:
-#line 439 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("parameter_list", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 728 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new parameter_list("parameter_list", 1, children);
+	;}
     break;
 
   case 99:
-#line 440 "grammar.y"
+#line 733 "grammar.y"
     {
 		exprAST* comma = new punctuationAST(",");
-		(yyval.exprPtr) = new nonleafAST("parameter_list", 2, 3, (yyvsp[(1) - (3)].exprPtr), comma, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(comma);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new parameter_list("parameter_list", 2, children);
 	;}
     break;
 
   case 100:
-#line 449 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("parameter_declaration", 1, 2, (yyvsp[(1) - (2)].exprPtr), (yyvsp[(2) - (2)].exprPtr));;}
+#line 746 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		(yyval.exprPtr) = new parameter_declaration("parameter_declaration", 1, children);
+	;}
     break;
 
   case 101:
-#line 455 "grammar.y"
+#line 757 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
-		(yyval.exprPtr) = new nonleafAST("compound_statement", 1, 2, left, right);
+		vector<exprAST*> children;
+		children.push_back(left);
+		children.push_back(right);
+		(yyval.exprPtr) = new compound_statement("compound_statement", 1, children);
 	;}
     break;
 
   case 102:
-#line 460 "grammar.y"
+#line 765 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
-		(yyval.exprPtr) = new nonleafAST("compound_statement", 2, 3, left, (yyvsp[(2) - (3)].exprPtr), right);
+		vector<exprAST*> children;
+		children.push_back(left);
+		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back(right);
+		(yyval.exprPtr) = new compound_statement("compound_statement", 2, children);
 	;}
     break;
 
   case 103:
-#line 465 "grammar.y"
+#line 774 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
-		(yyval.exprPtr) = new nonleafAST("compound_statement", 3, 3, left, (yyvsp[(2) - (3)].exprPtr), right);
+		vector<exprAST*> children;
+		children.push_back(left);
+		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back(right);
+		(yyval.exprPtr) = new compound_statement("compound_statement", 3, children);
 	;}
     break;
 
   case 104:
-#line 470 "grammar.y"
+#line 783 "grammar.y"
     { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
-		(yyval.exprPtr) = new nonleafAST("compound_statement", 4, 4, left, (yyvsp[(2) - (4)].exprPtr), (yyvsp[(3) - (4)].exprPtr), right);
+		vector<exprAST*> children;
+		children.push_back(left);
+		children.push_back((yyvsp[(2) - (4)].exprPtr));
+		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back(right);
+		(yyval.exprPtr) = new compound_statement("compound_statement", 4, children);
 	;}
     break;
 
   case 105:
-#line 480 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("statement_list", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 798 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new statement_list("statement_list", 1, children);
+	;}
     break;
 
   case 106:
-#line 481 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("statement_list", 2, 2, (yyvsp[(1) - (2)].exprPtr), (yyvsp[(2) - (2)].exprPtr));;}
+#line 803 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		(yyval.exprPtr) = new statement_list("statement_list", 2, children);
+	;}
     break;
 
   case 107:
-#line 487 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("declaration_list", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 814 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new declaration_list("declaration_list", 1, children);
+	;}
     break;
 
   case 108:
-#line 488 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("declaration_list", 2, 2, (yyvsp[(1) - (2)].exprPtr), (yyvsp[(2) - (2)].exprPtr));;}
+#line 819 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		(yyval.exprPtr) = new declaration_list("declaration_list", 2, children);
+	;}
     break;
 
   case 109:
-#line 494 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("statement", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 830 "grammar.y"
+    { 
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new statement("statement", 1, children);
+	;}
     break;
 
   case 110:
-#line 495 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("statement", 2, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 835 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new statement("statement", 2, children);
+	;}
     break;
 
   case 111:
-#line 496 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("statement", 3, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 840 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new statement("statement", 3, children);
+	;}
     break;
 
   case 112:
-#line 497 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("statement", 4, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 845 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new statement("statement", 4, children);
+	;}
     break;
 
   case 113:
-#line 498 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("statement", 5, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 850 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new statement("statement", 5, children);
+	;}
     break;
 
   case 114:
-#line 504 "grammar.y"
+#line 860 "grammar.y"
     { 
 		exprAST* semiColon = new punctuationAST(";");
-		(yyval.exprPtr) = new nonleafAST("expression_statement", 1, 1, semiColon);
+		vector<exprAST*> children;
+		children.push_back(semiColon);
+		(yyval.exprPtr) = new expression_statement("expression_statement", 1, children);
 	;}
     break;
 
   case 115:
-#line 508 "grammar.y"
+#line 866 "grammar.y"
     { 
 		exprAST* semiColon = new punctuationAST(";");
-		(yyval.exprPtr) = new nonleafAST("expression_statement", 2, 2, (yyvsp[(1) - (2)].exprPtr), semiColon);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back(semiColon);
+		(yyval.exprPtr) = new expression_statement("expression_statement", 2, children);
 	;}
     break;
 
   case 116:
-#line 516 "grammar.y"
+#line 878 "grammar.y"
     { 
 		exprAST* oneIF = new keywordAST("if");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("selection_statement", 1, 5, oneIF, left, (yyvsp[(3) - (5)].exprPtr), right, (yyvsp[(5) - (5)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back(oneIF);
+		children.push_back(left);
+		children.push_back((yyvsp[(3) - (5)].exprPtr));
+		children.push_back(right);
+		children.push_back((yyvsp[(5) - (5)].exprPtr));
+		(yyval.exprPtr) = new selection_statement("selection_statement", 1, children);
 	;}
     break;
 
   case 117:
-#line 522 "grammar.y"
+#line 890 "grammar.y"
     { 
 		exprAST* oneIF = new keywordAST("if");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		exprAST* oneELSE = new keywordAST("else");
-		(yyval.exprPtr) = new nonleafAST("selection_statement", 2, 7, oneIF, left, (yyvsp[(3) - (7)].exprPtr), right, (yyvsp[(5) - (7)].exprPtr), oneELSE, (yyvsp[(7) - (7)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back(oneIF);
+		children.push_back(left);
+		children.push_back((yyvsp[(3) - (7)].exprPtr));
+		children.push_back(right);
+		children.push_back((yyvsp[(5) - (7)].exprPtr));
+		children.push_back(oneELSE);
+		children.push_back((yyvsp[(7) - (7)].exprPtr));
+		(yyval.exprPtr) = new selection_statement("selection_statement", 2, children);
 	;}
     break;
 
   case 118:
-#line 534 "grammar.y"
+#line 910 "grammar.y"
     { 
 		exprAST* oneWHILE = new keywordAST("while");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("iteration_statement", 1, 5, oneWHILE, left, (yyvsp[(3) - (5)].exprPtr), right, (yyvsp[(5) - (5)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back(oneWHILE);
+		children.push_back(left);
+		children.push_back((yyvsp[(3) - (5)].exprPtr));
+		children.push_back(right);
+		children.push_back((yyvsp[(5) - (5)].exprPtr));
+		(yyval.exprPtr) = new iteration_statement("iteration_statement", 1, children);
 	;}
     break;
 
   case 119:
-#line 540 "grammar.y"
+#line 922 "grammar.y"
     { 
 		exprAST* oneDO = new keywordAST("do");
 		exprAST* oneWHILE = new keywordAST("while");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		exprAST* semiColon = new punctuationAST(";");
-		(yyval.exprPtr) = new nonleafAST("iteration_statement", 2, 7, oneDO, (yyvsp[(2) - (7)].exprPtr), oneWHILE, left, (yyvsp[(5) - (7)].exprPtr), right, semiColon);
+		vector<exprAST*> children;
+		children.push_back(oneDO);
+		children.push_back((yyvsp[(2) - (7)].exprPtr));
+		children.push_back(oneWHILE);
+		children.push_back(left);
+		children.push_back((yyvsp[(5) - (7)].exprPtr));
+		children.push_back(right);
+		children.push_back(semiColon);
+		(yyval.exprPtr) = new iteration_statement("iteration_statement", 2, children);
 	;}
     break;
 
   case 120:
-#line 548 "grammar.y"
+#line 938 "grammar.y"
     { 
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("iteration_statement", 3, 6, oneFOR, left, (yyvsp[(3) - (6)].exprPtr), (yyvsp[(4) - (6)].exprPtr),right, (yyvsp[(6) - (6)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back(oneFOR);
+		children.push_back(left);
+		children.push_back((yyvsp[(3) - (6)].exprPtr));
+		children.push_back((yyvsp[(4) - (6)].exprPtr));
+		children.push_back(right);
+		children.push_back((yyvsp[(6) - (6)].exprPtr));
+		(yyval.exprPtr) = new iteration_statement("iteration_statement", 3, children);
 	;}
     break;
 
   case 121:
-#line 554 "grammar.y"
+#line 951 "grammar.y"
     { 
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
-		(yyval.exprPtr) = new nonleafAST("iteration_statement", 4, 7, oneFOR, left, (yyvsp[(3) - (7)].exprPtr), (yyvsp[(4) - (7)].exprPtr), (yyvsp[(5) - (7)].exprPtr), right, (yyvsp[(7) - (7)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back(oneFOR);
+		children.push_back(left);
+		children.push_back((yyvsp[(3) - (7)].exprPtr));
+		children.push_back((yyvsp[(4) - (7)].exprPtr));
+		children.push_back((yyvsp[(5) - (7)].exprPtr));
+		children.push_back(right);
+		children.push_back((yyvsp[(7) - (7)].exprPtr));
+		(yyval.exprPtr) = new iteration_statement("iteration_statement", 4, children);
 	;}
     break;
 
   case 122:
-#line 565 "grammar.y"
+#line 970 "grammar.y"
     { 
 		exprAST* oneCONTINUE = new keywordAST("continue");
 		exprAST* semiColon = new punctuationAST(";");
-		(yyval.exprPtr) = new nonleafAST("jump_statement", 1, 2, oneCONTINUE, semiColon);
+		vector<exprAST*> children;
+		children.push_back(oneCONTINUE);
+		children.push_back(semiColon);
+		(yyval.exprPtr) = new jump_statement("jump_statement", 1, children);
 	;}
     break;
 
   case 123:
-#line 570 "grammar.y"
+#line 978 "grammar.y"
     { 
 		exprAST* oneBREAK = new keywordAST("break");
 		exprAST* semiColon = new punctuationAST(";");
-		(yyval.exprPtr) = new nonleafAST("jump_statement", 2, 2, oneBREAK, semiColon);
+		vector<exprAST*> children;
+		children.push_back(oneBREAK);
+		children.push_back(semiColon);
+		(yyval.exprPtr) = new jump_statement("jump_statement", 2, children);
 	;}
     break;
 
   case 124:
-#line 575 "grammar.y"
+#line 986 "grammar.y"
     { 
 		exprAST* oneRETURN = new keywordAST("return");
 		exprAST* semiColon = new punctuationAST(";");
-		(yyval.exprPtr) = new nonleafAST("jump_statement", 3, 2, oneRETURN, semiColon);
+		vector<exprAST*> children;
+		children.push_back(oneRETURN);
+		children.push_back(semiColon);
+		(yyval.exprPtr) = new jump_statement("jump_statement", 3, children);
 	;}
     break;
 
   case 125:
-#line 580 "grammar.y"
+#line 994 "grammar.y"
     { 
 		exprAST* oneRETURN = new keywordAST("return");
 		exprAST* semiColon = new punctuationAST(";");
-		(yyval.exprPtr) = new nonleafAST("jump_statement", 4, 3, oneRETURN, (yyvsp[(2) - (3)].exprPtr), semiColon);
+		vector<exprAST*> children;
+		children.push_back(oneRETURN);
+		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back(semiColon);
+		(yyval.exprPtr) = new jump_statement("jump_statement", 4, children);
 	;}
     break;
 
   case 126:
-#line 590 "grammar.y"
+#line 1008 "grammar.y"
     { 
 		exprAST* semiColon = new punctuationAST(";");
-		(yyval.exprPtr) = new nonleafAST("declaration", 1, 3, (yyvsp[(1) - (3)].exprPtr), (yyvsp[(2) - (3)].exprPtr), semiColon);
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back(semiColon);
+		(yyval.exprPtr) = new declaration("declaration", 1, children);
 	;}
     break;
 
   case 127:
-#line 599 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("init_declarator_list", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 1021 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new init_declarator_list("init_declarator_list", 1, children);
+	;}
     break;
 
   case 128:
-#line 600 "grammar.y"
+#line 1026 "grammar.y"
     {
 		exprAST* comma = new punctuationAST(",");
-		(yyval.exprPtr) = new nonleafAST("init_declarator_list", 2, 3, (yyvsp[(1) - (3)].exprPtr), comma, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(comma);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new init_declarator_list("init_declarator_list", 2, children);
 	;}
     break;
 
   case 129:
-#line 608 "grammar.y"
-    { (yyval.exprPtr) = new nonleafAST("init_declarator", 1, 1, (yyvsp[(1) - (1)].exprPtr));;}
+#line 1038 "grammar.y"
+    {
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		(yyval.exprPtr) = new init_declarator("init_declarator", 1, children);
+	;}
     break;
 
   case 130:
-#line 609 "grammar.y"
+#line 1043 "grammar.y"
     {
 		exprAST* eqOp = new operatorAST("=");
-		(yyval.exprPtr) = new nonleafAST("init_declarator", 2, 3, (yyvsp[(1) - (3)].exprPtr), eqOp, (yyvsp[(3) - (3)].exprPtr));
+		vector<exprAST*> children;
+		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back(eqOp);
+		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		(yyval.exprPtr) = new init_declarator("init_declarator", 2, children);
 	;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 2585 "grammar.cpp"
+#line 3022 "grammar.cpp"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2795,7 +3232,7 @@ yyreturn:
 }
 
 
-#line 615 "grammar.y"
+#line 1053 "grammar.y"
 
 
 

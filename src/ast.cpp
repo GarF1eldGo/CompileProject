@@ -39,26 +39,39 @@ Json::Value leafAST::buildJsonAST(){
 }
 
 
+
 //非终结符结点的构造函数
-nonleafAST::nonleafAST(string name, int type, int childNum, ...)
-{
+nonleafAST::nonleafAST(string name, int type, vector<exprAST*> children){
     this->name = name;
     this->type = type;
-
-    va_list ap;
-    va_start(ap, childNum);
-    for(int i=0;i<childNum;i++){
-        children.push_back(va_arg(ap, exprAST*));
-    }
-    va_end(ap);//清理保留的内存
+    this->children = children;
 }
 
+// //非终结符结点的构造函数
+// nonleafAST::nonleafAST(string name, int type, int childNum, ...)
+// {
+//     this->name = name;
+//     this->type = type;
 
-nonleafAST::nonleafAST(string name, int type)
-{
-    this->name = name;
-    this->type = type;
-}
+//     va_list ap;
+//     va_start(ap, childNum);
+//     for(int i=0;i<childNum;i++){
+//         children.push_back(va_arg(ap, exprAST*));
+//     }
+//     va_end(ap);//清理保留的内存
+// }
+
+
+// nonleafAST::nonleafAST(string name, int type)
+// {
+//     this->name = name;
+//     this->type = type;
+// }
+
+
+/*
+===========================叶子结点的相关类================================
+*/
 
 
 constantAST::constantAST(int type, double value)
@@ -109,3 +122,34 @@ punctuationAST::punctuationAST(string punctuation)
     this->punctuation = punctuation;
     this->name = "punctuation";
 }
+
+
+
+/*
+===========================非叶子结点的相关类================================
+*/
+
+// primaryExprAST::primaryExprAST(string name, int type, int childNum, ...)
+// {
+//     this->name = name;
+//     this->type = type;
+
+//     va_list ap;
+//     va_start(ap, childNum);
+//     for(int i=0;i<childNum;i++){
+//         children.push_back(va_arg(ap, exprAST*));
+//     }
+//     va_end(ap);//清理保留的内存
+// }
+
+
+// nonleafAST* new_nonleafAST(string name, int type, vector<exprAST*>children)
+// {   
+//     if(!strcmp(name.c_str(),"primary_expression")){
+//         return new primaryExprAST(name,type,children);
+//     }
+//     else if(!strcmp(name.c_str(),"postfix_expression")){
+//     }
+
+
+// }

@@ -3,12 +3,21 @@
   <head> 
         <meta charset="utf-8"> 
         <title>Visualization of AST</title> 
-        <script src="d3.js" charset="utf-8"></script> 
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
   </head> 
     <body> 
         <p>Hello World 1</p>
         <p>Hello World 2</p>
-        <script src="drawAST.js">  
+        <script>  
+          d3.json("city_tree.json", function(error, root) {
+
+          var nodes = tree.nodes(root);
+          var links = tree.links(nodes);
+
+          console.log(nodes);
+          console.log(links);
+
+          });
         </script> 
     </body> 
 </html>

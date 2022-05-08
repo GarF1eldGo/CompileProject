@@ -44,8 +44,8 @@ public:
 
     void createJsonFile(string fileName);
     Json::Value buildJsonAST();
-    nonleafAST(string name, int type, int childNum, ...);
-    nonleafAST(string name, int type);
+
+    nonleafAST(string name, int type, vector<exprAST*> children);
 };
 
 
@@ -137,49 +137,94 @@ public:
 ===========================非叶子结点的相关类================================
 */
 
-class primaryExprAST : public nonleafAST{};
-class postfixExprAST : public nonleafAST{};
-class argumentExprListAST : public nonleafAST{};
-class unaryExprAST : public nonleafAST{};
-class unaryOpAST : public nonleafAST{};
-class castExprAST : public nonleafAST{};
-class multiplicativeExprAST : public nonleafAST{};
-class additiveExprAST : public nonleafAST{};
-class shiftExprAST : public nonleafAST{};
-class relationalExprAST : public nonleafAST{};
-class equalityExprAST : public nonleafAST{};
-class andExpAST : public nonleafAST{};
-class exclusiveOrExpAST : public nonleafAST{};
-class inclusiveOrExpAST : public nonleafAST{};
-class logicalAndExpAST : public nonleafAST{};
-class logicalOrExpAST : public nonleafAST{};
-class conditionalExpAST : public nonleafAST{};
-class assignmentExprAST : public nonleafAST{};
-class assignmentOpAST : public nonleafAST{};
-class expressionAST : public nonleafAST{};
-class constantExpAST : public nonleafAST{};
-class declarationAST : public nonleafAST{};
-class initDeclaratorAST : public nonleafAST{};
-class initDeclaratorListAST : public nonleafAST{};
-class declarationSpecifierAST : public nonleafAST{};
-class typeSpecifierAST : public nonleafAST{};
-class declaratorAST : public nonleafAST{};
-class directDeclaratorAST : public nonleafAST{};
-class parameterTypeListAST : public nonleafAST{};
-class parameterListAST : public nonleafAST{};
-class parameterDeclarationAST : public nonleafAST{};
-class typeNameAST : public nonleafAST{};
-class statementAST : public nonleafAST{};
-class compoundStatementAST : public nonleafAST{};
-class declarationListAST : public nonleafAST{};
-class statementListAST : public nonleafAST{};
-class expressionStatementAST : public nonleafAST{};
-class selectionStatementAST : public nonleafAST{};
-class iterationStatementAST : public nonleafAST{};
-class jumpStatementAST : public nonleafAST{};
-class translationUnitAST : public nonleafAST{};
-class externalDeclarationAST : public nonleafAST{};
-class functionDefinitionAST : public nonleafAST{};
+class primary_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
 
+class postfix_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class argument_expression_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class unary_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class unary_operator : public nonleafAST{ public: using nonleafAST::nonleafAST;};
+
+class cast_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class multiplicative_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class additive_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class shift_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class relational_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class equality_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class and_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class exclusive_or_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class inclusive_or_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class logical_and_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class logical_or_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class conditional_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class assignment_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class assignment_operator : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class constant_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class declaration : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class init_declarator : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class init_declarator_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class declaration_specifiers : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class type_specifier : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class declarator : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class direct_declarator : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class parameter_type_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class parameter_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class parameter_declaration : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class type_name : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class compound_statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class declaration_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class statement_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class expression_statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class selection_statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class iteration_statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class jump_statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class translation_unit : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class external_declaration : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+class function_definition : public nonleafAST {public: using nonleafAST::nonleafAST;};
+
+
+// nonleafAST* new_nonleafAST(string name, int type, int childNum, ...);
+// nonleafAST* new_nonleafAST(string name, int type);
 
 #endif

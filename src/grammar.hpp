@@ -128,7 +128,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 17 "grammar.y"
+#line 18 "grammar.y"
 {
 	class exprAST* exprPtr;
 }
