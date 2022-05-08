@@ -11,8 +11,8 @@ int main(){
 
     //读取数据
     int numArray[max];
-    int i;
-    for(i=0;i<num;i++){
+
+    for(int i=0;i<num;i++){
         //scanf("%d",&numArray[i]);
     }
 
@@ -20,7 +20,7 @@ int main(){
     quickSort(numArray,0,num-1);
     
     //输出数据
-    for(i=0;i<num;i++){
+    for(int i=0;i<num;i++){
         //printf("%d\n",numArray[i]);
     }
 }

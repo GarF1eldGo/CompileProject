@@ -963,6 +963,20 @@ iteration_statement
 		children.push_back($7);
 		$$ = new iteration_statement("iteration_statement", 4, children);
 	}
+	| FOR '(' declaration expression_statement expression ')' statement {
+		exprAST* oneFOR = new keywordAST("for");
+		exprAST* left = new punctuationAST("(");
+		exprAST* right = new punctuationAST(")");
+		vector<exprAST*> children;
+		children.push_back(oneFOR);
+		children.push_back(left);
+		children.push_back($3);
+		children.push_back($4);
+		children.push_back($5);
+		children.push_back(right);
+		children.push_back($7);
+		$$ = new iteration_statement("iteration_statement", 5, children);
+	}
 	;
 
 
