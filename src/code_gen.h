@@ -5,7 +5,7 @@
 #include "ast.h"
 using namespace std;
 
-
+/*
 class codeGen {
 public:
 
@@ -13,7 +13,7 @@ public:
     codeGen();
     ~codeGen();
 };
-
+*/
 
 
 #endif
