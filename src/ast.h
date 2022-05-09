@@ -7,8 +7,26 @@
 #include<fstream>
 #include <json/json.h>
 
+#include <llvm/IR/Value.h>
+#include <llvm/IR/BasicBlock.h>
+#include <llvm/IR/Module.h>
+#include <llvm/IR/Function.h>
+#include <llvm/IR/LLVMContext.h>
+#include <llvm/IR/LegacyPassManager.h>
+#include <llvm/IR/CallingConv.h>
+#include <llvm/IR/IRPrintingPasses.h>
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/GlobalVariable.h>
+
+
+#define TYPENONE 0
+#define TYPEINT 1
+#define TYPEFLOAT 2
+#define TYPEBOOL 3
+#define TYPEICHAR 4
+
 using namespace std;
-//using namespace llvm;
+// using namespace llvm;
 
 
 
@@ -17,9 +35,12 @@ class exprAST{
 public:
     string name;//用于AST可视化
 
+    int valuetype = TYPENONE;//节点数据类型
     //virtual Value *Codegen();
     void createJsonFile(string fileName);
     virtual Json::Value buildJsonAST(){};
+    virtual llvm::Value *CodeGen(){};
+
 };
 
 
@@ -106,6 +127,7 @@ public:
 //type = 5 : long
 //type = 6 : float
 //type = 7 : double
+//type = 8 : bool
 class typeAST : public leafAST{
 public:
     int type;
@@ -137,91 +159,91 @@ public:
 ===========================非叶子结点的相关类================================
 */
 
-class primary_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class primary_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class postfix_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class postfix_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class argument_expression_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class argument_expression_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class unary_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class unary_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class unary_operator : public nonleafAST{ public: using nonleafAST::nonleafAST;};
+class unary_operator : public nonleafAST{ public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class cast_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class cast_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class multiplicative_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class multiplicative_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class additive_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class additive_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class shift_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class shift_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class relational_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class relational_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class equality_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class equality_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class and_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class and_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class exclusive_or_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class exclusive_or_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class inclusive_or_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class inclusive_or_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class logical_and_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class logical_and_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class logical_or_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class logical_or_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class conditional_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class conditional_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class assignment_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class assignment_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class assignment_operator : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class assignment_operator : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class constant_expression : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class constant_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class declaration : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class declaration : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class init_declarator : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class init_declarator : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class init_declarator_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class init_declarator_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class declaration_specifiers : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class declaration_specifiers : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class type_specifier : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class type_specifier : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class declarator : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class declarator : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class direct_declarator : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class direct_declarator : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class parameter_type_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class parameter_type_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class parameter_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class parameter_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class parameter_declaration : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class parameter_declaration : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class type_name : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class type_name : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class compound_statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class compound_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class declaration_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class declaration_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class statement_list : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class statement_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class expression_statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class expression_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class selection_statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class selection_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class iteration_statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class iteration_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class jump_statement : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class jump_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class translation_unit : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class translation_unit : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class external_declaration : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class external_declaration : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class function_definition : public nonleafAST {public: using nonleafAST::nonleafAST;};
+class function_definition : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
 
 // nonleafAST* new_nonleafAST(string name, int type, int childNum, ...);
