@@ -1,6 +1,6 @@
-#include<queue>
-#include"ast.h"
-#include"grammar.hpp"
+#include <queue>
+#include "ast.h"
+#include "grammar.hpp"
 
 extern exprAST* ROOT;
 extern int yyparse();

@@ -24,19 +24,19 @@
 // #include "llvm/Target/TargetMachine.h"
 // #include "llvm/Target/TargetOptions.h"
 
-CodeGen *generator;
+// CodeGen *generator;
 
-void CodeGen::generate(translation_unit* root) {
+// void CodeGen::generate(translation_unit* root) {
 
-}
+// }
 
-CodeGen::CodeGen(/* args */) {
+// CodeGen::CodeGen(/* args */) {
 
-}
+// }
 
-CodeGen::~CodeGen() {
+// CodeGen::~CodeGen() {
 
-}
+// }
 llvm::Value* IRError(string msg){
     cout<<msg<<endl;
     return nullptr;
@@ -67,11 +67,9 @@ llvm::Value* unary_expression::CodeGen(){
                 return IRError("unary_expression error in leaf node: unary_expression");
             }
             else if(tmp->getType() == llvm::Type::getInt1Ty(context)){
-                this->type = TYPEINT;
                 return builder.CreateAdd(tmp, builder.getInt32(1), "tmpAdd");
             }
             else if(tmp->getType() == llvm::Type::getFloatTy(context)){
-                this->type = TYPEFLOAT;
                 return builder.CreateFAdd(tmp, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpAddf");
             }
             else{
@@ -596,3 +594,9 @@ llvm::Value* assignment_expression::CodeGen(){
 llvm::Value* assignment_operator::CodeGen(){
 
 }
+// codeGen::codeGen( args ) {
+
+// }
+
+// codeGen::~codeGen() {}
+// */

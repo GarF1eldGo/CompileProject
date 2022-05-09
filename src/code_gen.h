@@ -36,15 +36,15 @@ static llvm::LLVMContext context;
 static llvm::IRBuilder<> builder(context);
 
 
-
-class CodeGen {
+/*
+class codeGen {
 public:
 
     void generate(translation_unit* root);
     CodeGen();
     ~CodeGen();
 };
-
+*/
 
 
 #endif

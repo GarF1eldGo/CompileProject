@@ -1,14 +1,14 @@
-/* A Bison parser, made by GNU Bison 2.3.  */
+/* A Bison parser, made by GNU Bison 3.7.6.  */
 
-/* Skeleton implementation for Bison's Yacc-like parsers in C
+/* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
-   Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
+   Inc.
 
-   This program is free software; you can redistribute it and/or modify
+   This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,9 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -36,6 +34,10 @@
 /* C LALR(1) parser skeleton written by Richard Stallman, by
    simplifying the original so-called "semantic" parser.  */
 
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
+
 /* All symbols defined below should begin with yy or YY, to avoid
    infringing on user name space.  This should be done even for local
    variables, as they might otherwise be expanded by user macros.
@@ -43,11 +45,11 @@
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
 
-/* Identify Bison output.  */
-#define YYBISON 1
+/* Identify Bison output, and Bison version.  */
+#define YYBISON 30706
 
-/* Bison version.  */
-#define YYBISON_VERSION "2.3"
+/* Bison version string.  */
+#define YYBISON_VERSION "3.7.6"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -55,105 +57,16 @@
 /* Pure parsers.  */
 #define YYPURE 0
 
-/* Using locations.  */
-#define YYLSP_NEEDED 0
+/* Push parsers.  */
+#define YYPUSH 0
 
-
-
-/* Tokens.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     IDENTIFIER = 258,
-     CONSTANT = 259,
-     STRING_LITERAL = 260,
-     SIZEOF = 261,
-     INC_OP = 262,
-     DEC_OP = 263,
-     LEFT_OP = 264,
-     RIGHT_OP = 265,
-     LE_OP = 266,
-     GE_OP = 267,
-     EQ_OP = 268,
-     NE_OP = 269,
-     AND_OP = 270,
-     OR_OP = 271,
-     MUL_ASSIGN = 272,
-     DIV_ASSIGN = 273,
-     MOD_ASSIGN = 274,
-     ADD_ASSIGN = 275,
-     SUB_ASSIGN = 276,
-     LEFT_ASSIGN = 277,
-     RIGHT_ASSIGN = 278,
-     AND_ASSIGN = 279,
-     XOR_ASSIGN = 280,
-     OR_ASSIGN = 281,
-     CHAR = 282,
-     SHORT = 283,
-     INT = 284,
-     LONG = 285,
-     FLOAT = 286,
-     DOUBLE = 287,
-     VOID = 288,
-     ELLIPSIS = 289,
-     IF = 290,
-     ELSE = 291,
-     WHILE = 292,
-     DO = 293,
-     FOR = 294,
-     CONTINUE = 295,
-     BREAK = 296,
-     RETURN = 297
-   };
-#endif
-/* Tokens.  */
-#define IDENTIFIER 258
-#define CONSTANT 259
-#define STRING_LITERAL 260
-#define SIZEOF 261
-#define INC_OP 262
-#define DEC_OP 263
-#define LEFT_OP 264
-#define RIGHT_OP 265
-#define LE_OP 266
-#define GE_OP 267
-#define EQ_OP 268
-#define NE_OP 269
-#define AND_OP 270
-#define OR_OP 271
-#define MUL_ASSIGN 272
-#define DIV_ASSIGN 273
-#define MOD_ASSIGN 274
-#define ADD_ASSIGN 275
-#define SUB_ASSIGN 276
-#define LEFT_ASSIGN 277
-#define RIGHT_ASSIGN 278
-#define AND_ASSIGN 279
-#define XOR_ASSIGN 280
-#define OR_ASSIGN 281
-#define CHAR 282
-#define SHORT 283
-#define INT 284
-#define LONG 285
-#define FLOAT 286
-#define DOUBLE 287
-#define VOID 288
-#define ELLIPSIS 289
-#define IF 290
-#define ELSE 291
-#define WHILE 292
-#define DO 293
-#define FOR 294
-#define CONTINUE 295
-#define BREAK 296
-#define RETURN 297
+/* Pull parsers.  */
+#define YYPULL 1
 
 
 
 
-/* Copy the first part of user declarations.  */
+/* First part of user prologue.  */
 #line 1 "grammar.y"
 
 #include<stdio.h>
@@ -170,76 +83,235 @@ void yyerror(char const *s);
 extern exprAST* ROOT;
 stack<exprAST*> tokenStack;
 
+#line 87 "grammar.cpp"
 
-/* Enabling traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
+# ifndef YY_CAST
+#  ifdef __cplusplus
+#   define YY_CAST(Type, Val) static_cast<Type> (Val)
+#   define YY_REINTERPRET_CAST(Type, Val) reinterpret_cast<Type> (Val)
+#  else
+#   define YY_CAST(Type, Val) ((Type) (Val))
+#   define YY_REINTERPRET_CAST(Type, Val) ((Type) (Val))
+#  endif
+# endif
+# ifndef YY_NULLPTR
+#  if defined __cplusplus
+#   if 201103L <= __cplusplus
+#    define YY_NULLPTR nullptr
+#   else
+#    define YY_NULLPTR 0
+#   endif
+#  else
+#   define YY_NULLPTR ((void*)0)
+#  endif
+# endif
 
-/* Enabling verbose error messages.  */
-#ifdef YYERROR_VERBOSE
-# undef YYERROR_VERBOSE
-# define YYERROR_VERBOSE 1
-#else
-# define YYERROR_VERBOSE 0
-#endif
-
-/* Enabling the token table.  */
-#ifndef YYTOKEN_TABLE
-# define YYTOKEN_TABLE 0
-#endif
-
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
-#line 18 "grammar.y"
+#include "grammar.hpp"
+/* Symbol kind.  */
+enum yysymbol_kind_t
 {
-	class exprAST* exprPtr;
-}
-/* Line 193 of yacc.c.  */
-#line 200 "grammar.cpp"
-	YYSTYPE;
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
-# define YYSTYPE_IS_DECLARED 1
-# define YYSTYPE_IS_TRIVIAL 1
-#endif
+  YYSYMBOL_YYEMPTY = -2,
+  YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
+  YYSYMBOL_YYerror = 1,                    /* error  */
+  YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
+  YYSYMBOL_IDENTIFIER = 3,                 /* IDENTIFIER  */
+  YYSYMBOL_CONSTANT = 4,                   /* CONSTANT  */
+  YYSYMBOL_STRING_LITERAL = 5,             /* STRING_LITERAL  */
+  YYSYMBOL_SIZEOF = 6,                     /* SIZEOF  */
+  YYSYMBOL_INC_OP = 7,                     /* INC_OP  */
+  YYSYMBOL_DEC_OP = 8,                     /* DEC_OP  */
+  YYSYMBOL_LEFT_OP = 9,                    /* LEFT_OP  */
+  YYSYMBOL_RIGHT_OP = 10,                  /* RIGHT_OP  */
+  YYSYMBOL_LE_OP = 11,                     /* LE_OP  */
+  YYSYMBOL_GE_OP = 12,                     /* GE_OP  */
+  YYSYMBOL_EQ_OP = 13,                     /* EQ_OP  */
+  YYSYMBOL_NE_OP = 14,                     /* NE_OP  */
+  YYSYMBOL_AND_OP = 15,                    /* AND_OP  */
+  YYSYMBOL_OR_OP = 16,                     /* OR_OP  */
+  YYSYMBOL_MUL_ASSIGN = 17,                /* MUL_ASSIGN  */
+  YYSYMBOL_DIV_ASSIGN = 18,                /* DIV_ASSIGN  */
+  YYSYMBOL_MOD_ASSIGN = 19,                /* MOD_ASSIGN  */
+  YYSYMBOL_ADD_ASSIGN = 20,                /* ADD_ASSIGN  */
+  YYSYMBOL_SUB_ASSIGN = 21,                /* SUB_ASSIGN  */
+  YYSYMBOL_LEFT_ASSIGN = 22,               /* LEFT_ASSIGN  */
+  YYSYMBOL_RIGHT_ASSIGN = 23,              /* RIGHT_ASSIGN  */
+  YYSYMBOL_AND_ASSIGN = 24,                /* AND_ASSIGN  */
+  YYSYMBOL_XOR_ASSIGN = 25,                /* XOR_ASSIGN  */
+  YYSYMBOL_OR_ASSIGN = 26,                 /* OR_ASSIGN  */
+  YYSYMBOL_CHAR = 27,                      /* CHAR  */
+  YYSYMBOL_SHORT = 28,                     /* SHORT  */
+  YYSYMBOL_INT = 29,                       /* INT  */
+  YYSYMBOL_LONG = 30,                      /* LONG  */
+  YYSYMBOL_FLOAT = 31,                     /* FLOAT  */
+  YYSYMBOL_DOUBLE = 32,                    /* DOUBLE  */
+  YYSYMBOL_VOID = 33,                      /* VOID  */
+  YYSYMBOL_ELLIPSIS = 34,                  /* ELLIPSIS  */
+  YYSYMBOL_IF = 35,                        /* IF  */
+  YYSYMBOL_ELSE = 36,                      /* ELSE  */
+  YYSYMBOL_WHILE = 37,                     /* WHILE  */
+  YYSYMBOL_DO = 38,                        /* DO  */
+  YYSYMBOL_FOR = 39,                       /* FOR  */
+  YYSYMBOL_CONTINUE = 40,                  /* CONTINUE  */
+  YYSYMBOL_BREAK = 41,                     /* BREAK  */
+  YYSYMBOL_RETURN = 42,                    /* RETURN  */
+  YYSYMBOL_43_ = 43,                       /* '('  */
+  YYSYMBOL_44_ = 44,                       /* ')'  */
+  YYSYMBOL_45_ = 45,                       /* '['  */
+  YYSYMBOL_46_ = 46,                       /* ']'  */
+  YYSYMBOL_47_ = 47,                       /* '?'  */
+  YYSYMBOL_48_ = 48,                       /* ':'  */
+  YYSYMBOL_49_ = 49,                       /* '|'  */
+  YYSYMBOL_50_ = 50,                       /* '^'  */
+  YYSYMBOL_51_ = 51,                       /* '&'  */
+  YYSYMBOL_52_ = 52,                       /* '<'  */
+  YYSYMBOL_53_ = 53,                       /* '>'  */
+  YYSYMBOL_54_ = 54,                       /* '+'  */
+  YYSYMBOL_55_ = 55,                       /* '-'  */
+  YYSYMBOL_56_ = 56,                       /* '*'  */
+  YYSYMBOL_57_ = 57,                       /* '/'  */
+  YYSYMBOL_58_ = 58,                       /* '%'  */
+  YYSYMBOL_59_ = 59,                       /* ','  */
+  YYSYMBOL_60_ = 60,                       /* '~'  */
+  YYSYMBOL_61_ = 61,                       /* '!'  */
+  YYSYMBOL_62_ = 62,                       /* '='  */
+  YYSYMBOL_63_ = 63,                       /* '{'  */
+  YYSYMBOL_64_ = 64,                       /* '}'  */
+  YYSYMBOL_65_ = 65,                       /* ';'  */
+  YYSYMBOL_YYACCEPT = 66,                  /* $accept  */
+  YYSYMBOL_translation_unit = 67,          /* translation_unit  */
+  YYSYMBOL_external_declaration = 68,      /* external_declaration  */
+  YYSYMBOL_function_definition = 69,       /* function_definition  */
+  YYSYMBOL_declaration_specifiers = 70,    /* declaration_specifiers  */
+  YYSYMBOL_type_specifier = 71,            /* type_specifier  */
+  YYSYMBOL_declarator = 72,                /* declarator  */
+  YYSYMBOL_direct_declarator = 73,         /* direct_declarator  */
+  YYSYMBOL_constant_expression = 74,       /* constant_expression  */
+  YYSYMBOL_conditional_expression = 75,    /* conditional_expression  */
+  YYSYMBOL_logical_or_expression = 76,     /* logical_or_expression  */
+  YYSYMBOL_logical_and_expression = 77,    /* logical_and_expression  */
+  YYSYMBOL_inclusive_or_expression = 78,   /* inclusive_or_expression  */
+  YYSYMBOL_exclusive_or_expression = 79,   /* exclusive_or_expression  */
+  YYSYMBOL_and_expression = 80,            /* and_expression  */
+  YYSYMBOL_equality_expression = 81,       /* equality_expression  */
+  YYSYMBOL_relational_expression = 82,     /* relational_expression  */
+  YYSYMBOL_shift_expression = 83,          /* shift_expression  */
+  YYSYMBOL_additive_expression = 84,       /* additive_expression  */
+  YYSYMBOL_multiplicative_expression = 85, /* multiplicative_expression  */
+  YYSYMBOL_cast_expression = 86,           /* cast_expression  */
+  YYSYMBOL_type_name = 87,                 /* type_name  */
+  YYSYMBOL_expression = 88,                /* expression  */
+  YYSYMBOL_assignment_expression = 89,     /* assignment_expression  */
+  YYSYMBOL_unary_expression = 90,          /* unary_expression  */
+  YYSYMBOL_postfix_expression = 91,        /* postfix_expression  */
+  YYSYMBOL_primary_expression = 92,        /* primary_expression  */
+  YYSYMBOL_argument_expression_list = 93,  /* argument_expression_list  */
+  YYSYMBOL_unary_operator = 94,            /* unary_operator  */
+  YYSYMBOL_assignment_operator = 95,       /* assignment_operator  */
+  YYSYMBOL_parameter_type_list = 96,       /* parameter_type_list  */
+  YYSYMBOL_parameter_list = 97,            /* parameter_list  */
+  YYSYMBOL_parameter_declaration = 98,     /* parameter_declaration  */
+  YYSYMBOL_compound_statement = 99,        /* compound_statement  */
+  YYSYMBOL_statement_list = 100,           /* statement_list  */
+  YYSYMBOL_declaration_list = 101,         /* declaration_list  */
+  YYSYMBOL_statement = 102,                /* statement  */
+  YYSYMBOL_expression_statement = 103,     /* expression_statement  */
+  YYSYMBOL_selection_statement = 104,      /* selection_statement  */
+  YYSYMBOL_iteration_statement = 105,      /* iteration_statement  */
+  YYSYMBOL_jump_statement = 106,           /* jump_statement  */
+  YYSYMBOL_declaration = 107,              /* declaration  */
+  YYSYMBOL_init_declarator_list = 108,     /* init_declarator_list  */
+  YYSYMBOL_init_declarator = 109           /* init_declarator  */
+};
+typedef enum yysymbol_kind_t yysymbol_kind_t;
 
 
 
-/* Copy the second part of user declarations.  */
-
-
-/* Line 216 of yacc.c.  */
-#line 213 "grammar.cpp"
 
 #ifdef short
 # undef short
 #endif
 
-#ifdef YYTYPE_UINT8
-typedef YYTYPE_UINT8 yytype_uint8;
-#else
-typedef unsigned char yytype_uint8;
+/* On compilers that do not define __PTRDIFF_MAX__ etc., make sure
+   <limits.h> and (if available) <stdint.h> are included
+   so that the code can choose integer types of a good width.  */
+
+#ifndef __PTRDIFF_MAX__
+# include <limits.h> /* INFRINGES ON USER NAME SPACE */
+# if defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__
+#  include <stdint.h> /* INFRINGES ON USER NAME SPACE */
+#  define YY_STDINT_H
+# endif
 #endif
 
-#ifdef YYTYPE_INT8
-typedef YYTYPE_INT8 yytype_int8;
-#elif (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+/* Narrow types that promote to a signed type and that can represent a
+   signed or unsigned integer of at least N bits.  In tables they can
+   save space and decrease cache pressure.  Promoting to a signed type
+   helps avoid bugs in integer arithmetic.  */
+
+#ifdef __INT_LEAST8_MAX__
+typedef __INT_LEAST8_TYPE__ yytype_int8;
+#elif defined YY_STDINT_H
+typedef int_least8_t yytype_int8;
+#else
 typedef signed char yytype_int8;
-#else
-typedef short int yytype_int8;
 #endif
 
-#ifdef YYTYPE_UINT16
-typedef YYTYPE_UINT16 yytype_uint16;
+#ifdef __INT_LEAST16_MAX__
+typedef __INT_LEAST16_TYPE__ yytype_int16;
+#elif defined YY_STDINT_H
+typedef int_least16_t yytype_int16;
 #else
-typedef unsigned short int yytype_uint16;
+typedef short yytype_int16;
 #endif
 
-#ifdef YYTYPE_INT16
-typedef YYTYPE_INT16 yytype_int16;
+/* Work around bug in HP-UX 11.23, which defines these macros
+   incorrectly for preprocessor constants.  This workaround can likely
+   be removed in 2023, as HPE has promised support for HP-UX 11.23
+   (aka HP-UX 11i v2) only through the end of 2022; see Table 2 of
+   <https://h20195.www2.hpe.com/V2/getpdf.aspx/4AA4-7673ENW.pdf>.  */
+#ifdef __hpux
+# undef UINT_LEAST8_MAX
+# undef UINT_LEAST16_MAX
+# define UINT_LEAST8_MAX 255
+# define UINT_LEAST16_MAX 65535
+#endif
+
+#if defined __UINT_LEAST8_MAX__ && __UINT_LEAST8_MAX__ <= __INT_MAX__
+typedef __UINT_LEAST8_TYPE__ yytype_uint8;
+#elif (!defined __UINT_LEAST8_MAX__ && defined YY_STDINT_H \
+       && UINT_LEAST8_MAX <= INT_MAX)
+typedef uint_least8_t yytype_uint8;
+#elif !defined __UINT_LEAST8_MAX__ && UCHAR_MAX <= INT_MAX
+typedef unsigned char yytype_uint8;
 #else
-typedef short int yytype_int16;
+typedef short yytype_uint8;
+#endif
+
+#if defined __UINT_LEAST16_MAX__ && __UINT_LEAST16_MAX__ <= __INT_MAX__
+typedef __UINT_LEAST16_TYPE__ yytype_uint16;
+#elif (!defined __UINT_LEAST16_MAX__ && defined YY_STDINT_H \
+       && UINT_LEAST16_MAX <= INT_MAX)
+typedef uint_least16_t yytype_uint16;
+#elif !defined __UINT_LEAST16_MAX__ && USHRT_MAX <= INT_MAX
+typedef unsigned short yytype_uint16;
+#else
+typedef int yytype_uint16;
+#endif
+
+#ifndef YYPTRDIFF_T
+# if defined __PTRDIFF_TYPE__ && defined __PTRDIFF_MAX__
+#  define YYPTRDIFF_T __PTRDIFF_TYPE__
+#  define YYPTRDIFF_MAXIMUM __PTRDIFF_MAX__
+# elif defined PTRDIFF_MAX
+#  ifndef ptrdiff_t
+#   include <stddef.h> /* INFRINGES ON USER NAME SPACE */
+#  endif
+#  define YYPTRDIFF_T ptrdiff_t
+#  define YYPTRDIFF_MAXIMUM PTRDIFF_MAX
+# else
+#  define YYPTRDIFF_T long
+#  define YYPTRDIFF_MAXIMUM LONG_MAX
+# endif
 #endif
 
 #ifndef YYSIZE_T
@@ -247,55 +319,100 @@ typedef short int yytype_int16;
 #  define YYSIZE_T __SIZE_TYPE__
 # elif defined size_t
 #  define YYSIZE_T size_t
-# elif ! defined YYSIZE_T && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+# elif defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__
 #  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
 #  define YYSIZE_T size_t
 # else
-#  define YYSIZE_T unsigned int
+#  define YYSIZE_T unsigned
 # endif
 #endif
 
-#define YYSIZE_MAXIMUM ((YYSIZE_T) -1)
+#define YYSIZE_MAXIMUM                                  \
+  YY_CAST (YYPTRDIFF_T,                                 \
+           (YYPTRDIFF_MAXIMUM < YY_CAST (YYSIZE_T, -1)  \
+            ? YYPTRDIFF_MAXIMUM                         \
+            : YY_CAST (YYSIZE_T, -1)))
+
+#define YYSIZEOF(X) YY_CAST (YYPTRDIFF_T, sizeof (X))
+
+
+/* Stored state numbers (used for stacks). */
+typedef yytype_uint8 yy_state_t;
+
+/* State numbers in computations.  */
+typedef int yy_state_fast_t;
 
 #ifndef YY_
 # if defined YYENABLE_NLS && YYENABLE_NLS
 #  if ENABLE_NLS
 #   include <libintl.h> /* INFRINGES ON USER NAME SPACE */
-#   define YY_(msgid) dgettext ("bison-runtime", msgid)
+#   define YY_(Msgid) dgettext ("bison-runtime", Msgid)
 #  endif
 # endif
 # ifndef YY_
-#  define YY_(msgid) msgid
+#  define YY_(Msgid) Msgid
+# endif
+#endif
+
+
+#ifndef YY_ATTRIBUTE_PURE
+# if defined __GNUC__ && 2 < __GNUC__ + (96 <= __GNUC_MINOR__)
+#  define YY_ATTRIBUTE_PURE __attribute__ ((__pure__))
+# else
+#  define YY_ATTRIBUTE_PURE
+# endif
+#endif
+
+#ifndef YY_ATTRIBUTE_UNUSED
+# if defined __GNUC__ && 2 < __GNUC__ + (7 <= __GNUC_MINOR__)
+#  define YY_ATTRIBUTE_UNUSED __attribute__ ((__unused__))
+# else
+#  define YY_ATTRIBUTE_UNUSED
 # endif
 #endif
 
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
-# define YYUSE(e) ((void) (e))
+# define YY_USE(E) ((void) (E))
 #else
-# define YYUSE(e) /* empty */
+# define YY_USE(E) /* empty */
 #endif
 
-/* Identity function, used to suppress warnings about constant conditions.  */
-#ifndef lint
-# define YYID(n) (n)
+#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+/* Suppress an incorrect diagnostic about yylval being uninitialized.  */
+# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
+    _Pragma ("GCC diagnostic push")                                     \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
+    _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
+    _Pragma ("GCC diagnostic pop")
 #else
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
-static int
-YYID (int i)
-#else
-static int
-YYID (i)
-    int i;
+# define YY_INITIAL_VALUE(Value) Value
 #endif
-{
-  return i;
-}
+#ifndef YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+# define YY_IGNORE_MAYBE_UNINITIALIZED_END
+#endif
+#ifndef YY_INITIAL_VALUE
+# define YY_INITIAL_VALUE(Value) /* Nothing. */
 #endif
 
-#if ! defined yyoverflow || YYERROR_VERBOSE
+#if defined __cplusplus && defined __GNUC__ && ! defined __ICC && 6 <= __GNUC__
+# define YY_IGNORE_USELESS_CAST_BEGIN                          \
+    _Pragma ("GCC diagnostic push")                            \
+    _Pragma ("GCC diagnostic ignored \"-Wuseless-cast\"")
+# define YY_IGNORE_USELESS_CAST_END            \
+    _Pragma ("GCC diagnostic pop")
+#endif
+#ifndef YY_IGNORE_USELESS_CAST_BEGIN
+# define YY_IGNORE_USELESS_CAST_BEGIN
+# define YY_IGNORE_USELESS_CAST_END
+#endif
+
+
+#define YY_ASSERT(E) ((void) (0 && (E)))
+
+#if !defined yyoverflow
 
 /* The parser invokes alloca or malloc; define the necessary symbols.  */
 
@@ -312,11 +429,11 @@ YYID (i)
 #    define alloca _alloca
 #   else
 #    define YYSTACK_ALLOC alloca
-#    if ! defined _ALLOCA_H && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+#    if ! defined _ALLOCA_H && ! defined EXIT_SUCCESS
 #     include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
-#     ifndef _STDLIB_H
-#      define _STDLIB_H 1
+      /* Use EXIT_SUCCESS as a witness for stdlib.h.  */
+#     ifndef EXIT_SUCCESS
+#      define EXIT_SUCCESS 0
 #     endif
 #    endif
 #   endif
@@ -324,8 +441,8 @@ YYID (i)
 # endif
 
 # ifdef YYSTACK_ALLOC
-   /* Pacify GCC's `empty if-body' warning.  */
-#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (YYID (0))
+   /* Pacify GCC's 'empty if-body' warning.  */
+#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (0)
 #  ifndef YYSTACK_ALLOC_MAXIMUM
     /* The OS might guarantee only one guard page at the bottom of the stack,
        and a page size can be as small as 4096 bytes.  So we cannot safely
@@ -339,87 +456,88 @@ YYID (i)
 #  ifndef YYSTACK_ALLOC_MAXIMUM
 #   define YYSTACK_ALLOC_MAXIMUM YYSIZE_MAXIMUM
 #  endif
-#  if (defined __cplusplus && ! defined _STDLIB_H \
+#  if (defined __cplusplus && ! defined EXIT_SUCCESS \
        && ! ((defined YYMALLOC || defined malloc) \
-	     && (defined YYFREE || defined free)))
+             && (defined YYFREE || defined free)))
 #   include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
-#   ifndef _STDLIB_H
-#    define _STDLIB_H 1
+#   ifndef EXIT_SUCCESS
+#    define EXIT_SUCCESS 0
 #   endif
 #  endif
 #  ifndef YYMALLOC
 #   define YYMALLOC malloc
-#   if ! defined malloc && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+#   if ! defined malloc && ! defined EXIT_SUCCESS
 void *malloc (YYSIZE_T); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
 #  ifndef YYFREE
 #   define YYFREE free
-#   if ! defined free && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+#   if ! defined free && ! defined EXIT_SUCCESS
 void free (void *); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
 # endif
-#endif /* ! defined yyoverflow || YYERROR_VERBOSE */
-
+#endif /* !defined yyoverflow */
 
 #if (! defined yyoverflow \
      && (! defined __cplusplus \
-	 || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
+         || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
 
 /* A type that is properly aligned for any stack member.  */
 union yyalloc
 {
-  yytype_int16 yyss;
-  YYSTYPE yyvs;
-  };
+  yy_state_t yyss_alloc;
+  YYSTYPE yyvs_alloc;
+};
 
 /* The size of the maximum gap between one aligned stack and the next.  */
-# define YYSTACK_GAP_MAXIMUM (sizeof (union yyalloc) - 1)
+# define YYSTACK_GAP_MAXIMUM (YYSIZEOF (union yyalloc) - 1)
 
 /* The size of an array large to enough to hold all stacks, each with
    N elements.  */
 # define YYSTACK_BYTES(N) \
-     ((N) * (sizeof (yytype_int16) + sizeof (YYSTYPE)) \
+     ((N) * (YYSIZEOF (yy_state_t) + YYSIZEOF (YYSTYPE)) \
       + YYSTACK_GAP_MAXIMUM)
 
-/* Copy COUNT objects from FROM to TO.  The source and destination do
-   not overlap.  */
-# ifndef YYCOPY
-#  if defined __GNUC__ && 1 < __GNUC__
-#   define YYCOPY(To, From, Count) \
-      __builtin_memcpy (To, From, (Count) * sizeof (*(From)))
-#  else
-#   define YYCOPY(To, From, Count)		\
-      do					\
-	{					\
-	  YYSIZE_T yyi;				\
-	  for (yyi = 0; yyi < (Count); yyi++)	\
-	    (To)[yyi] = (From)[yyi];		\
-	}					\
-      while (YYID (0))
-#  endif
-# endif
+# define YYCOPY_NEEDED 1
 
 /* Relocate STACK from its old location to the new one.  The
    local variables YYSIZE and YYSTACKSIZE give the old and new number of
    elements in the stack, and YYPTR gives the new location of the
    stack.  Advance YYPTR to a properly aligned location for the next
    stack.  */
-# define YYSTACK_RELOCATE(Stack)					\
-    do									\
-      {									\
-	YYSIZE_T yynewbytes;						\
-	YYCOPY (&yyptr->Stack, Stack, yysize);				\
-	Stack = &yyptr->Stack;						\
-	yynewbytes = yystacksize * sizeof (*Stack) + YYSTACK_GAP_MAXIMUM; \
-	yyptr += yynewbytes / sizeof (*yyptr);				\
-      }									\
-    while (YYID (0))
+# define YYSTACK_RELOCATE(Stack_alloc, Stack)                           \
+    do                                                                  \
+      {                                                                 \
+        YYPTRDIFF_T yynewbytes;                                         \
+        YYCOPY (&yyptr->Stack_alloc, Stack, yysize);                    \
+        Stack = &yyptr->Stack_alloc;                                    \
+        yynewbytes = yystacksize * YYSIZEOF (*Stack) + YYSTACK_GAP_MAXIMUM; \
+        yyptr += yynewbytes / YYSIZEOF (*yyptr);                        \
+      }                                                                 \
+    while (0)
 
 #endif
+
+#if defined YYCOPY_NEEDED && YYCOPY_NEEDED
+/* Copy COUNT objects from SRC to DST.  The source and destination do
+   not overlap.  */
+# ifndef YYCOPY
+#  if defined __GNUC__ && 1 < __GNUC__
+#   define YYCOPY(Dst, Src, Count) \
+      __builtin_memcpy (Dst, Src, YY_CAST (YYSIZE_T, (Count)) * sizeof (*(Src)))
+#  else
+#   define YYCOPY(Dst, Src, Count)              \
+      do                                        \
+        {                                       \
+          YYPTRDIFF_T yyi;                      \
+          for (yyi = 0; yyi < (Count); yyi++)   \
+            (Dst)[yyi] = (Src)[yyi];            \
+        }                                       \
+      while (0)
+#  endif
+# endif
+#endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  14
@@ -432,18 +550,23 @@ union yyalloc
 #define YYNNTS  44
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  131
-/* YYNRULES -- Number of states.  */
+/* YYNSTATES -- Number of states.  */
 #define YYNSTATES  222
 
-/* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
-#define YYUNDEFTOK  2
+/* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   297
 
-#define YYTRANSLATE(YYX)						\
-  ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
 
-/* YYTRANSLATE[YYLEX] -- Bison symbol number corresponding to YYLEX.  */
-static const yytype_uint8 yytranslate[] =
+/* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
+   as returned by yylex, with out-of-bounds checking.  */
+#define YYTRANSLATE(YYX)                                \
+  (0 <= (YYX) && (YYX) <= YYMAXUTOK                     \
+   ? YY_CAST (yysymbol_kind_t, yytranslate[YYX])        \
+   : YYSYMBOL_YYUNDEF)
+
+/* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
+   as returned by yylex.  */
+static const yytype_int8 yytranslate[] =
 {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -478,75 +601,8 @@ static const yytype_uint8 yytranslate[] =
 };
 
 #if YYDEBUG
-/* YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
-   YYRHS.  */
-static const yytype_uint16 yyprhs[] =
-{
-       0,     0,     3,     5,     8,    10,    12,    16,    18,    21,
-      23,    25,    27,    29,    31,    33,    35,    37,    39,    43,
-      48,    52,    57,    61,    63,    65,    71,    73,    77,    79,
-      83,    85,    89,    91,    95,    97,   101,   103,   107,   111,
-     113,   117,   121,   125,   129,   131,   135,   139,   141,   145,
-     149,   151,   155,   159,   163,   165,   170,   172,   174,   178,
-     180,   184,   186,   189,   192,   195,   198,   203,   205,   210,
-     214,   219,   222,   225,   227,   229,   231,   235,   237,   241,
-     243,   245,   247,   249,   251,   253,   255,   257,   259,   261,
-     263,   265,   267,   269,   271,   273,   275,   277,   281,   283,
-     287,   290,   293,   297,   301,   306,   308,   311,   313,   316,
-     318,   320,   322,   324,   326,   328,   331,   337,   345,   351,
-     359,   366,   374,   382,   385,   388,   391,   395,   399,   401,
-     405,   407
-};
-
-/* YYRHS -- A `-1'-separated list of the rules' RHS.  */
-static const yytype_int8 yyrhs[] =
-{
-      67,     0,    -1,    68,    -1,    67,    68,    -1,    69,    -1,
-     107,    -1,    70,    72,    99,    -1,    71,    -1,    71,    70,
-      -1,    33,    -1,    27,    -1,    28,    -1,    29,    -1,    30,
-      -1,    31,    -1,    32,    -1,    73,    -1,     3,    -1,    43,
-      72,    44,    -1,    73,    45,    74,    46,    -1,    73,    45,
-      46,    -1,    73,    43,    96,    44,    -1,    73,    43,    44,
-      -1,    75,    -1,    76,    -1,    76,    47,    88,    48,    75,
-      -1,    77,    -1,    76,    16,    77,    -1,    78,    -1,    77,
-      15,    78,    -1,    79,    -1,    78,    49,    79,    -1,    80,
-      -1,    79,    50,    80,    -1,    81,    -1,    80,    51,    81,
-      -1,    82,    -1,    81,    13,    82,    -1,    81,    14,    82,
-      -1,    83,    -1,    82,    52,    83,    -1,    82,    53,    83,
-      -1,    82,    11,    83,    -1,    82,    12,    83,    -1,    84,
-      -1,    83,     9,    84,    -1,    83,    10,    84,    -1,    85,
-      -1,    84,    54,    85,    -1,    84,    55,    85,    -1,    86,
-      -1,    85,    56,    86,    -1,    85,    57,    86,    -1,    85,
-      58,    86,    -1,    90,    -1,    43,    87,    44,    86,    -1,
-      71,    -1,    89,    -1,    88,    59,    89,    -1,    75,    -1,
-      90,    95,    89,    -1,    91,    -1,     7,    90,    -1,     8,
-      90,    -1,    94,    86,    -1,     6,    90,    -1,     6,    43,
-      87,    44,    -1,    92,    -1,    91,    45,    88,    46,    -1,
-      91,    43,    44,    -1,    91,    43,    93,    44,    -1,    91,
-       7,    -1,    91,     8,    -1,     3,    -1,     4,    -1,     5,
-      -1,    43,    88,    44,    -1,    89,    -1,    93,    59,    89,
-      -1,    51,    -1,    56,    -1,    54,    -1,    55,    -1,    60,
-      -1,    61,    -1,    62,    -1,    17,    -1,    18,    -1,    19,
-      -1,    20,    -1,    21,    -1,    22,    -1,    23,    -1,    24,
-      -1,    25,    -1,    26,    -1,    97,    -1,    97,    59,    34,
-      -1,    98,    -1,    97,    59,    98,    -1,    70,    72,    -1,
-      63,    64,    -1,    63,   100,    64,    -1,    63,   101,    64,
-      -1,    63,   101,   100,    64,    -1,   102,    -1,   100,   102,
-      -1,   107,    -1,   101,   107,    -1,    99,    -1,   103,    -1,
-     104,    -1,   105,    -1,   106,    -1,    65,    -1,    88,    65,
-      -1,    35,    43,    88,    44,   102,    -1,    35,    43,    88,
-      44,   102,    36,   102,    -1,    37,    43,    88,    44,   102,
-      -1,    38,   102,    37,    43,    88,    44,    65,    -1,    39,
-      43,   103,   103,    44,   102,    -1,    39,    43,   103,   103,
-      88,    44,   102,    -1,    39,    43,   107,   103,    88,    44,
-     102,    -1,    40,    65,    -1,    41,    65,    -1,    42,    65,
-      -1,    42,    88,    65,    -1,    70,   108,    65,    -1,   109,
-      -1,   108,    59,   109,    -1,    72,    -1,    72,    62,    89,
-      -1
-};
-
-/* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
-static const yytype_uint16 yyrline[] =
+  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+static const yytype_int16 yyrline[] =
 {
        0,    49,    49,    55,    67,    72,    82,    93,    98,   108,
      109,   110,   111,   112,   113,   114,   119,   129,   136,   145,
@@ -565,21 +621,28 @@ static const yytype_uint16 yyrline[] =
 };
 #endif
 
-#if YYDEBUG || YYERROR_VERBOSE || YYTOKEN_TABLE
+/** Accessing symbol of state STATE.  */
+#define YY_ACCESSING_SYMBOL(State) YY_CAST (yysymbol_kind_t, yystos[State])
+
+#if YYDEBUG || 0
+/* The user-facing name of the symbol whose (internal) number is
+   YYSYMBOL.  No bounds checking.  */
+static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
+
 /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "IDENTIFIER", "CONSTANT",
-  "STRING_LITERAL", "SIZEOF", "INC_OP", "DEC_OP", "LEFT_OP", "RIGHT_OP",
-  "LE_OP", "GE_OP", "EQ_OP", "NE_OP", "AND_OP", "OR_OP", "MUL_ASSIGN",
-  "DIV_ASSIGN", "MOD_ASSIGN", "ADD_ASSIGN", "SUB_ASSIGN", "LEFT_ASSIGN",
-  "RIGHT_ASSIGN", "AND_ASSIGN", "XOR_ASSIGN", "OR_ASSIGN", "CHAR", "SHORT",
-  "INT", "LONG", "FLOAT", "DOUBLE", "VOID", "ELLIPSIS", "IF", "ELSE",
-  "WHILE", "DO", "FOR", "CONTINUE", "BREAK", "RETURN", "'('", "')'", "'['",
-  "']'", "'?'", "':'", "'|'", "'^'", "'&'", "'<'", "'>'", "'+'", "'-'",
-  "'*'", "'/'", "'%'", "','", "'~'", "'!'", "'='", "'{'", "'}'", "';'",
-  "$accept", "translation_unit", "external_declaration",
+  "\"end of file\"", "error", "\"invalid token\"", "IDENTIFIER",
+  "CONSTANT", "STRING_LITERAL", "SIZEOF", "INC_OP", "DEC_OP", "LEFT_OP",
+  "RIGHT_OP", "LE_OP", "GE_OP", "EQ_OP", "NE_OP", "AND_OP", "OR_OP",
+  "MUL_ASSIGN", "DIV_ASSIGN", "MOD_ASSIGN", "ADD_ASSIGN", "SUB_ASSIGN",
+  "LEFT_ASSIGN", "RIGHT_ASSIGN", "AND_ASSIGN", "XOR_ASSIGN", "OR_ASSIGN",
+  "CHAR", "SHORT", "INT", "LONG", "FLOAT", "DOUBLE", "VOID", "ELLIPSIS",
+  "IF", "ELSE", "WHILE", "DO", "FOR", "CONTINUE", "BREAK", "RETURN", "'('",
+  "')'", "'['", "']'", "'?'", "':'", "'|'", "'^'", "'&'", "'<'", "'>'",
+  "'+'", "'-'", "'*'", "'/'", "'%'", "','", "'~'", "'!'", "'='", "'{'",
+  "'}'", "';'", "$accept", "translation_unit", "external_declaration",
   "function_definition", "declaration_specifiers", "type_specifier",
   "declarator", "direct_declarator", "constant_expression",
   "conditional_expression", "logical_or_expression",
@@ -594,14 +657,20 @@ static const char *const yytname[] =
   "statement_list", "declaration_list", "statement",
   "expression_statement", "selection_statement", "iteration_statement",
   "jump_statement", "declaration", "init_declarator_list",
-  "init_declarator", 0
+  "init_declarator", YY_NULLPTR
 };
+
+static const char *
+yysymbol_name (yysymbol_kind_t yysymbol)
+{
+  return yytname[yysymbol];
+}
 #endif
 
-# ifdef YYPRINT
-/* YYTOKNUM[YYLEX-NUM] -- Internal token number corresponding to
-   token YYLEX-NUM.  */
-static const yytype_uint16 yytoknum[] =
+#ifdef YYPRINT
+/* YYTOKNUM[NUM] -- (External) token number corresponding to the
+   (internal) symbol number NUM (which must be that of a token).  */
+static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
@@ -611,89 +680,20 @@ static const yytype_uint16 yytoknum[] =
       94,    38,    60,    62,    43,    45,    42,    47,    37,    44,
      126,    33,    61,   123,   125,    59
 };
-# endif
+#endif
 
-/* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
-static const yytype_uint8 yyr1[] =
-{
-       0,    66,    67,    67,    68,    68,    69,    70,    70,    71,
-      71,    71,    71,    71,    71,    71,    72,    73,    73,    73,
-      73,    73,    73,    74,    75,    75,    76,    76,    77,    77,
-      78,    78,    79,    79,    80,    80,    81,    81,    81,    82,
-      82,    82,    82,    82,    83,    83,    83,    84,    84,    84,
-      85,    85,    85,    85,    86,    86,    87,    88,    88,    89,
-      89,    90,    90,    90,    90,    90,    90,    91,    91,    91,
-      91,    91,    91,    92,    92,    92,    92,    93,    93,    94,
-      94,    94,    94,    94,    94,    95,    95,    95,    95,    95,
-      95,    95,    95,    95,    95,    95,    96,    96,    97,    97,
-      98,    99,    99,    99,    99,   100,   100,   101,   101,   102,
-     102,   102,   102,   102,   103,   103,   104,   104,   105,   105,
-     105,   105,   105,   106,   106,   106,   106,   107,   108,   108,
-     109,   109
-};
+#define YYPACT_NINF (-136)
 
-/* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
-static const yytype_uint8 yyr2[] =
-{
-       0,     2,     1,     2,     1,     1,     3,     1,     2,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     3,     4,
-       3,     4,     3,     1,     1,     5,     1,     3,     1,     3,
-       1,     3,     1,     3,     1,     3,     1,     3,     3,     1,
-       3,     3,     3,     3,     1,     3,     3,     1,     3,     3,
-       1,     3,     3,     3,     1,     4,     1,     1,     3,     1,
-       3,     1,     2,     2,     2,     2,     4,     1,     4,     3,
-       4,     2,     2,     1,     1,     1,     3,     1,     3,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     3,     1,     3,
-       2,     2,     3,     3,     4,     1,     2,     1,     2,     1,
-       1,     1,     1,     1,     1,     2,     5,     7,     5,     7,
-       6,     7,     7,     2,     2,     2,     3,     3,     1,     3,
-       1,     3
-};
+#define yypact_value_is_default(Yyn) \
+  ((Yyn) == YYPACT_NINF)
 
-/* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
-   STATE-NUM when YYTABLE doesn't specify something else to do.  Zero
-   means the default is an error.  */
-static const yytype_uint8 yydefact[] =
-{
-       0,    10,    11,    12,    13,    14,    15,     9,     0,     2,
-       4,     0,     7,     5,     1,     3,    17,     0,   130,    16,
-       0,   128,     8,     0,     0,     0,     6,     0,     0,     0,
-     127,    18,    73,    74,    75,     0,     0,     0,     0,    79,
-      81,    82,    80,    83,    84,    59,    24,    26,    28,    30,
-      32,    34,    36,    39,    44,    47,    50,   131,    54,    61,
-      67,     0,     0,     0,     0,     0,     0,     0,     0,   101,
-     114,     0,     0,    57,   109,     0,     0,   105,   110,   111,
-     112,   113,   107,    22,     0,     0,    96,    98,    20,     0,
-      23,    54,   130,   129,     0,    65,     0,    62,    63,    56,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    86,    87,    88,    89,    90,    91,    92,    93,    94,
-      95,    85,     0,    71,    72,     0,     0,    64,     0,     0,
-       0,     0,   123,   124,   125,     0,     0,   115,   102,   106,
-     103,     0,   108,   100,    21,     0,    19,     0,     0,    76,
-      27,     0,    29,    31,    33,    35,    37,    38,    42,    43,
-      40,    41,    45,    46,    48,    49,    51,    52,    53,    60,
-      69,    77,     0,     0,     0,     0,     0,     0,     0,   126,
-      58,   104,    97,    99,    66,    55,     0,    70,     0,    68,
-       0,     0,     0,     0,     0,    25,    78,   116,   118,     0,
-       0,     0,     0,     0,     0,   120,     0,     0,   117,   119,
-     121,   122
-};
+#define YYTABLE_NINF (-1)
 
-/* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int16 yydefgoto[] =
-{
-      -1,     8,     9,    10,    71,    12,    92,    19,    89,    45,
-      46,    47,    48,    49,    50,    51,    52,    53,    54,    55,
-      56,   100,    72,    73,    58,    59,    60,   182,    61,   132,
-      85,    86,    87,    74,    75,    76,    77,    78,    79,    80,
-      81,    13,    20,    21
-};
+#define yytable_value_is_error(Yyn) \
+  0
 
-/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-   STATE-NUM.  */
-#define YYPACT_NINF -136
+  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+     STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
      124,  -136,  -136,  -136,  -136,  -136,  -136,  -136,    12,  -136,
@@ -721,7 +721,37 @@ static const yytype_int16 yypact[] =
     -136,  -136
 };
 
-/* YYPGOTO[NTERM-NUM].  */
+  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+     Performed when YYTABLE does not specify something else to do.  Zero
+     means the default is an error.  */
+static const yytype_uint8 yydefact[] =
+{
+       0,    10,    11,    12,    13,    14,    15,     9,     0,     2,
+       4,     0,     7,     5,     1,     3,    17,     0,   130,    16,
+       0,   128,     8,     0,     0,     0,     6,     0,     0,     0,
+     127,    18,    73,    74,    75,     0,     0,     0,     0,    79,
+      81,    82,    80,    83,    84,    59,    24,    26,    28,    30,
+      32,    34,    36,    39,    44,    47,    50,   131,    54,    61,
+      67,     0,     0,     0,     0,     0,     0,     0,     0,   101,
+     114,     0,     0,    57,   109,     0,     0,   105,   110,   111,
+     112,   113,   107,    22,     0,     0,    96,    98,    20,     0,
+      23,    54,   130,   129,     0,    65,     0,    62,    63,    56,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    86,    87,    88,    89,    90,    91,    92,    93,    94,
+      95,    85,     0,    71,    72,     0,     0,    64,     0,     0,
+       0,     0,   123,   124,   125,     0,     0,   115,   102,   106,
+     103,     0,   108,   100,    21,     0,    19,     0,     0,    76,
+      27,     0,    29,    31,    33,    35,    37,    38,    42,    43,
+      40,    41,    45,    46,    48,    49,    51,    52,    53,    60,
+      69,    77,     0,     0,     0,     0,     0,     0,     0,   126,
+      58,   104,    97,    99,    66,    55,     0,    70,     0,    68,
+       0,     0,     0,     0,     0,    25,    78,   116,   118,     0,
+       0,     0,     0,     0,     0,   120,     0,     0,   117,   119,
+     121,   122
+};
+
+  /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
     -136,  -136,   170,  -136,     3,   -22,    11,  -136,  -136,   -26,
@@ -731,11 +761,19 @@ static const yytype_int16 yypgoto[] =
     -136,   -21,  -136,   172
 };
 
-/* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
-   positive, shift that token.  If negative, reduce the rule which
-   number is the opposite.  If zero, do what YYDEFACT says.
-   If YYTABLE_NINF, syntax error.  */
-#define YYTABLE_NINF -1
+  /* YYDEFGOTO[NTERM-NUM].  */
+static const yytype_uint8 yydefgoto[] =
+{
+       0,     8,     9,    10,    71,    12,    92,    19,    89,    45,
+      46,    47,    48,    49,    50,    51,    52,    53,    54,    55,
+      56,   100,    72,    73,    58,    59,    60,   182,    61,   132,
+      85,    86,    87,    74,    75,    76,    77,    78,    79,    80,
+      81,    13,    20,    21
+};
+
+  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+     positive, shift that token.  If negative, reduce the rule whose
+     number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
       57,    91,    90,    11,    82,   137,   187,    16,    95,    97,
@@ -882,9 +920,9 @@ static const yytype_int16 yycheck[] =
       61
 };
 
-/* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-   symbol of state STATE-NUM.  */
-static const yytype_uint8 yystos[] =
+  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
+     symbol of state STATE-NUM.  */
+static const yytype_int8 yystos[] =
 {
        0,    27,    28,    29,    30,    31,    32,    33,    67,    68,
       69,    70,    71,   107,     0,    68,     3,    43,    72,    73,
@@ -911,95 +949,78 @@ static const yytype_uint8 yystos[] =
      102,   102
 };
 
-#define yyerrok		(yyerrstatus = 0)
-#define yyclearin	(yychar = YYEMPTY)
-#define YYEMPTY		(-2)
-#define YYEOF		0
+  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+static const yytype_int8 yyr1[] =
+{
+       0,    66,    67,    67,    68,    68,    69,    70,    70,    71,
+      71,    71,    71,    71,    71,    71,    72,    73,    73,    73,
+      73,    73,    73,    74,    75,    75,    76,    76,    77,    77,
+      78,    78,    79,    79,    80,    80,    81,    81,    81,    82,
+      82,    82,    82,    82,    83,    83,    83,    84,    84,    84,
+      85,    85,    85,    85,    86,    86,    87,    88,    88,    89,
+      89,    90,    90,    90,    90,    90,    90,    91,    91,    91,
+      91,    91,    91,    92,    92,    92,    92,    93,    93,    94,
+      94,    94,    94,    94,    94,    95,    95,    95,    95,    95,
+      95,    95,    95,    95,    95,    95,    96,    96,    97,    97,
+      98,    99,    99,    99,    99,   100,   100,   101,   101,   102,
+     102,   102,   102,   102,   103,   103,   104,   104,   105,   105,
+     105,   105,   105,   106,   106,   106,   106,   107,   108,   108,
+     109,   109
+};
 
-#define YYACCEPT	goto yyacceptlab
-#define YYABORT		goto yyabortlab
-#define YYERROR		goto yyerrorlab
+  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+static const yytype_int8 yyr2[] =
+{
+       0,     2,     1,     2,     1,     1,     3,     1,     2,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     3,     4,
+       3,     4,     3,     1,     1,     5,     1,     3,     1,     3,
+       1,     3,     1,     3,     1,     3,     1,     3,     3,     1,
+       3,     3,     3,     3,     1,     3,     3,     1,     3,     3,
+       1,     3,     3,     3,     1,     4,     1,     1,     3,     1,
+       3,     1,     2,     2,     2,     2,     4,     1,     4,     3,
+       4,     2,     2,     1,     1,     1,     3,     1,     3,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     3,     1,     3,
+       2,     2,     3,     3,     4,     1,     2,     1,     2,     1,
+       1,     1,     1,     1,     1,     2,     5,     7,     5,     7,
+       6,     7,     7,     2,     2,     2,     3,     3,     1,     3,
+       1,     3
+};
 
 
-/* Like YYERROR except do call yyerror.  This remains here temporarily
-   to ease the transition to the new meaning of YYERROR, for GCC.
-   Once GCC version 2 has supplanted version 1, this can go.  */
+enum { YYENOMEM = -2 };
 
-#define YYFAIL		goto yyerrlab
+#define yyerrok         (yyerrstatus = 0)
+#define yyclearin       (yychar = YYEMPTY)
+
+#define YYACCEPT        goto yyacceptlab
+#define YYABORT         goto yyabortlab
+#define YYERROR         goto yyerrorlab
+
 
 #define YYRECOVERING()  (!!yyerrstatus)
 
-#define YYBACKUP(Token, Value)					\
-do								\
-  if (yychar == YYEMPTY && yylen == 1)				\
-    {								\
-      yychar = (Token);						\
-      yylval = (Value);						\
-      yytoken = YYTRANSLATE (yychar);				\
-      YYPOPSTACK (1);						\
-      goto yybackup;						\
-    }								\
-  else								\
-    {								\
-      yyerror (YY_("syntax error: cannot back up")); \
-      YYERROR;							\
-    }								\
-while (YYID (0))
+#define YYBACKUP(Token, Value)                                    \
+  do                                                              \
+    if (yychar == YYEMPTY)                                        \
+      {                                                           \
+        yychar = (Token);                                         \
+        yylval = (Value);                                         \
+        YYPOPSTACK (yylen);                                       \
+        yystate = *yyssp;                                         \
+        goto yybackup;                                            \
+      }                                                           \
+    else                                                          \
+      {                                                           \
+        yyerror (YY_("syntax error: cannot back up")); \
+        YYERROR;                                                  \
+      }                                                           \
+  while (0)
 
+/* Backward compatibility with an undocumented macro.
+   Use YYerror or YYUNDEF. */
+#define YYERRCODE YYUNDEF
 
-#define YYTERROR	1
-#define YYERRCODE	256
-
-
-/* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
-   If N is 0, then set CURRENT to the empty location which ends
-   the previous symbol: RHS[0] (always defined).  */
-
-#define YYRHSLOC(Rhs, K) ((Rhs)[K])
-#ifndef YYLLOC_DEFAULT
-# define YYLLOC_DEFAULT(Current, Rhs, N)				\
-    do									\
-      if (YYID (N))                                                    \
-	{								\
-	  (Current).first_line   = YYRHSLOC (Rhs, 1).first_line;	\
-	  (Current).first_column = YYRHSLOC (Rhs, 1).first_column;	\
-	  (Current).last_line    = YYRHSLOC (Rhs, N).last_line;		\
-	  (Current).last_column  = YYRHSLOC (Rhs, N).last_column;	\
-	}								\
-      else								\
-	{								\
-	  (Current).first_line   = (Current).last_line   =		\
-	    YYRHSLOC (Rhs, 0).last_line;				\
-	  (Current).first_column = (Current).last_column =		\
-	    YYRHSLOC (Rhs, 0).last_column;				\
-	}								\
-    while (YYID (0))
-#endif
-
-
-/* YY_LOCATION_PRINT -- Print the location on the stream.
-   This macro was not mandated originally: define only if we know
-   we won't break user code: when these are the locations we know.  */
-
-#ifndef YY_LOCATION_PRINT
-# if defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL
-#  define YY_LOCATION_PRINT(File, Loc)			\
-     fprintf (File, "%d.%d-%d.%d",			\
-	      (Loc).first_line, (Loc).first_column,	\
-	      (Loc).last_line,  (Loc).last_column)
-# else
-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-# endif
-#endif
-
-
-/* YYLEX -- calling `yylex' with the right arguments.  */
-
-#ifdef YYLEX_PARAM
-# define YYLEX yylex (YYLEX_PARAM)
-#else
-# define YYLEX yylex ()
-#endif
 
 /* Enable debugging if requested.  */
 #if YYDEBUG
@@ -1009,80 +1030,65 @@ while (YYID (0))
 #  define YYFPRINTF fprintf
 # endif
 
-# define YYDPRINTF(Args)			\
-do {						\
-  if (yydebug)					\
-    YYFPRINTF Args;				\
-} while (YYID (0))
+# define YYDPRINTF(Args)                        \
+do {                                            \
+  if (yydebug)                                  \
+    YYFPRINTF Args;                             \
+} while (0)
 
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)			  \
-do {									  \
-  if (yydebug)								  \
-    {									  \
-      YYFPRINTF (stderr, "%s ", Title);					  \
-      yy_symbol_print (stderr,						  \
-		  Type, Value); \
-      YYFPRINTF (stderr, "\n");						  \
-    }									  \
-} while (YYID (0))
+/* This macro is provided for backward compatibility. */
+# ifndef YY_LOCATION_PRINT
+#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
+# endif
 
 
-/*--------------------------------.
-| Print this symbol on YYOUTPUT.  |
-`--------------------------------*/
+# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
+do {                                                                      \
+  if (yydebug)                                                            \
+    {                                                                     \
+      YYFPRINTF (stderr, "%s ", Title);                                   \
+      yy_symbol_print (stderr,                                            \
+                  Kind, Value); \
+      YYFPRINTF (stderr, "\n");                                           \
+    }                                                                     \
+} while (0)
 
-/*ARGSUSED*/
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+
+/*-----------------------------------.
+| Print this symbol's value on YYO.  |
+`-----------------------------------*/
+
 static void
-yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
-#else
-static void
-yy_symbol_value_print (yyoutput, yytype, yyvaluep)
-    FILE *yyoutput;
-    int yytype;
-    YYSTYPE const * const yyvaluep;
-#endif
+yy_symbol_value_print (FILE *yyo,
+                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
 {
+  FILE *yyoutput = yyo;
+  YY_USE (yyoutput);
   if (!yyvaluep)
     return;
 # ifdef YYPRINT
-  if (yytype < YYNTOKENS)
-    YYPRINT (yyoutput, yytoknum[yytype], *yyvaluep);
-# else
-  YYUSE (yyoutput);
+  if (yykind < YYNTOKENS)
+    YYPRINT (yyo, yytoknum[yykind], *yyvaluep);
 # endif
-  switch (yytype)
-    {
-      default:
-	break;
-    }
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+  YY_USE (yykind);
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
 
-/*--------------------------------.
-| Print this symbol on YYOUTPUT.  |
-`--------------------------------*/
+/*---------------------------.
+| Print this symbol on YYO.  |
+`---------------------------*/
 
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
-yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
-#else
-static void
-yy_symbol_print (yyoutput, yytype, yyvaluep)
-    FILE *yyoutput;
-    int yytype;
-    YYSTYPE const * const yyvaluep;
-#endif
+yy_symbol_print (FILE *yyo,
+                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
 {
-  if (yytype < YYNTOKENS)
-    YYFPRINTF (yyoutput, "token %s (", yytname[yytype]);
-  else
-    YYFPRINTF (yyoutput, "nterm %s (", yytname[yytype]);
+  YYFPRINTF (yyo, "%s %s (",
+             yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
 
-  yy_symbol_value_print (yyoutput, yytype, yyvaluep);
-  YYFPRINTF (yyoutput, ")");
+  yy_symbol_value_print (yyo, yykind, yyvaluep);
+  YYFPRINTF (yyo, ")");
 }
 
 /*------------------------------------------------------------------.
@@ -1090,80 +1096,68 @@ yy_symbol_print (yyoutput, yytype, yyvaluep)
 | TOP (included).                                                   |
 `------------------------------------------------------------------*/
 
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
-yy_stack_print (yytype_int16 *bottom, yytype_int16 *top)
-#else
-static void
-yy_stack_print (bottom, top)
-    yytype_int16 *bottom;
-    yytype_int16 *top;
-#endif
+yy_stack_print (yy_state_t *yybottom, yy_state_t *yytop)
 {
   YYFPRINTF (stderr, "Stack now");
-  for (; bottom <= top; ++bottom)
-    YYFPRINTF (stderr, " %d", *bottom);
+  for (; yybottom <= yytop; yybottom++)
+    {
+      int yybot = *yybottom;
+      YYFPRINTF (stderr, " %d", yybot);
+    }
   YYFPRINTF (stderr, "\n");
 }
 
-# define YY_STACK_PRINT(Bottom, Top)				\
-do {								\
-  if (yydebug)							\
-    yy_stack_print ((Bottom), (Top));				\
-} while (YYID (0))
+# define YY_STACK_PRINT(Bottom, Top)                            \
+do {                                                            \
+  if (yydebug)                                                  \
+    yy_stack_print ((Bottom), (Top));                           \
+} while (0)
 
 
 /*------------------------------------------------.
 | Report that the YYRULE is going to be reduced.  |
 `------------------------------------------------*/
 
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
-yy_reduce_print (YYSTYPE *yyvsp, int yyrule)
-#else
-static void
-yy_reduce_print (yyvsp, yyrule)
-    YYSTYPE *yyvsp;
-    int yyrule;
-#endif
+yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
+                 int yyrule)
 {
+  int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
   int yyi;
-  unsigned long int yylno = yyrline[yyrule];
-  YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
-	     yyrule - 1, yylno);
+  YYFPRINTF (stderr, "Reducing stack by rule %d (line %d):\n",
+             yyrule - 1, yylno);
   /* The symbols being reduced.  */
   for (yyi = 0; yyi < yynrhs; yyi++)
     {
-      fprintf (stderr, "   $%d = ", yyi + 1);
-      yy_symbol_print (stderr, yyrhs[yyprhs[yyrule] + yyi],
-		       &(yyvsp[(yyi + 1) - (yynrhs)])
-		       		       );
-      fprintf (stderr, "\n");
+      YYFPRINTF (stderr, "   $%d = ", yyi + 1);
+      yy_symbol_print (stderr,
+                       YY_ACCESSING_SYMBOL (+yyssp[yyi + 1 - yynrhs]),
+                       &yyvsp[(yyi + 1) - (yynrhs)]);
+      YYFPRINTF (stderr, "\n");
     }
 }
 
-# define YY_REDUCE_PRINT(Rule)		\
-do {					\
-  if (yydebug)				\
-    yy_reduce_print (yyvsp, Rule); \
-} while (YYID (0))
+# define YY_REDUCE_PRINT(Rule)          \
+do {                                    \
+  if (yydebug)                          \
+    yy_reduce_print (yyssp, yyvsp, Rule); \
+} while (0)
 
 /* Nonzero means print parse trace.  It is left uninitialized so that
    multiple parsers can coexist.  */
 int yydebug;
 #else /* !YYDEBUG */
-# define YYDPRINTF(Args)
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)
+# define YYDPRINTF(Args) ((void) 0)
+# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)
 # define YY_STACK_PRINT(Bottom, Top)
 # define YY_REDUCE_PRINT(Rule)
 #endif /* !YYDEBUG */
 
 
 /* YYINITDEPTH -- initial size of the parser's stacks.  */
-#ifndef	YYINITDEPTH
+#ifndef YYINITDEPTH
 # define YYINITDEPTH 200
 #endif
 
@@ -1178,277 +1172,38 @@ int yydebug;
 # define YYMAXDEPTH 10000
 #endif
 
-
 
-#if YYERROR_VERBOSE
 
-# ifndef yystrlen
-#  if defined __GLIBC__ && defined _STRING_H
-#   define yystrlen strlen
-#  else
-/* Return the length of YYSTR.  */
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
-static YYSIZE_T
-yystrlen (const char *yystr)
-#else
-static YYSIZE_T
-yystrlen (yystr)
-    const char *yystr;
-#endif
-{
-  YYSIZE_T yylen;
-  for (yylen = 0; yystr[yylen]; yylen++)
-    continue;
-  return yylen;
-}
-#  endif
-# endif
 
-# ifndef yystpcpy
-#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
-#   define yystpcpy stpcpy
-#  else
-/* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
-   YYDEST.  */
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
-static char *
-yystpcpy (char *yydest, const char *yysrc)
-#else
-static char *
-yystpcpy (yydest, yysrc)
-    char *yydest;
-    const char *yysrc;
-#endif
-{
-  char *yyd = yydest;
-  const char *yys = yysrc;
 
-  while ((*yyd++ = *yys++) != '\0')
-    continue;
-
-  return yyd - 1;
-}
-#  endif
-# endif
-
-# ifndef yytnamerr
-/* Copy to YYRES the contents of YYSTR after stripping away unnecessary
-   quotes and backslashes, so that it's suitable for yyerror.  The
-   heuristic is that double-quoting is unnecessary unless the string
-   contains an apostrophe, a comma, or backslash (other than
-   backslash-backslash).  YYSTR is taken from yytname.  If YYRES is
-   null, do not copy; instead, return the length of what the result
-   would have been.  */
-static YYSIZE_T
-yytnamerr (char *yyres, const char *yystr)
-{
-  if (*yystr == '"')
-    {
-      YYSIZE_T yyn = 0;
-      char const *yyp = yystr;
-
-      for (;;)
-	switch (*++yyp)
-	  {
-	  case '\'':
-	  case ',':
-	    goto do_not_strip_quotes;
-
-	  case '\\':
-	    if (*++yyp != '\\')
-	      goto do_not_strip_quotes;
-	    /* Fall through.  */
-	  default:
-	    if (yyres)
-	      yyres[yyn] = *yyp;
-	    yyn++;
-	    break;
-
-	  case '"':
-	    if (yyres)
-	      yyres[yyn] = '\0';
-	    return yyn;
-	  }
-    do_not_strip_quotes: ;
-    }
-
-  if (! yyres)
-    return yystrlen (yystr);
-
-  return yystpcpy (yyres, yystr) - yyres;
-}
-# endif
-
-/* Copy into YYRESULT an error message about the unexpected token
-   YYCHAR while in state YYSTATE.  Return the number of bytes copied,
-   including the terminating null byte.  If YYRESULT is null, do not
-   copy anything; just return the number of bytes that would be
-   copied.  As a special case, return 0 if an ordinary "syntax error"
-   message will do.  Return YYSIZE_MAXIMUM if overflow occurs during
-   size calculation.  */
-static YYSIZE_T
-yysyntax_error (char *yyresult, int yystate, int yychar)
-{
-  int yyn = yypact[yystate];
-
-  if (! (YYPACT_NINF < yyn && yyn <= YYLAST))
-    return 0;
-  else
-    {
-      int yytype = YYTRANSLATE (yychar);
-      YYSIZE_T yysize0 = yytnamerr (0, yytname[yytype]);
-      YYSIZE_T yysize = yysize0;
-      YYSIZE_T yysize1;
-      int yysize_overflow = 0;
-      enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
-      char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
-      int yyx;
-
-# if 0
-      /* This is so xgettext sees the translatable formats that are
-	 constructed on the fly.  */
-      YY_("syntax error, unexpected %s");
-      YY_("syntax error, unexpected %s, expecting %s");
-      YY_("syntax error, unexpected %s, expecting %s or %s");
-      YY_("syntax error, unexpected %s, expecting %s or %s or %s");
-      YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s");
-# endif
-      char *yyfmt;
-      char const *yyf;
-      static char const yyunexpected[] = "syntax error, unexpected %s";
-      static char const yyexpecting[] = ", expecting %s";
-      static char const yyor[] = " or %s";
-      char yyformat[sizeof yyunexpected
-		    + sizeof yyexpecting - 1
-		    + ((YYERROR_VERBOSE_ARGS_MAXIMUM - 2)
-		       * (sizeof yyor - 1))];
-      char const *yyprefix = yyexpecting;
-
-      /* Start YYX at -YYN if negative to avoid negative indexes in
-	 YYCHECK.  */
-      int yyxbegin = yyn < 0 ? -yyn : 0;
-
-      /* Stay within bounds of both yycheck and yytname.  */
-      int yychecklim = YYLAST - yyn + 1;
-      int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
-      int yycount = 1;
-
-      yyarg[0] = yytname[yytype];
-      yyfmt = yystpcpy (yyformat, yyunexpected);
-
-      for (yyx = yyxbegin; yyx < yyxend; ++yyx)
-	if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR)
-	  {
-	    if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
-	      {
-		yycount = 1;
-		yysize = yysize0;
-		yyformat[sizeof yyunexpected - 1] = '\0';
-		break;
-	      }
-	    yyarg[yycount++] = yytname[yyx];
-	    yysize1 = yysize + yytnamerr (0, yytname[yyx]);
-	    yysize_overflow |= (yysize1 < yysize);
-	    yysize = yysize1;
-	    yyfmt = yystpcpy (yyfmt, yyprefix);
-	    yyprefix = yyor;
-	  }
-
-      yyf = YY_(yyformat);
-      yysize1 = yysize + yystrlen (yyf);
-      yysize_overflow |= (yysize1 < yysize);
-      yysize = yysize1;
-
-      if (yysize_overflow)
-	return YYSIZE_MAXIMUM;
-
-      if (yyresult)
-	{
-	  /* Avoid sprintf, as that infringes on the user's name space.
-	     Don't have undefined behavior even if the translation
-	     produced a string with the wrong number of "%s"s.  */
-	  char *yyp = yyresult;
-	  int yyi = 0;
-	  while ((*yyp = *yyf) != '\0')
-	    {
-	      if (*yyp == '%' && yyf[1] == 's' && yyi < yycount)
-		{
-		  yyp += yytnamerr (yyp, yyarg[yyi++]);
-		  yyf += 2;
-		}
-	      else
-		{
-		  yyp++;
-		  yyf++;
-		}
-	    }
-	}
-      return yysize;
-    }
-}
-#endif /* YYERROR_VERBOSE */
-
 
 /*-----------------------------------------------.
 | Release the memory associated to this symbol.  |
 `-----------------------------------------------*/
 
-/*ARGSUSED*/
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
-yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
-#else
-static void
-yydestruct (yymsg, yytype, yyvaluep)
-    const char *yymsg;
-    int yytype;
-    YYSTYPE *yyvaluep;
-#endif
+yydestruct (const char *yymsg,
+            yysymbol_kind_t yykind, YYSTYPE *yyvaluep)
 {
-  YYUSE (yyvaluep);
-
+  YY_USE (yyvaluep);
   if (!yymsg)
     yymsg = "Deleting";
-  YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
+  YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
 
-  switch (yytype)
-    {
-
-      default:
-	break;
-    }
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+  YY_USE (yykind);
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
-
-
-/* Prevent warnings from -Wmissing-prototypes.  */
-
-#ifdef YYPARSE_PARAM
-#if defined __STDC__ || defined __cplusplus
-int yyparse (void *YYPARSE_PARAM);
-#else
-int yyparse ();
-#endif
-#else /* ! YYPARSE_PARAM */
-#if defined __STDC__ || defined __cplusplus
-int yyparse (void);
-#else
-int yyparse ();
-#endif
-#endif /* ! YYPARSE_PARAM */
 
 
-
-/* The look-ahead symbol.  */
+/* Lookahead token kind.  */
 int yychar;
 
-/* The semantic value of the look-ahead symbol.  */
+/* The semantic value of the lookahead symbol.  */
 YYSTYPE yylval;
-
 /* Number of syntax errors so far.  */
 int yynerrs;
+
 
 
 
@@ -1456,71 +1211,41 @@ int yynerrs;
 | yyparse.  |
 `----------*/
 
-#ifdef YYPARSE_PARAM
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
-int
-yyparse (void *YYPARSE_PARAM)
-#else
-int
-yyparse (YYPARSE_PARAM)
-    void *YYPARSE_PARAM;
-#endif
-#else /* ! YYPARSE_PARAM */
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 int
 yyparse (void)
-#else
-int
-yyparse ()
-
-#endif
-#endif
 {
-  
-  int yystate;
+    yy_state_fast_t yystate = 0;
+    /* Number of tokens to shift before error messages enabled.  */
+    int yyerrstatus = 0;
+
+    /* Refer to the stacks through separate pointers, to allow yyoverflow
+       to reallocate them elsewhere.  */
+
+    /* Their size.  */
+    YYPTRDIFF_T yystacksize = YYINITDEPTH;
+
+    /* The state stack: array, bottom, top.  */
+    yy_state_t yyssa[YYINITDEPTH];
+    yy_state_t *yyss = yyssa;
+    yy_state_t *yyssp = yyss;
+
+    /* The semantic value stack: array, bottom, top.  */
+    YYSTYPE yyvsa[YYINITDEPTH];
+    YYSTYPE *yyvs = yyvsa;
+    YYSTYPE *yyvsp = yyvs;
+
   int yyn;
+  /* The return value of yyparse.  */
   int yyresult;
-  /* Number of tokens to shift before error messages enabled.  */
-  int yyerrstatus;
-  /* Look-ahead token as an internal (translated) token number.  */
-  int yytoken = 0;
-#if YYERROR_VERBOSE
-  /* Buffer for error messages, and its allocated size.  */
-  char yymsgbuf[128];
-  char *yymsg = yymsgbuf;
-  YYSIZE_T yymsg_alloc = sizeof yymsgbuf;
-#endif
-
-  /* Three stacks and their tools:
-     `yyss': related to states,
-     `yyvs': related to semantic values,
-     `yyls': related to locations.
-
-     Refer to the stacks thru separate pointers, to allow yyoverflow
-     to reallocate them elsewhere.  */
-
-  /* The state stack.  */
-  yytype_int16 yyssa[YYINITDEPTH];
-  yytype_int16 *yyss = yyssa;
-  yytype_int16 *yyssp;
-
-  /* The semantic value stack.  */
-  YYSTYPE yyvsa[YYINITDEPTH];
-  YYSTYPE *yyvs = yyvsa;
-  YYSTYPE *yyvsp;
-
-
-
-#define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N))
-
-  YYSIZE_T yystacksize = YYINITDEPTH;
-
+  /* Lookahead symbol kind.  */
+  yysymbol_kind_t yytoken = YYSYMBOL_YYEMPTY;
   /* The variables used to return semantic value and location from the
      action routines.  */
   YYSTYPE yyval;
 
+
+
+#define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N))
 
   /* The number of symbols on the RHS of the reduced rule.
      Keep to zero when no symbol should be popped.  */
@@ -1528,127 +1253,135 @@ yyparse ()
 
   YYDPRINTF ((stderr, "Starting parse\n"));
 
-  yystate = 0;
-  yyerrstatus = 0;
-  yynerrs = 0;
-  yychar = YYEMPTY;		/* Cause a token to be read.  */
-
-  /* Initialize stack pointers.
-     Waste one element of value and location stack
-     so that they stay on the same level as the state stack.
-     The wasted elements are never initialized.  */
-
-  yyssp = yyss;
-  yyvsp = yyvs;
-
+  yychar = YYEMPTY; /* Cause a token to be read.  */
   goto yysetstate;
 
+
 /*------------------------------------------------------------.
-| yynewstate -- Push a new state, which is found in yystate.  |
+| yynewstate -- push a new state, which is found in yystate.  |
 `------------------------------------------------------------*/
- yynewstate:
+yynewstate:
   /* In all cases, when you get here, the value and location stacks
      have just been pushed.  So pushing a state here evens the stacks.  */
   yyssp++;
 
- yysetstate:
-  *yyssp = yystate;
+
+/*--------------------------------------------------------------------.
+| yysetstate -- set current state (the top of the stack) to yystate.  |
+`--------------------------------------------------------------------*/
+yysetstate:
+  YYDPRINTF ((stderr, "Entering state %d\n", yystate));
+  YY_ASSERT (0 <= yystate && yystate < YYNSTATES);
+  YY_IGNORE_USELESS_CAST_BEGIN
+  *yyssp = YY_CAST (yy_state_t, yystate);
+  YY_IGNORE_USELESS_CAST_END
+  YY_STACK_PRINT (yyss, yyssp);
 
   if (yyss + yystacksize - 1 <= yyssp)
+#if !defined yyoverflow && !defined YYSTACK_RELOCATE
+    goto yyexhaustedlab;
+#else
     {
       /* Get the current used size of the three stacks, in elements.  */
-      YYSIZE_T yysize = yyssp - yyss + 1;
+      YYPTRDIFF_T yysize = yyssp - yyss + 1;
 
-#ifdef yyoverflow
+# if defined yyoverflow
       {
-	/* Give user a chance to reallocate the stack.  Use copies of
-	   these so that the &'s don't force the real ones into
-	   memory.  */
-	YYSTYPE *yyvs1 = yyvs;
-	yytype_int16 *yyss1 = yyss;
+        /* Give user a chance to reallocate the stack.  Use copies of
+           these so that the &'s don't force the real ones into
+           memory.  */
+        yy_state_t *yyss1 = yyss;
+        YYSTYPE *yyvs1 = yyvs;
 
-
-	/* Each stack pointer address is followed by the size of the
-	   data in use in that stack, in bytes.  This used to be a
-	   conditional around just the two extra args, but that might
-	   be undefined if yyoverflow is a macro.  */
-	yyoverflow (YY_("memory exhausted"),
-		    &yyss1, yysize * sizeof (*yyssp),
-		    &yyvs1, yysize * sizeof (*yyvsp),
-
-		    &yystacksize);
-
-	yyss = yyss1;
-	yyvs = yyvs1;
+        /* Each stack pointer address is followed by the size of the
+           data in use in that stack, in bytes.  This used to be a
+           conditional around just the two extra args, but that might
+           be undefined if yyoverflow is a macro.  */
+        yyoverflow (YY_("memory exhausted"),
+                    &yyss1, yysize * YYSIZEOF (*yyssp),
+                    &yyvs1, yysize * YYSIZEOF (*yyvsp),
+                    &yystacksize);
+        yyss = yyss1;
+        yyvs = yyvs1;
       }
-#else /* no yyoverflow */
-# ifndef YYSTACK_RELOCATE
-      goto yyexhaustedlab;
-# else
+# else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-	goto yyexhaustedlab;
+        goto yyexhaustedlab;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
-	yystacksize = YYMAXDEPTH;
+        yystacksize = YYMAXDEPTH;
 
       {
-	yytype_int16 *yyss1 = yyss;
-	union yyalloc *yyptr =
-	  (union yyalloc *) YYSTACK_ALLOC (YYSTACK_BYTES (yystacksize));
-	if (! yyptr)
-	  goto yyexhaustedlab;
-	YYSTACK_RELOCATE (yyss);
-	YYSTACK_RELOCATE (yyvs);
-
+        yy_state_t *yyss1 = yyss;
+        union yyalloc *yyptr =
+          YY_CAST (union yyalloc *,
+                   YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
+        if (! yyptr)
+          goto yyexhaustedlab;
+        YYSTACK_RELOCATE (yyss_alloc, yyss);
+        YYSTACK_RELOCATE (yyvs_alloc, yyvs);
 #  undef YYSTACK_RELOCATE
-	if (yyss1 != yyssa)
-	  YYSTACK_FREE (yyss1);
+        if (yyss1 != yyssa)
+          YYSTACK_FREE (yyss1);
       }
 # endif
-#endif /* no yyoverflow */
 
       yyssp = yyss + yysize - 1;
       yyvsp = yyvs + yysize - 1;
 
-
-      YYDPRINTF ((stderr, "Stack size increased to %lu\n",
-		  (unsigned long int) yystacksize));
+      YY_IGNORE_USELESS_CAST_BEGIN
+      YYDPRINTF ((stderr, "Stack size increased to %ld\n",
+                  YY_CAST (long, yystacksize)));
+      YY_IGNORE_USELESS_CAST_END
 
       if (yyss + yystacksize - 1 <= yyssp)
-	YYABORT;
+        YYABORT;
     }
+#endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
 
-  YYDPRINTF ((stderr, "Entering state %d\n", yystate));
+  if (yystate == YYFINAL)
+    YYACCEPT;
 
   goto yybackup;
+
 
 /*-----------.
 | yybackup.  |
 `-----------*/
 yybackup:
-
   /* Do appropriate processing given the current state.  Read a
-     look-ahead token if we need one and don't already have one.  */
+     lookahead token if we need one and don't already have one.  */
 
-  /* First try to decide what to do without reference to look-ahead token.  */
+  /* First try to decide what to do without reference to lookahead token.  */
   yyn = yypact[yystate];
-  if (yyn == YYPACT_NINF)
+  if (yypact_value_is_default (yyn))
     goto yydefault;
 
-  /* Not known => get a look-ahead token if don't already have one.  */
+  /* Not known => get a lookahead token if don't already have one.  */
 
-  /* YYCHAR is either YYEMPTY or YYEOF or a valid look-ahead symbol.  */
+  /* YYCHAR is either empty, or end-of-input, or a valid lookahead.  */
   if (yychar == YYEMPTY)
     {
-      YYDPRINTF ((stderr, "Reading a token: "));
-      yychar = YYLEX;
+      YYDPRINTF ((stderr, "Reading a token\n"));
+      yychar = yylex ();
     }
 
   if (yychar <= YYEOF)
     {
-      yychar = yytoken = YYEOF;
+      yychar = YYEOF;
+      yytoken = YYSYMBOL_YYEOF;
       YYDPRINTF ((stderr, "Now at end of input.\n"));
+    }
+  else if (yychar == YYerror)
+    {
+      /* The scanner already issued an error message, process directly
+         to error recovery.  But do not keep the error token as
+         lookahead, it is too special and may lead us to an endless
+         loop in error recovery. */
+      yychar = YYUNDEF;
+      yytoken = YYSYMBOL_YYerror;
+      goto yyerrlab1;
     }
   else
     {
@@ -1664,30 +1397,26 @@ yybackup:
   yyn = yytable[yyn];
   if (yyn <= 0)
     {
-      if (yyn == 0 || yyn == YYTABLE_NINF)
-	goto yyerrlab;
+      if (yytable_value_is_error (yyn))
+        goto yyerrlab;
       yyn = -yyn;
       goto yyreduce;
     }
-
-  if (yyn == YYFINAL)
-    YYACCEPT;
 
   /* Count tokens shifted since error; after three, turn off error
      status.  */
   if (yyerrstatus)
     yyerrstatus--;
 
-  /* Shift the look-ahead token.  */
+  /* Shift the lookahead token.  */
   YY_SYMBOL_PRINT ("Shifting", yytoken, &yylval, &yylloc);
-
-  /* Discard the shifted token unless it is eof.  */
-  if (yychar != YYEOF)
-    yychar = YYEMPTY;
-
   yystate = yyn;
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   *++yyvsp = yylval;
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
 
+  /* Discard the shifted token.  */
+  yychar = YYEMPTY;
   goto yynewstate;
 
 
@@ -1702,14 +1431,14 @@ yydefault:
 
 
 /*-----------------------------.
-| yyreduce -- Do a reduction.  |
+| yyreduce -- do a reduction.  |
 `-----------------------------*/
 yyreduce:
   /* yyn is the number of a rule to reduce with.  */
   yylen = yyr2[yyn];
 
   /* If YYLEN is nonzero, implement the default value of the action:
-     `$$ = $1'.
+     '$$ = $1'.
 
      Otherwise, the following line sets YYVAL to garbage.
      This behavior is undocumented and Bison
@@ -1722,1128 +1451,1243 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 2:
+  case 2: /* translation_unit: external_declaration  */
 #line 49 "grammar.y"
-    { 
+                           { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new translation_unit("translation_unit", 1, children);
 		ROOT = (yyval.exprPtr);
-	;}
+	}
+#line 1463 "grammar.cpp"
     break;
 
-  case 3:
+  case 3: /* translation_unit: translation_unit external_declaration  */
 #line 55 "grammar.y"
-    {
+                                            {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (2)].exprPtr));
-		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new translation_unit("translation_unit", 2, children);
 		ROOT = (yyval.exprPtr);
-	;}
+	}
+#line 1475 "grammar.cpp"
     break;
 
-  case 4:
+  case 4: /* external_declaration: function_definition  */
 #line 67 "grammar.y"
-    { 
+                          { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new external_declaration("external_declaration", 1, children);
-	;}
+	}
+#line 1485 "grammar.cpp"
     break;
 
-  case 5:
+  case 5: /* external_declaration: declaration  */
 #line 72 "grammar.y"
-    {
+                  {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new external_declaration("external_declaration", 2, children);
-	;}
+	}
+#line 1495 "grammar.cpp"
     break;
 
-  case 6:
+  case 6: /* function_definition: declaration_specifiers declarator compound_statement  */
 #line 82 "grammar.y"
-    {
+                                                           {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
-		children.push_back((yyvsp[(2) - (3)].exprPtr));
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new function_definition("function_definition", 1, children);
-	;}
+	}
+#line 1507 "grammar.cpp"
     break;
 
-  case 7:
+  case 7: /* declaration_specifiers: type_specifier  */
 #line 93 "grammar.y"
-    {
+                     {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new declaration_specifiers("declaration_specifiers", 1, children);
-	;}
+	}
+#line 1517 "grammar.cpp"
     break;
 
-  case 8:
+  case 8: /* declaration_specifiers: type_specifier declaration_specifiers  */
 #line 98 "grammar.y"
-    {
+                                                {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (2)].exprPtr));
-		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new declaration_specifiers("declaration_specifiers", 2, children);
-	;}
+	}
+#line 1528 "grammar.cpp"
     break;
 
-  case 9:
+  case 9: /* type_specifier: VOID  */
 #line 108 "grammar.y"
-    { (yyval.exprPtr) = new typeAST(1); ;}
+               { (yyval.exprPtr) = new typeAST(1); }
+#line 1534 "grammar.cpp"
     break;
 
-  case 10:
+  case 10: /* type_specifier: CHAR  */
 #line 109 "grammar.y"
-    { (yyval.exprPtr) = new typeAST(2);;}
+               { (yyval.exprPtr) = new typeAST(2);}
+#line 1540 "grammar.cpp"
     break;
 
-  case 11:
+  case 11: /* type_specifier: SHORT  */
 #line 110 "grammar.y"
-    { (yyval.exprPtr) = new typeAST(3);;}
+                { (yyval.exprPtr) = new typeAST(3);}
+#line 1546 "grammar.cpp"
     break;
 
-  case 12:
+  case 12: /* type_specifier: INT  */
 #line 111 "grammar.y"
-    { (yyval.exprPtr) = new typeAST(4);;}
+              { (yyval.exprPtr) = new typeAST(4);}
+#line 1552 "grammar.cpp"
     break;
 
-  case 13:
+  case 13: /* type_specifier: LONG  */
 #line 112 "grammar.y"
-    { (yyval.exprPtr) = new typeAST(5);;}
+               { (yyval.exprPtr) = new typeAST(5);}
+#line 1558 "grammar.cpp"
     break;
 
-  case 14:
+  case 14: /* type_specifier: FLOAT  */
 #line 113 "grammar.y"
-    { (yyval.exprPtr) = new typeAST(6);;}
+                { (yyval.exprPtr) = new typeAST(6);}
+#line 1564 "grammar.cpp"
     break;
 
-  case 15:
+  case 15: /* type_specifier: DOUBLE  */
 #line 114 "grammar.y"
-    { (yyval.exprPtr) = new typeAST(7);;}
+                 { (yyval.exprPtr) = new typeAST(7);}
+#line 1570 "grammar.cpp"
     break;
 
-  case 16:
+  case 16: /* declarator: direct_declarator  */
 #line 119 "grammar.y"
-    { 
+                        { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new declarator("declarator", 1, children);
-	;}
+	}
+#line 1580 "grammar.cpp"
     break;
 
-  case 17:
+  case 17: /* direct_declarator: IDENTIFIER  */
 #line 129 "grammar.y"
-    { 
+                     { 
 		exprAST* id = tokenStack.top();
 		tokenStack.pop();
 		vector<exprAST*> children;
 		children.push_back(id);
 		(yyval.exprPtr) = new nonleafAST("direct_declarator", 1, children);
-	;}
+	}
+#line 1592 "grammar.cpp"
     break;
 
-  case 18:
+  case 18: /* direct_declarator: '(' declarator ')'  */
 #line 136 "grammar.y"
-    { 
+                             { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back(left);
-		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
 		(yyval.exprPtr) = new nonleafAST("direct_declarator", 2, children);
-	;}
+	}
+#line 1606 "grammar.cpp"
     break;
 
-  case 19:
+  case 19: /* direct_declarator: direct_declarator '[' constant_expression ']'  */
 #line 145 "grammar.y"
-    { 
+                                                        { 
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (4)].exprPtr));
+		children.push_back((yyvsp[-3].exprPtr));
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
 		(yyval.exprPtr) = new nonleafAST("direct_declarator", 3, children);
-	;}
+	}
+#line 1621 "grammar.cpp"
     break;
 
-  case 20:
+  case 20: /* direct_declarator: direct_declarator '[' ']'  */
 #line 155 "grammar.y"
-    { 
+                                    { 
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(left);
 		children.push_back(right);
 		(yyval.exprPtr) = new nonleafAST("direct_declarator", 4, children);
-	;}
+	}
+#line 1635 "grammar.cpp"
     break;
 
-  case 21:
+  case 21: /* direct_declarator: direct_declarator '(' parameter_type_list ')'  */
 #line 164 "grammar.y"
-    { 
+                                                        { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (4)].exprPtr));
+		children.push_back((yyvsp[-3].exprPtr));
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
 		(yyval.exprPtr) = new nonleafAST("direct_declarator", 5, children);
-	;}
+	}
+#line 1650 "grammar.cpp"
     break;
 
-  case 22:
+  case 22: /* direct_declarator: direct_declarator '(' ')'  */
 #line 174 "grammar.y"
-    { 
+                                    { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(left);
 		children.push_back(right);
 		(yyval.exprPtr) = new nonleafAST("direct_declarator", 6, children);
-	;}
+	}
+#line 1664 "grammar.cpp"
     break;
 
-  case 23:
+  case 23: /* constant_expression: conditional_expression  */
 #line 188 "grammar.y"
-    { 
+                                 { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new constant_expression("constant_expression", 1, children);
-	;}
+	}
+#line 1674 "grammar.cpp"
     break;
 
-  case 24:
+  case 24: /* conditional_expression: logical_or_expression  */
 #line 198 "grammar.y"
-    {
+                                {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new conditional_expression("conditional_expression", 1, children);
-	;}
+	}
+#line 1684 "grammar.cpp"
     break;
 
-  case 25:
+  case 25: /* conditional_expression: logical_or_expression '?' expression ':' conditional_expression  */
 #line 203 "grammar.y"
-    {
+                                                                          {
 		exprAST* questionMark = new punctuationAST("?");
 		exprAST* colon = new punctuationAST(":");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (5)].exprPtr));
+		children.push_back((yyvsp[-4].exprPtr));
 		children.push_back(questionMark);
-		children.push_back((yyvsp[(3) - (5)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(colon);
-		children.push_back((yyvsp[(5) - (5)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new conditional_expression("conditional_expression", 2, children);
-	;}
+	}
+#line 1700 "grammar.cpp"
     break;
 
-  case 26:
+  case 26: /* logical_or_expression: logical_and_expression  */
 #line 219 "grammar.y"
-    {
+                                 {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new logical_or_expression("logical_or_expression", 1, children);
-	;}
+	}
+#line 1710 "grammar.cpp"
     break;
 
-  case 27:
+  case 27: /* logical_or_expression: logical_or_expression OR_OP logical_and_expression  */
 #line 224 "grammar.y"
-    {
+                                                             {
 		exprAST* orOp = new operatorAST("||");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(orOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new logical_or_expression("logical_or_expression", 2, children);
-	;}
+	}
+#line 1723 "grammar.cpp"
     break;
 
-  case 28:
+  case 28: /* logical_and_expression: inclusive_or_expression  */
 #line 237 "grammar.y"
-    {
+                                  {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new logical_and_expression("logical_and_expression", 1, children);
-	;}
+	}
+#line 1733 "grammar.cpp"
     break;
 
-  case 29:
+  case 29: /* logical_and_expression: logical_and_expression AND_OP inclusive_or_expression  */
 #line 242 "grammar.y"
-    {
+                                                                {
 		exprAST* andOp = new operatorAST("&&");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(andOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new logical_and_expression("logical_and_expression", 2, children);
-	;}
+	}
+#line 1746 "grammar.cpp"
     break;
 
-  case 30:
+  case 30: /* inclusive_or_expression: exclusive_or_expression  */
 #line 255 "grammar.y"
-    {
+                                  {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new inclusive_or_expression("inclusive_or_expression", 1, children);
-	;}
+	}
+#line 1756 "grammar.cpp"
     break;
 
-  case 31:
+  case 31: /* inclusive_or_expression: inclusive_or_expression '|' exclusive_or_expression  */
 #line 260 "grammar.y"
-    {
+                                                              {
 		exprAST* orOp = new operatorAST("|");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(orOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new inclusive_or_expression("inclusive_or_expression", 2, children);
-	;}
+	}
+#line 1769 "grammar.cpp"
     break;
 
-  case 32:
+  case 32: /* exclusive_or_expression: and_expression  */
 #line 273 "grammar.y"
-    { 
+                         { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new exclusive_or_expression("exclusive_or_expression", 1, children);
-	;}
+	}
+#line 1779 "grammar.cpp"
     break;
 
-  case 33:
+  case 33: /* exclusive_or_expression: exclusive_or_expression '^' and_expression  */
 #line 278 "grammar.y"
-    {
+                                                     {
 		exprAST* xorOp = new operatorAST("^");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(xorOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new exclusive_or_expression("exclusive_or_expression", 2, children);
-	;}
+	}
+#line 1792 "grammar.cpp"
     break;
 
-  case 34:
+  case 34: /* and_expression: equality_expression  */
 #line 291 "grammar.y"
-    {
+                              {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new and_expression("and_expression", 1, children);
-	;}
+	}
+#line 1802 "grammar.cpp"
     break;
 
-  case 35:
+  case 35: /* and_expression: and_expression '&' equality_expression  */
 #line 296 "grammar.y"
-    {
+                                                 {
 		exprAST* andOp = new operatorAST("&");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(andOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new and_expression("and_expression", 2, children);
-	;}
+	}
+#line 1815 "grammar.cpp"
     break;
 
-  case 36:
+  case 36: /* equality_expression: relational_expression  */
 #line 309 "grammar.y"
-    { 
+                                { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new equality_expression("equality_expression", 1, children);
-	;}
+	}
+#line 1825 "grammar.cpp"
     break;
 
-  case 37:
+  case 37: /* equality_expression: equality_expression EQ_OP relational_expression  */
 #line 314 "grammar.y"
-    {
+                                                          {
 		exprAST* eqOp = new operatorAST("==");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(eqOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new equality_expression("equality_expression", 2, children);
-	;}
+	}
+#line 1838 "grammar.cpp"
     break;
 
-  case 38:
+  case 38: /* equality_expression: equality_expression NE_OP relational_expression  */
 #line 322 "grammar.y"
-    {
+                                                          {
 		exprAST* neOp = new operatorAST("!=");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(neOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new equality_expression("equality_expression", 3, children);
-	;}
+	}
+#line 1851 "grammar.cpp"
     break;
 
-  case 39:
+  case 39: /* relational_expression: shift_expression  */
 #line 335 "grammar.y"
-    { 
+                           { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new relational_expression("relational_expression", 1, children);
-	;}
+	}
+#line 1861 "grammar.cpp"
     break;
 
-  case 40:
+  case 40: /* relational_expression: relational_expression '<' shift_expression  */
 #line 340 "grammar.y"
-    {
+                                                     {
 		exprAST* lessOp = new operatorAST("<");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(lessOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new relational_expression("relational_expression", 2, children);
-	;}
+	}
+#line 1874 "grammar.cpp"
     break;
 
-  case 41:
+  case 41: /* relational_expression: relational_expression '>' shift_expression  */
 #line 348 "grammar.y"
-    {
+                                                     {
 		exprAST* greaterOp = new operatorAST(">");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(greaterOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new relational_expression("relational_expression", 3, children);
-	;}
+	}
+#line 1887 "grammar.cpp"
     break;
 
-  case 42:
+  case 42: /* relational_expression: relational_expression LE_OP shift_expression  */
 #line 356 "grammar.y"
-    {
+                                                       {
 		exprAST* lessEqualOp = new operatorAST("<=");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(lessEqualOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new relational_expression("relational_expression", 4, children);
-	;}
+	}
+#line 1900 "grammar.cpp"
     break;
 
-  case 43:
+  case 43: /* relational_expression: relational_expression GE_OP shift_expression  */
 #line 364 "grammar.y"
-    {
+                                                       {
 		exprAST* greaterEqualOp = new operatorAST(">=");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(greaterEqualOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new relational_expression("relational_expression", 5, children);
-	;}
+	}
+#line 1913 "grammar.cpp"
     break;
 
-  case 44:
+  case 44: /* shift_expression: additive_expression  */
 #line 377 "grammar.y"
-    {
+                              {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new shift_expression("shift_expression", 1, children);
-	;}
+	}
+#line 1923 "grammar.cpp"
     break;
 
-  case 45:
+  case 45: /* shift_expression: shift_expression LEFT_OP additive_expression  */
 #line 382 "grammar.y"
-    {
+                                                       {
 		exprAST* leftOp = new operatorAST("<<");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(leftOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new shift_expression("shift_expression", 2, children);
-	;}
+	}
+#line 1936 "grammar.cpp"
     break;
 
-  case 46:
+  case 46: /* shift_expression: shift_expression RIGHT_OP additive_expression  */
 #line 390 "grammar.y"
-    {
+                                                        {
 		exprAST* rightOp = new operatorAST(">>");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(rightOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new shift_expression("shift_expression", 3, children);
-	;}
+	}
+#line 1949 "grammar.cpp"
     break;
 
-  case 47:
+  case 47: /* additive_expression: multiplicative_expression  */
 #line 403 "grammar.y"
-    { 
+                                    { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new additive_expression("additive_expression", 1, children);
-	;}
+	}
+#line 1959 "grammar.cpp"
     break;
 
-  case 48:
+  case 48: /* additive_expression: additive_expression '+' multiplicative_expression  */
 #line 408 "grammar.y"
-    {
+                                                            {
 		exprAST* addOp = new operatorAST("+");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(addOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new additive_expression("additive_expression", 2, children);
-	;}
+	}
+#line 1972 "grammar.cpp"
     break;
 
-  case 49:
+  case 49: /* additive_expression: additive_expression '-' multiplicative_expression  */
 #line 416 "grammar.y"
-    {
+                                                            {
 		exprAST* subOp = new operatorAST("-");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(subOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new additive_expression("additive_expression", 3, children);
-	;}
+	}
+#line 1985 "grammar.cpp"
     break;
 
-  case 50:
+  case 50: /* multiplicative_expression: cast_expression  */
 #line 429 "grammar.y"
-    { 
+                          { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 1, children);
-	;}
+	}
+#line 1995 "grammar.cpp"
     break;
 
-  case 51:
+  case 51: /* multiplicative_expression: multiplicative_expression '*' cast_expression  */
 #line 434 "grammar.y"
-    {
+                                                        {
 		exprAST* mulOp = new operatorAST("*");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(mulOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 2, children);
-	;}
+	}
+#line 2008 "grammar.cpp"
     break;
 
-  case 52:
+  case 52: /* multiplicative_expression: multiplicative_expression '/' cast_expression  */
 #line 442 "grammar.y"
-    {
+                                                        {
 		exprAST* divOp = new operatorAST("/");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(divOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 3, children);
-	;}
+	}
+#line 2021 "grammar.cpp"
     break;
 
-  case 53:
+  case 53: /* multiplicative_expression: multiplicative_expression '%' cast_expression  */
 #line 450 "grammar.y"
-    {
+                                                        {
 		exprAST* modOp = new operatorAST("%");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(modOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 4, children);
-	;}
+	}
+#line 2034 "grammar.cpp"
     break;
 
-  case 54:
+  case 54: /* cast_expression: unary_expression  */
 #line 463 "grammar.y"
-    { 
+                           { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new cast_expression("cast_expression", 1, children);
-	;}
+	}
+#line 2044 "grammar.cpp"
     break;
 
-  case 55:
+  case 55: /* cast_expression: '(' type_name ')' cast_expression  */
 #line 468 "grammar.y"
-    {
+                                            {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back(left);
-		children.push_back((yyvsp[(2) - (4)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(right);
-		children.push_back((yyvsp[(4) - (4)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new cast_expression("cast_expression", 2, children);
-	;}
+	}
+#line 2059 "grammar.cpp"
     break;
 
-  case 56:
+  case 56: /* type_name: type_specifier  */
 #line 483 "grammar.y"
-    { 
+                         { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new type_name("type_name", 1, children);
-	;}
+	}
+#line 2069 "grammar.cpp"
     break;
 
-  case 57:
+  case 57: /* expression: assignment_expression  */
 #line 493 "grammar.y"
-    { 
+                                { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new expression("expression", 1, children);
-	;}
+	}
+#line 2079 "grammar.cpp"
     break;
 
-  case 58:
+  case 58: /* expression: expression ',' assignment_expression  */
 #line 498 "grammar.y"
-    {
+                                               {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(comma);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new expression("expression", 2, children);
-	;}
+	}
+#line 2092 "grammar.cpp"
     break;
 
-  case 59:
+  case 59: /* assignment_expression: conditional_expression  */
 #line 511 "grammar.y"
-    { 
+                                 { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new assignment_expression("assignment_expression", 1, children);
-	;}
+	}
+#line 2102 "grammar.cpp"
     break;
 
-  case 60:
+  case 60: /* assignment_expression: unary_expression assignment_operator assignment_expression  */
 #line 516 "grammar.y"
-    { 
+                                                                     { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
-		children.push_back((yyvsp[(2) - (3)].exprPtr));
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new assignment_expression("assignment_expression", 2, children);
-	;}
+	}
+#line 2114 "grammar.cpp"
     break;
 
-  case 61:
+  case 61: /* unary_expression: postfix_expression  */
 #line 528 "grammar.y"
-    { 
+                             { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new unary_expression("unary_expression", 1, children);
-	;}
+	}
+#line 2124 "grammar.cpp"
     break;
 
-  case 62:
+  case 62: /* unary_expression: INC_OP unary_expression  */
 #line 533 "grammar.y"
-    {
+                                  {
 		exprAST* incOp = new operatorAST("++");
 		vector<exprAST*> children;
 		children.push_back(incOp);
-		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new unary_expression("unary_expression", 2, children);
-	;}
+	}
+#line 2136 "grammar.cpp"
     break;
 
-  case 63:
+  case 63: /* unary_expression: DEC_OP unary_expression  */
 #line 540 "grammar.y"
-    {
+                                  {
 		exprAST* decOp = new operatorAST("--");
 		vector<exprAST*> children;
 		children.push_back(decOp);
-		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new unary_expression("unary_expression", 3, children);
-	;}
+	}
+#line 2148 "grammar.cpp"
     break;
 
-  case 64:
+  case 64: /* unary_expression: unary_operator cast_expression  */
 #line 547 "grammar.y"
-    { 
+                                         { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (2)].exprPtr));
-		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new unary_expression("unary_expression", 4, children);
-	;}
+	}
+#line 2159 "grammar.cpp"
     break;
 
-  case 65:
+  case 65: /* unary_expression: SIZEOF unary_expression  */
 #line 553 "grammar.y"
-    {
+                                  {
 		exprAST* sizeOf = new keywordAST("sizeof");
 		vector<exprAST*> children;
 		children.push_back(sizeOf);
-		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new unary_expression("unary_expression", 5, children);
-	;}
+	}
+#line 2171 "grammar.cpp"
     break;
 
-  case 66:
+  case 66: /* unary_expression: SIZEOF '(' type_name ')'  */
 #line 560 "grammar.y"
-    {
+                                   {
 		exprAST* sizeOf = new keywordAST("sizeof");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back(sizeOf);
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
 		(yyval.exprPtr) = new unary_expression("unary_expression", 6, children);
-	;}
+	}
+#line 2187 "grammar.cpp"
     break;
 
-  case 67:
+  case 67: /* postfix_expression: primary_expression  */
 #line 576 "grammar.y"
-    { 
+                             { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 1, children);
-	;}
+	}
+#line 2197 "grammar.cpp"
     break;
 
-  case 68:
+  case 68: /* postfix_expression: postfix_expression '[' expression ']'  */
 #line 581 "grammar.y"
-    {
+                                                {
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (4)].exprPtr));
+		children.push_back((yyvsp[-3].exprPtr));
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 2, children);
-	;}
+	}
+#line 2212 "grammar.cpp"
     break;
 
-  case 69:
+  case 69: /* postfix_expression: postfix_expression '(' ')'  */
 #line 591 "grammar.y"
-    {
+                                     {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(left);
 		children.push_back(right);
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 3, children);
-	;}
+	}
+#line 2226 "grammar.cpp"
     break;
 
-  case 70:
+  case 70: /* postfix_expression: postfix_expression '(' argument_expression_list ')'  */
 #line 600 "grammar.y"
-    {
+                                                             {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (4)].exprPtr));
+		children.push_back((yyvsp[-3].exprPtr));
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 4, children);
-	;}
+	}
+#line 2241 "grammar.cpp"
     break;
 
-  case 71:
+  case 71: /* postfix_expression: postfix_expression INC_OP  */
 #line 610 "grammar.y"
-    {
+                                    {
 		exprAST* incOp = new operatorAST("++");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(incOp);
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 5, children);
-	;}
+	}
+#line 2253 "grammar.cpp"
     break;
 
-  case 72:
+  case 72: /* postfix_expression: postfix_expression DEC_OP  */
 #line 617 "grammar.y"
-    {
+                                    {
 		exprAST* decOp = new operatorAST("--");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(decOp);
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 6, children);
-	;}
+	}
+#line 2265 "grammar.cpp"
     break;
 
-  case 73:
+  case 73: /* primary_expression: IDENTIFIER  */
 #line 630 "grammar.y"
-    {
+                     {
 		exprAST* identifier = tokenStack.top();
 		tokenStack.pop();
 		vector<exprAST*> children;
 		children.push_back(identifier);
 		(yyval.exprPtr) = new primary_expression("primary_expression", 1, children);
-	;}
+	}
+#line 2277 "grammar.cpp"
     break;
 
-  case 74:
+  case 74: /* primary_expression: CONSTANT  */
 #line 637 "grammar.y"
-    {
+                   {
 		exprAST* constant = tokenStack.top();
 		tokenStack.pop();
 		vector<exprAST*> children;
 		children.push_back(constant);
 		(yyval.exprPtr) = new primary_expression("primary_expression", 2, children);
-	;}
+	}
+#line 2289 "grammar.cpp"
     break;
 
-  case 75:
+  case 75: /* primary_expression: STRING_LITERAL  */
 #line 644 "grammar.y"
-    {
+                         {
 		exprAST* str = tokenStack.top();
 		tokenStack.pop();
 		vector<exprAST*> children;
 		children.push_back(str);
 		(yyval.exprPtr) = new primary_expression("primary_expression", 3, children);
-	;}
+	}
+#line 2301 "grammar.cpp"
     break;
 
-  case 76:
+  case 76: /* primary_expression: '(' expression ')'  */
 #line 651 "grammar.y"
-    {
+                             {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back(left);
-		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
 		(yyval.exprPtr) = new primary_expression("primary_expression", 4, children);
-	;}
+	}
+#line 2315 "grammar.cpp"
     break;
 
-  case 77:
+  case 77: /* argument_expression_list: assignment_expression  */
 #line 665 "grammar.y"
-    { 
+                                { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new argument_expression_list("argument_expression_list", 1, children);
-	;}
+	}
+#line 2325 "grammar.cpp"
     break;
 
-  case 78:
+  case 78: /* argument_expression_list: argument_expression_list ',' assignment_expression  */
 #line 670 "grammar.y"
-    {
+                                                             {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(comma);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new argument_expression_list("argument_expression_list", 2, children);
-	;}
+	}
+#line 2338 "grammar.cpp"
     break;
 
-  case 79:
+  case 79: /* unary_operator: '&'  */
 #line 683 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("&"); ;}
+              { (yyval.exprPtr) = new operatorAST("&"); }
+#line 2344 "grammar.cpp"
     break;
 
-  case 80:
+  case 80: /* unary_operator: '*'  */
 #line 684 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("*"); ;}
+              { (yyval.exprPtr) = new operatorAST("*"); }
+#line 2350 "grammar.cpp"
     break;
 
-  case 81:
+  case 81: /* unary_operator: '+'  */
 #line 685 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("+"); ;}
+              { (yyval.exprPtr) = new operatorAST("+"); }
+#line 2356 "grammar.cpp"
     break;
 
-  case 82:
+  case 82: /* unary_operator: '-'  */
 #line 686 "grammar.y"
-    {	(yyval.exprPtr) = new operatorAST("-"); ;}
+              {	(yyval.exprPtr) = new operatorAST("-"); }
+#line 2362 "grammar.cpp"
     break;
 
-  case 83:
+  case 83: /* unary_operator: '~'  */
 #line 687 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("~"); ;}
+              { (yyval.exprPtr) = new operatorAST("~"); }
+#line 2368 "grammar.cpp"
     break;
 
-  case 84:
+  case 84: /* unary_operator: '!'  */
 #line 688 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("!"); ;}
+              { (yyval.exprPtr) = new operatorAST("!"); }
+#line 2374 "grammar.cpp"
     break;
 
-  case 85:
+  case 85: /* assignment_operator: '='  */
 #line 694 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("="); ;}
+              { (yyval.exprPtr) = new operatorAST("="); }
+#line 2380 "grammar.cpp"
     break;
 
-  case 86:
+  case 86: /* assignment_operator: MUL_ASSIGN  */
 #line 695 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("*="); ;}
+                     { (yyval.exprPtr) = new operatorAST("*="); }
+#line 2386 "grammar.cpp"
     break;
 
-  case 87:
+  case 87: /* assignment_operator: DIV_ASSIGN  */
 #line 696 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("/="); ;}
+                     { (yyval.exprPtr) = new operatorAST("/="); }
+#line 2392 "grammar.cpp"
     break;
 
-  case 88:
+  case 88: /* assignment_operator: MOD_ASSIGN  */
 #line 697 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("%="); ;}
+                     { (yyval.exprPtr) = new operatorAST("%="); }
+#line 2398 "grammar.cpp"
     break;
 
-  case 89:
+  case 89: /* assignment_operator: ADD_ASSIGN  */
 #line 698 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("+="); ;}
+                     { (yyval.exprPtr) = new operatorAST("+="); }
+#line 2404 "grammar.cpp"
     break;
 
-  case 90:
+  case 90: /* assignment_operator: SUB_ASSIGN  */
 #line 699 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("-="); ;}
+                     { (yyval.exprPtr) = new operatorAST("-="); }
+#line 2410 "grammar.cpp"
     break;
 
-  case 91:
+  case 91: /* assignment_operator: LEFT_ASSIGN  */
 #line 700 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("<<="); ;}
+                      { (yyval.exprPtr) = new operatorAST("<<="); }
+#line 2416 "grammar.cpp"
     break;
 
-  case 92:
+  case 92: /* assignment_operator: RIGHT_ASSIGN  */
 #line 701 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST(">>="); ;}
+                       { (yyval.exprPtr) = new operatorAST(">>="); }
+#line 2422 "grammar.cpp"
     break;
 
-  case 93:
+  case 93: /* assignment_operator: AND_ASSIGN  */
 #line 702 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("&="); ;}
+                     { (yyval.exprPtr) = new operatorAST("&="); }
+#line 2428 "grammar.cpp"
     break;
 
-  case 94:
+  case 94: /* assignment_operator: XOR_ASSIGN  */
 #line 703 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("^="); ;}
+                     { (yyval.exprPtr) = new operatorAST("^="); }
+#line 2434 "grammar.cpp"
     break;
 
-  case 95:
+  case 95: /* assignment_operator: OR_ASSIGN  */
 #line 704 "grammar.y"
-    { (yyval.exprPtr) = new operatorAST("|="); ;}
+                    { (yyval.exprPtr) = new operatorAST("|="); }
+#line 2440 "grammar.cpp"
     break;
 
-  case 96:
+  case 96: /* parameter_type_list: parameter_list  */
 #line 710 "grammar.y"
-    { 
+                         { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new parameter_type_list("parameter_type_list", 1, children);
-	;}
+	}
+#line 2450 "grammar.cpp"
     break;
 
-  case 97:
+  case 97: /* parameter_type_list: parameter_list ',' ELLIPSIS  */
 #line 715 "grammar.y"
-    {
+                                      {
 		exprAST* comma = new punctuationAST(",");
 		exprAST* ellipsis = new keywordAST("...");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(comma);
 		children.push_back(ellipsis);
 		(yyval.exprPtr) = new parameter_type_list("parameter_type_list", 2, children);
-	;}
+	}
+#line 2464 "grammar.cpp"
     break;
 
-  case 98:
+  case 98: /* parameter_list: parameter_declaration  */
 #line 729 "grammar.y"
-    { 
+                                { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new parameter_list("parameter_list", 1, children);
-	;}
+	}
+#line 2474 "grammar.cpp"
     break;
 
-  case 99:
+  case 99: /* parameter_list: parameter_list ',' parameter_declaration  */
 #line 734 "grammar.y"
-    {
+                                                   {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(comma);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new parameter_list("parameter_list", 2, children);
-	;}
+	}
+#line 2487 "grammar.cpp"
     break;
 
-  case 100:
+  case 100: /* parameter_declaration: declaration_specifiers declarator  */
 #line 747 "grammar.y"
-    { 
+                                           { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (2)].exprPtr));
-		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new parameter_declaration("parameter_declaration", 1, children);
-	;}
+	}
+#line 2498 "grammar.cpp"
     break;
 
-  case 101:
+  case 101: /* compound_statement: '{' '}'  */
 #line 758 "grammar.y"
-    { 
+                  { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
 		vector<exprAST*> children;
 		children.push_back(left);
 		children.push_back(right);
 		(yyval.exprPtr) = new compound_statement("compound_statement", 1, children);
-	;}
+	}
+#line 2511 "grammar.cpp"
     break;
 
-  case 102:
+  case 102: /* compound_statement: '{' statement_list '}'  */
 #line 766 "grammar.y"
-    { 
+                                 { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
 		vector<exprAST*> children;
 		children.push_back(left);
-		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
 		(yyval.exprPtr) = new compound_statement("compound_statement", 2, children);
-	;}
+	}
+#line 2525 "grammar.cpp"
     break;
 
-  case 103:
+  case 103: /* compound_statement: '{' declaration_list '}'  */
 #line 775 "grammar.y"
-    { 
+                                   { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
 		vector<exprAST*> children;
 		children.push_back(left);
-		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
 		(yyval.exprPtr) = new compound_statement("compound_statement", 3, children);
-	;}
+	}
+#line 2539 "grammar.cpp"
     break;
 
-  case 104:
+  case 104: /* compound_statement: '{' declaration_list statement_list '}'  */
 #line 784 "grammar.y"
-    { 
+                                                  { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
 		vector<exprAST*> children;
 		children.push_back(left);
-		children.push_back((yyvsp[(2) - (4)].exprPtr));
-		children.push_back((yyvsp[(3) - (4)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
 		(yyval.exprPtr) = new compound_statement("compound_statement", 4, children);
-	;}
+	}
+#line 2554 "grammar.cpp"
     break;
 
-  case 105:
+  case 105: /* statement_list: statement  */
 #line 799 "grammar.y"
-    { 
+                    { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement_list("statement_list", 1, children);
-	;}
+	}
+#line 2564 "grammar.cpp"
     break;
 
-  case 106:
+  case 106: /* statement_list: statement_list statement  */
 #line 804 "grammar.y"
-    { 
+                                   { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (2)].exprPtr));
-		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement_list("statement_list", 2, children);
-	;}
+	}
+#line 2575 "grammar.cpp"
     break;
 
-  case 107:
+  case 107: /* declaration_list: declaration  */
 #line 815 "grammar.y"
-    {
+                      {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new declaration_list("declaration_list", 1, children);
-	;}
+	}
+#line 2585 "grammar.cpp"
     break;
 
-  case 108:
+  case 108: /* declaration_list: declaration_list declaration  */
 #line 820 "grammar.y"
-    {
+                                       {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (2)].exprPtr));
-		children.push_back((yyvsp[(2) - (2)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new declaration_list("declaration_list", 2, children);
-	;}
+	}
+#line 2596 "grammar.cpp"
     break;
 
-  case 109:
+  case 109: /* statement: compound_statement  */
 #line 831 "grammar.y"
-    { 
+                             { 
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement("statement", 1, children);
-	;}
+	}
+#line 2606 "grammar.cpp"
     break;
 
-  case 110:
+  case 110: /* statement: expression_statement  */
 #line 836 "grammar.y"
-    {
+                               {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement("statement", 2, children);
-	;}
+	}
+#line 2616 "grammar.cpp"
     break;
 
-  case 111:
+  case 111: /* statement: selection_statement  */
 #line 841 "grammar.y"
-    {
+                              {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement("statement", 3, children);
-	;}
+	}
+#line 2626 "grammar.cpp"
     break;
 
-  case 112:
+  case 112: /* statement: iteration_statement  */
 #line 846 "grammar.y"
-    {
+                              {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement("statement", 4, children);
-	;}
+	}
+#line 2636 "grammar.cpp"
     break;
 
-  case 113:
+  case 113: /* statement: jump_statement  */
 #line 851 "grammar.y"
-    {
+                         {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement("statement", 5, children);
-	;}
+	}
+#line 2646 "grammar.cpp"
     break;
 
-  case 114:
+  case 114: /* expression_statement: ';'  */
 #line 861 "grammar.y"
-    { 
+              { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new expression_statement("expression_statement", 1, children);
-	;}
+	}
+#line 2657 "grammar.cpp"
     break;
 
-  case 115:
+  case 115: /* expression_statement: expression ';'  */
 #line 867 "grammar.y"
-    { 
+                         { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (2)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new expression_statement("expression_statement", 2, children);
-	;}
+	}
+#line 2669 "grammar.cpp"
     break;
 
-  case 116:
+  case 116: /* selection_statement: IF '(' expression ')' statement  */
 #line 879 "grammar.y"
-    { 
+                                          { 
 		exprAST* oneIF = new keywordAST("if");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back(oneIF);
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (5)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(right);
-		children.push_back((yyvsp[(5) - (5)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new selection_statement("selection_statement", 1, children);
-	;}
+	}
+#line 2686 "grammar.cpp"
     break;
 
-  case 117:
+  case 117: /* selection_statement: IF '(' expression ')' statement ELSE statement  */
 #line 891 "grammar.y"
-    { 
+                                                         { 
 		exprAST* oneIF = new keywordAST("if");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -2851,34 +2695,36 @@ yyreduce:
 		vector<exprAST*> children;
 		children.push_back(oneIF);
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (7)].exprPtr));
+		children.push_back((yyvsp[-4].exprPtr));
 		children.push_back(right);
-		children.push_back((yyvsp[(5) - (7)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(oneELSE);
-		children.push_back((yyvsp[(7) - (7)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new selection_statement("selection_statement", 2, children);
-	;}
+	}
+#line 2706 "grammar.cpp"
     break;
 
-  case 118:
+  case 118: /* iteration_statement: WHILE '(' expression ')' statement  */
 #line 911 "grammar.y"
-    { 
+                                             { 
 		exprAST* oneWHILE = new keywordAST("while");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back(oneWHILE);
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (5)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(right);
-		children.push_back((yyvsp[(5) - (5)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new iteration_statement("iteration_statement", 1, children);
-	;}
+	}
+#line 2723 "grammar.cpp"
     break;
 
-  case 119:
+  case 119: /* iteration_statement: DO statement WHILE '(' expression ')' ';'  */
 #line 923 "grammar.y"
-    { 
+                                                    { 
 		exprAST* oneDO = new keywordAST("do");
 		exprAST* oneWHILE = new keywordAST("while");
 		exprAST* left = new punctuationAST("(");
@@ -2886,268 +2732,256 @@ yyreduce:
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back(oneDO);
-		children.push_back((yyvsp[(2) - (7)].exprPtr));
+		children.push_back((yyvsp[-5].exprPtr));
 		children.push_back(oneWHILE);
 		children.push_back(left);
-		children.push_back((yyvsp[(5) - (7)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(right);
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new iteration_statement("iteration_statement", 2, children);
-	;}
+	}
+#line 2744 "grammar.cpp"
     break;
 
-  case 120:
+  case 120: /* iteration_statement: FOR '(' expression_statement expression_statement ')' statement  */
 #line 939 "grammar.y"
-    { 
+                                                                          { 
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back(oneFOR);
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (6)].exprPtr));
-		children.push_back((yyvsp[(4) - (6)].exprPtr));
+		children.push_back((yyvsp[-3].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(right);
-		children.push_back((yyvsp[(6) - (6)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new iteration_statement("iteration_statement", 3, children);
-	;}
+	}
+#line 2762 "grammar.cpp"
     break;
 
-  case 121:
+  case 121: /* iteration_statement: FOR '(' expression_statement expression_statement expression ')' statement  */
 #line 952 "grammar.y"
-    { 
+                                                                                     { 
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back(oneFOR);
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (7)].exprPtr));
-		children.push_back((yyvsp[(4) - (7)].exprPtr));
-		children.push_back((yyvsp[(5) - (7)].exprPtr));
+		children.push_back((yyvsp[-4].exprPtr));
+		children.push_back((yyvsp[-3].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(right);
-		children.push_back((yyvsp[(7) - (7)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new iteration_statement("iteration_statement", 4, children);
-	;}
+	}
+#line 2781 "grammar.cpp"
     break;
 
-  case 122:
+  case 122: /* iteration_statement: FOR '(' declaration expression_statement expression ')' statement  */
 #line 966 "grammar.y"
-    {
+                                                                            {
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back(oneFOR);
 		children.push_back(left);
-		children.push_back((yyvsp[(3) - (7)].exprPtr));
-		children.push_back((yyvsp[(4) - (7)].exprPtr));
-		children.push_back((yyvsp[(5) - (7)].exprPtr));
+		children.push_back((yyvsp[-4].exprPtr));
+		children.push_back((yyvsp[-3].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(right);
-		children.push_back((yyvsp[(7) - (7)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new iteration_statement("iteration_statement", 5, children);
-	;}
+	}
+#line 2800 "grammar.cpp"
     break;
 
-  case 123:
+  case 123: /* jump_statement: CONTINUE ';'  */
 #line 985 "grammar.y"
-    { 
+                       { 
 		exprAST* oneCONTINUE = new keywordAST("continue");
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back(oneCONTINUE);
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new jump_statement("jump_statement", 1, children);
-	;}
+	}
+#line 2813 "grammar.cpp"
     break;
 
-  case 124:
+  case 124: /* jump_statement: BREAK ';'  */
 #line 993 "grammar.y"
-    { 
+                    { 
 		exprAST* oneBREAK = new keywordAST("break");
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back(oneBREAK);
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new jump_statement("jump_statement", 2, children);
-	;}
+	}
+#line 2826 "grammar.cpp"
     break;
 
-  case 125:
+  case 125: /* jump_statement: RETURN ';'  */
 #line 1001 "grammar.y"
-    { 
+                     { 
 		exprAST* oneRETURN = new keywordAST("return");
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back(oneRETURN);
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new jump_statement("jump_statement", 3, children);
-	;}
+	}
+#line 2839 "grammar.cpp"
     break;
 
-  case 126:
+  case 126: /* jump_statement: RETURN expression ';'  */
 #line 1009 "grammar.y"
-    { 
+                                { 
 		exprAST* oneRETURN = new keywordAST("return");
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back(oneRETURN);
-		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new jump_statement("jump_statement", 4, children);
-	;}
+	}
+#line 2853 "grammar.cpp"
     break;
 
-  case 127:
+  case 127: /* declaration: declaration_specifiers init_declarator_list ';'  */
 #line 1023 "grammar.y"
-    { 
+                                                      { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
-		children.push_back((yyvsp[(2) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new declaration("declaration", 1, children);
-	;}
+	}
+#line 2866 "grammar.cpp"
     break;
 
-  case 128:
+  case 128: /* init_declarator_list: init_declarator  */
 #line 1036 "grammar.y"
-    {
+                          {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new init_declarator_list("init_declarator_list", 1, children);
-	;}
+	}
+#line 2876 "grammar.cpp"
     break;
 
-  case 129:
+  case 129: /* init_declarator_list: init_declarator_list ',' init_declarator  */
 #line 1041 "grammar.y"
-    {
+                                                  {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(comma);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new init_declarator_list("init_declarator_list", 2, children);
-	;}
+	}
+#line 2889 "grammar.cpp"
     break;
 
-  case 130:
+  case 130: /* init_declarator: declarator  */
 #line 1053 "grammar.y"
-    {
+                     {
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (1)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new init_declarator("init_declarator", 1, children);
-	;}
+	}
+#line 2899 "grammar.cpp"
     break;
 
-  case 131:
+  case 131: /* init_declarator: declarator '=' assignment_expression  */
 #line 1058 "grammar.y"
-    {
+                                               {
 		exprAST* eqOp = new operatorAST("=");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[(1) - (3)].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(eqOp);
-		children.push_back((yyvsp[(3) - (3)].exprPtr));
+		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new init_declarator("init_declarator", 2, children);
-	;}
+	}
+#line 2912 "grammar.cpp"
     break;
 
 
-/* Line 1267 of yacc.c.  */
-#line 3058 "grammar.cpp"
+#line 2916 "grammar.cpp"
+
       default: break;
     }
-  YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
+  /* User semantic actions sometimes alter yychar, and that requires
+     that yytoken be updated with the new translation.  We take the
+     approach of translating immediately before every use of yytoken.
+     One alternative is translating here after every semantic action,
+     but that translation would be missed if the semantic action invokes
+     YYABORT, YYACCEPT, or YYERROR immediately after altering yychar or
+     if it invokes YYBACKUP.  In the case of YYABORT or YYACCEPT, an
+     incorrect destructor might then be invoked immediately.  In the
+     case of YYERROR or YYBACKUP, subsequent parser actions might lead
+     to an incorrect destructor call or verbose syntax error message
+     before the lookahead is translated.  */
+  YY_SYMBOL_PRINT ("-> $$ =", YY_CAST (yysymbol_kind_t, yyr1[yyn]), &yyval, &yyloc);
 
   YYPOPSTACK (yylen);
   yylen = 0;
-  YY_STACK_PRINT (yyss, yyssp);
 
   *++yyvsp = yyval;
 
-
-  /* Now `shift' the result of the reduction.  Determine what state
+  /* Now 'shift' the result of the reduction.  Determine what state
      that goes to, based on the state we popped back to and the rule
      number reduced by.  */
-
-  yyn = yyr1[yyn];
-
-  yystate = yypgoto[yyn - YYNTOKENS] + *yyssp;
-  if (0 <= yystate && yystate <= YYLAST && yycheck[yystate] == *yyssp)
-    yystate = yytable[yystate];
-  else
-    yystate = yydefgoto[yyn - YYNTOKENS];
+  {
+    const int yylhs = yyr1[yyn] - YYNTOKENS;
+    const int yyi = yypgoto[yylhs] + *yyssp;
+    yystate = (0 <= yyi && yyi <= YYLAST && yycheck[yyi] == *yyssp
+               ? yytable[yyi]
+               : yydefgoto[yylhs]);
+  }
 
   goto yynewstate;
 
 
-/*------------------------------------.
-| yyerrlab -- here on detecting error |
-`------------------------------------*/
+/*--------------------------------------.
+| yyerrlab -- here on detecting error.  |
+`--------------------------------------*/
 yyerrlab:
+  /* Make sure we have latest lookahead translation.  See comments at
+     user semantic actions for why this is necessary.  */
+  yytoken = yychar == YYEMPTY ? YYSYMBOL_YYEMPTY : YYTRANSLATE (yychar);
   /* If not already recovering from an error, report this error.  */
   if (!yyerrstatus)
     {
       ++yynerrs;
-#if ! YYERROR_VERBOSE
       yyerror (YY_("syntax error"));
-#else
-      {
-	YYSIZE_T yysize = yysyntax_error (0, yystate, yychar);
-	if (yymsg_alloc < yysize && yymsg_alloc < YYSTACK_ALLOC_MAXIMUM)
-	  {
-	    YYSIZE_T yyalloc = 2 * yysize;
-	    if (! (yysize <= yyalloc && yyalloc <= YYSTACK_ALLOC_MAXIMUM))
-	      yyalloc = YYSTACK_ALLOC_MAXIMUM;
-	    if (yymsg != yymsgbuf)
-	      YYSTACK_FREE (yymsg);
-	    yymsg = (char *) YYSTACK_ALLOC (yyalloc);
-	    if (yymsg)
-	      yymsg_alloc = yyalloc;
-	    else
-	      {
-		yymsg = yymsgbuf;
-		yymsg_alloc = sizeof yymsgbuf;
-	      }
-	  }
-
-	if (0 < yysize && yysize <= yymsg_alloc)
-	  {
-	    (void) yysyntax_error (yymsg, yystate, yychar);
-	    yyerror (yymsg);
-	  }
-	else
-	  {
-	    yyerror (YY_("syntax error"));
-	    if (yysize != 0)
-	      goto yyexhaustedlab;
-	  }
-      }
-#endif
     }
-
-
 
   if (yyerrstatus == 3)
     {
-      /* If just tried and failed to reuse look-ahead token after an
-	 error, discard it.  */
+      /* If just tried and failed to reuse lookahead token after an
+         error, discard it.  */
 
       if (yychar <= YYEOF)
-	{
-	  /* Return failure if at end of input.  */
-	  if (yychar == YYEOF)
-	    YYABORT;
-	}
+        {
+          /* Return failure if at end of input.  */
+          if (yychar == YYEOF)
+            YYABORT;
+        }
       else
-	{
-	  yydestruct ("Error: discarding",
-		      yytoken, &yylval);
-	  yychar = YYEMPTY;
-	}
+        {
+          yydestruct ("Error: discarding",
+                      yytoken, &yylval);
+          yychar = YYEMPTY;
+        }
     }
 
-  /* Else will try to reuse look-ahead token after shifting the error
+  /* Else will try to reuse lookahead token after shifting the error
      token.  */
   goto yyerrlab1;
 
@@ -3156,14 +2990,12 @@ yyerrlab:
 | yyerrorlab -- error raised explicitly by YYERROR.  |
 `---------------------------------------------------*/
 yyerrorlab:
+  /* Pacify compilers when the user code never invokes YYERROR and the
+     label yyerrorlab therefore never appears in user code.  */
+  if (0)
+    YYERROR;
 
-  /* Pacify compilers like GCC when the user code never invokes
-     YYERROR and the label yyerrorlab therefore never appears in user
-     code.  */
-  if (/*CONSTCOND*/ 0)
-     goto yyerrorlab;
-
-  /* Do not reclaim the symbols of the rule which action triggered
+  /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
   YYPOPSTACK (yylen);
   yylen = 0;
@@ -3176,42 +3008,42 @@ yyerrorlab:
 | yyerrlab1 -- common code for both syntax error and YYERROR.  |
 `-------------------------------------------------------------*/
 yyerrlab1:
-  yyerrstatus = 3;	/* Each real token shifted decrements this.  */
+  yyerrstatus = 3;      /* Each real token shifted decrements this.  */
 
+  /* Pop stack until we find a state that shifts the error token.  */
   for (;;)
     {
       yyn = yypact[yystate];
-      if (yyn != YYPACT_NINF)
-	{
-	  yyn += YYTERROR;
-	  if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYTERROR)
-	    {
-	      yyn = yytable[yyn];
-	      if (0 < yyn)
-		break;
-	    }
-	}
+      if (!yypact_value_is_default (yyn))
+        {
+          yyn += YYSYMBOL_YYerror;
+          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYSYMBOL_YYerror)
+            {
+              yyn = yytable[yyn];
+              if (0 < yyn)
+                break;
+            }
+        }
 
       /* Pop the current state because it cannot handle the error token.  */
       if (yyssp == yyss)
-	YYABORT;
+        YYABORT;
 
 
       yydestruct ("Error: popping",
-		  yystos[yystate], yyvsp);
+                  YY_ACCESSING_SYMBOL (yystate), yyvsp);
       YYPOPSTACK (1);
       yystate = *yyssp;
       YY_STACK_PRINT (yyss, yyssp);
     }
 
-  if (yyn == YYFINAL)
-    YYACCEPT;
-
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   *++yyvsp = yylval;
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
 
 
   /* Shift the error token.  */
-  YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
+  YY_SYMBOL_PRINT ("Shifting", YY_ACCESSING_SYMBOL (yyn), yyvsp, yylsp);
 
   yystate = yyn;
   goto yynewstate;
@@ -3224,6 +3056,7 @@ yyacceptlab:
   yyresult = 0;
   goto yyreturn;
 
+
 /*-----------------------------------.
 | yyabortlab -- YYABORT comes here.  |
 `-----------------------------------*/
@@ -3231,42 +3064,47 @@ yyabortlab:
   yyresult = 1;
   goto yyreturn;
 
-#ifndef yyoverflow
+
+#if !defined yyoverflow
 /*-------------------------------------------------.
 | yyexhaustedlab -- memory exhaustion comes here.  |
 `-------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  /* Fall through.  */
+  goto yyreturn;
 #endif
 
+
+/*-------------------------------------------------------.
+| yyreturn -- parsing is finished, clean up and return.  |
+`-------------------------------------------------------*/
 yyreturn:
-  if (yychar != YYEOF && yychar != YYEMPTY)
-     yydestruct ("Cleanup: discarding lookahead",
-		 yytoken, &yylval);
-  /* Do not reclaim the symbols of the rule which action triggered
+  if (yychar != YYEMPTY)
+    {
+      /* Make sure we have latest lookahead translation.  See comments at
+         user semantic actions for why this is necessary.  */
+      yytoken = YYTRANSLATE (yychar);
+      yydestruct ("Cleanup: discarding lookahead",
+                  yytoken, &yylval);
+    }
+  /* Do not reclaim the symbols of the rule whose action triggered
      this YYABORT or YYACCEPT.  */
   YYPOPSTACK (yylen);
   YY_STACK_PRINT (yyss, yyssp);
   while (yyssp != yyss)
     {
       yydestruct ("Cleanup: popping",
-		  yystos[*yyssp], yyvsp);
+                  YY_ACCESSING_SYMBOL (+*yyssp), yyvsp);
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow
   if (yyss != yyssa)
     YYSTACK_FREE (yyss);
 #endif
-#if YYERROR_VERBOSE
-  if (yymsg != yymsgbuf)
-    YYSTACK_FREE (yymsg);
-#endif
-  /* Make sure YYID is used.  */
-  return YYID (yyresult);
-}
 
+  return yyresult;
+}
 
 #line 1068 "grammar.y"
 
@@ -3277,6 +3115,5 @@ void yyerror(char const *s){
     printf("%s at %s\n",s,yytext);
 	return ;
 }
-
 
 

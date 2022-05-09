@@ -17,25 +17,40 @@
 #include <llvm/IR/IRPrintingPasses.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/GlobalVariable.h>
+#include "llvm/IR/Verifier.h"
 
-
-#define TYPENONE 0
-#define TYPEINT 1
-#define TYPEFLOAT 2
-#define TYPEBOOL 3
-#define TYPEICHAR 4
+// #define TYPENONE 0
+// #define TYPEINT 1
+// #define TYPEFLOAT 2
+// #define TYPEBOOL 3
+// #define TYPEICHAR 4
 
 using namespace std;
 // using namespace llvm;
+
+using namespace llvm;
+using namespace std;
+
+static unique_ptr<LLVMContext> TheContext;
+static unique_ptr<Module> TheModule;
+static unique_ptr<IRBuilder<>> Builder;
+
+static void InitializeModule() {
+  TheContext = std::make_unique<LLVMContext>();
+  TheModule = std::make_unique<Module>("first modlue", *TheContext);
+  Builder = std::make_unique<IRBuilder<>>(*TheContext);
+}
+
+
 
 
 
 //基类
 class exprAST{
 public:
-    string name;//用于AST可视化
+  string name;//用于AST可视化
 
-    int valuetype = TYPENONE;//节点数据类型
+    // int valuetype = TYPENONE;//节点数据类型
     //virtual Value *Codegen();
     void createJsonFile(string fileName);
     virtual Json::Value buildJsonAST(){};
@@ -48,10 +63,10 @@ public:
 //叶子结点
 class leafAST : public exprAST{
 public:
-    //virtual ~leafAST(){}
+  //virtual ~leafAST(){}
     
-    void createJsonFile(string fileName);
-    Json::Value buildJsonAST();
+  void createJsonFile(string fileName);
+  Json::Value buildJsonAST();
 };
 
 
@@ -59,19 +74,19 @@ public:
 //非叶子结点
 class nonleafAST : public exprAST{
 public:
-    //string name;
-    int type;
-    vector<exprAST*> children;
+  //string name;
+  int type;
+  vector<exprAST*> children;
 
-    void createJsonFile(string fileName);
-    Json::Value buildJsonAST();
+  void createJsonFile(string fileName);
+  Json::Value buildJsonAST();
 
-    nonleafAST(string name, int type, vector<exprAST*> children);
+  nonleafAST(string name, int type, vector<exprAST*> children);
 };
 
 
 /*
-===========================叶子结点的相关类================================
+  ===========================叶子结点的相关类================================
 */
 
 
@@ -80,10 +95,10 @@ public:
 //double value : 表示该常量的值
 class constantAST : public leafAST{
 public:
-    int type;
-    double value;
+  int type;
+  double value;
 
-    constantAST(int type,double value);
+  constantAST(int type,double value);
 };
 
 
@@ -92,8 +107,8 @@ public:
 //string value : 表示该字符串的值
 class stringAST : public leafAST{
 public:
-    string value;
-    stringAST(string value);
+  string value;
+  stringAST(string value);
 };
 
 
@@ -102,8 +117,8 @@ public:
 //string op : 记录操作符的string表示
 class operatorAST : public leafAST{
 public:
-    string op;
-    operatorAST(string op);
+  string op;
+  operatorAST(string op);
 };
 
 
@@ -112,26 +127,25 @@ public:
 //string name : 记录标识符的名称
 class identifierAST : public leafAST{
 public:
-    string identifier;
-    identifierAST(string identifier);
+  string identifier;
+  identifierAST(string identifier);
 };
 
 
 
 //类型结点
 //int type : 记录类型 
-//type = 1 : void
-//type = 2 : char
-//type = 3 : short
-//type = 4 : int
-//type = 5 : long
-//type = 6 : float
-//type = 7 : double
-//type = 8 : bool
+  //type = 1 : void
+  //type = 2 : char
+  //type = 3 : short
+  //type = 4 : int
+  //type = 5 : long
+  //type = 6 : float
+  //type = 7 : double
 class typeAST : public leafAST{
 public:
-    int type;
-    typeAST(int type);
+  int type;
+  typeAST(int type);
 };
 
 
@@ -140,8 +154,8 @@ public:
 //string name : 记录关键字的名称
 class keywordAST : public leafAST{
 public:
-    string keyword;
-    keywordAST(string keyword);
+  string keyword;
+  keywordAST(string keyword);
 };
 
 
@@ -149,14 +163,14 @@ public:
 //标点结点
 class punctuationAST : public leafAST{
 public:
-    string punctuation;
-    punctuationAST(string punctuation);
+  string punctuation;
+  punctuationAST(string punctuation);
 };
 
 
 
 /*
-===========================非叶子结点的相关类================================
+  ===========================非叶子结点的相关类================================
 */
 
 class primary_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
