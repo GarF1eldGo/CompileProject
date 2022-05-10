@@ -43,7 +43,154 @@ llvm::Value* IRError(string msg){
 }
 
 
-llvm::Value* translation_unit::CodeGen(){
+llvm::Value* findValue(const std::string & name) {
+    llvm::Value * result = funStack.top()->getValueSymbolTable()->lookup(name);
+    if (result != nullptr) {
+        return result;
+    }
+    result = TheModule->getGlobalVariable(name, true);
+    if (result == nullptr) {
+        return IRError("variable or function undefined!");
+    }
+    return result;
+}
+
+
+llvm::Value* primary_expression::CodeGen(){
+    #ifdef DEBUG
+        cout<<"primary_expression type:"<<this->type<<endl;
+    #endif
+    switch(this->type){
+        case 1:
+            llvm::Value* tmp = this->children[0]->CodeGen();
+            llvm::Value* rs = findValue((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+            if(rs == nullptr){
+                return IRError("primary_expression error in leaf node: IDENTIFIER");
+            }
+            else{
+                return  rs;
+            }
+            return rs;
+        case 2:
+            llvm::Value* tmp = this->children[0]->CodeGen();
+            // if(tmp == nullptr){
+            //     return IRError("postfix_expression error in leaf node: primary_expression");
+            // }
+            if((dynamic_cast<constantAST*>(this->children[0]))->type == 1){
+                return builder.getInt32((int)((dynamic_cast<constantAST*>(this->children[0]))->value));
+            }
+            else{
+                return llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)((dynamic_cast<constantAST*>(this->children[0]))->value)));
+            }
+        case 3:
+            1;
+        case 4:
+            llvm::Value* tmp = this->children[1]->CodeGen();
+            if(tmp == nullptr){
+                return IRError("primary_expression error in leaf node: expression");
+            }
+            else{
+                return  tmp;
+            }
+
+    }
+    return nullptr;
+}
+
+llvm::Value* postfix_expression::CodeGen(){
+    #ifdef DEBUG
+        cout<<"postfix_expression type:"<<this->type<<endl;
+    #endif
+    switch(this->type){
+        case 1:
+            llvm::Value* tmp = this->children[0]->CodeGen();
+            if(tmp == nullptr){
+                return IRError("postfix_expression error in leaf node: primary_expression");
+            }
+            else{
+                return tmp;
+            }
+
+        case 2:
+            llvm::Value* ary = this->children[0]->CodeGen();
+            llvm::Value* index = this->children[2]->CodeGen();
+            if(ary == nullptr || index == nullptr){
+                return IRError("postfix_expression error in leaf node: postfix_expression or expression");
+            }
+            else if(index->getType() != llvm::Type::getInt32Ty(context)){
+                return IRError("postfix_expression error: only int type can be used as index");
+            }
+            else{
+                //id [][]...[]
+                if(ary->getType() == llvm::Type::getInt32PtrTy(context)||ary->getType() == llvm::Type::getInt8PtrTy(context)||ary->getType() == llvm::Type::getInt1PtrTy(context)||ary->getType() == llvm::Type::getFloatPtrTy(context)){
+                    vector<llvm::Value*> indexList;
+                    indexList.push_back(builder.getInt32(0));
+                    indexList.push_back(index);
+                    llvm::Value * varPtr = builder.CreateInBoundsGEP(ary, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+                    return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
+                }
+                //id []
+                else{
+                    llvm::Value* ary_real = findValue((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+                    vector<llvm::Value*> indexList;
+                    indexList.push_back(builder.getInt32(0));
+                    indexList.push_back(index);
+                    llvm::Value * varPtr = builder.CreateInBoundsGEP(ary_real, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+                    return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
+                }
+            }
+        case 3:
+
+        case 4:
+
+        case 5:
+            llvm::Value* tmp = this->children[0]->CodeGen();
+            if(tmp == nullptr){
+                return IRError("postfix_expression error in leaf node: postfix_expression");
+            }
+            else if(tmp->getType() == llvm::Type::getInt1Ty(context)){
+                return builder.CreateAdd(tmp, builder.getInt32(1), "tmpAdd");
+            }
+            else if(tmp->getType() == llvm::Type::getFloatTy(context)){
+                return builder.CreateFAdd(tmp, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpAddf");
+            }
+            else{
+                return IRError("postfix_expression error: bool/char type could not associate with '++' operator");
+            }
+        case 6:
+            llvm::Value* tmp = this->children[0]->CodeGen();
+            if(tmp == nullptr){
+                return IRError("postfix_expression error in leaf node: postfix_expression");
+            }
+            else if(tmp->getType() == llvm::Type::getInt1Ty(context)){
+                return builder.CreateSub(tmp, builder.getInt32(1), "tmpSub");
+            }
+            else if(tmp->getType() == llvm::Type::getFloatTy(context)){
+                return builder.CreateFSub(tmp, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpSubf");
+            }
+            else{
+                return IRError("postfix_expression error: bool/char type could not associate with '--' operator");
+            }
+    }
+    return nullptr;
+
+}
+
+llvm::Value* argument_expression_list::CodeGen(){
+    #ifdef DEBUG
+        cout<<"argument_expression_list type:"<<this->type<<endl;
+    #endif
+    switch(this->type){
+        case 1:
+            llvm::Value* tmp = this->children[0]->CodeGen();
+            if(tmp == nullptr){
+                return IRError("argument_expression_list error in leaf node: assignment_expression");
+            }
+            else{
+                return tmp;
+            }
+    }
+    return nullptr;
 
 }
 
@@ -73,7 +220,7 @@ llvm::Value* unary_expression::CodeGen(){
                 return builder.CreateFAdd(tmp, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpAddf");
             }
             else{
-                return IRError("bool/char type could not associate with '++' operator");
+                return IRError("unary_expression error: bool/char type could not associate with '++' operator");
             }
         case 3:
             llvm::Value* tmp = this->children[1]->CodeGen();
@@ -87,7 +234,7 @@ llvm::Value* unary_expression::CodeGen(){
                 return builder.CreateFSub(tmp, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpSubf");
             }
             else{
-                return IRError("bool/char type could not associate with '--' operator");
+                return IRError("unary_expression error: bool/char type could not associate with '--' operator");
             }
         case 4:
             llvm::Value* tmp = this->children[1]->CodeGen();
@@ -95,7 +242,7 @@ llvm::Value* unary_expression::CodeGen(){
                 return IRError("unary_expression error in leaf node: cast_expression");
             }
             else if(tmp->getType() == llvm::Type::getInt8Ty(context)){
-                return IRError("char type could not associate with unary_operator");
+                return IRError("unary_expression error: char type could not associate with unary_operator");
             }
             else{
                 llvm::Value* rs = this->children[0]->CodeGen();
@@ -107,7 +254,7 @@ llvm::Value* unary_expression::CodeGen(){
                         return builder.CreateFNeg(tmp, "tmpNegf");
                     }
                     else{
-                        return IRError("bool type could not associate with '-' operator");
+                        return IRError("unary_expression error: bool type could not associate with '-' operator");
                     }
                 }
                 else if((dynamic_cast<operatorAST*>(this->children[0]))->op.compare("!") == 0){
@@ -115,7 +262,7 @@ llvm::Value* unary_expression::CodeGen(){
                         return builder.CreateNot(tmp, "tmpNot");
                     }
                     else{
-                        return IRError("int/float type could not associate with '~' operator");
+                        return IRError("unary_expression error: int/float type could not associate with '~' operator");
                     }
                 }
                 else if((dynamic_cast<operatorAST*>(this->children[0]))->op.compare("-") == 0){
@@ -123,7 +270,7 @@ llvm::Value* unary_expression::CodeGen(){
                         return builder.CreateNot(tmp, "tmpNot");
                     }
                     else{
-                        return IRError("int/float type could not associate with '~' operator");
+                        return IRError("unary_expression error: int/float type could not associate with '~' operator");
                     }
                 }
                 else{
