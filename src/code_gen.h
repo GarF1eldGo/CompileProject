@@ -48,5 +48,23 @@ public:
 };
 */
 
+class codeGen {
+public:
+    llvm::Function *printf, *scanf;
+    void generate(translation_unit* root);
+    codeGen();
+
+};
+
+codeGen *generator;
+
+llvm::Value* IRError(string msg);
+
+llvm::Value* findValue(const std::string & name);
+
+llvm::Instruction::CastOps getCastInst(llvm::Type* src, llvm::Type* dst);
+
+llvm::Value* typeCast(llvm::Value* src, llvm::Type* dst);
+
 
 #endif

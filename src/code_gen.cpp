@@ -37,6 +37,36 @@
 // CodeGen::~CodeGen() {
 
 // }
+
+codeGen::codeGen(){
+    this->printf = createPrintf();
+    this->scanf = createScanf();
+}
+
+
+
+
+
+llvm::Function* createPrintf()
+{
+    std::vector<llvm::Type*> arg_types;
+    arg_types.push_back(builder.getInt8PtrTy());
+    auto printf_type = llvm::FunctionType::get(builder.getInt32Ty(), llvm::makeArrayRef(arg_types), true);
+    auto func = llvm::Function::Create(printf_type, llvm::Function::ExternalLinkage, llvm::Twine("printf"), TheModule.get());
+    func->setCallingConv(llvm::CallingConv::C);
+    return func;
+}
+
+
+llvm::Function* createScanf()
+{
+    auto scanf_type = llvm::FunctionType::get(builder.getInt32Ty(), true);
+    auto func = llvm::Function::Create(scanf_type, llvm::Function::ExternalLinkage, llvm::Twine("scanf"), TheModule.get());
+    func->setCallingConv(llvm::CallingConv::C);
+    return func;
+}
+
+
 llvm::Value* IRError(string msg){
     cout<<msg<<endl;
     return nullptr;
@@ -140,9 +170,42 @@ llvm::Value* postfix_expression::CodeGen(){
                 }
             }
         case 3:
-
+            // llvm::Value* func = this->children[0]->CodeGen();
+            if((dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("printf") == 0||(dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("scanf") == 0){
+                return IRError("postfix_expression error: printf() or scanf() is not allowed");
+            }
+            else{
+                llvm::Function* func_real = TheModule->getFunction((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+                if(func_real == nullptr){
+                    return IRError("postfix_expression error: undefined function");
+                }
+                else{
+                    return builder.CreateCall(func_real, nullptr, "tmpcall");
+                }
+            }
         case 4:
-
+            // llvm::Value* func = this->children[0]->CodeGen();
+            vector<llvm::Value *>* arg = (dynamic_cast<argument_expression_list*>(this->children[2]))->ArgGen();
+            if(arg == nullptr){
+                return IRError("postfix_expression error in leaf node: argument_expression_list");
+            }
+            else{
+                if((dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("printf") == 0){
+                    return builder.CreateCall(generator->printf, *arg, "printf");
+                }
+                else if((dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("scanf") == 0){
+                    return builder.CreateCall(generator->scanf, *arg, "scanf");
+                }
+                else{
+                    llvm::Function* func_real = TheModule->getFunction((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+                    if(func_real == nullptr){
+                        return IRError("postfix_expression error: undefined function");
+                    }
+                    else{
+                        return builder.CreateCall(func_real, *arg, "tmpcall");
+                    }
+                }
+            }
         case 5:
             llvm::Value* tmp = this->children[0]->CodeGen();
             if(tmp == nullptr){
@@ -180,20 +243,57 @@ llvm::Value* argument_expression_list::CodeGen(){
     #ifdef DEBUG
         cout<<"argument_expression_list type:"<<this->type<<endl;
     #endif
-    switch(this->type){
-        case 1:
-            llvm::Value* tmp = this->children[0]->CodeGen();
-            if(tmp == nullptr){
-                return IRError("argument_expression_list error in leaf node: assignment_expression");
-            }
-            else{
-                return tmp;
-            }
-    }
+    // switch(this->type){
+    //     case 1:
+    //         llvm::Value* tmp = this->children[0]->CodeGen();
+    //         if(tmp == nullptr){
+    //             cout<<"argument_expression_list error in leaf node: assignment_expression"<<endl;
+    //             return nullptr;
+    //         }
+    //         else{
+    //             vector<llvm::Value *> * args = new vector<llvm::Value *>;
+    //             args->push_back(tmp);
+    //             return tmp;
+    //         }
+    //     case 2:
+    //         vector<llvm::Value *> * children_args = this->children[0]->ArgGen();
+    //         llvm::Value* tmp = this->children[2]->CodeGen();
+
+    // }
     return nullptr;
 
 }
 
+vector<llvm::Value *>* argument_expression_list::ArgGen(){
+    #ifdef DEBUG
+        cout<<"argument_expression_list type:"<<this->type<<endl;
+    #endif
+    switch(this->type){
+        case 1:
+            llvm::Value* tmp = this->children[0]->CodeGen();
+            if(tmp == nullptr){
+                cout<<"argument_expression_list error in leaf node: assignment_expression"<<endl;
+                return nullptr;
+            }
+            else{
+                vector<llvm::Value *> * args = new vector<llvm::Value *>;
+                args->push_back(tmp);
+                return args;
+            }
+        case 2:
+            vector<llvm::Value *> * children_args = (dynamic_cast<argument_expression_list*>(this->children[0]))->ArgGen();
+            llvm::Value* tmp = this->children[2]->CodeGen();
+            if(children_args == nullptr||tmp == nullptr){
+                cout<<"argument_expression_list error in leaf node: argument_expression_list or assignment_expression"<<endl;
+                return nullptr;
+            }
+            else{
+                children_args->push_back(tmp);
+                return children_args;
+            }
+    }
+    return nullptr;
+}
 
 llvm::Value* unary_expression::CodeGen(){
     #ifdef DEBUG

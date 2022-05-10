@@ -177,7 +177,7 @@ class primary_expression : public nonleafAST {public: using nonleafAST::nonleafA
 
 class postfix_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class argument_expression_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
+class argument_expression_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen(); vector<llvm::Value *> *ArgGen();};
 
 class unary_expression : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
