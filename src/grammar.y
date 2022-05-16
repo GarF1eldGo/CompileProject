@@ -79,7 +79,7 @@ external_declaration
 
 //函数定义
 function_definition
-    : declaration_specifiers declarator compound_statement {
+    : type_specifier declarator compound_statement {
 		vector<exprAST*> children;
 		children.push_back($1);
 		children.push_back($2);
@@ -89,19 +89,6 @@ function_definition
     ;
 
 
-declaration_specifiers
-    : type_specifier {
-		vector<exprAST*> children;
-		children.push_back($1);
-		$$ = new declaration_specifiers("declaration_specifiers", 1, children);
-	}
-	| type_specifier declaration_specifiers {
-		vector<exprAST*> children;
-		children.push_back($1);
-		children.push_back($2);
-		$$ = new declaration_specifiers("declaration_specifiers", 2, children);
-	}
-	;
 
 
 type_specifier
@@ -116,22 +103,12 @@ type_specifier
 
 
 declarator
-    : direct_declarator { 
-		vector<exprAST*> children;
-		children.push_back($1);
-		$$ = new declarator("declarator", 1, children);
-	}
-	;
-
-
-//TODO
-direct_declarator
 	: IDENTIFIER { 
 		exprAST* id = tokenStack.top();
 		tokenStack.pop();
 		vector<exprAST*> children;
 		children.push_back(id);
-		$$ = new nonleafAST("direct_declarator", 1, children);
+		$$ = new nonleafAST("declarator", 1, children);
 	}
 	| '(' declarator ')' { 
 		exprAST* left = new punctuationAST("(");
@@ -140,9 +117,9 @@ direct_declarator
 		children.push_back(left);
 		children.push_back($2);
 		children.push_back(right);
-		$$ = new nonleafAST("direct_declarator", 2, children);
+		$$ = new nonleafAST("declarator", 2, children);
 	}
-	| direct_declarator '[' constant_expression ']' { 
+	| declarator '[' constant_expression ']' { 
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
 		vector<exprAST*> children;
@@ -150,18 +127,18 @@ direct_declarator
 		children.push_back(left);
 		children.push_back($3);
 		children.push_back(right);
-		$$ = new nonleafAST("direct_declarator", 3, children);
+		$$ = new nonleafAST("declarator", 3, children);
 	}
-	| direct_declarator '[' ']' { 
+	| declarator '[' ']' { 
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
 		vector<exprAST*> children;
 		children.push_back($1);
 		children.push_back(left);
 		children.push_back(right);
-		$$ = new nonleafAST("direct_declarator", 4, children);
+		$$ = new nonleafAST("declarator", 4, children);
 	}
-	| direct_declarator '(' parameter_type_list ')' { 
+	| declarator '(' parameter_list ')' { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
@@ -169,16 +146,16 @@ direct_declarator
 		children.push_back(left);
 		children.push_back($3);
 		children.push_back(right);
-		$$ = new nonleafAST("direct_declarator", 5, children);
+		$$ = new nonleafAST("declarator", 5, children);
 	}
-	| direct_declarator '(' ')' { 
+	| declarator '(' ')' { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back($1);
 		children.push_back(left);
 		children.push_back(right);
-		$$ = new nonleafAST("direct_declarator", 6, children);
+		$$ = new nonleafAST("declarator", 6, children);
 	}
 	;
 
@@ -705,23 +682,6 @@ assignment_operator
 	;
 
 
-//参数类型列表
-parameter_type_list
-	: parameter_list { 
-		vector<exprAST*> children;
-		children.push_back($1);
-		$$ = new parameter_type_list("parameter_type_list", 1, children);
-	}
-	| parameter_list ',' ELLIPSIS {
-		exprAST* comma = new punctuationAST(",");
-		exprAST* ellipsis = new keywordAST("...");
-		vector<exprAST*> children;
-		children.push_back($1);
-		children.push_back(comma);
-		children.push_back(ellipsis);
-		$$ = new parameter_type_list("parameter_type_list", 2, children);
-	}
-	;
 
 
 //参数列表
@@ -744,7 +704,7 @@ parameter_list
 
 // 参数定义
 parameter_declaration
-	: declaration_specifiers declarator{ 
+	: type_specifiers declarator{ 
 		vector<exprAST*> children;
 		children.push_back($1);
 		children.push_back($2);

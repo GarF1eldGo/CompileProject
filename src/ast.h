@@ -17,6 +17,7 @@
 #include <llvm/IR/IRPrintingPasses.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/GlobalVariable.h>
+#include "llvm/ADT/ArrayRef.h"
 #include "llvm/IR/Verifier.h"
 
 // #define TYPENONE 0
@@ -31,15 +32,6 @@ using namespace std;
 using namespace llvm;
 using namespace std;
 
-static unique_ptr<LLVMContext> TheContext;
-static unique_ptr<Module> TheModule;
-static unique_ptr<IRBuilder<>> Builder;
-
-static void InitializeModule() {
-  TheContext = std::make_unique<LLVMContext>();
-  TheModule = std::make_unique<Module>("first modlue", *TheContext);
-  Builder = std::make_unique<IRBuilder<>>(*TheContext);
-}
 
 
 
@@ -53,8 +45,8 @@ public:
     // int valuetype = TYPENONE;//节点数据类型
     //virtual Value *Codegen();
     void createJsonFile(string fileName);
-    virtual Json::Value buildJsonAST(){};
-    virtual llvm::Value *CodeGen(){};
+  virtual Json::Value buildJsonAST();
+  virtual llvm::Value *CodeGen();
 
 };
 
@@ -223,15 +215,29 @@ class init_declarator_list : public nonleafAST {public: using nonleafAST::nonlea
 
 class declaration_specifiers : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class type_specifier : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
+class type_specifier : public nonleafAST {
+public:
+  using nonleafAST::nonleafAST;
+  llvm::Type* type_spec;
+  llvm::Value *CodeGen();
+};
 
-class declarator : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
+class declarator : public nonleafAST {
+  public:
+  using nonleafAST::nonleafAST;
+  llvm::Value* CodeGen();
+  string name;
+  vector<string> para_name;
+  llvm::ArrayRef<Type *> para_type;
+};
 
-class direct_declarator : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
-
-class parameter_type_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
-
-class parameter_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
+class parameter_list : public nonleafAST {
+public:
+  using nonleafAST::nonleafAST;
+  llvm::Value *CodeGen();
+  vector<string> para_name;
+  llvm::ArrayRef<Type *> para_type;
+};
 
 class parameter_declaration : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 

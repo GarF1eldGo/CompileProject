@@ -36,6 +36,7 @@
 using namespace std;
 static llvm::LLVMContext context;
 static llvm::IRBuilder<> builder(context);
+static llvm::Module module("module", context);
 stack<llvm::Function*> funStack;
 
 /*
