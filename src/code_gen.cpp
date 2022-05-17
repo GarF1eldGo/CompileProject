@@ -1531,6 +1531,11 @@ llvm::Value* external_declaration::CodeGen() {
   }
 }
 
+
+llvm::Value* constant_expression::CodeGen() {
+  return this->children[0]->CodeGen();
+}
+
 llvm::Type* build_array(Type *array_type, vector<ConstantInt*> array_size) {
   if (array_size.size() > 1) {
     ArrayType* array = ArrayType::get(array_type, array_size.back()->getZExtValue());

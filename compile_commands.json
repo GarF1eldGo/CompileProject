@@ -13,5 +13,10 @@
   "directory": "/home/lumina/Documents/CompileProject/src",
   "command": "/usr/bin/c++  -I/usr/include/jsoncpp -I/usr/include/llvm-13 -I/usr/include/llvm-c-13 -I/home/lumina/Documents/CompileProject/src -I/usr/lib/llvm-13/include  -o CMakeFiles/Mini-C-Compiler.dir/ast.cpp.o -c /home/lumina/Documents/CompileProject/src/ast.cpp",
   "file": "/home/lumina/Documents/CompileProject/src/ast.cpp"
+},
+{
+  "directory": "/home/lumina/Documents/CompileProject/src",
+  "command": "/usr/bin/c++  -I/usr/include/jsoncpp -I/usr/include/llvm-13 -I/usr/include/llvm-c-13 -I/home/lumina/Documents/CompileProject/src -I/usr/lib/llvm-13/include  -o CMakeFiles/Mini-C-Compiler.dir/code_gen.cpp.o -c /home/lumina/Documents/CompileProject/src/code_gen.cpp",
+  "file": "/home/lumina/Documents/CompileProject/src/code_gen.cpp"
 }
 ]

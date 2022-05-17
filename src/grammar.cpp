@@ -83,7 +83,7 @@ void yyerror(char const *s);
 extern exprAST* ROOT;
 stack<exprAST*> tokenStack;
 
-#line 87 "grammar.cpp"
+#line 87 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -154,73 +154,70 @@ enum yysymbol_kind_t
   YYSYMBOL_CONTINUE = 40,                  /* CONTINUE  */
   YYSYMBOL_BREAK = 41,                     /* BREAK  */
   YYSYMBOL_RETURN = 42,                    /* RETURN  */
-  YYSYMBOL_43_ = 43,                       /* '('  */
-  YYSYMBOL_44_ = 44,                       /* ')'  */
-  YYSYMBOL_45_ = 45,                       /* '['  */
-  YYSYMBOL_46_ = 46,                       /* ']'  */
-  YYSYMBOL_47_ = 47,                       /* '?'  */
-  YYSYMBOL_48_ = 48,                       /* ':'  */
-  YYSYMBOL_49_ = 49,                       /* '|'  */
-  YYSYMBOL_50_ = 50,                       /* '^'  */
-  YYSYMBOL_51_ = 51,                       /* '&'  */
-  YYSYMBOL_52_ = 52,                       /* '<'  */
-  YYSYMBOL_53_ = 53,                       /* '>'  */
-  YYSYMBOL_54_ = 54,                       /* '+'  */
-  YYSYMBOL_55_ = 55,                       /* '-'  */
-  YYSYMBOL_56_ = 56,                       /* '*'  */
-  YYSYMBOL_57_ = 57,                       /* '/'  */
-  YYSYMBOL_58_ = 58,                       /* '%'  */
-  YYSYMBOL_59_ = 59,                       /* ','  */
-  YYSYMBOL_60_ = 60,                       /* '~'  */
-  YYSYMBOL_61_ = 61,                       /* '!'  */
-  YYSYMBOL_62_ = 62,                       /* '='  */
-  YYSYMBOL_63_ = 63,                       /* '{'  */
-  YYSYMBOL_64_ = 64,                       /* '}'  */
-  YYSYMBOL_65_ = 65,                       /* ';'  */
+  YYSYMBOL_43_ = 43,                       /* ';'  */
+  YYSYMBOL_44_ = 44,                       /* '('  */
+  YYSYMBOL_45_ = 45,                       /* ')'  */
+  YYSYMBOL_46_ = 46,                       /* '['  */
+  YYSYMBOL_47_ = 47,                       /* ']'  */
+  YYSYMBOL_48_ = 48,                       /* '?'  */
+  YYSYMBOL_49_ = 49,                       /* ':'  */
+  YYSYMBOL_50_ = 50,                       /* '|'  */
+  YYSYMBOL_51_ = 51,                       /* '^'  */
+  YYSYMBOL_52_ = 52,                       /* '&'  */
+  YYSYMBOL_53_ = 53,                       /* '<'  */
+  YYSYMBOL_54_ = 54,                       /* '>'  */
+  YYSYMBOL_55_ = 55,                       /* '+'  */
+  YYSYMBOL_56_ = 56,                       /* '-'  */
+  YYSYMBOL_57_ = 57,                       /* '*'  */
+  YYSYMBOL_58_ = 58,                       /* '/'  */
+  YYSYMBOL_59_ = 59,                       /* '%'  */
+  YYSYMBOL_60_ = 60,                       /* ','  */
+  YYSYMBOL_61_ = 61,                       /* '~'  */
+  YYSYMBOL_62_ = 62,                       /* '!'  */
+  YYSYMBOL_63_ = 63,                       /* '='  */
+  YYSYMBOL_64_ = 64,                       /* '{'  */
+  YYSYMBOL_65_ = 65,                       /* '}'  */
   YYSYMBOL_YYACCEPT = 66,                  /* $accept  */
   YYSYMBOL_translation_unit = 67,          /* translation_unit  */
   YYSYMBOL_external_declaration = 68,      /* external_declaration  */
   YYSYMBOL_function_definition = 69,       /* function_definition  */
-  YYSYMBOL_declaration_specifiers = 70,    /* declaration_specifiers  */
-  YYSYMBOL_type_specifier = 71,            /* type_specifier  */
-  YYSYMBOL_declarator = 72,                /* declarator  */
-  YYSYMBOL_direct_declarator = 73,         /* direct_declarator  */
-  YYSYMBOL_constant_expression = 74,       /* constant_expression  */
-  YYSYMBOL_conditional_expression = 75,    /* conditional_expression  */
-  YYSYMBOL_logical_or_expression = 76,     /* logical_or_expression  */
-  YYSYMBOL_logical_and_expression = 77,    /* logical_and_expression  */
-  YYSYMBOL_inclusive_or_expression = 78,   /* inclusive_or_expression  */
-  YYSYMBOL_exclusive_or_expression = 79,   /* exclusive_or_expression  */
-  YYSYMBOL_and_expression = 80,            /* and_expression  */
-  YYSYMBOL_equality_expression = 81,       /* equality_expression  */
-  YYSYMBOL_relational_expression = 82,     /* relational_expression  */
-  YYSYMBOL_shift_expression = 83,          /* shift_expression  */
-  YYSYMBOL_additive_expression = 84,       /* additive_expression  */
-  YYSYMBOL_multiplicative_expression = 85, /* multiplicative_expression  */
-  YYSYMBOL_cast_expression = 86,           /* cast_expression  */
-  YYSYMBOL_type_name = 87,                 /* type_name  */
-  YYSYMBOL_expression = 88,                /* expression  */
-  YYSYMBOL_assignment_expression = 89,     /* assignment_expression  */
-  YYSYMBOL_unary_expression = 90,          /* unary_expression  */
-  YYSYMBOL_postfix_expression = 91,        /* postfix_expression  */
-  YYSYMBOL_primary_expression = 92,        /* primary_expression  */
-  YYSYMBOL_argument_expression_list = 93,  /* argument_expression_list  */
-  YYSYMBOL_unary_operator = 94,            /* unary_operator  */
-  YYSYMBOL_assignment_operator = 95,       /* assignment_operator  */
-  YYSYMBOL_parameter_type_list = 96,       /* parameter_type_list  */
-  YYSYMBOL_parameter_list = 97,            /* parameter_list  */
-  YYSYMBOL_parameter_declaration = 98,     /* parameter_declaration  */
-  YYSYMBOL_compound_statement = 99,        /* compound_statement  */
-  YYSYMBOL_statement_list = 100,           /* statement_list  */
-  YYSYMBOL_declaration_list = 101,         /* declaration_list  */
-  YYSYMBOL_statement = 102,                /* statement  */
-  YYSYMBOL_expression_statement = 103,     /* expression_statement  */
-  YYSYMBOL_selection_statement = 104,      /* selection_statement  */
-  YYSYMBOL_iteration_statement = 105,      /* iteration_statement  */
-  YYSYMBOL_jump_statement = 106,           /* jump_statement  */
-  YYSYMBOL_declaration = 107,              /* declaration  */
-  YYSYMBOL_init_declarator_list = 108,     /* init_declarator_list  */
-  YYSYMBOL_init_declarator = 109           /* init_declarator  */
+  YYSYMBOL_type_specifier = 70,            /* type_specifier  */
+  YYSYMBOL_declarator = 71,                /* declarator  */
+  YYSYMBOL_constant_expression = 72,       /* constant_expression  */
+  YYSYMBOL_conditional_expression = 73,    /* conditional_expression  */
+  YYSYMBOL_logical_or_expression = 74,     /* logical_or_expression  */
+  YYSYMBOL_logical_and_expression = 75,    /* logical_and_expression  */
+  YYSYMBOL_inclusive_or_expression = 76,   /* inclusive_or_expression  */
+  YYSYMBOL_exclusive_or_expression = 77,   /* exclusive_or_expression  */
+  YYSYMBOL_and_expression = 78,            /* and_expression  */
+  YYSYMBOL_equality_expression = 79,       /* equality_expression  */
+  YYSYMBOL_relational_expression = 80,     /* relational_expression  */
+  YYSYMBOL_shift_expression = 81,          /* shift_expression  */
+  YYSYMBOL_additive_expression = 82,       /* additive_expression  */
+  YYSYMBOL_multiplicative_expression = 83, /* multiplicative_expression  */
+  YYSYMBOL_cast_expression = 84,           /* cast_expression  */
+  YYSYMBOL_type_name = 85,                 /* type_name  */
+  YYSYMBOL_expression = 86,                /* expression  */
+  YYSYMBOL_assignment_expression = 87,     /* assignment_expression  */
+  YYSYMBOL_unary_expression = 88,          /* unary_expression  */
+  YYSYMBOL_postfix_expression = 89,        /* postfix_expression  */
+  YYSYMBOL_primary_expression = 90,        /* primary_expression  */
+  YYSYMBOL_argument_expression_list = 91,  /* argument_expression_list  */
+  YYSYMBOL_unary_operator = 92,            /* unary_operator  */
+  YYSYMBOL_assignment_operator = 93,       /* assignment_operator  */
+  YYSYMBOL_parameter_list = 94,            /* parameter_list  */
+  YYSYMBOL_parameter_declaration = 95,     /* parameter_declaration  */
+  YYSYMBOL_compound_statement = 96,        /* compound_statement  */
+  YYSYMBOL_statement_list = 97,            /* statement_list  */
+  YYSYMBOL_declaration_list = 98,          /* declaration_list  */
+  YYSYMBOL_statement = 99,                 /* statement  */
+  YYSYMBOL_expression_statement = 100,     /* expression_statement  */
+  YYSYMBOL_selection_statement = 101,      /* selection_statement  */
+  YYSYMBOL_iteration_statement = 102,      /* iteration_statement  */
+  YYSYMBOL_jump_statement = 103,           /* jump_statement  */
+  YYSYMBOL_declaration = 104,              /* declaration  */
+  YYSYMBOL_init_declarator_list = 105,     /* init_declarator_list  */
+  YYSYMBOL_init_declarator = 106           /* init_declarator  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -540,18 +537,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  14
+#define YYFINAL  12
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   680
+#define YYLAST   639
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  66
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  44
+#define YYNNTS  41
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  131
+#define YYNRULES  125
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  222
+#define YYNSTATES  211
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   297
@@ -571,16 +568,16 @@ static const yytype_int8 yytranslate[] =
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    61,     2,     2,     2,    58,    51,     2,
-      43,    44,    56,    54,    59,    55,     2,    57,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    48,    65,
-      52,    62,    53,    47,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,    62,     2,     2,     2,    59,    52,     2,
+      44,    45,    57,    55,    60,    56,     2,    58,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    49,    43,
+      53,    63,    54,    48,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,    45,     2,    46,    50,     2,     2,     2,     2,     2,
+       2,    46,     2,    47,    51,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    63,    49,    64,    60,     2,     2,     2,
+       2,     2,     2,    64,    50,    65,    61,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -604,20 +601,19 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    49,    49,    55,    67,    72,    82,    93,    98,   108,
-     109,   110,   111,   112,   113,   114,   119,   129,   136,   145,
-     155,   164,   174,   188,   198,   203,   219,   224,   237,   242,
-     255,   260,   273,   278,   291,   296,   309,   314,   322,   335,
-     340,   348,   356,   364,   377,   382,   390,   403,   408,   416,
-     429,   434,   442,   450,   463,   468,   483,   493,   498,   511,
-     516,   528,   533,   540,   547,   553,   560,   576,   581,   591,
-     600,   610,   617,   630,   637,   644,   651,   665,   670,   683,
-     684,   685,   686,   687,   688,   694,   695,   696,   697,   698,
-     699,   700,   701,   702,   703,   704,   710,   715,   729,   734,
-     747,   758,   766,   775,   784,   799,   804,   815,   820,   831,
-     836,   841,   846,   851,   861,   867,   879,   891,   911,   923,
-     939,   952,   966,   985,   993,  1001,  1009,  1023,  1036,  1041,
-    1053,  1058
+       0,    49,    49,    55,    67,    72,    85,    98,    99,   100,
+     101,   102,   103,   104,   109,   116,   125,   135,   144,   154,
+     168,   178,   183,   199,   204,   217,   222,   235,   240,   253,
+     258,   271,   276,   289,   294,   302,   315,   320,   328,   336,
+     344,   357,   362,   370,   383,   388,   396,   409,   414,   422,
+     430,   443,   448,   463,   473,   478,   491,   496,   508,   513,
+     520,   527,   533,   540,   556,   561,   571,   580,   590,   597,
+     610,   617,   624,   631,   645,   650,   663,   664,   665,   666,
+     667,   668,   674,   675,   676,   677,   678,   679,   680,   681,
+     682,   683,   684,   692,   697,   710,   721,   729,   738,   747,
+     762,   767,   778,   783,   794,   799,   804,   809,   814,   824,
+     830,   842,   854,   874,   886,   899,   913,   932,   940,   948,
+     956,   970,   983,   988,  1000,  1005
 };
 #endif
 
@@ -639,25 +635,23 @@ static const char *const yytname[] =
   "MUL_ASSIGN", "DIV_ASSIGN", "MOD_ASSIGN", "ADD_ASSIGN", "SUB_ASSIGN",
   "LEFT_ASSIGN", "RIGHT_ASSIGN", "AND_ASSIGN", "XOR_ASSIGN", "OR_ASSIGN",
   "CHAR", "SHORT", "INT", "LONG", "FLOAT", "DOUBLE", "VOID", "ELLIPSIS",
-  "IF", "ELSE", "WHILE", "DO", "FOR", "CONTINUE", "BREAK", "RETURN", "'('",
-  "')'", "'['", "']'", "'?'", "':'", "'|'", "'^'", "'&'", "'<'", "'>'",
-  "'+'", "'-'", "'*'", "'/'", "'%'", "','", "'~'", "'!'", "'='", "'{'",
-  "'}'", "';'", "$accept", "translation_unit", "external_declaration",
-  "function_definition", "declaration_specifiers", "type_specifier",
-  "declarator", "direct_declarator", "constant_expression",
-  "conditional_expression", "logical_or_expression",
+  "IF", "ELSE", "WHILE", "DO", "FOR", "CONTINUE", "BREAK", "RETURN", "';'",
+  "'('", "')'", "'['", "']'", "'?'", "':'", "'|'", "'^'", "'&'", "'<'",
+  "'>'", "'+'", "'-'", "'*'", "'/'", "'%'", "','", "'~'", "'!'", "'='",
+  "'{'", "'}'", "$accept", "translation_unit", "external_declaration",
+  "function_definition", "type_specifier", "declarator",
+  "constant_expression", "conditional_expression", "logical_or_expression",
   "logical_and_expression", "inclusive_or_expression",
   "exclusive_or_expression", "and_expression", "equality_expression",
   "relational_expression", "shift_expression", "additive_expression",
   "multiplicative_expression", "cast_expression", "type_name",
   "expression", "assignment_expression", "unary_expression",
   "postfix_expression", "primary_expression", "argument_expression_list",
-  "unary_operator", "assignment_operator", "parameter_type_list",
-  "parameter_list", "parameter_declaration", "compound_statement",
-  "statement_list", "declaration_list", "statement",
-  "expression_statement", "selection_statement", "iteration_statement",
-  "jump_statement", "declaration", "init_declarator_list",
-  "init_declarator", YY_NULLPTR
+  "unary_operator", "assignment_operator", "parameter_list",
+  "parameter_declaration", "compound_statement", "statement_list",
+  "declaration_list", "statement", "expression_statement",
+  "selection_statement", "iteration_statement", "jump_statement",
+  "declaration", "init_declarator_list", "init_declarator", YY_NULLPTR
 };
 
 static const char *
@@ -676,13 +670,13 @@ static const yytype_int16 yytoknum[] =
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
      275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
      285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
-     295,   296,   297,    40,    41,    91,    93,    63,    58,   124,
-      94,    38,    60,    62,    43,    45,    42,    47,    37,    44,
-     126,    33,    61,   123,   125,    59
+     295,   296,   297,    59,    40,    41,    91,    93,    63,    58,
+     124,    94,    38,    60,    62,    43,    45,    42,    47,    37,
+      44,   126,    33,    61,   123,   125
 };
 #endif
 
-#define YYPACT_NINF (-136)
+#define YYPACT_NINF (-138)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -696,79 +690,77 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     124,  -136,  -136,  -136,  -136,  -136,  -136,  -136,    12,  -136,
-    -136,     4,   124,  -136,  -136,  -136,  -136,     4,     8,    64,
-     -40,  -136,  -136,   -17,   137,   178,  -136,    85,   518,     4,
-    -136,  -136,  -136,  -136,  -136,   605,   619,   619,   487,  -136,
-    -136,  -136,  -136,  -136,  -136,  -136,     7,    22,    25,    -1,
-       5,   114,     6,   123,    80,    41,  -136,  -136,   268,    24,
-    -136,   137,    23,    58,   342,    67,    40,    65,   414,  -136,
-    -136,     4,   -39,  -136,  -136,   260,   219,  -136,  -136,  -136,
-    -136,  -136,  -136,  -136,     4,    93,    89,  -136,  -136,   121,
-    -136,  -136,   106,  -136,   487,  -136,   137,  -136,  -136,  -136,
-     127,   -30,   137,   137,   137,   137,   137,   137,   137,   137,
-     137,   137,   137,   137,   137,   137,   137,   137,   137,   137,
-     137,  -136,  -136,  -136,  -136,  -136,  -136,  -136,  -136,  -136,
-    -136,  -136,   137,  -136,  -136,   546,   137,  -136,   137,   137,
-     135,   383,  -136,  -136,  -136,    -8,   137,  -136,  -136,  -136,
-    -136,   301,  -136,  -136,  -136,   340,  -136,   129,   137,  -136,
-      22,    17,    25,    -1,     5,   114,     6,     6,   123,   123,
-     123,   123,    80,    80,    41,    41,  -136,  -136,  -136,  -136,
-    -136,  -136,   -23,    14,   -11,    -9,   132,   446,   446,  -136,
-    -136,  -136,  -136,  -136,  -136,  -136,   137,  -136,   137,  -136,
-     342,   342,   137,   577,   137,  -136,  -136,   140,  -136,     2,
-     342,    60,    62,   342,   112,  -136,   342,   342,  -136,  -136,
-    -136,  -136
+     276,  -138,  -138,  -138,  -138,  -138,  -138,  -138,   330,  -138,
+    -138,    11,  -138,  -138,  -138,    11,   -34,   -23,  -138,    99,
+     501,   394,   516,    46,  -138,  -138,    11,  -138,  -138,    11,
+     -32,  -138,  -138,  -138,  -138,   558,   577,   577,   363,  -138,
+    -138,  -138,  -138,  -138,  -138,  -138,    14,  -138,   -10,     9,
+     -15,    15,    16,   107,    -7,   167,   123,   114,  -138,  -138,
+      25,  -138,   516,  -138,  -138,   202,    28,    38,    48,    69,
+      75,   423,  -138,  -138,    11,   -18,  -138,  -138,   195,   153,
+    -138,  -138,  -138,  -138,  -138,  -138,   -29,  -138,   -25,  -138,
+     276,   363,  -138,   516,  -138,  -138,  -138,   101,    35,  -138,
+     516,   516,   516,   516,   516,   516,   516,   516,   516,   516,
+     516,   516,   516,   516,   516,   516,   516,   516,   516,  -138,
+    -138,   454,   516,  -138,  -138,  -138,  -138,  -138,  -138,  -138,
+    -138,  -138,  -138,  -138,  -138,   516,   516,   516,   321,  -138,
+    -138,  -138,   -12,    -4,  -138,   516,  -138,  -138,  -138,   237,
+    -138,  -138,   105,   516,  -138,     9,   -33,   -15,    15,    16,
+     107,    -7,    -7,   167,   167,   167,   167,   123,   123,   114,
+     114,  -138,  -138,  -138,  -138,  -138,    59,    49,  -138,   102,
+     103,   483,   483,  -138,  -138,  -138,  -138,  -138,  -138,   516,
+    -138,   516,  -138,   279,   279,   497,   516,  -138,  -138,   131,
+    -138,   279,   106,   108,   279,  -138,   279,   279,  -138,  -138,
+    -138
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
      Performed when YYTABLE does not specify something else to do.  Zero
      means the default is an error.  */
-static const yytype_uint8 yydefact[] =
+static const yytype_int8 yydefact[] =
 {
-       0,    10,    11,    12,    13,    14,    15,     9,     0,     2,
-       4,     0,     7,     5,     1,     3,    17,     0,   130,    16,
-       0,   128,     8,     0,     0,     0,     6,     0,     0,     0,
-     127,    18,    73,    74,    75,     0,     0,     0,     0,    79,
-      81,    82,    80,    83,    84,    59,    24,    26,    28,    30,
-      32,    34,    36,    39,    44,    47,    50,   131,    54,    61,
-      67,     0,     0,     0,     0,     0,     0,     0,     0,   101,
-     114,     0,     0,    57,   109,     0,     0,   105,   110,   111,
-     112,   113,   107,    22,     0,     0,    96,    98,    20,     0,
-      23,    54,   130,   129,     0,    65,     0,    62,    63,    56,
+       0,     8,     9,    10,    11,    12,    13,     7,     0,     2,
+       4,     0,     1,     3,    14,     0,   124,     0,   122,     0,
+       0,     0,     0,     0,     6,     5,     0,    15,    19,     0,
+       0,    93,    70,    71,    72,     0,     0,     0,     0,    17,
+      76,    78,    79,    77,    80,    81,     0,    20,    21,    23,
+      25,    27,    29,    31,    33,    36,    41,    44,    47,    51,
+      58,    64,     0,    56,   125,    51,     0,     0,     0,     0,
+       0,     0,   109,    96,     0,     0,    54,   104,     0,     0,
+     100,   105,   106,   107,   108,   102,   124,   123,    95,    18,
+       0,     0,    62,     0,    59,    60,    53,     0,     0,    16,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    86,    87,    88,    89,    90,    91,    92,    93,    94,
-      95,    85,     0,    71,    72,     0,     0,    64,     0,     0,
-       0,     0,   123,   124,   125,     0,     0,   115,   102,   106,
-     103,     0,   108,   100,    21,     0,    19,     0,     0,    76,
-      27,     0,    29,    31,    33,    35,    37,    38,    42,    43,
-      40,    41,    45,    46,    48,    49,    51,    52,    53,    60,
-      69,    77,     0,     0,     0,     0,     0,     0,     0,   126,
-      58,   104,    97,    99,    66,    55,     0,    70,     0,    68,
-       0,     0,     0,     0,     0,    25,    78,   116,   118,     0,
-       0,     0,     0,     0,     0,   120,     0,     0,   117,   119,
-     121,   122
+       0,     0,     0,     0,     0,     0,     0,     0,     0,    68,
+      69,     0,     0,    61,    83,    84,    85,    86,    87,    88,
+      89,    90,    91,    92,    82,     0,     0,     0,     0,   117,
+     118,   119,     0,     0,   110,     0,    97,   101,    98,     0,
+     103,    94,     0,     0,    73,    24,     0,    26,    28,    30,
+      32,    34,    35,    39,    40,    37,    38,    42,    43,    45,
+      46,    48,    49,    50,    66,    74,     0,     0,    57,     0,
+       0,     0,     0,   120,   121,    55,    99,    63,    52,     0,
+      67,     0,    65,     0,     0,     0,     0,    22,    75,   111,
+     113,     0,     0,     0,     0,   114,     0,     0,   112,   115,
+     116
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-    -136,  -136,   170,  -136,     3,   -22,    11,  -136,  -136,   -26,
-    -136,    77,    83,    84,    88,    92,    38,    13,    46,    47,
-     -56,    96,     0,   -24,   -27,  -136,  -136,  -136,  -136,  -136,
-    -136,  -136,    45,   177,   120,  -136,   -51,  -135,  -136,  -136,
-    -136,   -21,  -136,   172
+    -138,  -138,   166,  -138,     3,     7,  -138,   -19,  -138,    87,
+      89,    86,   112,   124,   100,     6,   136,    98,   -53,   113,
+     -31,   -22,    22,  -138,  -138,  -138,  -138,  -138,  -138,   141,
+     217,   174,  -138,   -52,  -137,  -138,  -138,  -138,   -71,   172,
+     228
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_uint8 yydefgoto[] =
 {
-       0,     8,     9,    10,    71,    12,    92,    19,    89,    45,
-      46,    47,    48,    49,    50,    51,    52,    53,    54,    55,
-      56,   100,    72,    73,    58,    59,    60,   182,    61,   132,
-      85,    86,    87,    74,    75,    76,    77,    78,    79,    80,
-      81,    13,    20,    21
+       0,     8,     9,    10,    74,    86,    46,    63,    48,    49,
+      50,    51,    52,    53,    54,    55,    56,    57,    58,    97,
+      75,    76,    65,    60,    61,   176,    62,   135,    30,    31,
+      77,    78,    79,    80,    81,    82,    83,    84,    85,    17,
+      18
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -776,148 +768,138 @@ static const yytype_uint8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-      57,    91,    90,    11,    82,   137,   187,    16,    95,    97,
-      98,    11,    14,   140,   159,    22,    99,   110,   111,    29,
-     146,   197,    18,   102,   149,    30,   147,    31,    23,   146,
-      84,   133,   134,   200,    91,   201,   198,   104,   101,     1,
-       2,     3,     4,     5,     6,     7,   214,    17,   146,   106,
-     146,   146,   203,   204,   103,   152,   107,   189,   112,   113,
-     199,   146,   176,   177,   178,   196,   138,   135,   145,   136,
-      24,    25,    99,   146,   105,    91,   146,    91,    91,    91,
-      91,    91,    91,    91,    91,    91,    91,    91,    91,    91,
-      91,    91,    91,    91,   101,   153,   101,   118,   119,   120,
-     149,   139,   195,   161,   216,   142,   217,    27,   179,    28,
-     141,   181,     1,     2,     3,     4,     5,     6,     7,   146,
-     188,   146,   190,   168,   169,   170,   171,   108,   109,    83,
-     143,    91,   114,   115,   116,   117,   183,   154,   184,   185,
-      32,    33,    34,    35,    36,    37,   166,   167,   155,   207,
-     208,     1,     2,     3,     4,     5,     6,     7,    84,   215,
-     172,   173,   218,   174,   175,   220,   221,   156,    24,    91,
-     205,   158,   186,   194,   206,   202,   213,   219,    15,   160,
-      38,    32,    33,    34,    35,    36,    37,   162,    39,   163,
-     157,    40,    41,    42,   164,    26,   151,    43,    44,   165,
-     193,    93,   209,   211,   212,     1,     2,     3,     4,     5,
-       6,     7,     0,    62,     0,    63,    64,    65,    66,    67,
-      68,    38,    32,    33,    34,    35,    36,    37,     0,    39,
-       0,     0,    40,    41,    42,     0,     0,     0,    43,    44,
-       0,    25,    69,    70,     0,     0,     1,     2,     3,     4,
-       5,     6,     7,     0,    62,     0,    63,    64,    65,    66,
-      67,    68,    38,    32,    33,    34,    35,    36,    37,     0,
-      39,     0,     0,    40,    41,    42,     0,     0,     0,    43,
-      44,     0,    25,   150,    70,   121,   122,   123,   124,   125,
-     126,   127,   128,   129,   130,    62,     0,    63,    64,    65,
-      66,    67,    68,    38,    32,    33,    34,    35,    36,    37,
-       0,    39,     0,     0,    40,    41,    42,     0,     0,     0,
-      43,    44,     0,    25,   148,    70,     0,     0,     0,     0,
-     131,     0,     0,     0,     0,     0,    62,     0,    63,    64,
-      65,    66,    67,    68,    38,    32,    33,    34,    35,    36,
-      37,     0,    39,     0,     0,    40,    41,    42,     0,     0,
-       0,    43,    44,     0,    25,   191,    70,     1,     2,     3,
-       4,     5,     6,     7,   192,     0,     0,    62,     0,    63,
-      64,    65,    66,    67,    68,    38,    32,    33,    34,    35,
-      36,    37,     0,    39,     0,     0,    40,    41,    42,     0,
-       0,     0,    43,    44,     0,    25,     0,    70,     0,     0,
+      64,   181,    47,    11,   108,   109,   100,    98,   150,   123,
+      20,    11,    21,    89,    14,    20,   189,    21,    16,    20,
+      25,    21,    19,    29,   102,   144,   147,   145,    90,    22,
+      23,   183,   119,   120,    22,   103,    88,    26,   101,   184,
+     142,    96,   145,    59,   195,   196,   110,   111,   145,    32,
+      33,    34,    35,    36,    37,    15,    26,    92,    94,    95,
+      98,    99,    98,   171,   172,   173,   104,   182,   105,   121,
+     156,   122,   136,     1,     2,     3,     4,     5,     6,     7,
+     154,    66,   137,    67,    59,    68,    69,    70,    71,    72,
+      38,   177,   138,    29,    96,   145,   192,   147,    40,   175,
+     188,    41,    42,    43,   190,   179,   180,    44,    45,   145,
+      23,    73,   139,   178,   163,   164,   165,   166,   140,   191,
+     106,   107,    59,   185,    59,    59,    59,    59,    59,    59,
+      59,    59,    59,    59,    59,    59,    59,    59,    59,    59,
+      59,   199,   200,    20,    27,    21,   153,   193,   194,   205,
+     187,   206,   208,   207,   209,   210,    32,    33,    34,    35,
+      36,    37,   145,   145,   202,   203,   145,   204,   145,   198,
+     197,   116,   117,   118,    13,    59,   112,   113,   114,   115,
+       1,     2,     3,     4,     5,     6,     7,   155,    66,   158,
+      67,   157,    68,    69,    70,    71,    72,    38,    32,    33,
+      34,    35,    36,    37,   152,    40,   161,   162,    41,    42,
+      43,    59,   169,   170,    44,    45,   159,    23,   148,   124,
+     125,   126,   127,   128,   129,   130,   131,   132,   133,   160,
+      66,   151,    67,    24,    68,    69,    70,    71,    72,    38,
+      32,    33,    34,    35,    36,    37,   143,    40,   167,   168,
+      41,    42,    43,   149,    87,     0,    44,    45,     0,    23,
+     146,     0,     0,     0,     0,   134,     0,     0,     0,     0,
+       0,     0,    66,     0,    67,     0,    68,    69,    70,    71,
+      72,    38,    32,    33,    34,    35,    36,    37,     0,    40,
+       0,     0,    41,    42,    43,     0,     0,     0,    44,    45,
+       0,    23,   186,     1,     2,     3,     4,     5,     6,     7,
+       0,     0,     0,     0,    66,     0,    67,     0,    68,    69,
+      70,    71,    72,    38,    32,    33,    34,    35,    36,    37,
+      12,    40,     0,     0,    41,    42,    43,     0,     0,     0,
+      44,    45,     0,    23,     0,     0,     0,     0,     1,     2,
+       3,     4,     5,     6,     7,     0,     0,     1,     2,     3,
+       4,     5,     6,     7,    72,    38,    32,    33,    34,    35,
+      36,    37,     0,    40,     0,     0,    41,    42,    43,     0,
+       0,     0,    44,    45,     0,     0,     0,     0,     0,     0,
        1,     2,     3,     4,     5,     6,     7,    32,    33,    34,
-      35,    36,    37,     0,     0,     0,    38,     0,     0,     0,
-       0,     0,     0,     0,    39,     0,     0,    40,    41,    42,
-       0,     0,     0,    43,    44,     0,     0,     0,    70,    32,
-      33,    34,    35,    36,    37,     0,     0,    38,     0,     0,
-       0,     0,     0,     0,     0,    39,     0,     0,    40,    41,
-      42,     0,     0,     0,    43,    44,     0,     0,     0,   144,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,    38,
-      32,    33,    34,    35,    36,    37,     0,    39,     0,     0,
-      40,    41,    42,     0,     0,     0,    43,    44,     0,     0,
-       0,    70,     0,     0,     1,     2,     3,     4,     5,     6,
-       7,    32,    33,    34,    35,    36,    37,     0,     0,     0,
-      38,     0,     0,     0,     0,     0,     0,     0,    39,     0,
-       0,    40,    41,    42,     0,     0,     0,    43,    44,    32,
-      33,    34,    35,    36,    37,     0,     0,     0,     0,     0,
-       0,    38,     0,     0,    88,     0,     0,     0,     0,    39,
-       0,     0,    40,    41,    42,     0,     0,     0,    43,    44,
-      32,    33,    34,    35,    36,    37,     0,     0,     0,    38,
-     180,     0,     0,     0,     0,     0,     0,    39,     0,     0,
-      40,    41,    42,     0,     0,     0,    43,    44,    32,    33,
-      34,    35,    36,    37,     0,     0,     0,     0,     0,     0,
-      38,   210,    32,    33,    34,    35,    36,    37,    39,     0,
-       0,    40,    41,    42,     0,     0,     0,    43,    44,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,    94,     0,
-       0,     0,     0,     0,     0,     0,    39,     0,     0,    40,
-      41,    42,    96,     0,     0,    43,    44,     0,     0,     0,
-      39,     0,     0,    40,    41,    42,     0,     0,     0,    43,
-      44
+      35,    36,    37,     0,     0,     0,     0,    38,     0,     0,
+       0,     0,     0,     0,     0,    40,     0,     0,    41,    42,
+      43,     0,     0,     0,    44,    45,    32,    33,    34,    35,
+      36,    37,     0,     0,     0,     0,     0,     0,    38,     0,
+       0,    39,     0,     0,     0,     0,    40,     0,     0,    41,
+      42,    43,     0,     0,     0,    44,    45,    32,    33,    34,
+      35,    36,    37,     0,     0,     0,   141,    38,     0,     0,
+       0,     0,     0,     0,     0,    40,     0,     0,    41,    42,
+      43,     0,     0,     0,    44,    45,    32,    33,    34,    35,
+      36,    37,     0,     0,     0,     0,     0,     0,    38,   174,
+      32,    33,    34,    35,    36,    37,    40,     0,     0,    41,
+      42,    43,     0,     0,     0,    44,    45,     0,     0,    32,
+      33,    34,    35,    36,    37,     0,    72,    38,     1,     2,
+       3,     4,     5,     6,     7,    40,     0,     0,    41,    42,
+      43,    38,   201,     0,    44,    45,    28,     0,     0,    40,
+       0,     0,    41,    42,    43,     0,     0,     0,    44,    45,
+      38,    32,    33,    34,    35,    36,    37,     0,    40,     0,
+       0,    41,    42,    43,     0,     0,     0,    44,    45,     0,
+      32,    33,    34,    35,    36,    37,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,    91,     0,     0,     0,     0,     0,     0,     0,
+      40,     0,     0,    41,    42,    43,     0,     0,     0,    44,
+      45,    93,     0,     0,     0,     0,     0,     0,     0,    40,
+       0,     0,    41,    42,    43,     0,     0,     0,    44,    45
 };
 
 static const yytype_int16 yycheck[] =
 {
-      24,    28,    28,     0,    25,    61,   141,     3,    35,    36,
-      37,     8,     0,    64,    44,    12,    38,    11,    12,    59,
-      59,    44,    11,    16,    75,    65,    65,    44,    17,    59,
-      27,     7,     8,    44,    61,    44,    59,    15,    38,    27,
-      28,    29,    30,    31,    32,    33,    44,    43,    59,    50,
-      59,    59,   187,   188,    47,    76,    51,    65,    52,    53,
-      46,    59,   118,   119,   120,    48,    43,    43,    68,    45,
-      62,    63,    94,    59,    49,   102,    59,   104,   105,   106,
-     107,   108,   109,   110,   111,   112,   113,   114,   115,   116,
-     117,   118,   119,   120,    94,    84,    96,    56,    57,    58,
-     151,    43,   158,   103,    44,    65,    44,    43,   132,    45,
-      43,   135,    27,    28,    29,    30,    31,    32,    33,    59,
-     141,    59,   146,   110,   111,   112,   113,    13,    14,    44,
-      65,   158,     9,    10,    54,    55,   136,    44,   138,   139,
-       3,     4,     5,     6,     7,     8,   108,   109,    59,   200,
-     201,    27,    28,    29,    30,    31,    32,    33,   155,   210,
-     114,   115,   213,   116,   117,   216,   217,    46,    62,   196,
-     196,    44,    37,    44,   198,    43,    36,    65,     8,   102,
-      43,     3,     4,     5,     6,     7,     8,   104,    51,   105,
-      94,    54,    55,    56,   106,    18,    76,    60,    61,   107,
-     155,    29,   202,   203,   204,    27,    28,    29,    30,    31,
-      32,    33,    -1,    35,    -1,    37,    38,    39,    40,    41,
-      42,    43,     3,     4,     5,     6,     7,     8,    -1,    51,
-      -1,    -1,    54,    55,    56,    -1,    -1,    -1,    60,    61,
-      -1,    63,    64,    65,    -1,    -1,    27,    28,    29,    30,
-      31,    32,    33,    -1,    35,    -1,    37,    38,    39,    40,
-      41,    42,    43,     3,     4,     5,     6,     7,     8,    -1,
-      51,    -1,    -1,    54,    55,    56,    -1,    -1,    -1,    60,
-      61,    -1,    63,    64,    65,    17,    18,    19,    20,    21,
-      22,    23,    24,    25,    26,    35,    -1,    37,    38,    39,
-      40,    41,    42,    43,     3,     4,     5,     6,     7,     8,
-      -1,    51,    -1,    -1,    54,    55,    56,    -1,    -1,    -1,
-      60,    61,    -1,    63,    64,    65,    -1,    -1,    -1,    -1,
-      62,    -1,    -1,    -1,    -1,    -1,    35,    -1,    37,    38,
-      39,    40,    41,    42,    43,     3,     4,     5,     6,     7,
-       8,    -1,    51,    -1,    -1,    54,    55,    56,    -1,    -1,
-      -1,    60,    61,    -1,    63,    64,    65,    27,    28,    29,
-      30,    31,    32,    33,    34,    -1,    -1,    35,    -1,    37,
-      38,    39,    40,    41,    42,    43,     3,     4,     5,     6,
-       7,     8,    -1,    51,    -1,    -1,    54,    55,    56,    -1,
-      -1,    -1,    60,    61,    -1,    63,    -1,    65,    -1,    -1,
+      22,   138,    21,     0,    11,    12,    16,    38,    79,    62,
+      44,     8,    46,    45,     3,    44,    49,    46,    11,    44,
+      43,    46,    15,    20,    15,    43,    78,    60,    60,    63,
+      64,    43,     7,     8,    63,    50,    29,    60,    48,    43,
+      71,    38,    60,    21,   181,   182,    53,    54,    60,     3,
+       4,     5,     6,     7,     8,    44,    60,    35,    36,    37,
+      91,    47,    93,   116,   117,   118,    51,   138,    52,    44,
+     101,    46,    44,    27,    28,    29,    30,    31,    32,    33,
+      45,    35,    44,    37,    62,    39,    40,    41,    42,    43,
+      44,   122,    44,    90,    91,    60,    47,   149,    52,   121,
+     153,    55,    56,    57,    45,   136,   137,    61,    62,    60,
+      64,    65,    43,   135,   108,   109,   110,   111,    43,    60,
+      13,    14,   100,   145,   102,   103,   104,   105,   106,   107,
+     108,   109,   110,   111,   112,   113,   114,   115,   116,   117,
+     118,   193,   194,    44,    45,    46,    45,    45,    45,   201,
+      45,    45,   204,    45,   206,   207,     3,     4,     5,     6,
+       7,     8,    60,    60,   195,   196,    60,    36,    60,   191,
+     189,    57,    58,    59,     8,   153,     9,    10,    55,    56,
+      27,    28,    29,    30,    31,    32,    33,   100,    35,   103,
+      37,   102,    39,    40,    41,    42,    43,    44,     3,     4,
+       5,     6,     7,     8,    91,    52,   106,   107,    55,    56,
+      57,   189,   114,   115,    61,    62,   104,    64,    65,    17,
+      18,    19,    20,    21,    22,    23,    24,    25,    26,   105,
+      35,    90,    37,    16,    39,    40,    41,    42,    43,    44,
+       3,     4,     5,     6,     7,     8,    74,    52,   112,   113,
+      55,    56,    57,    79,    26,    -1,    61,    62,    -1,    64,
+      65,    -1,    -1,    -1,    -1,    63,    -1,    -1,    -1,    -1,
+      -1,    -1,    35,    -1,    37,    -1,    39,    40,    41,    42,
+      43,    44,     3,     4,     5,     6,     7,     8,    -1,    52,
+      -1,    -1,    55,    56,    57,    -1,    -1,    -1,    61,    62,
+      -1,    64,    65,    27,    28,    29,    30,    31,    32,    33,
+      -1,    -1,    -1,    -1,    35,    -1,    37,    -1,    39,    40,
+      41,    42,    43,    44,     3,     4,     5,     6,     7,     8,
+       0,    52,    -1,    -1,    55,    56,    57,    -1,    -1,    -1,
+      61,    62,    -1,    64,    -1,    -1,    -1,    -1,    27,    28,
+      29,    30,    31,    32,    33,    -1,    -1,    27,    28,    29,
+      30,    31,    32,    33,    43,    44,     3,     4,     5,     6,
+       7,     8,    -1,    52,    -1,    -1,    55,    56,    57,    -1,
+      -1,    -1,    61,    62,    -1,    -1,    -1,    -1,    -1,    -1,
       27,    28,    29,    30,    31,    32,    33,     3,     4,     5,
-       6,     7,     8,    -1,    -1,    -1,    43,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    51,    -1,    -1,    54,    55,    56,
-      -1,    -1,    -1,    60,    61,    -1,    -1,    -1,    65,     3,
-       4,     5,     6,     7,     8,    -1,    -1,    43,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    51,    -1,    -1,    54,    55,
-      56,    -1,    -1,    -1,    60,    61,    -1,    -1,    -1,    65,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    43,
-       3,     4,     5,     6,     7,     8,    -1,    51,    -1,    -1,
-      54,    55,    56,    -1,    -1,    -1,    60,    61,    -1,    -1,
-      -1,    65,    -1,    -1,    27,    28,    29,    30,    31,    32,
-      33,     3,     4,     5,     6,     7,     8,    -1,    -1,    -1,
-      43,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    51,    -1,
-      -1,    54,    55,    56,    -1,    -1,    -1,    60,    61,     3,
-       4,     5,     6,     7,     8,    -1,    -1,    -1,    -1,    -1,
-      -1,    43,    -1,    -1,    46,    -1,    -1,    -1,    -1,    51,
-      -1,    -1,    54,    55,    56,    -1,    -1,    -1,    60,    61,
-       3,     4,     5,     6,     7,     8,    -1,    -1,    -1,    43,
-      44,    -1,    -1,    -1,    -1,    -1,    -1,    51,    -1,    -1,
-      54,    55,    56,    -1,    -1,    -1,    60,    61,     3,     4,
-       5,     6,     7,     8,    -1,    -1,    -1,    -1,    -1,    -1,
-      43,    44,     3,     4,     5,     6,     7,     8,    51,    -1,
-      -1,    54,    55,    56,    -1,    -1,    -1,    60,    61,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    43,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    51,    -1,    -1,    54,
-      55,    56,    43,    -1,    -1,    60,    61,    -1,    -1,    -1,
-      51,    -1,    -1,    54,    55,    56,    -1,    -1,    -1,    60,
-      61
+       6,     7,     8,    -1,    -1,    -1,    -1,    44,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    52,    -1,    -1,    55,    56,
+      57,    -1,    -1,    -1,    61,    62,     3,     4,     5,     6,
+       7,     8,    -1,    -1,    -1,    -1,    -1,    -1,    44,    -1,
+      -1,    47,    -1,    -1,    -1,    -1,    52,    -1,    -1,    55,
+      56,    57,    -1,    -1,    -1,    61,    62,     3,     4,     5,
+       6,     7,     8,    -1,    -1,    -1,    43,    44,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    52,    -1,    -1,    55,    56,
+      57,    -1,    -1,    -1,    61,    62,     3,     4,     5,     6,
+       7,     8,    -1,    -1,    -1,    -1,    -1,    -1,    44,    45,
+       3,     4,     5,     6,     7,     8,    52,    -1,    -1,    55,
+      56,    57,    -1,    -1,    -1,    61,    62,    -1,    -1,     3,
+       4,     5,     6,     7,     8,    -1,    43,    44,    27,    28,
+      29,    30,    31,    32,    33,    52,    -1,    -1,    55,    56,
+      57,    44,    45,    -1,    61,    62,    45,    -1,    -1,    52,
+      -1,    -1,    55,    56,    57,    -1,    -1,    -1,    61,    62,
+      44,     3,     4,     5,     6,     7,     8,    -1,    52,    -1,
+      -1,    55,    56,    57,    -1,    -1,    -1,    61,    62,    -1,
+       3,     4,     5,     6,     7,     8,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    44,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      52,    -1,    -1,    55,    56,    57,    -1,    -1,    -1,    61,
+      62,    44,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    52,
+      -1,    -1,    55,    56,    57,    -1,    -1,    -1,    61,    62
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -925,66 +907,63 @@ static const yytype_int16 yycheck[] =
 static const yytype_int8 yystos[] =
 {
        0,    27,    28,    29,    30,    31,    32,    33,    67,    68,
-      69,    70,    71,   107,     0,    68,     3,    43,    72,    73,
-     108,   109,    70,    72,    62,    63,    99,    43,    45,    59,
-      65,    44,     3,     4,     5,     6,     7,     8,    43,    51,
-      54,    55,    56,    60,    61,    75,    76,    77,    78,    79,
-      80,    81,    82,    83,    84,    85,    86,    89,    90,    91,
-      92,    94,    35,    37,    38,    39,    40,    41,    42,    64,
-      65,    70,    88,    89,    99,   100,   101,   102,   103,   104,
-     105,   106,   107,    44,    70,    96,    97,    98,    46,    74,
-      75,    90,    72,   109,    43,    90,    43,    90,    90,    71,
-      87,    88,    16,    47,    15,    49,    50,    51,    13,    14,
-      11,    12,    52,    53,     9,    10,    54,    55,    56,    57,
-      58,    17,    18,    19,    20,    21,    22,    23,    24,    25,
-      26,    62,    95,     7,     8,    43,    45,    86,    43,    43,
-     102,    43,    65,    65,    65,    88,    59,    65,    64,   102,
-      64,   100,   107,    72,    44,    59,    46,    87,    44,    44,
-      77,    88,    78,    79,    80,    81,    82,    82,    83,    83,
-      83,    83,    84,    84,    85,    85,    86,    86,    86,    89,
-      44,    89,    93,    88,    88,    88,    37,   103,   107,    65,
-      89,    64,    34,    98,    44,    86,    48,    44,    59,    46,
-      44,    44,    43,   103,   103,    75,    89,   102,   102,    88,
-      44,    88,    88,    36,    44,   102,    44,    44,   102,    65,
-     102,   102
+      69,    70,     0,    68,     3,    44,    71,   105,   106,    71,
+      44,    46,    63,    64,    96,    43,    60,    45,    45,    70,
+      94,    95,     3,     4,     5,     6,     7,     8,    44,    47,
+      52,    55,    56,    57,    61,    62,    72,    73,    74,    75,
+      76,    77,    78,    79,    80,    81,    82,    83,    84,    88,
+      89,    90,    92,    73,    87,    88,    35,    37,    39,    40,
+      41,    42,    43,    65,    70,    86,    87,    96,    97,    98,
+      99,   100,   101,   102,   103,   104,    71,   106,    71,    45,
+      60,    44,    88,    44,    88,    88,    70,    85,    86,    47,
+      16,    48,    15,    50,    51,    52,    13,    14,    11,    12,
+      53,    54,     9,    10,    55,    56,    57,    58,    59,     7,
+       8,    44,    46,    84,    17,    18,    19,    20,    21,    22,
+      23,    24,    25,    26,    63,    93,    44,    44,    44,    43,
+      43,    43,    86,   105,    43,    60,    65,    99,    65,    97,
+     104,    95,    85,    45,    45,    75,    86,    76,    77,    78,
+      79,    80,    80,    81,    81,    81,    81,    82,    82,    83,
+      83,    84,    84,    84,    45,    87,    91,    86,    87,    86,
+      86,   100,   104,    43,    43,    87,    65,    45,    84,    49,
+      45,    60,    47,    45,    45,   100,   100,    73,    87,    99,
+      99,    45,    86,    86,    36,    99,    45,    45,    99,    99,
+      99
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    66,    67,    67,    68,    68,    69,    70,    70,    71,
-      71,    71,    71,    71,    71,    71,    72,    73,    73,    73,
-      73,    73,    73,    74,    75,    75,    76,    76,    77,    77,
-      78,    78,    79,    79,    80,    80,    81,    81,    81,    82,
-      82,    82,    82,    82,    83,    83,    83,    84,    84,    84,
-      85,    85,    85,    85,    86,    86,    87,    88,    88,    89,
-      89,    90,    90,    90,    90,    90,    90,    91,    91,    91,
-      91,    91,    91,    92,    92,    92,    92,    93,    93,    94,
-      94,    94,    94,    94,    94,    95,    95,    95,    95,    95,
-      95,    95,    95,    95,    95,    95,    96,    96,    97,    97,
-      98,    99,    99,    99,    99,   100,   100,   101,   101,   102,
-     102,   102,   102,   102,   103,   103,   104,   104,   105,   105,
-     105,   105,   105,   106,   106,   106,   106,   107,   108,   108,
-     109,   109
+       0,    66,    67,    67,    68,    68,    69,    70,    70,    70,
+      70,    70,    70,    70,    71,    71,    71,    71,    71,    71,
+      72,    73,    73,    74,    74,    75,    75,    76,    76,    77,
+      77,    78,    78,    79,    79,    79,    80,    80,    80,    80,
+      80,    81,    81,    81,    82,    82,    82,    83,    83,    83,
+      83,    84,    84,    85,    86,    86,    87,    87,    88,    88,
+      88,    88,    88,    88,    89,    89,    89,    89,    89,    89,
+      90,    90,    90,    90,    91,    91,    92,    92,    92,    92,
+      92,    92,    93,    93,    93,    93,    93,    93,    93,    93,
+      93,    93,    93,    94,    94,    95,    96,    96,    96,    96,
+      97,    97,    98,    98,    99,    99,    99,    99,    99,   100,
+     100,   101,   101,   102,   102,   102,   102,   103,   103,   103,
+     103,   104,   105,   105,   106,   106
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     2,     1,     1,     3,     1,     2,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     3,     4,
-       3,     4,     3,     1,     1,     5,     1,     3,     1,     3,
-       1,     3,     1,     3,     1,     3,     1,     3,     3,     1,
-       3,     3,     3,     3,     1,     3,     3,     1,     3,     3,
-       1,     3,     3,     3,     1,     4,     1,     1,     3,     1,
-       3,     1,     2,     2,     2,     2,     4,     1,     4,     3,
-       4,     2,     2,     1,     1,     1,     3,     1,     3,     1,
+       0,     2,     1,     2,     1,     3,     3,     1,     1,     1,
+       1,     1,     1,     1,     1,     3,     4,     3,     4,     3,
+       1,     1,     5,     1,     3,     1,     3,     1,     3,     1,
+       3,     1,     3,     1,     3,     3,     1,     3,     3,     3,
+       3,     1,     3,     3,     1,     3,     3,     1,     3,     3,
+       3,     1,     4,     1,     1,     3,     1,     3,     1,     2,
+       2,     2,     2,     4,     1,     4,     3,     4,     2,     2,
+       1,     1,     1,     3,     1,     3,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     3,     1,     3,
-       2,     2,     3,     3,     4,     1,     2,     1,     2,     1,
-       1,     1,     1,     1,     1,     2,     5,     7,     5,     7,
-       6,     7,     7,     2,     2,     2,     3,     3,     1,     3,
-       1,     3
+       1,     1,     1,     1,     3,     2,     2,     3,     3,     4,
+       1,     2,     1,     2,     1,     1,     1,     1,     1,     1,
+       2,     5,     7,     5,     6,     7,     7,     2,     2,     2,
+       3,     3,     1,     3,     1,     3
 };
 
 
@@ -1459,7 +1438,7 @@ yyreduce:
 		(yyval.exprPtr) = new translation_unit("translation_unit", 1, children);
 		ROOT = (yyval.exprPtr);
 	}
-#line 1463 "grammar.cpp"
+#line 1442 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
   case 3: /* translation_unit: translation_unit external_declaration  */
@@ -1471,7 +1450,7 @@ yyreduce:
 		(yyval.exprPtr) = new translation_unit("translation_unit", 2, children);
 		ROOT = (yyval.exprPtr);
 	}
-#line 1475 "grammar.cpp"
+#line 1454 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
   case 4: /* external_declaration: function_definition  */
@@ -1481,118 +1460,90 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new external_declaration("external_declaration", 1, children);
 	}
-#line 1485 "grammar.cpp"
+#line 1464 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 5: /* external_declaration: declaration  */
+  case 5: /* external_declaration: type_specifier init_declarator_list ';'  */
 #line 72 "grammar.y"
-                  {
+                                              { 
+		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
-		children.push_back((yyvsp[0].exprPtr));
+		children.push_back((yyvsp[-2].exprPtr));
+		children.push_back((yyvsp[-1].exprPtr));
+		children.push_back(semiColon);
 		(yyval.exprPtr) = new external_declaration("external_declaration", 2, children);
 	}
-#line 1495 "grammar.cpp"
+#line 1477 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 6: /* function_definition: declaration_specifiers declarator compound_statement  */
-#line 82 "grammar.y"
-                                                           {
+  case 6: /* function_definition: type_specifier declarator compound_statement  */
+#line 85 "grammar.y"
+                                                   {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new function_definition("function_definition", 1, children);
 	}
-#line 1507 "grammar.cpp"
+#line 1489 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 7: /* declaration_specifiers: type_specifier  */
-#line 93 "grammar.y"
-                     {
-		vector<exprAST*> children;
-		children.push_back((yyvsp[0].exprPtr));
-		(yyval.exprPtr) = new declaration_specifiers("declaration_specifiers", 1, children);
-	}
-#line 1517 "grammar.cpp"
-    break;
-
-  case 8: /* declaration_specifiers: type_specifier declaration_specifiers  */
+  case 7: /* type_specifier: VOID  */
 #line 98 "grammar.y"
-                                                {
-		vector<exprAST*> children;
-		children.push_back((yyvsp[-1].exprPtr));
-		children.push_back((yyvsp[0].exprPtr));
-		(yyval.exprPtr) = new declaration_specifiers("declaration_specifiers", 2, children);
-	}
-#line 1528 "grammar.cpp"
-    break;
-
-  case 9: /* type_specifier: VOID  */
-#line 108 "grammar.y"
                { (yyval.exprPtr) = new typeAST(1); }
-#line 1534 "grammar.cpp"
+#line 1495 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 10: /* type_specifier: CHAR  */
-#line 109 "grammar.y"
+  case 8: /* type_specifier: CHAR  */
+#line 99 "grammar.y"
                { (yyval.exprPtr) = new typeAST(2);}
-#line 1540 "grammar.cpp"
+#line 1501 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 11: /* type_specifier: SHORT  */
-#line 110 "grammar.y"
+  case 9: /* type_specifier: SHORT  */
+#line 100 "grammar.y"
                 { (yyval.exprPtr) = new typeAST(3);}
-#line 1546 "grammar.cpp"
+#line 1507 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 12: /* type_specifier: INT  */
-#line 111 "grammar.y"
+  case 10: /* type_specifier: INT  */
+#line 101 "grammar.y"
               { (yyval.exprPtr) = new typeAST(4);}
-#line 1552 "grammar.cpp"
+#line 1513 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 13: /* type_specifier: LONG  */
-#line 112 "grammar.y"
+  case 11: /* type_specifier: LONG  */
+#line 102 "grammar.y"
                { (yyval.exprPtr) = new typeAST(5);}
-#line 1558 "grammar.cpp"
+#line 1519 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 14: /* type_specifier: FLOAT  */
-#line 113 "grammar.y"
+  case 12: /* type_specifier: FLOAT  */
+#line 103 "grammar.y"
                 { (yyval.exprPtr) = new typeAST(6);}
-#line 1564 "grammar.cpp"
+#line 1525 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 15: /* type_specifier: DOUBLE  */
-#line 114 "grammar.y"
+  case 13: /* type_specifier: DOUBLE  */
+#line 104 "grammar.y"
                  { (yyval.exprPtr) = new typeAST(7);}
-#line 1570 "grammar.cpp"
+#line 1531 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 16: /* declarator: direct_declarator  */
-#line 119 "grammar.y"
-                        { 
-		vector<exprAST*> children;
-		children.push_back((yyvsp[0].exprPtr));
-		(yyval.exprPtr) = new declarator("declarator", 1, children);
-	}
-#line 1580 "grammar.cpp"
-    break;
-
-  case 17: /* direct_declarator: IDENTIFIER  */
-#line 129 "grammar.y"
+  case 14: /* declarator: IDENTIFIER  */
+#line 109 "grammar.y"
                      { 
 		exprAST* id = tokenStack.top();
 		tokenStack.pop();
 		vector<exprAST*> children;
 		children.push_back(id);
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 1, children);
+		(yyval.exprPtr) = new nonleafAST("declarator", 1, children);
 	}
-#line 1592 "grammar.cpp"
+#line 1543 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 18: /* direct_declarator: '(' declarator ')'  */
-#line 136 "grammar.y"
+  case 15: /* declarator: '(' declarator ')'  */
+#line 116 "grammar.y"
                              { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -1600,14 +1551,14 @@ yyreduce:
 		children.push_back(left);
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 2, children);
+		(yyval.exprPtr) = new nonleafAST("declarator", 2, children);
 	}
-#line 1606 "grammar.cpp"
+#line 1557 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 19: /* direct_declarator: direct_declarator '[' constant_expression ']'  */
-#line 145 "grammar.y"
-                                                        { 
+  case 16: /* declarator: declarator '[' constant_expression ']'  */
+#line 125 "grammar.y"
+                                                 { 
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
 		vector<exprAST*> children;
@@ -1615,28 +1566,28 @@ yyreduce:
 		children.push_back(left);
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 3, children);
+		(yyval.exprPtr) = new nonleafAST("declarator", 3, children);
 	}
-#line 1621 "grammar.cpp"
+#line 1572 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 20: /* direct_declarator: direct_declarator '[' ']'  */
-#line 155 "grammar.y"
-                                    { 
+  case 17: /* declarator: declarator '[' ']'  */
+#line 135 "grammar.y"
+                             { 
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
 		vector<exprAST*> children;
 		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(left);
 		children.push_back(right);
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 4, children);
+		(yyval.exprPtr) = new nonleafAST("declarator", 4, children);
 	}
-#line 1635 "grammar.cpp"
+#line 1586 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 21: /* direct_declarator: direct_declarator '(' parameter_type_list ')'  */
-#line 164 "grammar.y"
-                                                        { 
+  case 18: /* declarator: declarator '(' parameter_list ')'  */
+#line 144 "grammar.y"
+                                            { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
@@ -1644,47 +1595,47 @@ yyreduce:
 		children.push_back(left);
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 5, children);
+		(yyval.exprPtr) = new nonleafAST("declarator", 5, children);
 	}
-#line 1650 "grammar.cpp"
+#line 1601 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 22: /* direct_declarator: direct_declarator '(' ')'  */
-#line 174 "grammar.y"
-                                    { 
+  case 19: /* declarator: declarator '(' ')'  */
+#line 154 "grammar.y"
+                             { 
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
 		vector<exprAST*> children;
 		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(left);
 		children.push_back(right);
-		(yyval.exprPtr) = new nonleafAST("direct_declarator", 6, children);
+		(yyval.exprPtr) = new nonleafAST("declarator", 6, children);
 	}
-#line 1664 "grammar.cpp"
+#line 1615 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 23: /* constant_expression: conditional_expression  */
-#line 188 "grammar.y"
+  case 20: /* constant_expression: conditional_expression  */
+#line 168 "grammar.y"
                                  { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new constant_expression("constant_expression", 1, children);
 	}
-#line 1674 "grammar.cpp"
+#line 1625 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 24: /* conditional_expression: logical_or_expression  */
-#line 198 "grammar.y"
+  case 21: /* conditional_expression: logical_or_expression  */
+#line 178 "grammar.y"
                                 {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new conditional_expression("conditional_expression", 1, children);
 	}
-#line 1684 "grammar.cpp"
+#line 1635 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 25: /* conditional_expression: logical_or_expression '?' expression ':' conditional_expression  */
-#line 203 "grammar.y"
+  case 22: /* conditional_expression: logical_or_expression '?' expression ':' conditional_expression  */
+#line 183 "grammar.y"
                                                                           {
 		exprAST* questionMark = new punctuationAST("?");
 		exprAST* colon = new punctuationAST(":");
@@ -1696,21 +1647,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new conditional_expression("conditional_expression", 2, children);
 	}
-#line 1700 "grammar.cpp"
+#line 1651 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 26: /* logical_or_expression: logical_and_expression  */
-#line 219 "grammar.y"
+  case 23: /* logical_or_expression: logical_and_expression  */
+#line 199 "grammar.y"
                                  {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new logical_or_expression("logical_or_expression", 1, children);
 	}
-#line 1710 "grammar.cpp"
+#line 1661 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 27: /* logical_or_expression: logical_or_expression OR_OP logical_and_expression  */
-#line 224 "grammar.y"
+  case 24: /* logical_or_expression: logical_or_expression OR_OP logical_and_expression  */
+#line 204 "grammar.y"
                                                              {
 		exprAST* orOp = new operatorAST("||");
 		vector<exprAST*> children;
@@ -1719,21 +1670,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new logical_or_expression("logical_or_expression", 2, children);
 	}
-#line 1723 "grammar.cpp"
+#line 1674 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 28: /* logical_and_expression: inclusive_or_expression  */
-#line 237 "grammar.y"
+  case 25: /* logical_and_expression: inclusive_or_expression  */
+#line 217 "grammar.y"
                                   {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new logical_and_expression("logical_and_expression", 1, children);
 	}
-#line 1733 "grammar.cpp"
+#line 1684 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 29: /* logical_and_expression: logical_and_expression AND_OP inclusive_or_expression  */
-#line 242 "grammar.y"
+  case 26: /* logical_and_expression: logical_and_expression AND_OP inclusive_or_expression  */
+#line 222 "grammar.y"
                                                                 {
 		exprAST* andOp = new operatorAST("&&");
 		vector<exprAST*> children;
@@ -1742,21 +1693,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new logical_and_expression("logical_and_expression", 2, children);
 	}
-#line 1746 "grammar.cpp"
+#line 1697 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 30: /* inclusive_or_expression: exclusive_or_expression  */
-#line 255 "grammar.y"
+  case 27: /* inclusive_or_expression: exclusive_or_expression  */
+#line 235 "grammar.y"
                                   {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new inclusive_or_expression("inclusive_or_expression", 1, children);
 	}
-#line 1756 "grammar.cpp"
+#line 1707 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 31: /* inclusive_or_expression: inclusive_or_expression '|' exclusive_or_expression  */
-#line 260 "grammar.y"
+  case 28: /* inclusive_or_expression: inclusive_or_expression '|' exclusive_or_expression  */
+#line 240 "grammar.y"
                                                               {
 		exprAST* orOp = new operatorAST("|");
 		vector<exprAST*> children;
@@ -1765,21 +1716,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new inclusive_or_expression("inclusive_or_expression", 2, children);
 	}
-#line 1769 "grammar.cpp"
+#line 1720 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 32: /* exclusive_or_expression: and_expression  */
-#line 273 "grammar.y"
+  case 29: /* exclusive_or_expression: and_expression  */
+#line 253 "grammar.y"
                          { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new exclusive_or_expression("exclusive_or_expression", 1, children);
 	}
-#line 1779 "grammar.cpp"
+#line 1730 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 33: /* exclusive_or_expression: exclusive_or_expression '^' and_expression  */
-#line 278 "grammar.y"
+  case 30: /* exclusive_or_expression: exclusive_or_expression '^' and_expression  */
+#line 258 "grammar.y"
                                                      {
 		exprAST* xorOp = new operatorAST("^");
 		vector<exprAST*> children;
@@ -1788,21 +1739,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new exclusive_or_expression("exclusive_or_expression", 2, children);
 	}
-#line 1792 "grammar.cpp"
+#line 1743 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 34: /* and_expression: equality_expression  */
-#line 291 "grammar.y"
+  case 31: /* and_expression: equality_expression  */
+#line 271 "grammar.y"
                               {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new and_expression("and_expression", 1, children);
 	}
-#line 1802 "grammar.cpp"
+#line 1753 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 35: /* and_expression: and_expression '&' equality_expression  */
-#line 296 "grammar.y"
+  case 32: /* and_expression: and_expression '&' equality_expression  */
+#line 276 "grammar.y"
                                                  {
 		exprAST* andOp = new operatorAST("&");
 		vector<exprAST*> children;
@@ -1811,21 +1762,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new and_expression("and_expression", 2, children);
 	}
-#line 1815 "grammar.cpp"
+#line 1766 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 36: /* equality_expression: relational_expression  */
-#line 309 "grammar.y"
+  case 33: /* equality_expression: relational_expression  */
+#line 289 "grammar.y"
                                 { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new equality_expression("equality_expression", 1, children);
 	}
-#line 1825 "grammar.cpp"
+#line 1776 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 37: /* equality_expression: equality_expression EQ_OP relational_expression  */
-#line 314 "grammar.y"
+  case 34: /* equality_expression: equality_expression EQ_OP relational_expression  */
+#line 294 "grammar.y"
                                                           {
 		exprAST* eqOp = new operatorAST("==");
 		vector<exprAST*> children;
@@ -1834,11 +1785,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new equality_expression("equality_expression", 2, children);
 	}
-#line 1838 "grammar.cpp"
+#line 1789 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 38: /* equality_expression: equality_expression NE_OP relational_expression  */
-#line 322 "grammar.y"
+  case 35: /* equality_expression: equality_expression NE_OP relational_expression  */
+#line 302 "grammar.y"
                                                           {
 		exprAST* neOp = new operatorAST("!=");
 		vector<exprAST*> children;
@@ -1847,21 +1798,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new equality_expression("equality_expression", 3, children);
 	}
-#line 1851 "grammar.cpp"
+#line 1802 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 39: /* relational_expression: shift_expression  */
-#line 335 "grammar.y"
+  case 36: /* relational_expression: shift_expression  */
+#line 315 "grammar.y"
                            { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new relational_expression("relational_expression", 1, children);
 	}
-#line 1861 "grammar.cpp"
+#line 1812 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 40: /* relational_expression: relational_expression '<' shift_expression  */
-#line 340 "grammar.y"
+  case 37: /* relational_expression: relational_expression '<' shift_expression  */
+#line 320 "grammar.y"
                                                      {
 		exprAST* lessOp = new operatorAST("<");
 		vector<exprAST*> children;
@@ -1870,11 +1821,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new relational_expression("relational_expression", 2, children);
 	}
-#line 1874 "grammar.cpp"
+#line 1825 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 41: /* relational_expression: relational_expression '>' shift_expression  */
-#line 348 "grammar.y"
+  case 38: /* relational_expression: relational_expression '>' shift_expression  */
+#line 328 "grammar.y"
                                                      {
 		exprAST* greaterOp = new operatorAST(">");
 		vector<exprAST*> children;
@@ -1883,11 +1834,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new relational_expression("relational_expression", 3, children);
 	}
-#line 1887 "grammar.cpp"
+#line 1838 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 42: /* relational_expression: relational_expression LE_OP shift_expression  */
-#line 356 "grammar.y"
+  case 39: /* relational_expression: relational_expression LE_OP shift_expression  */
+#line 336 "grammar.y"
                                                        {
 		exprAST* lessEqualOp = new operatorAST("<=");
 		vector<exprAST*> children;
@@ -1896,11 +1847,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new relational_expression("relational_expression", 4, children);
 	}
-#line 1900 "grammar.cpp"
+#line 1851 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 43: /* relational_expression: relational_expression GE_OP shift_expression  */
-#line 364 "grammar.y"
+  case 40: /* relational_expression: relational_expression GE_OP shift_expression  */
+#line 344 "grammar.y"
                                                        {
 		exprAST* greaterEqualOp = new operatorAST(">=");
 		vector<exprAST*> children;
@@ -1909,21 +1860,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new relational_expression("relational_expression", 5, children);
 	}
-#line 1913 "grammar.cpp"
+#line 1864 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 44: /* shift_expression: additive_expression  */
-#line 377 "grammar.y"
+  case 41: /* shift_expression: additive_expression  */
+#line 357 "grammar.y"
                               {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new shift_expression("shift_expression", 1, children);
 	}
-#line 1923 "grammar.cpp"
+#line 1874 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 45: /* shift_expression: shift_expression LEFT_OP additive_expression  */
-#line 382 "grammar.y"
+  case 42: /* shift_expression: shift_expression LEFT_OP additive_expression  */
+#line 362 "grammar.y"
                                                        {
 		exprAST* leftOp = new operatorAST("<<");
 		vector<exprAST*> children;
@@ -1932,11 +1883,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new shift_expression("shift_expression", 2, children);
 	}
-#line 1936 "grammar.cpp"
+#line 1887 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 46: /* shift_expression: shift_expression RIGHT_OP additive_expression  */
-#line 390 "grammar.y"
+  case 43: /* shift_expression: shift_expression RIGHT_OP additive_expression  */
+#line 370 "grammar.y"
                                                         {
 		exprAST* rightOp = new operatorAST(">>");
 		vector<exprAST*> children;
@@ -1945,21 +1896,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new shift_expression("shift_expression", 3, children);
 	}
-#line 1949 "grammar.cpp"
+#line 1900 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 47: /* additive_expression: multiplicative_expression  */
-#line 403 "grammar.y"
+  case 44: /* additive_expression: multiplicative_expression  */
+#line 383 "grammar.y"
                                     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new additive_expression("additive_expression", 1, children);
 	}
-#line 1959 "grammar.cpp"
+#line 1910 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 48: /* additive_expression: additive_expression '+' multiplicative_expression  */
-#line 408 "grammar.y"
+  case 45: /* additive_expression: additive_expression '+' multiplicative_expression  */
+#line 388 "grammar.y"
                                                             {
 		exprAST* addOp = new operatorAST("+");
 		vector<exprAST*> children;
@@ -1968,11 +1919,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new additive_expression("additive_expression", 2, children);
 	}
-#line 1972 "grammar.cpp"
+#line 1923 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 49: /* additive_expression: additive_expression '-' multiplicative_expression  */
-#line 416 "grammar.y"
+  case 46: /* additive_expression: additive_expression '-' multiplicative_expression  */
+#line 396 "grammar.y"
                                                             {
 		exprAST* subOp = new operatorAST("-");
 		vector<exprAST*> children;
@@ -1981,21 +1932,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new additive_expression("additive_expression", 3, children);
 	}
-#line 1985 "grammar.cpp"
+#line 1936 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 50: /* multiplicative_expression: cast_expression  */
-#line 429 "grammar.y"
+  case 47: /* multiplicative_expression: cast_expression  */
+#line 409 "grammar.y"
                           { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 1, children);
 	}
-#line 1995 "grammar.cpp"
+#line 1946 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 51: /* multiplicative_expression: multiplicative_expression '*' cast_expression  */
-#line 434 "grammar.y"
+  case 48: /* multiplicative_expression: multiplicative_expression '*' cast_expression  */
+#line 414 "grammar.y"
                                                         {
 		exprAST* mulOp = new operatorAST("*");
 		vector<exprAST*> children;
@@ -2004,11 +1955,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 2, children);
 	}
-#line 2008 "grammar.cpp"
+#line 1959 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 52: /* multiplicative_expression: multiplicative_expression '/' cast_expression  */
-#line 442 "grammar.y"
+  case 49: /* multiplicative_expression: multiplicative_expression '/' cast_expression  */
+#line 422 "grammar.y"
                                                         {
 		exprAST* divOp = new operatorAST("/");
 		vector<exprAST*> children;
@@ -2017,11 +1968,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 3, children);
 	}
-#line 2021 "grammar.cpp"
+#line 1972 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 53: /* multiplicative_expression: multiplicative_expression '%' cast_expression  */
-#line 450 "grammar.y"
+  case 50: /* multiplicative_expression: multiplicative_expression '%' cast_expression  */
+#line 430 "grammar.y"
                                                         {
 		exprAST* modOp = new operatorAST("%");
 		vector<exprAST*> children;
@@ -2030,21 +1981,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new multiplicative_expression("multiplicative_expression", 4, children);
 	}
-#line 2034 "grammar.cpp"
+#line 1985 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 54: /* cast_expression: unary_expression  */
-#line 463 "grammar.y"
+  case 51: /* cast_expression: unary_expression  */
+#line 443 "grammar.y"
                            { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new cast_expression("cast_expression", 1, children);
 	}
-#line 2044 "grammar.cpp"
+#line 1995 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 55: /* cast_expression: '(' type_name ')' cast_expression  */
-#line 468 "grammar.y"
+  case 52: /* cast_expression: '(' type_name ')' cast_expression  */
+#line 448 "grammar.y"
                                             {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -2055,31 +2006,31 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new cast_expression("cast_expression", 2, children);
 	}
-#line 2059 "grammar.cpp"
+#line 2010 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 56: /* type_name: type_specifier  */
-#line 483 "grammar.y"
+  case 53: /* type_name: type_specifier  */
+#line 463 "grammar.y"
                          { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new type_name("type_name", 1, children);
 	}
-#line 2069 "grammar.cpp"
+#line 2020 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 57: /* expression: assignment_expression  */
-#line 493 "grammar.y"
+  case 54: /* expression: assignment_expression  */
+#line 473 "grammar.y"
                                 { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new expression("expression", 1, children);
 	}
-#line 2079 "grammar.cpp"
+#line 2030 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 58: /* expression: expression ',' assignment_expression  */
-#line 498 "grammar.y"
+  case 55: /* expression: expression ',' assignment_expression  */
+#line 478 "grammar.y"
                                                {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
@@ -2088,21 +2039,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new expression("expression", 2, children);
 	}
-#line 2092 "grammar.cpp"
+#line 2043 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 59: /* assignment_expression: conditional_expression  */
-#line 511 "grammar.y"
+  case 56: /* assignment_expression: conditional_expression  */
+#line 491 "grammar.y"
                                  { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new assignment_expression("assignment_expression", 1, children);
 	}
-#line 2102 "grammar.cpp"
+#line 2053 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 60: /* assignment_expression: unary_expression assignment_operator assignment_expression  */
-#line 516 "grammar.y"
+  case 57: /* assignment_expression: unary_expression assignment_operator assignment_expression  */
+#line 496 "grammar.y"
                                                                      { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[-2].exprPtr));
@@ -2110,21 +2061,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new assignment_expression("assignment_expression", 2, children);
 	}
-#line 2114 "grammar.cpp"
+#line 2065 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 61: /* unary_expression: postfix_expression  */
-#line 528 "grammar.y"
+  case 58: /* unary_expression: postfix_expression  */
+#line 508 "grammar.y"
                              { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new unary_expression("unary_expression", 1, children);
 	}
-#line 2124 "grammar.cpp"
+#line 2075 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 62: /* unary_expression: INC_OP unary_expression  */
-#line 533 "grammar.y"
+  case 59: /* unary_expression: INC_OP unary_expression  */
+#line 513 "grammar.y"
                                   {
 		exprAST* incOp = new operatorAST("++");
 		vector<exprAST*> children;
@@ -2132,11 +2083,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new unary_expression("unary_expression", 2, children);
 	}
-#line 2136 "grammar.cpp"
+#line 2087 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 63: /* unary_expression: DEC_OP unary_expression  */
-#line 540 "grammar.y"
+  case 60: /* unary_expression: DEC_OP unary_expression  */
+#line 520 "grammar.y"
                                   {
 		exprAST* decOp = new operatorAST("--");
 		vector<exprAST*> children;
@@ -2144,22 +2095,22 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new unary_expression("unary_expression", 3, children);
 	}
-#line 2148 "grammar.cpp"
+#line 2099 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 64: /* unary_expression: unary_operator cast_expression  */
-#line 547 "grammar.y"
+  case 61: /* unary_expression: unary_operator cast_expression  */
+#line 527 "grammar.y"
                                          { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new unary_expression("unary_expression", 4, children);
 	}
-#line 2159 "grammar.cpp"
+#line 2110 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 65: /* unary_expression: SIZEOF unary_expression  */
-#line 553 "grammar.y"
+  case 62: /* unary_expression: SIZEOF unary_expression  */
+#line 533 "grammar.y"
                                   {
 		exprAST* sizeOf = new keywordAST("sizeof");
 		vector<exprAST*> children;
@@ -2167,11 +2118,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new unary_expression("unary_expression", 5, children);
 	}
-#line 2171 "grammar.cpp"
+#line 2122 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 66: /* unary_expression: SIZEOF '(' type_name ')'  */
-#line 560 "grammar.y"
+  case 63: /* unary_expression: SIZEOF '(' type_name ')'  */
+#line 540 "grammar.y"
                                    {
 		exprAST* sizeOf = new keywordAST("sizeof");
 		exprAST* left = new punctuationAST("(");
@@ -2183,21 +2134,21 @@ yyreduce:
 		children.push_back(right);
 		(yyval.exprPtr) = new unary_expression("unary_expression", 6, children);
 	}
-#line 2187 "grammar.cpp"
+#line 2138 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 67: /* postfix_expression: primary_expression  */
-#line 576 "grammar.y"
+  case 64: /* postfix_expression: primary_expression  */
+#line 556 "grammar.y"
                              { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 1, children);
 	}
-#line 2197 "grammar.cpp"
+#line 2148 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 68: /* postfix_expression: postfix_expression '[' expression ']'  */
-#line 581 "grammar.y"
+  case 65: /* postfix_expression: postfix_expression '[' expression ']'  */
+#line 561 "grammar.y"
                                                 {
 		exprAST* left = new punctuationAST("[");
 		exprAST* right = new punctuationAST("]");
@@ -2208,11 +2159,11 @@ yyreduce:
 		children.push_back(right);
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 2, children);
 	}
-#line 2212 "grammar.cpp"
+#line 2163 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 69: /* postfix_expression: postfix_expression '(' ')'  */
-#line 591 "grammar.y"
+  case 66: /* postfix_expression: postfix_expression '(' ')'  */
+#line 571 "grammar.y"
                                      {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -2222,11 +2173,11 @@ yyreduce:
 		children.push_back(right);
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 3, children);
 	}
-#line 2226 "grammar.cpp"
+#line 2177 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 70: /* postfix_expression: postfix_expression '(' argument_expression_list ')'  */
-#line 600 "grammar.y"
+  case 67: /* postfix_expression: postfix_expression '(' argument_expression_list ')'  */
+#line 580 "grammar.y"
                                                              {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -2237,11 +2188,11 @@ yyreduce:
 		children.push_back(right);
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 4, children);
 	}
-#line 2241 "grammar.cpp"
+#line 2192 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 71: /* postfix_expression: postfix_expression INC_OP  */
-#line 610 "grammar.y"
+  case 68: /* postfix_expression: postfix_expression INC_OP  */
+#line 590 "grammar.y"
                                     {
 		exprAST* incOp = new operatorAST("++");
 		vector<exprAST*> children;
@@ -2249,11 +2200,11 @@ yyreduce:
 		children.push_back(incOp);
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 5, children);
 	}
-#line 2253 "grammar.cpp"
+#line 2204 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 72: /* postfix_expression: postfix_expression DEC_OP  */
-#line 617 "grammar.y"
+  case 69: /* postfix_expression: postfix_expression DEC_OP  */
+#line 597 "grammar.y"
                                     {
 		exprAST* decOp = new operatorAST("--");
 		vector<exprAST*> children;
@@ -2261,11 +2212,11 @@ yyreduce:
 		children.push_back(decOp);
 		(yyval.exprPtr) = new postfix_expression("postfix_expression", 6, children);
 	}
-#line 2265 "grammar.cpp"
+#line 2216 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 73: /* primary_expression: IDENTIFIER  */
-#line 630 "grammar.y"
+  case 70: /* primary_expression: IDENTIFIER  */
+#line 610 "grammar.y"
                      {
 		exprAST* identifier = tokenStack.top();
 		tokenStack.pop();
@@ -2273,11 +2224,11 @@ yyreduce:
 		children.push_back(identifier);
 		(yyval.exprPtr) = new primary_expression("primary_expression", 1, children);
 	}
-#line 2277 "grammar.cpp"
+#line 2228 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 74: /* primary_expression: CONSTANT  */
-#line 637 "grammar.y"
+  case 71: /* primary_expression: CONSTANT  */
+#line 617 "grammar.y"
                    {
 		exprAST* constant = tokenStack.top();
 		tokenStack.pop();
@@ -2285,11 +2236,11 @@ yyreduce:
 		children.push_back(constant);
 		(yyval.exprPtr) = new primary_expression("primary_expression", 2, children);
 	}
-#line 2289 "grammar.cpp"
+#line 2240 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 75: /* primary_expression: STRING_LITERAL  */
-#line 644 "grammar.y"
+  case 72: /* primary_expression: STRING_LITERAL  */
+#line 624 "grammar.y"
                          {
 		exprAST* str = tokenStack.top();
 		tokenStack.pop();
@@ -2297,11 +2248,11 @@ yyreduce:
 		children.push_back(str);
 		(yyval.exprPtr) = new primary_expression("primary_expression", 3, children);
 	}
-#line 2301 "grammar.cpp"
+#line 2252 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 76: /* primary_expression: '(' expression ')'  */
-#line 651 "grammar.y"
+  case 73: /* primary_expression: '(' expression ')'  */
+#line 631 "grammar.y"
                              {
 		exprAST* left = new punctuationAST("(");
 		exprAST* right = new punctuationAST(")");
@@ -2311,21 +2262,21 @@ yyreduce:
 		children.push_back(right);
 		(yyval.exprPtr) = new primary_expression("primary_expression", 4, children);
 	}
-#line 2315 "grammar.cpp"
+#line 2266 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 77: /* argument_expression_list: assignment_expression  */
-#line 665 "grammar.y"
+  case 74: /* argument_expression_list: assignment_expression  */
+#line 645 "grammar.y"
                                 { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new argument_expression_list("argument_expression_list", 1, children);
 	}
-#line 2325 "grammar.cpp"
+#line 2276 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 78: /* argument_expression_list: argument_expression_list ',' assignment_expression  */
-#line 670 "grammar.y"
+  case 75: /* argument_expression_list: argument_expression_list ',' assignment_expression  */
+#line 650 "grammar.y"
                                                              {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
@@ -2334,147 +2285,123 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new argument_expression_list("argument_expression_list", 2, children);
 	}
-#line 2338 "grammar.cpp"
+#line 2289 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 79: /* unary_operator: '&'  */
-#line 683 "grammar.y"
+  case 76: /* unary_operator: '&'  */
+#line 663 "grammar.y"
               { (yyval.exprPtr) = new operatorAST("&"); }
-#line 2344 "grammar.cpp"
+#line 2295 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 80: /* unary_operator: '*'  */
-#line 684 "grammar.y"
+  case 77: /* unary_operator: '*'  */
+#line 664 "grammar.y"
               { (yyval.exprPtr) = new operatorAST("*"); }
-#line 2350 "grammar.cpp"
+#line 2301 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 81: /* unary_operator: '+'  */
-#line 685 "grammar.y"
+  case 78: /* unary_operator: '+'  */
+#line 665 "grammar.y"
               { (yyval.exprPtr) = new operatorAST("+"); }
-#line 2356 "grammar.cpp"
+#line 2307 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 82: /* unary_operator: '-'  */
-#line 686 "grammar.y"
+  case 79: /* unary_operator: '-'  */
+#line 666 "grammar.y"
               {	(yyval.exprPtr) = new operatorAST("-"); }
-#line 2362 "grammar.cpp"
+#line 2313 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 83: /* unary_operator: '~'  */
-#line 687 "grammar.y"
+  case 80: /* unary_operator: '~'  */
+#line 667 "grammar.y"
               { (yyval.exprPtr) = new operatorAST("~"); }
-#line 2368 "grammar.cpp"
+#line 2319 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 84: /* unary_operator: '!'  */
-#line 688 "grammar.y"
+  case 81: /* unary_operator: '!'  */
+#line 668 "grammar.y"
               { (yyval.exprPtr) = new operatorAST("!"); }
-#line 2374 "grammar.cpp"
+#line 2325 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 85: /* assignment_operator: '='  */
-#line 694 "grammar.y"
+  case 82: /* assignment_operator: '='  */
+#line 674 "grammar.y"
               { (yyval.exprPtr) = new operatorAST("="); }
-#line 2380 "grammar.cpp"
+#line 2331 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 86: /* assignment_operator: MUL_ASSIGN  */
-#line 695 "grammar.y"
+  case 83: /* assignment_operator: MUL_ASSIGN  */
+#line 675 "grammar.y"
                      { (yyval.exprPtr) = new operatorAST("*="); }
-#line 2386 "grammar.cpp"
+#line 2337 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 87: /* assignment_operator: DIV_ASSIGN  */
-#line 696 "grammar.y"
+  case 84: /* assignment_operator: DIV_ASSIGN  */
+#line 676 "grammar.y"
                      { (yyval.exprPtr) = new operatorAST("/="); }
-#line 2392 "grammar.cpp"
+#line 2343 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 88: /* assignment_operator: MOD_ASSIGN  */
-#line 697 "grammar.y"
+  case 85: /* assignment_operator: MOD_ASSIGN  */
+#line 677 "grammar.y"
                      { (yyval.exprPtr) = new operatorAST("%="); }
-#line 2398 "grammar.cpp"
+#line 2349 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 89: /* assignment_operator: ADD_ASSIGN  */
-#line 698 "grammar.y"
+  case 86: /* assignment_operator: ADD_ASSIGN  */
+#line 678 "grammar.y"
                      { (yyval.exprPtr) = new operatorAST("+="); }
-#line 2404 "grammar.cpp"
+#line 2355 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 90: /* assignment_operator: SUB_ASSIGN  */
-#line 699 "grammar.y"
+  case 87: /* assignment_operator: SUB_ASSIGN  */
+#line 679 "grammar.y"
                      { (yyval.exprPtr) = new operatorAST("-="); }
-#line 2410 "grammar.cpp"
+#line 2361 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 91: /* assignment_operator: LEFT_ASSIGN  */
-#line 700 "grammar.y"
+  case 88: /* assignment_operator: LEFT_ASSIGN  */
+#line 680 "grammar.y"
                       { (yyval.exprPtr) = new operatorAST("<<="); }
-#line 2416 "grammar.cpp"
+#line 2367 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 92: /* assignment_operator: RIGHT_ASSIGN  */
-#line 701 "grammar.y"
+  case 89: /* assignment_operator: RIGHT_ASSIGN  */
+#line 681 "grammar.y"
                        { (yyval.exprPtr) = new operatorAST(">>="); }
-#line 2422 "grammar.cpp"
+#line 2373 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 93: /* assignment_operator: AND_ASSIGN  */
-#line 702 "grammar.y"
+  case 90: /* assignment_operator: AND_ASSIGN  */
+#line 682 "grammar.y"
                      { (yyval.exprPtr) = new operatorAST("&="); }
-#line 2428 "grammar.cpp"
+#line 2379 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 94: /* assignment_operator: XOR_ASSIGN  */
-#line 703 "grammar.y"
+  case 91: /* assignment_operator: XOR_ASSIGN  */
+#line 683 "grammar.y"
                      { (yyval.exprPtr) = new operatorAST("^="); }
-#line 2434 "grammar.cpp"
+#line 2385 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 95: /* assignment_operator: OR_ASSIGN  */
-#line 704 "grammar.y"
+  case 92: /* assignment_operator: OR_ASSIGN  */
+#line 684 "grammar.y"
                     { (yyval.exprPtr) = new operatorAST("|="); }
-#line 2440 "grammar.cpp"
+#line 2391 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 96: /* parameter_type_list: parameter_list  */
-#line 710 "grammar.y"
-                         { 
-		vector<exprAST*> children;
-		children.push_back((yyvsp[0].exprPtr));
-		(yyval.exprPtr) = new parameter_type_list("parameter_type_list", 1, children);
-	}
-#line 2450 "grammar.cpp"
-    break;
-
-  case 97: /* parameter_type_list: parameter_list ',' ELLIPSIS  */
-#line 715 "grammar.y"
-                                      {
-		exprAST* comma = new punctuationAST(",");
-		exprAST* ellipsis = new keywordAST("...");
-		vector<exprAST*> children;
-		children.push_back((yyvsp[-2].exprPtr));
-		children.push_back(comma);
-		children.push_back(ellipsis);
-		(yyval.exprPtr) = new parameter_type_list("parameter_type_list", 2, children);
-	}
-#line 2464 "grammar.cpp"
-    break;
-
-  case 98: /* parameter_list: parameter_declaration  */
-#line 729 "grammar.y"
+  case 93: /* parameter_list: parameter_declaration  */
+#line 692 "grammar.y"
                                 { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new parameter_list("parameter_list", 1, children);
 	}
-#line 2474 "grammar.cpp"
+#line 2401 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 99: /* parameter_list: parameter_list ',' parameter_declaration  */
-#line 734 "grammar.y"
+  case 94: /* parameter_list: parameter_list ',' parameter_declaration  */
+#line 697 "grammar.y"
                                                    {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
@@ -2483,22 +2410,22 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new parameter_list("parameter_list", 2, children);
 	}
-#line 2487 "grammar.cpp"
+#line 2414 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 100: /* parameter_declaration: declaration_specifiers declarator  */
-#line 747 "grammar.y"
-                                           { 
+  case 95: /* parameter_declaration: type_specifier declarator  */
+#line 710 "grammar.y"
+                                   { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new parameter_declaration("parameter_declaration", 1, children);
 	}
-#line 2498 "grammar.cpp"
+#line 2425 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 101: /* compound_statement: '{' '}'  */
-#line 758 "grammar.y"
+  case 96: /* compound_statement: '{' '}'  */
+#line 721 "grammar.y"
                   { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
@@ -2507,11 +2434,11 @@ yyreduce:
 		children.push_back(right);
 		(yyval.exprPtr) = new compound_statement("compound_statement", 1, children);
 	}
-#line 2511 "grammar.cpp"
+#line 2438 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 102: /* compound_statement: '{' statement_list '}'  */
-#line 766 "grammar.y"
+  case 97: /* compound_statement: '{' statement_list '}'  */
+#line 729 "grammar.y"
                                  { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
@@ -2521,11 +2448,11 @@ yyreduce:
 		children.push_back(right);
 		(yyval.exprPtr) = new compound_statement("compound_statement", 2, children);
 	}
-#line 2525 "grammar.cpp"
+#line 2452 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 103: /* compound_statement: '{' declaration_list '}'  */
-#line 775 "grammar.y"
+  case 98: /* compound_statement: '{' declaration_list '}'  */
+#line 738 "grammar.y"
                                    { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
@@ -2535,11 +2462,11 @@ yyreduce:
 		children.push_back(right);
 		(yyval.exprPtr) = new compound_statement("compound_statement", 3, children);
 	}
-#line 2539 "grammar.cpp"
+#line 2466 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 104: /* compound_statement: '{' declaration_list statement_list '}'  */
-#line 784 "grammar.y"
+  case 99: /* compound_statement: '{' declaration_list statement_list '}'  */
+#line 747 "grammar.y"
                                                   { 
 		exprAST* left = new punctuationAST("{");
 		exprAST* right = new punctuationAST("}");
@@ -2550,114 +2477,114 @@ yyreduce:
 		children.push_back(right);
 		(yyval.exprPtr) = new compound_statement("compound_statement", 4, children);
 	}
-#line 2554 "grammar.cpp"
+#line 2481 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 105: /* statement_list: statement  */
-#line 799 "grammar.y"
+  case 100: /* statement_list: statement  */
+#line 762 "grammar.y"
                     { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement_list("statement_list", 1, children);
 	}
-#line 2564 "grammar.cpp"
+#line 2491 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 106: /* statement_list: statement_list statement  */
-#line 804 "grammar.y"
+  case 101: /* statement_list: statement_list statement  */
+#line 767 "grammar.y"
                                    { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement_list("statement_list", 2, children);
 	}
-#line 2575 "grammar.cpp"
+#line 2502 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 107: /* declaration_list: declaration  */
-#line 815 "grammar.y"
+  case 102: /* declaration_list: declaration  */
+#line 778 "grammar.y"
                       {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new declaration_list("declaration_list", 1, children);
 	}
-#line 2585 "grammar.cpp"
+#line 2512 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 108: /* declaration_list: declaration_list declaration  */
-#line 820 "grammar.y"
+  case 103: /* declaration_list: declaration_list declaration  */
+#line 783 "grammar.y"
                                        {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new declaration_list("declaration_list", 2, children);
 	}
-#line 2596 "grammar.cpp"
+#line 2523 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 109: /* statement: compound_statement  */
-#line 831 "grammar.y"
+  case 104: /* statement: compound_statement  */
+#line 794 "grammar.y"
                              { 
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement("statement", 1, children);
 	}
-#line 2606 "grammar.cpp"
+#line 2533 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 110: /* statement: expression_statement  */
-#line 836 "grammar.y"
+  case 105: /* statement: expression_statement  */
+#line 799 "grammar.y"
                                {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement("statement", 2, children);
 	}
-#line 2616 "grammar.cpp"
+#line 2543 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 111: /* statement: selection_statement  */
-#line 841 "grammar.y"
+  case 106: /* statement: selection_statement  */
+#line 804 "grammar.y"
                               {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement("statement", 3, children);
 	}
-#line 2626 "grammar.cpp"
+#line 2553 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 112: /* statement: iteration_statement  */
-#line 846 "grammar.y"
+  case 107: /* statement: iteration_statement  */
+#line 809 "grammar.y"
                               {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement("statement", 4, children);
 	}
-#line 2636 "grammar.cpp"
+#line 2563 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 113: /* statement: jump_statement  */
-#line 851 "grammar.y"
+  case 108: /* statement: jump_statement  */
+#line 814 "grammar.y"
                          {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new statement("statement", 5, children);
 	}
-#line 2646 "grammar.cpp"
+#line 2573 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 114: /* expression_statement: ';'  */
-#line 861 "grammar.y"
+  case 109: /* expression_statement: ';'  */
+#line 824 "grammar.y"
               { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new expression_statement("expression_statement", 1, children);
 	}
-#line 2657 "grammar.cpp"
+#line 2584 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 115: /* expression_statement: expression ';'  */
-#line 867 "grammar.y"
+  case 110: /* expression_statement: expression ';'  */
+#line 830 "grammar.y"
                          { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
@@ -2665,11 +2592,11 @@ yyreduce:
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new expression_statement("expression_statement", 2, children);
 	}
-#line 2669 "grammar.cpp"
+#line 2596 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 116: /* selection_statement: IF '(' expression ')' statement  */
-#line 879 "grammar.y"
+  case 111: /* selection_statement: IF '(' expression ')' statement  */
+#line 842 "grammar.y"
                                           { 
 		exprAST* oneIF = new keywordAST("if");
 		exprAST* left = new punctuationAST("(");
@@ -2682,11 +2609,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new selection_statement("selection_statement", 1, children);
 	}
-#line 2686 "grammar.cpp"
+#line 2613 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 117: /* selection_statement: IF '(' expression ')' statement ELSE statement  */
-#line 891 "grammar.y"
+  case 112: /* selection_statement: IF '(' expression ')' statement ELSE statement  */
+#line 854 "grammar.y"
                                                          { 
 		exprAST* oneIF = new keywordAST("if");
 		exprAST* left = new punctuationAST("(");
@@ -2702,11 +2629,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new selection_statement("selection_statement", 2, children);
 	}
-#line 2706 "grammar.cpp"
+#line 2633 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 118: /* iteration_statement: WHILE '(' expression ')' statement  */
-#line 911 "grammar.y"
+  case 113: /* iteration_statement: WHILE '(' expression ')' statement  */
+#line 874 "grammar.y"
                                              { 
 		exprAST* oneWHILE = new keywordAST("while");
 		exprAST* left = new punctuationAST("(");
@@ -2719,32 +2646,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new iteration_statement("iteration_statement", 1, children);
 	}
-#line 2723 "grammar.cpp"
+#line 2650 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 119: /* iteration_statement: DO statement WHILE '(' expression ')' ';'  */
-#line 923 "grammar.y"
-                                                    { 
-		exprAST* oneDO = new keywordAST("do");
-		exprAST* oneWHILE = new keywordAST("while");
-		exprAST* left = new punctuationAST("(");
-		exprAST* right = new punctuationAST(")");
-		exprAST* semiColon = new punctuationAST(";");
-		vector<exprAST*> children;
-		children.push_back(oneDO);
-		children.push_back((yyvsp[-5].exprPtr));
-		children.push_back(oneWHILE);
-		children.push_back(left);
-		children.push_back((yyvsp[-2].exprPtr));
-		children.push_back(right);
-		children.push_back(semiColon);
-		(yyval.exprPtr) = new iteration_statement("iteration_statement", 2, children);
-	}
-#line 2744 "grammar.cpp"
-    break;
-
-  case 120: /* iteration_statement: FOR '(' expression_statement expression_statement ')' statement  */
-#line 939 "grammar.y"
+  case 114: /* iteration_statement: FOR '(' expression_statement expression_statement ')' statement  */
+#line 886 "grammar.y"
                                                                           { 
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
@@ -2758,11 +2664,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new iteration_statement("iteration_statement", 3, children);
 	}
-#line 2762 "grammar.cpp"
+#line 2668 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 121: /* iteration_statement: FOR '(' expression_statement expression_statement expression ')' statement  */
-#line 952 "grammar.y"
+  case 115: /* iteration_statement: FOR '(' expression_statement expression_statement expression ')' statement  */
+#line 899 "grammar.y"
                                                                                      { 
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
@@ -2777,11 +2683,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new iteration_statement("iteration_statement", 4, children);
 	}
-#line 2781 "grammar.cpp"
+#line 2687 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 122: /* iteration_statement: FOR '(' declaration expression_statement expression ')' statement  */
-#line 966 "grammar.y"
+  case 116: /* iteration_statement: FOR '(' declaration expression_statement expression ')' statement  */
+#line 913 "grammar.y"
                                                                             {
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
@@ -2796,11 +2702,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new iteration_statement("iteration_statement", 5, children);
 	}
-#line 2800 "grammar.cpp"
+#line 2706 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 123: /* jump_statement: CONTINUE ';'  */
-#line 985 "grammar.y"
+  case 117: /* jump_statement: CONTINUE ';'  */
+#line 932 "grammar.y"
                        { 
 		exprAST* oneCONTINUE = new keywordAST("continue");
 		exprAST* semiColon = new punctuationAST(";");
@@ -2809,11 +2715,11 @@ yyreduce:
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new jump_statement("jump_statement", 1, children);
 	}
-#line 2813 "grammar.cpp"
+#line 2719 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 124: /* jump_statement: BREAK ';'  */
-#line 993 "grammar.y"
+  case 118: /* jump_statement: BREAK ';'  */
+#line 940 "grammar.y"
                     { 
 		exprAST* oneBREAK = new keywordAST("break");
 		exprAST* semiColon = new punctuationAST(";");
@@ -2822,11 +2728,11 @@ yyreduce:
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new jump_statement("jump_statement", 2, children);
 	}
-#line 2826 "grammar.cpp"
+#line 2732 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 125: /* jump_statement: RETURN ';'  */
-#line 1001 "grammar.y"
+  case 119: /* jump_statement: RETURN ';'  */
+#line 948 "grammar.y"
                      { 
 		exprAST* oneRETURN = new keywordAST("return");
 		exprAST* semiColon = new punctuationAST(";");
@@ -2835,11 +2741,11 @@ yyreduce:
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new jump_statement("jump_statement", 3, children);
 	}
-#line 2839 "grammar.cpp"
+#line 2745 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 126: /* jump_statement: RETURN expression ';'  */
-#line 1009 "grammar.y"
+  case 120: /* jump_statement: RETURN expression ';'  */
+#line 956 "grammar.y"
                                 { 
 		exprAST* oneRETURN = new keywordAST("return");
 		exprAST* semiColon = new punctuationAST(";");
@@ -2849,12 +2755,12 @@ yyreduce:
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new jump_statement("jump_statement", 4, children);
 	}
-#line 2853 "grammar.cpp"
+#line 2759 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 127: /* declaration: declaration_specifiers init_declarator_list ';'  */
-#line 1023 "grammar.y"
-                                                      { 
+  case 121: /* declaration: type_specifier init_declarator_list ';'  */
+#line 970 "grammar.y"
+                                              { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back((yyvsp[-2].exprPtr));
@@ -2862,21 +2768,21 @@ yyreduce:
 		children.push_back(semiColon);
 		(yyval.exprPtr) = new declaration("declaration", 1, children);
 	}
-#line 2866 "grammar.cpp"
+#line 2772 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 128: /* init_declarator_list: init_declarator  */
-#line 1036 "grammar.y"
+  case 122: /* init_declarator_list: init_declarator  */
+#line 983 "grammar.y"
                           {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new init_declarator_list("init_declarator_list", 1, children);
 	}
-#line 2876 "grammar.cpp"
+#line 2782 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 129: /* init_declarator_list: init_declarator_list ',' init_declarator  */
-#line 1041 "grammar.y"
+  case 123: /* init_declarator_list: init_declarator_list ',' init_declarator  */
+#line 988 "grammar.y"
                                                   {
 		exprAST* comma = new punctuationAST(",");
 		vector<exprAST*> children;
@@ -2885,21 +2791,21 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new init_declarator_list("init_declarator_list", 2, children);
 	}
-#line 2889 "grammar.cpp"
+#line 2795 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 130: /* init_declarator: declarator  */
-#line 1053 "grammar.y"
+  case 124: /* init_declarator: declarator  */
+#line 1000 "grammar.y"
                      {
 		vector<exprAST*> children;
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new init_declarator("init_declarator", 1, children);
 	}
-#line 2899 "grammar.cpp"
+#line 2805 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
-  case 131: /* init_declarator: declarator '=' assignment_expression  */
-#line 1058 "grammar.y"
+  case 125: /* init_declarator: declarator '=' assignment_expression  */
+#line 1005 "grammar.y"
                                                {
 		exprAST* eqOp = new operatorAST("=");
 		vector<exprAST*> children;
@@ -2908,11 +2814,11 @@ yyreduce:
 		children.push_back((yyvsp[0].exprPtr));
 		(yyval.exprPtr) = new init_declarator("init_declarator", 2, children);
 	}
-#line 2912 "grammar.cpp"
+#line 2818 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
 
 
-#line 2916 "grammar.cpp"
+#line 2822 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
 
       default: break;
     }
@@ -3106,7 +3012,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 1068 "grammar.y"
+#line 1015 "grammar.y"
 
 
 
