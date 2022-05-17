@@ -18,6 +18,7 @@
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/GlobalVariable.h>
 #include "llvm/ADT/ArrayRef.h"
+#include "llvm/IR/Type.h"
 #include "llvm/IR/Verifier.h"
 
 // #define TYPENONE 0
@@ -209,19 +210,6 @@ class constant_expression : public nonleafAST {public: using nonleafAST::nonleaf
 
 class declaration : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class init_declarator : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
-
-class init_declarator_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
-
-class declaration_specifiers : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
-
-class type_specifier : public nonleafAST {
-public:
-  using nonleafAST::nonleafAST;
-  llvm::Type* type_spec;
-  llvm::Value *CodeGen();
-};
-
 class declarator : public nonleafAST {
   public:
   using nonleafAST::nonleafAST;
@@ -229,17 +217,72 @@ class declarator : public nonleafAST {
   string name;
   vector<string> para_name;
   llvm::ArrayRef<Type *> para_type;
+  vector<ConstantInt*> array_size;
+  bool is_array() { return array_size.size() > 0; }
+  void clear() {
+    name = "";
+    para_name.clear();
+    para_type = ArrayRef<Type *>();
+    array_size.clear();
+  }
 };
+
+
+class init_declarator : public nonleafAST {
+  public:
+  using nonleafAST::nonleafAST;
+  llvm::Value *CodeGen();
+  declarator* decl;
+  Value* value;
+  void clear() {
+    decl = nullptr;
+    value = nullptr;
+  }
+};
+
+class init_declarator_list : public nonleafAST {
+  public:
+  using nonleafAST::nonleafAST;
+  llvm::Value *CodeGen();
+  vector<init_declarator*> list;
+  void clear() {
+    list.clear();
+  }
+};
+
+class declaration_specifiers : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
+
+// class type_specifier : public nonleafAST {
+// public:
+//   using nonleafAST::nonleafAST;
+//   llvm::Type* type_spec;
+//   llvm::Value *CodeGen();
+// };
+
 
 class parameter_list : public nonleafAST {
 public:
   using nonleafAST::nonleafAST;
   llvm::Value *CodeGen();
   vector<string> para_name;
-  llvm::ArrayRef<Type *> para_type;
+  vector<Type *> para_type;
+  void clear() {
+    para_type.clear();
+    para_name.clear();
+  }
 };
 
-class parameter_declaration : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
+class parameter_declaration : public nonleafAST {
+  public:
+  using nonleafAST::nonleafAST;
+  llvm::Value *CodeGen();
+  Type* type_spec;
+  string name;
+  void clear() {
+    name = "";
+    type_spec = nullptr;
+  }
+};
 
 class type_name : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 

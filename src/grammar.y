@@ -69,9 +69,12 @@ external_declaration
 		children.push_back($1);
 		$$ = new external_declaration("external_declaration", 1, children);
 	}
-    | declaration {
+    | type_specifiers init_declarator_list ';' { 
+		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back($1);
+		children.push_back($2);
+		children.push_back(semiColon);
 		$$ = new external_declaration("external_declaration", 2, children);
 	}
     ;
@@ -880,22 +883,6 @@ iteration_statement
 		children.push_back($5);
 		$$ = new iteration_statement("iteration_statement", 1, children);
 	}
-	| DO statement WHILE '(' expression ')' ';' { 
-		exprAST* oneDO = new keywordAST("do");
-		exprAST* oneWHILE = new keywordAST("while");
-		exprAST* left = new punctuationAST("(");
-		exprAST* right = new punctuationAST(")");
-		exprAST* semiColon = new punctuationAST(";");
-		vector<exprAST*> children;
-		children.push_back(oneDO);
-		children.push_back($2);
-		children.push_back(oneWHILE);
-		children.push_back(left);
-		children.push_back($5);
-		children.push_back(right);
-		children.push_back(semiColon);
-		$$ = new iteration_statement("iteration_statement", 2, children);
-	}
 	| FOR '(' expression_statement expression_statement ')' statement { 
 		exprAST* oneFOR = new keywordAST("for");
 		exprAST* left = new punctuationAST("(");
@@ -980,7 +967,7 @@ jump_statement
 
 //变量声明
 declaration
-    : declaration_specifiers init_declarator_list ';' { 
+    : type_specifiers init_declarator_list ';' { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back($1);

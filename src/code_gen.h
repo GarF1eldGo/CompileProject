@@ -67,5 +67,7 @@ llvm::Instruction::CastOps getCastInst(llvm::Type* src, llvm::Type* dst);
 
 llvm::Value* typeCast(llvm::Value* src, llvm::Type* dst);
 
+llvm::Type *build_array(Type *array_type, vector<ConstantInt *> array_size);
+
 
 #endif

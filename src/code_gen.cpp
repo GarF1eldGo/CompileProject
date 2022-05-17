@@ -1,7 +1,10 @@
 #include "code_gen.h"
 #include "ast.h"
 #include "llvm/IR/BasicBlock.h"
+#include "llvm/IR/Constants.h"
 #include "llvm/IR/DerivedTypes.h"
+#include "llvm/IR/GlobalVariable.h"
+#include "llvm/IR/Instructions.h"
 #include "llvm/IR/Type.h"
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Verifier.h"
@@ -45,7 +48,24 @@
 // }
 
 
-
+Type* get_type(int type) {
+  switch (type) {
+  case 1:
+    return llvm::Type::getVoidTy(context);
+  case 2:
+    return llvm::Type::getInt8Ty(context);
+  case 3:
+    return llvm::Type::getInt16Ty(context);
+  case 4:
+    return llvm::Type::getInt32Ty(context);
+  case 5:
+    return llvm::Type::getInt64Ty(context);
+  case 6:
+    return llvm::Type::getFloatTy(context);
+  case 7:
+    return llvm::Type::getDoubleTy(context);
+  }
+}
 
 
 llvm::Function* createPrintf()
@@ -115,7 +135,8 @@ llvm::Value* primary_expression::CodeGen(){
     //     return IRError("postfix_expression error in leaf node: primary_expression");
     // }
     if((dynamic_cast<constantAST*>(this->children[0]))->type == 1){
-      return builder.getInt32((int)((dynamic_cast<constantAST*>(this->children[0]))->value));
+      // return builder.getInt32((int)((dynamic_cast<constantAST*>(this->children[0]))->value));
+      return llvm::ConstantInt::get(builder.getInt32Ty(), (int)(dynamic_cast<constantAST*>(this->children[0])->value));
     }
     else{
       return llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)((dynamic_cast<constantAST*>(this->children[0]))->value)));
@@ -1143,36 +1164,84 @@ llvm::Value* assignment_operator::CodeGen(){
   return nullptr;
 }
 
-llvm::Value* type_specifier::CodeGen() {
+// llvm::Value* type_specifier::CodeGen() {
+//   switch (this->type) {
+//   case 1:
+//     this->type_spec = llvm::Type::getVoidTy(context);
+//   case 2:
+//     this->type_spec = llvm::Type::getInt8Ty(context);
+//   case 3:
+//     this->type_spec = llvm::Type::getInt16Ty(context);
+//   case 4:
+//     this->type_spec = llvm::Type::getInt32Ty(context);
+//   case 5:
+//     this->type_spec = llvm::Type::getInt64Ty(context);
+//   case 6:
+//     this->type_spec = llvm::Type::getFloatTy(context);
+//   case 7:
+//     this->type_spec = llvm::Type::getDoubleTy(context);
+//   }
+//   return nullptr;
+// }
+
+Value* expression::CodeGen() {
   switch (this->type) {
-  case 1:
-    this->type_spec = llvm::Type::getVoidTy(context);
-  case 2:
-    this->type_spec = llvm::Type::getInt8Ty(context);
-  case 3:
-    this->type_spec = llvm::Type::getInt16Ty(context);
-  case 4:
-    this->type_spec = llvm::Type::getInt32Ty(context);
-  case 5:
-    this->type_spec = llvm::Type::getInt64Ty(context);
-  case 6:
-    this->type_spec = llvm::Type::getFloatTy(context);
-  case 7:
-    this->type_spec = llvm::Type::getDoubleTy(context);
+  case 1:{
+    return this->children[0]->CodeGen();
+  }
+  case 2:{
+    this->children[0]->CodeGen();
+    return this->children[2]->CodeGen();
+  }
   }
   return nullptr;
 }
 
+
+//done
 llvm::Value* parameter_declaration::CodeGen() {
-  this->children[0]->CodeGen();
+  this->clear();
+  Type* type_spec = get_type(dynamic_cast<typeAST*>(this->children[0])->type);
   this->children[1]->CodeGen();
-  llvm::Type* type_spec = dynamic_cast<type_specifier*>(this->children[0])->type_spec;
+  if (dynamic_cast<declarator*>(this->children[1])->is_array()) {
+    type_spec = build_array(type_spec, dynamic_cast<declarator*>(this->children[1])->array_size);
+  }
+  this->name = dynamic_cast<declarator*>(this->children[1])->name;
+  this->type_spec = type_spec;
+  return nullptr;
 }
 
+
+//done
+llvm::Value* parameter_list::CodeGen() {
+  this->clear();
+  switch (this->type) {
+  case 1: {
+    this->children[0]->CodeGen();
+    parameter_declaration* decl = dynamic_cast<parameter_declaration*>(this->children[0]);
+    this->para_name.push_back(decl->name);
+    this->para_type.push_back(decl->type_spec);
+    break;
+  }
+  case 2: {
+    this->children[0]->CodeGen();
+    parameter_list* decl_list = dynamic_cast<parameter_list*>(this->children[0]);
+    this->children[2]->CodeGen();
+    parameter_declaration* decl = dynamic_cast<parameter_declaration*>(this->children[2]);
+    this->para_name = decl_list->para_name;
+    this->para_type = decl_list->para_type;
+    this->para_name.push_back(decl->name);
+    this->para_type.push_back(decl->type_spec);
+    break;
+  }
+  }
+  return nullptr;
+}
+
+//done 
 llvm::Value* function_definition::CodeGen() {
-  type_specifier* type = dynamic_cast<type_specifier*>(this->children[0]);
-  type->CodeGen();
-  llvm::Type*  return_type = type->type_spec;
+  Type* type_spec = get_type(dynamic_cast<typeAST*>(this->children[0])->type);
+  llvm::Type*  return_type = type_spec;
   declarator *prototype = dynamic_cast<declarator*>(this->children[1]);
   prototype->CodeGen();
   FunctionType * func_type = FunctionType::get(return_type, prototype->para_type, false);
@@ -1190,6 +1259,8 @@ llvm::Value* function_definition::CodeGen() {
   return func;
 }
 
+
+//done
 llvm::Value* declarator::CodeGen() {
   switch (this->type) {
   case 1: {
@@ -1202,8 +1273,19 @@ llvm::Value* declarator::CodeGen() {
   }
   case 3: {
     //int a[][3]
+    this->children[0]->CodeGen();
+    this->name = dynamic_cast<identifierAST*>(this->children[0])->identifier;
+    this->array_size = dynamic_cast<declarator*>(this->children[0])->array_size;
+    this->array_size.push_back(cast<ConstantInt>(this->children[2]->CodeGen()));
+    break;
   }
   case 4: {
+    // int a[]
+    this->children[0]->CodeGen();
+    this->name = dynamic_cast<identifierAST*>(this->children[0])->identifier;
+    this->array_size = dynamic_cast<declarator*>(this->children[0])->array_size;
+    this->array_size.push_back(0);
+    break;
   }
   case 5: {
     this->children[0]->CodeGen();
@@ -1223,6 +1305,247 @@ llvm::Value* declarator::CodeGen() {
   }
   }
   return nullptr;
+}
+
+llvm::Value* init_declarator::CodeGen() {
+  this->clear();
+  this->children[0]->CodeGen();
+  declarator* decl = dynamic_cast<declarator*>(this->children[0]);
+switch (this->type) {
+ case 1:{
+   this->decl = decl;
+   this->value = nullptr;
+   break;
+ }
+ case 2:{
+   this->decl = decl;
+   this->value = this->children[2]->CodeGen();
+   break;
+ }
+ }
+ return nullptr;
+}
+
+llvm::Value* init_declarator_list::CodeGen() {
+  this->clear();
+  switch (this->type) {
+  case 1: {
+    this->children[0]->CodeGen();
+    this->list.push_back(dynamic_cast<init_declarator*>(this->children[0]));
+    break;
+  }
+  case 2:{
+    this->children[0]->CodeGen();
+    this->children[2]->CodeGen();
+    this->list = dynamic_cast<init_declarator_list*>(this->children[0])->list;
+    this->list.push_back(dynamic_cast<init_declarator*>(this->children[2]));
+    break;
+  }
+  }
+  return nullptr;
+}
+
+//done
+llvm::Value* declaration::CodeGen() {
+  this->children[0]->CodeGen();
+  this->children[1]->CodeGen();
+  Type* type_spec = get_type(dynamic_cast<typeAST*>(this->children[0])->type);
+  vector<init_declarator*> decl_list = dynamic_cast<init_declarator_list*>(this->children[1])->list;
+  for (int i = 0; i < decl_list.size(); ++i) {
+    Type* type_spec_local = type_spec;
+    int is_array = decl_list[i]->decl->is_array();
+    if (is_array) {
+      type_spec_local = build_array(type_spec, decl_list[i]->decl->array_size);
+    }
+    AllocaInst *alloc = builder.CreateAlloca(type_spec_local, nullptr, decl_list[i]->decl->name);
+    if (!is_array) {
+      builder.CreateStore(decl_list[i]->value, alloc);
+    }
+  }
+}
+
+//done
+llvm::Value* declaration_list::CodeGen() {
+  switch (this->type) {
+  case 1: {
+    this->children[0]->CodeGen();
+    break;
+  }
+  case 2: {
+    this->children[0]->CodeGen();
+    this->children[1]->CodeGen();
+    break;
+  }
+  }
+  return nullptr;
+}
+
+
+//done
+llvm::Value *statement::CodeGen() { this->children[0]->CodeGen(); }
+
+llvm::Value *expression_statement::CodeGen() {
+  switch (this->type) {
+  case 1:{
+    break;
+  }
+  case 2:{
+    this->children[0]->CodeGen();
+    break;
+  }
+  }
+  return nullptr;
+}
+
+llvm::Value *selection_statement::CodeGen() {
+  switch (this->type) {
+  case 1: {
+    Function *func = builder.GetInsertBlock()->getParent();
+    BasicBlock *ThenBB = BasicBlock::Create(context, "then", func);
+    BasicBlock *MergeBB = BasicBlock::Create(context, "merge", func);
+    Value* cond = this->children[2]->CodeGen();
+    builder.CreateCondBr(cond, ThenBB, nullptr);
+    builder.SetInsertPoint(ThenBB);
+    this->children[4]->CodeGen();
+    builder.CreateBr(MergeBB);
+    break;
+  }
+  case 2: {
+    Function *func = builder.GetInsertBlock()->getParent();
+    BasicBlock *ThenBB = BasicBlock::Create(context, "then", func);
+    BasicBlock *ElseBB = BasicBlock::Create(context, "else", func);
+    BasicBlock *MergeBB = BasicBlock::Create(context, "merge", func);
+    Value* cond = this->children[2]->CodeGen();
+    builder.CreateCondBr(cond, ThenBB, ElseBB);
+    builder.SetInsertPoint(ThenBB);
+    this->children[4]->CodeGen();
+    builder.CreateBr(MergeBB);
+    builder.SetInsertPoint(ElseBB);
+    this->children[6]->CodeGen();
+    builder.CreateBr(MergeBB);
+    break;
+  }
+  }
+  return nullptr;
+}
+
+llvm::Value* iteration_statement::CodeGen() {
+  switch (this->type) {
+  case 1:{
+    //     BasicBlock *ThenBB = BasicBlock::Create(context, "then", func);
+    Function* func = builder.GetInsertBlock()->getParent();
+    BasicBlock *loop = BasicBlock::Create(context, "whileloop", func);
+    BasicBlock *cont = BasicBlock::Create(context, "whilecont", func);
+    Value* cond_value = this->children[2]->CodeGen();
+    builder.CreateCondBr(cond_value, loop, cont);
+    builder.SetInsertPoint(loop);
+    this->children[4]->CodeGen();
+    builder.CreateCondBr(cond_value, loop, cont);
+    builder.SetInsertPoint(cont);
+    break;
+  }
+  case 2: {
+    // for loop
+  }
+  case 3: {
+  }
+  case 4: {
+    Function* func = builder.GetInsertBlock()->getParent();
+    expression_statement* init = dynamic_cast<expression_statement*>(this->children[2]);
+    expression_statement* cond = dynamic_cast<expression_statement*>(this->children[3]);
+    expression* incr = this->type == 2 ? nullptr : dynamic_cast<expression*>(this->children[5]);
+    statement* body = dynamic_cast<statement*>(this->type == 2 ? this->children[5] : this->children[6]);
+    init->CodeGen();
+    BasicBlock *loop = BasicBlock::Create(context, "forloop", func);
+    BasicBlock *cont = BasicBlock::Create(context, "forcont", func);
+    Value* cond_value = cond->CodeGen();
+    builder.CreateCondBr(cond_value, loop, cont);
+    builder.SetInsertPoint(loop);
+    body->CodeGen();
+    if (incr) {
+      incr->CodeGen();
+    }
+    cond_value = cond->CodeGen();
+    builder.CreateCondBr(cond_value, loop, cont);
+    builder.SetInsertPoint(cont);
+    break;
+  }
+    
+  }
+}
+
+llvm::Value* jump_statement::CodeGen() {
+  switch (this->type) {
+  case 0: {
+  }
+  case 1: {
+  }
+  case 3: {
+    builder.CreateRetVoid();
+    break;
+  }
+  case 4: {
+    Value* return_value = this->children[1]->CodeGen();
+    builder.CreateRet(return_value);
+    break;
+  }
+  }
+  return nullptr;
+}
+
+llvm::Value *translation_unit::CodeGen() {
+switch (this->type) {
+ case 1:{
+   this->children[0]->CodeGen();
+   break;
+ }
+ case 2:{
+   this->children[0]->CodeGen();
+   this->children[1]->CodeGen();
+   break;
+ }
+ }
+ return nullptr;
+}
+
+llvm::Value* external_declaration::CodeGen() {
+  switch (this->type) {
+  case 1:{
+    this->children[0]->CodeGen();
+    break;
+  }
+  case 2:{
+    this->children[0]->CodeGen();
+    this->children[1]->CodeGen();
+    vector<init_declarator*> list = dynamic_cast<init_declarator_list*>(this->children[1])->list;
+    Type* type_spec = get_type(dynamic_cast<typeAST*>(this->children[0])->type);
+    for (int i = 0; i < list.size(); ++i) {
+      Type *type_local = type_spec;
+      if (list[i]->decl->is_array()) {
+        type_local = build_array(type_spec, list[i]->decl->array_size);
+      }
+      module.getOrInsertGlobal(list[i]->decl->name, type_local);
+      if (!list[i]->decl->is_array()) {
+        GlobalVariable *gVar = module.getNamedGlobal(list[i]->decl->name);
+        gVar->setInitializer(cast<Constant>(list[i]->value));
+      }
+    }
+    
+  }
+  }
+}
+
+llvm::Type* build_array(Type *array_type, vector<ConstantInt*> array_size) {
+  if (array_size.size() > 1) {
+    ArrayType* array = ArrayType::get(array_type, array_size.back()->getZExtValue());
+    for (int i = (int)array_size.size() - 2; i >= 1; --i) {
+      array = ArrayType::get(array, array_size[i]->getZExtValue());
+    }
+    array = ArrayType::get(array, 0);
+    return array;
+  } else {
+    return ArrayType::get(array_type, 0);
+  }
 }
 // codeGen::codeGen( args ) {
 

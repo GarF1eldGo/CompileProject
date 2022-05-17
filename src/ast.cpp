@@ -106,8 +106,8 @@ identifierAST::identifierAST(string identifier)
 
 typeAST::typeAST(int type)
 {
-    this->type = type;
-    this->name = "type";
+  this->type = type;
+  this->name = "type";
 }
 
 
