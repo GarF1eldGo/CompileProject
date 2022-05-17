@@ -184,22 +184,27 @@ llvm::Value* postfix_expression::CodeGen(){
     }
     else{
       //id [][]...[]
-      if(ary->getType() == llvm::Type::getInt32PtrTy(context)||ary->getType() == llvm::Type::getInt8PtrTy(context)||ary->getType() == llvm::Type::getInt1PtrTy(context)||ary->getType() == llvm::Type::getFloatPtrTy(context)){
-        vector<llvm::Value*> indexList;
-        indexList.push_back(builder.getInt32(0));
-        indexList.push_back(index);
-        llvm::Value * varPtr = builder.CreateInBoundsGEP(ary, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
-        return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
-      }
-      //id []
-      else{
-        llvm::Value* ary_real = findValue((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
-        vector<llvm::Value*> indexList;
-        indexList.push_back(builder.getInt32(0));
-        indexList.push_back(index);
-        llvm::Value * varPtr = builder.CreateInBoundsGEP(ary_real, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
-        return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
-      }
+      // if(ary->getType() == llvm::Type::getInt32PtrTy(context)||ary->getType() == llvm::Type::getInt8PtrTy(context)||ary->getType() == llvm::Type::getInt1PtrTy(context)||ary->getType() == llvm::Type::getFloatPtrTy(context)){
+      //   vector<llvm::Value*> indexList;
+      //   indexList.push_back(builder.getInt32(0));
+      //   indexList.push_back(index);
+      //   llvm::Value * varPtr = builder.CreateInBoundsGEP(ary, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+      //   return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
+      // }
+      // //id []
+      // else{
+      //   llvm::Value* ary_real = findValue((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+      //   vector<llvm::Value*> indexList;
+      //   indexList.push_back(builder.getInt32(0));
+      //   indexList.push_back(index);
+      //   llvm::Value * varPtr = builder.CreateInBoundsGEP(ary_real, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+      //   return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
+      // }
+      vector<llvm::Value*> indexList;
+      indexList.push_back(builder.getInt32(0));
+      indexList.push_back(index);
+      llvm::Value * varPtr = builder.CreateInBoundsGEP(ary, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+      return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
     }
   }
   case 3: {
@@ -246,7 +251,7 @@ llvm::Value* postfix_expression::CodeGen(){
     if(tmp == nullptr){
       return IRError("postfix_expression error in leaf node: postfix_expression");
     }
-    else if(tmp->getType() == llvm::Type::getInt1Ty(context)){
+    else if(tmp->getType() == llvm::Type::getInt32Ty(context)){
       return builder.CreateAdd(tmp, builder.getInt32(1), "tmpAdd");
     }
     else if(tmp->getType() == llvm::Type::getFloatTy(context)){
@@ -261,7 +266,7 @@ llvm::Value* postfix_expression::CodeGen(){
     if(tmp == nullptr){
       return IRError("postfix_expression error in leaf node: postfix_expression");
     }
-    else if(tmp->getType() == llvm::Type::getInt1Ty(context)){
+    else if(tmp->getType() == llvm::Type::getInt32Ty(context)){
       return builder.CreateSub(tmp, builder.getInt32(1), "tmpSub");
     }
     else if(tmp->getType() == llvm::Type::getFloatTy(context)){
