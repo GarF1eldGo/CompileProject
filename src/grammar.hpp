@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_GRAMMAR_HPP_INCLUDED
-# define YY_YY_GRAMMAR_HPP_INCLUDED
+#ifndef YY_YY_HOME_LUMINA_DOCUMENTS_COMPILEPROJECT_SRC_GRAMMAR_HPP_INCLUDED
+# define YY_YY_HOME_LUMINA_DOCUMENTS_COMPILEPROJECT_SRC_GRAMMAR_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -106,7 +106,7 @@ union YYSTYPE
 
 	class exprAST* exprPtr;
 
-#line 110 "grammar.hpp"
+#line 110 "/home/lumina/Documents/CompileProject/src/grammar.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -119,4 +119,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_GRAMMAR_HPP_INCLUDED  */
+#endif /* !YY_YY_HOME_LUMINA_DOCUMENTS_COMPILEPROJECT_SRC_GRAMMAR_HPP_INCLUDED  */

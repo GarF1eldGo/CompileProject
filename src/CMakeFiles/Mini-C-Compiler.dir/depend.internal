@@ -87,6 +87,7 @@ src/CMakeFiles/Mini-C-Compiler.dir/ast.cpp.o
  /usr/include/llvm-13/llvm/IR/GlobalVariable.h
  /usr/include/llvm-13/llvm/IR/IRBuilder.h
  /usr/include/llvm-13/llvm/IR/IRBuilderFolder.h
+ /usr/include/llvm-13/llvm/IR/IRPrintingPasses.h
  /usr/include/llvm-13/llvm/IR/InstrTypes.h
  /usr/include/llvm-13/llvm/IR/Instruction.def
  /usr/include/llvm-13/llvm/IR/Instruction.h
@@ -95,6 +96,7 @@ src/CMakeFiles/Mini-C-Compiler.dir/ast.cpp.o
  /usr/include/llvm-13/llvm/IR/IntrinsicInst.h
  /usr/include/llvm-13/llvm/IR/Intrinsics.h
  /usr/include/llvm-13/llvm/IR/LLVMContext.h
+ /usr/include/llvm-13/llvm/IR/LegacyPassManager.h
  /usr/include/llvm-13/llvm/IR/Metadata.def
  /usr/include/llvm-13/llvm/IR/Metadata.h
  /usr/include/llvm-13/llvm/IR/Module.h
@@ -154,6 +156,195 @@ src/CMakeFiles/Mini-C-Compiler.dir/ast.cpp.o
  /usr/include/llvm-13/llvm/Support/raw_ostream.h
  /usr/include/llvm-13/llvm/Support/type_traits.h
  /usr/include/llvm-c-13/llvm-c/DataTypes.h
+ /usr/include/llvm-c-13/llvm-c/Error.h
+ /usr/include/llvm-c-13/llvm-c/ExternC.h
+ /usr/include/llvm-c-13/llvm-c/Types.h
+src/CMakeFiles/Mini-C-Compiler.dir/code_gen.cpp.o
+ /home/lumina/Documents/CompileProject/src/ast.h
+ /home/lumina/Documents/CompileProject/src/code_gen.cpp
+ /home/lumina/Documents/CompileProject/src/code_gen.h
+ /usr/include/jsoncpp/json/allocator.h
+ /usr/include/jsoncpp/json/config.h
+ /usr/include/jsoncpp/json/forwards.h
+ /usr/include/jsoncpp/json/json.h
+ /usr/include/jsoncpp/json/json_features.h
+ /usr/include/jsoncpp/json/reader.h
+ /usr/include/jsoncpp/json/value.h
+ /usr/include/jsoncpp/json/version.h
+ /usr/include/jsoncpp/json/writer.h
+ /usr/include/llvm-13/llvm/ADT/APFloat.h
+ /usr/include/llvm-13/llvm/ADT/APInt.h
+ /usr/include/llvm-13/llvm/ADT/APSInt.h
+ /usr/include/llvm-13/llvm/ADT/Any.h
+ /usr/include/llvm-13/llvm/ADT/ArrayRef.h
+ /usr/include/llvm-13/llvm/ADT/BitVector.h
+ /usr/include/llvm-13/llvm/ADT/Bitfields.h
+ /usr/include/llvm-13/llvm/ADT/BitmaskEnum.h
+ /usr/include/llvm-13/llvm/ADT/DenseMap.h
+ /usr/include/llvm-13/llvm/ADT/DenseMapInfo.h
+ /usr/include/llvm-13/llvm/ADT/DenseSet.h
+ /usr/include/llvm-13/llvm/ADT/EpochTracker.h
+ /usr/include/llvm-13/llvm/ADT/FloatingPointMode.h
+ /usr/include/llvm-13/llvm/ADT/FunctionExtras.h
+ /usr/include/llvm-13/llvm/ADT/GraphTraits.h
+ /usr/include/llvm-13/llvm/ADT/Hashing.h
+ /usr/include/llvm-13/llvm/ADT/MapVector.h
+ /usr/include/llvm-13/llvm/ADT/None.h
+ /usr/include/llvm-13/llvm/ADT/Optional.h
+ /usr/include/llvm-13/llvm/ADT/PointerIntPair.h
+ /usr/include/llvm-13/llvm/ADT/PointerUnion.h
+ /usr/include/llvm-13/llvm/ADT/STLExtras.h
+ /usr/include/llvm-13/llvm/ADT/STLForwardCompat.h
+ /usr/include/llvm-13/llvm/ADT/SmallPtrSet.h
+ /usr/include/llvm-13/llvm/ADT/SmallString.h
+ /usr/include/llvm-13/llvm/ADT/SmallVector.h
+ /usr/include/llvm-13/llvm/ADT/StringExtras.h
+ /usr/include/llvm-13/llvm/ADT/StringMap.h
+ /usr/include/llvm-13/llvm/ADT/StringMapEntry.h
+ /usr/include/llvm-13/llvm/ADT/StringRef.h
+ /usr/include/llvm-13/llvm/ADT/StringSwitch.h
+ /usr/include/llvm-13/llvm/ADT/TinyPtrVector.h
+ /usr/include/llvm-13/llvm/ADT/Triple.h
+ /usr/include/llvm-13/llvm/ADT/Twine.h
+ /usr/include/llvm-13/llvm/ADT/bit.h
+ /usr/include/llvm-13/llvm/ADT/ilist.h
+ /usr/include/llvm-13/llvm/ADT/ilist_base.h
+ /usr/include/llvm-13/llvm/ADT/ilist_iterator.h
+ /usr/include/llvm-13/llvm/ADT/ilist_node.h
+ /usr/include/llvm-13/llvm/ADT/ilist_node_base.h
+ /usr/include/llvm-13/llvm/ADT/ilist_node_options.h
+ /usr/include/llvm-13/llvm/ADT/iterator.h
+ /usr/include/llvm-13/llvm/ADT/iterator_range.h
+ /usr/include/llvm-13/llvm/ADT/simple_ilist.h
+ /usr/include/llvm-13/llvm/BinaryFormat/Dwarf.def
+ /usr/include/llvm-13/llvm/BinaryFormat/Dwarf.h
+ /usr/include/llvm-13/llvm/Config/AsmParsers.def
+ /usr/include/llvm-13/llvm/Config/AsmPrinters.def
+ /usr/include/llvm-13/llvm/Config/Disassemblers.def
+ /usr/include/llvm-13/llvm/Config/Targets.def
+ /usr/include/llvm-13/llvm/Config/abi-breaking.h
+ /usr/include/llvm-13/llvm/Config/llvm-config.h
+ /usr/include/llvm-13/llvm/IR/Argument.h
+ /usr/include/llvm-13/llvm/IR/AssemblyAnnotationWriter.h
+ /usr/include/llvm-13/llvm/IR/Attributes.h
+ /usr/include/llvm-13/llvm/IR/Attributes.inc
+ /usr/include/llvm-13/llvm/IR/BasicBlock.h
+ /usr/include/llvm-13/llvm/IR/CFG.h
+ /usr/include/llvm-13/llvm/IR/CallingConv.h
+ /usr/include/llvm-13/llvm/IR/Comdat.h
+ /usr/include/llvm-13/llvm/IR/Constant.h
+ /usr/include/llvm-13/llvm/IR/ConstantFolder.h
+ /usr/include/llvm-13/llvm/IR/Constants.h
+ /usr/include/llvm-13/llvm/IR/DataLayout.h
+ /usr/include/llvm-13/llvm/IR/DebugInfoFlags.def
+ /usr/include/llvm-13/llvm/IR/DebugInfoMetadata.h
+ /usr/include/llvm-13/llvm/IR/DebugLoc.h
+ /usr/include/llvm-13/llvm/IR/DerivedTypes.h
+ /usr/include/llvm-13/llvm/IR/DiagnosticHandler.h
+ /usr/include/llvm-13/llvm/IR/FPEnv.h
+ /usr/include/llvm-13/llvm/IR/FixedMetadataKinds.def
+ /usr/include/llvm-13/llvm/IR/Function.h
+ /usr/include/llvm-13/llvm/IR/GlobalAlias.h
+ /usr/include/llvm-13/llvm/IR/GlobalIFunc.h
+ /usr/include/llvm-13/llvm/IR/GlobalIndirectSymbol.h
+ /usr/include/llvm-13/llvm/IR/GlobalObject.h
+ /usr/include/llvm-13/llvm/IR/GlobalValue.h
+ /usr/include/llvm-13/llvm/IR/GlobalVariable.h
+ /usr/include/llvm-13/llvm/IR/IRBuilder.h
+ /usr/include/llvm-13/llvm/IR/IRBuilderFolder.h
+ /usr/include/llvm-13/llvm/IR/IRPrintingPasses.h
+ /usr/include/llvm-13/llvm/IR/InstrTypes.h
+ /usr/include/llvm-13/llvm/IR/Instruction.def
+ /usr/include/llvm-13/llvm/IR/Instruction.h
+ /usr/include/llvm-13/llvm/IR/Instructions.h
+ /usr/include/llvm-13/llvm/IR/IntrinsicEnums.inc
+ /usr/include/llvm-13/llvm/IR/IntrinsicInst.h
+ /usr/include/llvm-13/llvm/IR/Intrinsics.h
+ /usr/include/llvm-13/llvm/IR/LLVMContext.h
+ /usr/include/llvm-13/llvm/IR/LegacyPassManager.h
+ /usr/include/llvm-13/llvm/IR/Metadata.def
+ /usr/include/llvm-13/llvm/IR/Metadata.h
+ /usr/include/llvm-13/llvm/IR/Module.h
+ /usr/include/llvm-13/llvm/IR/OperandTraits.h
+ /usr/include/llvm-13/llvm/IR/Operator.h
+ /usr/include/llvm-13/llvm/IR/PassInstrumentation.h
+ /usr/include/llvm-13/llvm/IR/PassManager.h
+ /usr/include/llvm-13/llvm/IR/PassManagerInternal.h
+ /usr/include/llvm-13/llvm/IR/ProfileSummary.h
+ /usr/include/llvm-13/llvm/IR/SymbolTableListTraits.h
+ /usr/include/llvm-13/llvm/IR/TrackingMDRef.h
+ /usr/include/llvm-13/llvm/IR/Type.h
+ /usr/include/llvm-13/llvm/IR/Use.h
+ /usr/include/llvm-13/llvm/IR/User.h
+ /usr/include/llvm-13/llvm/IR/Value.def
+ /usr/include/llvm-13/llvm/IR/Value.h
+ /usr/include/llvm-13/llvm/IR/ValueHandle.h
+ /usr/include/llvm-13/llvm/IR/ValueSymbolTable.h
+ /usr/include/llvm-13/llvm/IR/Verifier.h
+ /usr/include/llvm-13/llvm/MC/MCExpr.h
+ /usr/include/llvm-13/llvm/MC/MCFixup.h
+ /usr/include/llvm-13/llvm/MC/MCFragment.h
+ /usr/include/llvm-13/llvm/MC/MCInst.h
+ /usr/include/llvm-13/llvm/MC/MCObjectFileInfo.h
+ /usr/include/llvm-13/llvm/MC/MCSymbol.h
+ /usr/include/llvm-13/llvm/MC/MCTargetOptions.h
+ /usr/include/llvm-13/llvm/Pass.h
+ /usr/include/llvm-13/llvm/PassAnalysisSupport.h
+ /usr/include/llvm-13/llvm/PassInfo.h
+ /usr/include/llvm-13/llvm/PassRegistry.h
+ /usr/include/llvm-13/llvm/PassSupport.h
+ /usr/include/llvm-13/llvm/Support/AlignOf.h
+ /usr/include/llvm-13/llvm/Support/Alignment.h
+ /usr/include/llvm-13/llvm/Support/AllocatorBase.h
+ /usr/include/llvm-13/llvm/Support/Atomic.h
+ /usr/include/llvm-13/llvm/Support/AtomicOrdering.h
+ /usr/include/llvm-13/llvm/Support/CBindingWrapping.h
+ /usr/include/llvm-13/llvm/Support/Casting.h
+ /usr/include/llvm-13/llvm/Support/Chrono.h
+ /usr/include/llvm-13/llvm/Support/CodeGen.h
+ /usr/include/llvm-13/llvm/Support/CommandLine.h
+ /usr/include/llvm-13/llvm/Support/Compiler.h
+ /usr/include/llvm-13/llvm/Support/DataTypes.h
+ /usr/include/llvm-13/llvm/Support/Debug.h
+ /usr/include/llvm-13/llvm/Support/Discriminator.h
+ /usr/include/llvm-13/llvm/Support/Endian.h
+ /usr/include/llvm-13/llvm/Support/Error.h
+ /usr/include/llvm-13/llvm/Support/ErrorHandling.h
+ /usr/include/llvm-13/llvm/Support/ErrorOr.h
+ /usr/include/llvm-13/llvm/Support/FileSystem.h
+ /usr/include/llvm-13/llvm/Support/FileSystem/UniqueID.h
+ /usr/include/llvm-13/llvm/Support/Format.h
+ /usr/include/llvm-13/llvm/Support/FormatProviders.h
+ /usr/include/llvm-13/llvm/Support/FormatVariadicDetails.h
+ /usr/include/llvm-13/llvm/Support/FormattedStream.h
+ /usr/include/llvm-13/llvm/Support/Host.h
+ /usr/include/llvm-13/llvm/Support/MD5.h
+ /usr/include/llvm-13/llvm/Support/ManagedStatic.h
+ /usr/include/llvm-13/llvm/Support/MathExtras.h
+ /usr/include/llvm-13/llvm/Support/MemAlloc.h
+ /usr/include/llvm-13/llvm/Support/NativeFormatting.h
+ /usr/include/llvm-13/llvm/Support/PointerLikeTypeTraits.h
+ /usr/include/llvm-13/llvm/Support/RWMutex.h
+ /usr/include/llvm-13/llvm/Support/ReverseIteration.h
+ /usr/include/llvm-13/llvm/Support/SMLoc.h
+ /usr/include/llvm-13/llvm/Support/SwapByteOrder.h
+ /usr/include/llvm-13/llvm/Support/TargetRegistry.h
+ /usr/include/llvm-13/llvm/Support/TargetSelect.h
+ /usr/include/llvm-13/llvm/Support/Threading.h
+ /usr/include/llvm-13/llvm/Support/TimeProfiler.h
+ /usr/include/llvm-13/llvm/Support/TrailingObjects.h
+ /usr/include/llvm-13/llvm/Support/TypeName.h
+ /usr/include/llvm-13/llvm/Support/TypeSize.h
+ /usr/include/llvm-13/llvm/Support/VersionTuple.h
+ /usr/include/llvm-13/llvm/Support/WithColor.h
+ /usr/include/llvm-13/llvm/Support/raw_os_ostream.h
+ /usr/include/llvm-13/llvm/Support/raw_ostream.h
+ /usr/include/llvm-13/llvm/Support/type_traits.h
+ /usr/include/llvm-13/llvm/Target/CGPassBuilderOption.h
+ /usr/include/llvm-13/llvm/Target/TargetMachine.h
+ /usr/include/llvm-13/llvm/Target/TargetOptions.h
+ /usr/include/llvm-c-13/llvm-c/DataTypes.h
+ /usr/include/llvm-c-13/llvm-c/DisassemblerTypes.h
  /usr/include/llvm-c-13/llvm-c/Error.h
  /usr/include/llvm-c-13/llvm-c/ExternC.h
  /usr/include/llvm-c-13/llvm-c/Types.h
@@ -245,6 +436,7 @@ src/CMakeFiles/Mini-C-Compiler.dir/grammar.cpp.o
  /usr/include/llvm-13/llvm/IR/GlobalVariable.h
  /usr/include/llvm-13/llvm/IR/IRBuilder.h
  /usr/include/llvm-13/llvm/IR/IRBuilderFolder.h
+ /usr/include/llvm-13/llvm/IR/IRPrintingPasses.h
  /usr/include/llvm-13/llvm/IR/InstrTypes.h
  /usr/include/llvm-13/llvm/IR/Instruction.def
  /usr/include/llvm-13/llvm/IR/Instruction.h
@@ -253,6 +445,7 @@ src/CMakeFiles/Mini-C-Compiler.dir/grammar.cpp.o
  /usr/include/llvm-13/llvm/IR/IntrinsicInst.h
  /usr/include/llvm-13/llvm/IR/Intrinsics.h
  /usr/include/llvm-13/llvm/IR/LLVMContext.h
+ /usr/include/llvm-13/llvm/IR/LegacyPassManager.h
  /usr/include/llvm-13/llvm/IR/Metadata.def
  /usr/include/llvm-13/llvm/IR/Metadata.h
  /usr/include/llvm-13/llvm/IR/Module.h
@@ -317,6 +510,7 @@ src/CMakeFiles/Mini-C-Compiler.dir/grammar.cpp.o
  /usr/include/llvm-c-13/llvm-c/Types.h
 src/CMakeFiles/Mini-C-Compiler.dir/main.cpp.o
  /home/lumina/Documents/CompileProject/src/ast.h
+ /home/lumina/Documents/CompileProject/src/code_gen.h
  /home/lumina/Documents/CompileProject/src/grammar.hpp
  /home/lumina/Documents/CompileProject/src/main.cpp
  /usr/include/jsoncpp/json/allocator.h
@@ -362,6 +556,7 @@ src/CMakeFiles/Mini-C-Compiler.dir/main.cpp.o
  /usr/include/llvm-13/llvm/ADT/TinyPtrVector.h
  /usr/include/llvm-13/llvm/ADT/Triple.h
  /usr/include/llvm-13/llvm/ADT/Twine.h
+ /usr/include/llvm-13/llvm/ADT/bit.h
  /usr/include/llvm-13/llvm/ADT/ilist.h
  /usr/include/llvm-13/llvm/ADT/ilist_base.h
  /usr/include/llvm-13/llvm/ADT/ilist_iterator.h
@@ -373,9 +568,14 @@ src/CMakeFiles/Mini-C-Compiler.dir/main.cpp.o
  /usr/include/llvm-13/llvm/ADT/simple_ilist.h
  /usr/include/llvm-13/llvm/BinaryFormat/Dwarf.def
  /usr/include/llvm-13/llvm/BinaryFormat/Dwarf.h
+ /usr/include/llvm-13/llvm/Config/AsmParsers.def
+ /usr/include/llvm-13/llvm/Config/AsmPrinters.def
+ /usr/include/llvm-13/llvm/Config/Disassemblers.def
+ /usr/include/llvm-13/llvm/Config/Targets.def
  /usr/include/llvm-13/llvm/Config/abi-breaking.h
  /usr/include/llvm-13/llvm/Config/llvm-config.h
  /usr/include/llvm-13/llvm/IR/Argument.h
+ /usr/include/llvm-13/llvm/IR/AssemblyAnnotationWriter.h
  /usr/include/llvm-13/llvm/IR/Attributes.h
  /usr/include/llvm-13/llvm/IR/Attributes.inc
  /usr/include/llvm-13/llvm/IR/BasicBlock.h
@@ -402,6 +602,7 @@ src/CMakeFiles/Mini-C-Compiler.dir/main.cpp.o
  /usr/include/llvm-13/llvm/IR/GlobalVariable.h
  /usr/include/llvm-13/llvm/IR/IRBuilder.h
  /usr/include/llvm-13/llvm/IR/IRBuilderFolder.h
+ /usr/include/llvm-13/llvm/IR/IRPrintingPasses.h
  /usr/include/llvm-13/llvm/IR/InstrTypes.h
  /usr/include/llvm-13/llvm/IR/Instruction.def
  /usr/include/llvm-13/llvm/IR/Instruction.h
@@ -410,6 +611,7 @@ src/CMakeFiles/Mini-C-Compiler.dir/main.cpp.o
  /usr/include/llvm-13/llvm/IR/IntrinsicInst.h
  /usr/include/llvm-13/llvm/IR/Intrinsics.h
  /usr/include/llvm-13/llvm/IR/LLVMContext.h
+ /usr/include/llvm-13/llvm/IR/LegacyPassManager.h
  /usr/include/llvm-13/llvm/IR/Metadata.def
  /usr/include/llvm-13/llvm/IR/Metadata.h
  /usr/include/llvm-13/llvm/IR/Module.h
@@ -427,7 +629,15 @@ src/CMakeFiles/Mini-C-Compiler.dir/main.cpp.o
  /usr/include/llvm-13/llvm/IR/Value.def
  /usr/include/llvm-13/llvm/IR/Value.h
  /usr/include/llvm-13/llvm/IR/ValueHandle.h
+ /usr/include/llvm-13/llvm/IR/ValueSymbolTable.h
  /usr/include/llvm-13/llvm/IR/Verifier.h
+ /usr/include/llvm-13/llvm/MC/MCExpr.h
+ /usr/include/llvm-13/llvm/MC/MCFixup.h
+ /usr/include/llvm-13/llvm/MC/MCFragment.h
+ /usr/include/llvm-13/llvm/MC/MCInst.h
+ /usr/include/llvm-13/llvm/MC/MCObjectFileInfo.h
+ /usr/include/llvm-13/llvm/MC/MCSymbol.h
+ /usr/include/llvm-13/llvm/MC/MCTargetOptions.h
  /usr/include/llvm-13/llvm/Pass.h
  /usr/include/llvm-13/llvm/PassAnalysisSupport.h
  /usr/include/llvm-13/llvm/PassInfo.h
@@ -440,6 +650,7 @@ src/CMakeFiles/Mini-C-Compiler.dir/main.cpp.o
  /usr/include/llvm-13/llvm/Support/AtomicOrdering.h
  /usr/include/llvm-13/llvm/Support/CBindingWrapping.h
  /usr/include/llvm-13/llvm/Support/Casting.h
+ /usr/include/llvm-13/llvm/Support/Chrono.h
  /usr/include/llvm-13/llvm/Support/CodeGen.h
  /usr/include/llvm-13/llvm/Support/CommandLine.h
  /usr/include/llvm-13/llvm/Support/Compiler.h
@@ -450,25 +661,40 @@ src/CMakeFiles/Mini-C-Compiler.dir/main.cpp.o
  /usr/include/llvm-13/llvm/Support/Error.h
  /usr/include/llvm-13/llvm/Support/ErrorHandling.h
  /usr/include/llvm-13/llvm/Support/ErrorOr.h
+ /usr/include/llvm-13/llvm/Support/FileSystem.h
+ /usr/include/llvm-13/llvm/Support/FileSystem/UniqueID.h
  /usr/include/llvm-13/llvm/Support/Format.h
+ /usr/include/llvm-13/llvm/Support/FormatProviders.h
  /usr/include/llvm-13/llvm/Support/FormatVariadicDetails.h
+ /usr/include/llvm-13/llvm/Support/FormattedStream.h
+ /usr/include/llvm-13/llvm/Support/Host.h
  /usr/include/llvm-13/llvm/Support/MD5.h
  /usr/include/llvm-13/llvm/Support/ManagedStatic.h
  /usr/include/llvm-13/llvm/Support/MathExtras.h
  /usr/include/llvm-13/llvm/Support/MemAlloc.h
+ /usr/include/llvm-13/llvm/Support/NativeFormatting.h
  /usr/include/llvm-13/llvm/Support/PointerLikeTypeTraits.h
  /usr/include/llvm-13/llvm/Support/RWMutex.h
  /usr/include/llvm-13/llvm/Support/ReverseIteration.h
+ /usr/include/llvm-13/llvm/Support/SMLoc.h
  /usr/include/llvm-13/llvm/Support/SwapByteOrder.h
+ /usr/include/llvm-13/llvm/Support/TargetRegistry.h
+ /usr/include/llvm-13/llvm/Support/TargetSelect.h
  /usr/include/llvm-13/llvm/Support/Threading.h
  /usr/include/llvm-13/llvm/Support/TimeProfiler.h
  /usr/include/llvm-13/llvm/Support/TrailingObjects.h
  /usr/include/llvm-13/llvm/Support/TypeName.h
  /usr/include/llvm-13/llvm/Support/TypeSize.h
+ /usr/include/llvm-13/llvm/Support/VersionTuple.h
  /usr/include/llvm-13/llvm/Support/WithColor.h
+ /usr/include/llvm-13/llvm/Support/raw_os_ostream.h
  /usr/include/llvm-13/llvm/Support/raw_ostream.h
  /usr/include/llvm-13/llvm/Support/type_traits.h
+ /usr/include/llvm-13/llvm/Target/CGPassBuilderOption.h
+ /usr/include/llvm-13/llvm/Target/TargetMachine.h
+ /usr/include/llvm-13/llvm/Target/TargetOptions.h
  /usr/include/llvm-c-13/llvm-c/DataTypes.h
+ /usr/include/llvm-c-13/llvm-c/DisassemblerTypes.h
  /usr/include/llvm-c-13/llvm-c/Error.h
  /usr/include/llvm-c-13/llvm-c/ExternC.h
  /usr/include/llvm-c-13/llvm-c/Types.h

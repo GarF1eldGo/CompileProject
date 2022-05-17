@@ -13,7 +13,7 @@ int main(){
 	//AST可视化
 	ROOT->createJsonFile("visualize/ast.json");
 	//IR生成
-	codegen->generate();
+	// codegen->generate();
 
 	return 0;
 }

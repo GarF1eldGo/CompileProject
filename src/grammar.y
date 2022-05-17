@@ -32,12 +32,12 @@ stack<exprAST*> tokenStack;
 %token <exprPtr> IF ELSE WHILE DO FOR CONTINUE BREAK RETURN
 
 //文法规则类型定义
-%type <exprPtr> translation_unit external_declaration function_definition declaration_specifiers type_specifier
-%type <exprPtr> declarator direct_declarator constant_expression conditional_expression logical_or_expression logical_and_expression
+%type <exprPtr> translation_unit external_declaration function_definition type_specifier
+%type <exprPtr> declarator constant_expression conditional_expression logical_or_expression logical_and_expression
 %type <exprPtr> inclusive_or_expression exclusive_or_expression and_expression equality_expression relational_expression
 %type <exprPtr> shift_expression additive_expression multiplicative_expression cast_expression type_name expression assignment_expression
 %type <exprPtr> unary_expression postfix_expression argument_expression_list unary_operator assignment_operator expression_statement 
-%type <exprPtr> parameter_type_list parameter_list parameter_declaration compound_statement statement_list statement selection_statement
+%type <exprPtr> parameter_list parameter_declaration compound_statement statement_list statement selection_statement
 %type <exprPtr> iteration_statement jump_statement init_declarator init_declarator_list primary_expression declaration declaration_list
 
 
@@ -69,7 +69,7 @@ external_declaration
 		children.push_back($1);
 		$$ = new external_declaration("external_declaration", 1, children);
 	}
-    | type_specifiers init_declarator_list ';' { 
+    | type_specifier init_declarator_list ';' { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back($1);
@@ -707,7 +707,7 @@ parameter_list
 
 // 参数定义
 parameter_declaration
-	: type_specifiers declarator{ 
+	: type_specifier declarator{ 
 		vector<exprAST*> children;
 		children.push_back($1);
 		children.push_back($2);
@@ -967,7 +967,7 @@ jump_statement
 
 //变量声明
 declaration
-    : type_specifiers init_declarator_list ';' { 
+    : type_specifier init_declarator_list ';' { 
 		exprAST* semiColon = new punctuationAST(";");
 		vector<exprAST*> children;
 		children.push_back($1);

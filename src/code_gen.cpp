@@ -1537,6 +1537,11 @@ llvm::Value* external_declaration::CodeGen() {
   }
 }
 
+
+llvm::Value* constant_expression::CodeGen() {
+  return this->children[0]->CodeGen();
+}
+
 llvm::Type* build_array(Type *array_type, vector<ConstantInt*> array_size) {
   if (array_size.size() > 1) {
     ArrayType* array = ArrayType::get(array_type, array_size.back()->getZExtValue());
@@ -1549,15 +1554,15 @@ llvm::Type* build_array(Type *array_type, vector<ConstantInt*> array_size) {
     return ArrayType::get(array_type, 0);
   }
 }
-codeGen * codegen = new codeGen();
+// codeGen * codegen = new codeGen();
 
-codeGen::codeGen() {
+// codeGen::codeGen() {
 
-}
+// }
 
-void codeGen::generate() {
-  ROOT->CodeGen();
-  module.print(llvm::outs(), nullptr);
-}
+// void codeGen::generate() {
+//   ROOT->CodeGen();
+//   module.print(llvm::outs(), nullptr);
+// }
 // codeGen::~codeGen() {}
 // */

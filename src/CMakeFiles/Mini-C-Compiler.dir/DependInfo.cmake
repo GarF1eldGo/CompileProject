@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/lumina/Documents/CompileProject/src/ast.cpp" "/home/lumina/Documents/CompileProject/src/CMakeFiles/Mini-C-Compiler.dir/ast.cpp.o"
+  "/home/lumina/Documents/CompileProject/src/code_gen.cpp" "/home/lumina/Documents/CompileProject/src/CMakeFiles/Mini-C-Compiler.dir/code_gen.cpp.o"
   "/home/lumina/Documents/CompileProject/src/grammar.cpp" "/home/lumina/Documents/CompileProject/src/CMakeFiles/Mini-C-Compiler.dir/grammar.cpp.o"
   "/home/lumina/Documents/CompileProject/src/main.cpp" "/home/lumina/Documents/CompileProject/src/CMakeFiles/Mini-C-Compiler.dir/main.cpp.o"
   )

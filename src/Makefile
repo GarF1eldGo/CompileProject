@@ -216,6 +216,33 @@ ast.cpp.s:
 	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/Mini-C-Compiler.dir/build.make src/CMakeFiles/Mini-C-Compiler.dir/ast.cpp.s
 .PHONY : ast.cpp.s
 
+code_gen.o: code_gen.cpp.o
+
+.PHONY : code_gen.o
+
+# target to build an object file
+code_gen.cpp.o:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/Mini-C-Compiler.dir/build.make src/CMakeFiles/Mini-C-Compiler.dir/code_gen.cpp.o
+.PHONY : code_gen.cpp.o
+
+code_gen.i: code_gen.cpp.i
+
+.PHONY : code_gen.i
+
+# target to preprocess a source file
+code_gen.cpp.i:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/Mini-C-Compiler.dir/build.make src/CMakeFiles/Mini-C-Compiler.dir/code_gen.cpp.i
+.PHONY : code_gen.cpp.i
+
+code_gen.s: code_gen.cpp.s
+
+.PHONY : code_gen.s
+
+# target to generate assembly for a file
+code_gen.cpp.s:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/Mini-C-Compiler.dir/build.make src/CMakeFiles/Mini-C-Compiler.dir/code_gen.cpp.s
+.PHONY : code_gen.cpp.s
+
 grammar.o: grammar.cpp.o
 
 .PHONY : grammar.o
@@ -285,6 +312,9 @@ help:
 	@echo "... ast.o"
 	@echo "... ast.i"
 	@echo "... ast.s"
+	@echo "... code_gen.o"
+	@echo "... code_gen.i"
+	@echo "... code_gen.s"
 	@echo "... grammar.o"
 	@echo "... grammar.i"
 	@echo "... grammar.s"
