@@ -43,6 +43,39 @@
 // CodeGen::~CodeGen() {
 
 // }
+llvm::Function* codeGen::createPrintf()
+{
+  std::vector<llvm::Type*> arg_types;
+  arg_types.push_back(builder.getInt8PtrTy());
+  auto printf_type = llvm::FunctionType::get(builder.getInt32Ty(), llvm::makeArrayRef(arg_types), true);
+  auto func = llvm::Function::Create(printf_type, llvm::Function::ExternalLinkage, llvm::Twine("printf"), this->module);
+  func->setCallingConv(llvm::CallingConv::C);
+  return func;
+}
+
+
+llvm::Function* codeGen::createScanf()
+{
+  auto scanf_type = llvm::FunctionType::get(builder.getInt32Ty(), true);
+  auto func = llvm::Function::Create(scanf_type, llvm::Function::ExternalLinkage, llvm::Twine("scanf"), this->module);
+  func->setCallingConv(llvm::CallingConv::C);
+  return func;
+}
+
+
+codeGen::codeGen(){
+  this->module = new llvm::Module("main", context);
+  this->printf = this->createPrintf();
+  this->scanf = this->createScanf();
+}
+
+
+void codeGen::generate(exprAST* ROOT) {
+  ROOT->CodeGen();
+  this->module->print(llvm::outs(), nullptr);
+}
+
+codeGen *generator = new codeGen();
 
 
 Type* get_type(int type) {
@@ -65,26 +98,6 @@ Type* get_type(int type) {
 }
 
 
-llvm::Function* createPrintf()
-{
-  std::vector<llvm::Type*> arg_types;
-  arg_types.push_back(builder.getInt8PtrTy());
-  auto printf_type = llvm::FunctionType::get(builder.getInt32Ty(), llvm::makeArrayRef(arg_types), true);
-  auto func = llvm::Function::Create(printf_type, llvm::Function::ExternalLinkage, llvm::Twine("printf"), module);
-  func->setCallingConv(llvm::CallingConv::C);
-  return func;
-}
-
-
-llvm::Function* createScanf()
-{
-  auto scanf_type = llvm::FunctionType::get(builder.getInt32Ty(), true);
-  auto func = llvm::Function::Create(scanf_type, llvm::Function::ExternalLinkage, llvm::Twine("scanf"), module);
-  func->setCallingConv(llvm::CallingConv::C);
-  return func;
-}
-
-
 llvm::Value* IRError(string msg){
   cout<<msg<<endl;
   return nullptr;
@@ -92,11 +105,11 @@ llvm::Value* IRError(string msg){
 
 
 llvm::Value* findValue(const std::string & name) {
-  llvm::Value * result = funStack.top()->getValueSymbolTable()->lookup(name);
+  llvm::Value * result = generator->funStack.top()->getValueSymbolTable()->lookup(name);
   if (result != nullptr) {
     return result;
   }
-  result = module.getGlobalVariable(name, true);
+  result = generator->module->getGlobalVariable(name, true);
   if (result == nullptr) {
     return IRError("variable or function undefined!");
   }
@@ -204,7 +217,7 @@ llvm::Value* postfix_expression::CodeGen(){
       return IRError("postfix_expression error: printf() or scanf() is not allowed");
     }
     else{
-      llvm::Function* func_real = module.getFunction((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+      llvm::Function* func_real = generator->module->getFunction((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
       if(func_real == nullptr){
         return IRError("postfix_expression error: undefined function");
       }
@@ -227,7 +240,7 @@ llvm::Value* postfix_expression::CodeGen(){
         return builder.CreateCall(generator->scanf, *arg, "scanf");
       }
       else{
-        llvm::Function* func_real = module.getFunction((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+        llvm::Function* func_real = generator->module->getFunction((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
         if(func_real == nullptr){
           return IRError("postfix_expression error: undefined function");
         }
@@ -442,16 +455,16 @@ llvm::Value* unary_expression::CodeGen(){
     if(tmp == nullptr){
       return IRError("unary_expression error in leaf node: type_name");
     }
-    else if(dynamic_cast<typeAST*> ((dynamic_cast<type_name *>(this->children[2])->children)[0])->type == 8){
+    else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[2])->children)[0])->type == 8){
       return builder.getInt32(1);
     }
-    else if(dynamic_cast<typeAST*> ((dynamic_cast<type_name *>(this->children[2])->children)[0])->type == 4){
+    else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[2])->children)[0])->type == 4){
       return builder.getInt32(4);
     }
-    else if(dynamic_cast<typeAST*> ((dynamic_cast<type_name *>(this->children[2])->children)[0])->type == 6){
+    else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[2])->children)[0])->type == 6){
       return builder.getInt32(4);
     }
-    else if(dynamic_cast<typeAST*> ((dynamic_cast<type_name *>(this->children[2])->children)[0])->type == 2){
+    else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[2])->children)[0])->type == 2){
       return builder.getInt32(1);
     }
     else {
@@ -550,13 +563,13 @@ llvm::Value* cast_expression::CodeGen(){
     if(tmp1==nullptr||tmp2==nullptr){
       return IRError("cast_expression error in leaf node: type_name or cast_expression");
     }
-    else if(dynamic_cast<typeAST*> ((dynamic_cast<type_name *>(this->children[1])->children)[0])->type == 2){
+    else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[1])->children)[0])->type == 2){
       return typeCast(tmp2, llvm::Type::getInt8Ty(context));
     }
-    else if(dynamic_cast<typeAST*> ((dynamic_cast<type_name *>(this->children[1])->children)[0])->type == 4){
+    else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[1])->children)[0])->type == 4){
       return typeCast(tmp2, llvm::Type::getInt32Ty(context));
     }
-    else if(dynamic_cast<typeAST*> ((dynamic_cast<type_name *>(this->children[1])->children)[0])->type == 6){
+    else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[1])->children)[0])->type == 6){
       return typeCast(tmp2, llvm::Type::getFloatTy(context));
     }
   }
@@ -1241,7 +1254,7 @@ llvm::Value* function_definition::CodeGen() {
   declarator *prototype = dynamic_cast<declarator*>(this->children[1]);
   prototype->CodeGen();
   FunctionType * func_type = FunctionType::get(return_type, prototype->para_type, false);
-  Function *func = Function::Create(func_type, Function::ExternalLinkage, prototype->name, module);
+  Function *func = Function::Create(func_type, Function::ExternalLinkage, prototype->name, generator->module);
   int para_ptr = 0;
   for (Function::arg_iterator it = func->arg_begin(); it != func->arg_end(); ++it, ++para_ptr) {
     it->setName(prototype->para_name[para_ptr]);
@@ -1520,9 +1533,9 @@ llvm::Value* external_declaration::CodeGen() {
       if (list[i]->decl->is_array()) {
         type_local = build_array(type_spec, list[i]->decl->array_size);
       }
-      module.getOrInsertGlobal(list[i]->decl->name, type_local);
+      generator->module->getOrInsertGlobal(list[i]->decl->name, type_local);
       if (!list[i]->decl->is_array()) {
-        GlobalVariable *gVar = module.getNamedGlobal(list[i]->decl->name);
+        GlobalVariable *gVar = generator->module->getNamedGlobal(list[i]->decl->name);
         gVar->setInitializer(cast<Constant>(list[i]->value));
       }
     }
@@ -1551,17 +1564,5 @@ llvm::Type* build_array(Type *array_type, vector<ConstantInt*> array_size) {
 // codeGen * codegen = new codeGen();
 
 
-
-codeGen::codeGen(){
-  this->printf = createPrintf();
-  this->scanf = createScanf();
-}
-
-codeGen *generator = new codeGen();
-
-void codeGen::generate(exprAST* ROOT) {
-  ROOT->CodeGen();
-  module.print(llvm::outs(), nullptr);
-}
 // codeGen::~codeGen() {}
 // */

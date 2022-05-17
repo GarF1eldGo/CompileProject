@@ -36,8 +36,6 @@
 using namespace std;
 static llvm::LLVMContext context;
 static llvm::IRBuilder<> builder(context);
-static llvm::Module module("module", context);
-stack<llvm::Function*> funStack;
 
 /*
 class codeGen {
@@ -51,7 +49,11 @@ public:
 
 class codeGen {
 public:
+    llvm::Module *module;
+    stack<llvm::Function*> funStack;
     llvm::Function *printf, *scanf;
+    llvm::Function* createPrintf();
+    llvm::Function* createScanf();
     void generate(exprAST* ROOT);
     codeGen();
 

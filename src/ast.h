@@ -46,8 +46,8 @@ public:
     // int valuetype = TYPENONE;//节点数据类型
     //virtual Value *Codegen();
     void createJsonFile(string fileName);
-  virtual Json::Value buildJsonAST();
-  virtual llvm::Value *CodeGen();
+  virtual Json::Value buildJsonAST(){};
+  virtual llvm::Value *CodeGen(){};
 
 };
 
@@ -284,15 +284,15 @@ class parameter_declaration : public nonleafAST {
   }
 };
 
-class type_name : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
+class type_name : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen(){};};
 
 class statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class compound_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
+class compound_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen(){};};
 
 class declaration_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class statement_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
+class statement_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen(){};};
 
 class expression_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
