@@ -35,9 +35,6 @@
 
 // CodeGen *generator;
 
-// void CodeGen::generate(translation_unit* root) {
-
-// }
 
 // CodeGen::CodeGen(/* args */) {
 
@@ -1552,9 +1549,15 @@ llvm::Type* build_array(Type *array_type, vector<ConstantInt*> array_size) {
     return ArrayType::get(array_type, 0);
   }
 }
-// codeGen::codeGen( args ) {
+codeGen * codegen = new codeGen();
 
-// }
+codeGen::codeGen() {
 
+}
+
+void codeGen::generate() {
+  ROOT->CodeGen();
+  module.print(llvm::outs(), nullptr);
+}
 // codeGen::~codeGen() {}
 // */
