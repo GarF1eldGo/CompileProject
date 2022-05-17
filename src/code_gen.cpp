@@ -85,12 +85,6 @@ llvm::Function* createScanf()
 }
 
 
-codeGen::codeGen(){
-  this->printf = createPrintf();
-  this->scanf = createScanf();
-}
-
-
 llvm::Value* IRError(string msg){
   cout<<msg<<endl;
   return nullptr;
@@ -1549,13 +1543,18 @@ llvm::Type* build_array(Type *array_type, vector<ConstantInt*> array_size) {
     return ArrayType::get(array_type, 0);
   }
 }
-codeGen * codegen = new codeGen();
+// codeGen * codegen = new codeGen();
 
-codeGen::codeGen() {
 
+
+codeGen::codeGen(){
+  this->printf = createPrintf();
+  this->scanf = createScanf();
 }
 
-void codeGen::generate() {
+codeGen *generator = new codeGen();
+
+void codeGen::generate(exprAST* ROOT) {
   ROOT->CodeGen();
   module.print(llvm::outs(), nullptr);
 }

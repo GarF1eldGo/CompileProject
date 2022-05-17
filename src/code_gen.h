@@ -32,7 +32,7 @@
 #include "llvm/Target/TargetOptions.h"
 
 
-extern exprAST* ROOT;
+// extern exprAST* ROOT;
 using namespace std;
 static llvm::LLVMContext context;
 static llvm::IRBuilder<> builder(context);
@@ -52,12 +52,10 @@ public:
 class codeGen {
 public:
     llvm::Function *printf, *scanf;
-    void generate();
+    void generate(exprAST* ROOT);
     codeGen();
 
 };
-
-codeGen *generator;
 
 llvm::Value* IRError(string msg);
 

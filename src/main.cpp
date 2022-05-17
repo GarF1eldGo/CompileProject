@@ -4,7 +4,7 @@
 #include "grammar.hpp"
 
 extern exprAST* ROOT;
-extern codeGen* codegen;
+extern codeGen* generator;
 extern int yyparse();
 
 int main(){
@@ -13,7 +13,7 @@ int main(){
 	//AST可视化
 	ROOT->createJsonFile("visualize/ast.json");
 	//IR生成
-	codegen->generate();
+	generator->generate(ROOT);
 
 	return 0;
 }
