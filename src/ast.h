@@ -5,7 +5,7 @@
 #include<string.h>
 #include<vector>
 #include<fstream>
-#include <json/json.h>
+// #include <json/json.h>
 
 #include <llvm/IR/Value.h>
 #include <llvm/IR/BasicBlock.h>
@@ -46,7 +46,7 @@ public:
     // int valuetype = TYPENONE;//节点数据类型
     //virtual Value *Codegen();
     void createJsonFile(string fileName);
-  virtual Json::Value buildJsonAST(){};
+  // virtual Json::Value buildJsonAST(){};
   virtual llvm::Value *CodeGen(){};
 
 };
@@ -59,7 +59,7 @@ public:
   //virtual ~leafAST(){}
     
   void createJsonFile(string fileName);
-  Json::Value buildJsonAST();
+  // Json::Value buildJsonAST();
 };
 
 
@@ -72,7 +72,7 @@ public:
   vector<exprAST*> children;
 
   void createJsonFile(string fileName);
-  Json::Value buildJsonAST();
+  // Json::Value buildJsonAST();
 
   nonleafAST(string name, int type, vector<exprAST*> children);
 };

@@ -8,7 +8,8 @@
 #include "llvm/IR/Type.h"
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Verifier.h"
-
+#include <iostream>
+#define DEBUG
 // #include "llvm/ADT/APFloat.h"
 // #include "llvm/ADT/Optional.h"
 // #include "llvm/ADT/STLExtras.h"
@@ -51,6 +52,7 @@ llvm::Function* codeGen::createPrintf()
   auto func = llvm::Function::Create(printf_type, llvm::Function::ExternalLinkage, llvm::Twine("printf"), this->module);
   func->setCallingConv(llvm::CallingConv::C);
   return func;
+  // return nullptr;
 }
 
 
@@ -60,11 +62,12 @@ llvm::Function* codeGen::createScanf()
   auto func = llvm::Function::Create(scanf_type, llvm::Function::ExternalLinkage, llvm::Twine("scanf"), this->module);
   func->setCallingConv(llvm::CallingConv::C);
   return func;
+  // return nullptr;
 }
 
 
 codeGen::codeGen(){
-  this->module = new llvm::Module("main", context);
+  this->module = new llvm::Module("module", context);
   this->printf = this->createPrintf();
   this->scanf = this->createScanf();
 }
@@ -134,7 +137,7 @@ llvm::Value* primary_expression::CodeGen(){
     return rs;
   }
   case 2: {
-    llvm::Value* tmp = this->children[0]->CodeGen();
+    // llvm::Value* tmp = this->children[0]->CodeGen();
     // if(tmp == nullptr){
     //     return IRError("postfix_expression error in leaf node: primary_expression");
     // }
@@ -170,6 +173,7 @@ llvm::Value* postfix_expression::CodeGen(){
   switch(this->type){
   case 1: {
     llvm::Value* tmp = this->children[0]->CodeGen();
+    // cout<<"pr okk~"<<endl;
     if(tmp == nullptr){
       return IRError("postfix_expression error in leaf node: primary_expression");
     }
@@ -1194,6 +1198,9 @@ llvm::Value* assignment_operator::CodeGen(){
 // }
 
 Value* expression::CodeGen() {
+  #ifdef DEBUG
+    cout<<"expression type:"<<this->type<<endl;
+  #endif
   switch (this->type) {
   case 1:{
     return this->children[0]->CodeGen();
@@ -1209,6 +1216,9 @@ Value* expression::CodeGen() {
 
 //done
 llvm::Value* parameter_declaration::CodeGen() {
+  #ifdef DEBUG
+    cout<<"parameter_declaration type:"<<this->type<<endl;
+  #endif
   this->clear();
   Type* type_spec = get_type(dynamic_cast<typeAST*>(this->children[0])->type);
   this->children[1]->CodeGen();
@@ -1223,6 +1233,9 @@ llvm::Value* parameter_declaration::CodeGen() {
 
 //done
 llvm::Value* parameter_list::CodeGen() {
+  #ifdef DEBUG
+    cout<<"parameter_list type:"<<this->type<<endl;
+  #endif
   this->clear();
   switch (this->type) {
   case 1: {
@@ -1249,6 +1262,9 @@ llvm::Value* parameter_list::CodeGen() {
 
 //done 
 llvm::Value* function_definition::CodeGen() {
+  #ifdef DEBUG
+    cout<<"function_definition type:"<<this->type<<endl;
+  #endif
   Type* type_spec = get_type(dynamic_cast<typeAST*>(this->children[0])->type);
   llvm::Type*  return_type = type_spec;
   declarator *prototype = dynamic_cast<declarator*>(this->children[1]);
@@ -1271,6 +1287,9 @@ llvm::Value* function_definition::CodeGen() {
 
 //done
 llvm::Value* declarator::CodeGen() {
+  #ifdef DEBUG
+    cout<<"declarator type:"<<this->type<<endl;
+  #endif
   switch (this->type) {
   case 1: {
     this->name = dynamic_cast<identifierAST*>(this->children[0])->identifier;
@@ -1317,6 +1336,9 @@ llvm::Value* declarator::CodeGen() {
 }
 
 llvm::Value* init_declarator::CodeGen() {
+  #ifdef DEBUG
+    cout<<"init_declarator type:"<<this->type<<endl;
+  #endif
   this->clear();
   this->children[0]->CodeGen();
   declarator* decl = dynamic_cast<declarator*>(this->children[0]);
@@ -1336,6 +1358,9 @@ switch (this->type) {
 }
 
 llvm::Value* init_declarator_list::CodeGen() {
+  #ifdef DEBUG
+    cout<<"init_declarator_list type:"<<this->type<<endl;
+  #endif
   this->clear();
   switch (this->type) {
   case 1: {
@@ -1356,6 +1381,9 @@ llvm::Value* init_declarator_list::CodeGen() {
 
 //done
 llvm::Value* declaration::CodeGen() {
+  #ifdef DEBUG
+    cout<<"declaration type:"<<this->type<<endl;
+  #endif
   this->children[0]->CodeGen();
   this->children[1]->CodeGen();
   Type* type_spec = get_type(dynamic_cast<typeAST*>(this->children[0])->type);
@@ -1375,6 +1403,9 @@ llvm::Value* declaration::CodeGen() {
 
 //done
 llvm::Value* declaration_list::CodeGen() {
+  #ifdef DEBUG
+    cout<<"declaration_list type:"<<this->type<<endl;
+  #endif
   switch (this->type) {
   case 1: {
     this->children[0]->CodeGen();
@@ -1391,9 +1422,17 @@ llvm::Value* declaration_list::CodeGen() {
 
 
 //done
-llvm::Value *statement::CodeGen() { this->children[0]->CodeGen(); }
+llvm::Value *statement::CodeGen() { 
+  #ifdef DEBUG
+    cout<<"statement type:"<<this->type<<endl;
+  #endif
+  this->children[0]->CodeGen(); 
+}
 
 llvm::Value *expression_statement::CodeGen() {
+  #ifdef DEBUG
+    cout<<"expression_statement type:"<<this->type<<endl;
+  #endif
   switch (this->type) {
   case 1:{
     break;
@@ -1407,6 +1446,9 @@ llvm::Value *expression_statement::CodeGen() {
 }
 
 llvm::Value *selection_statement::CodeGen() {
+  #ifdef DEBUG
+    cout<<"selection_statement type:"<<this->type<<endl;
+  #endif
   switch (this->type) {
   case 1: {
     Function *func = builder.GetInsertBlock()->getParent();
@@ -1439,6 +1481,9 @@ llvm::Value *selection_statement::CodeGen() {
 }
 
 llvm::Value* iteration_statement::CodeGen() {
+  #ifdef DEBUG
+    cout<<"iteration_statement type:"<<this->type<<endl;
+  #endif
   switch (this->type) {
   case 1:{
     //     BasicBlock *ThenBB = BasicBlock::Create(context, "then", func);
@@ -1484,6 +1529,9 @@ llvm::Value* iteration_statement::CodeGen() {
 }
 
 llvm::Value* jump_statement::CodeGen() {
+  #ifdef DEBUG
+    cout<<"jump_statement type:"<<this->type<<endl;
+  #endif
   switch (this->type) {
   case 0: {
   }
@@ -1503,21 +1551,27 @@ llvm::Value* jump_statement::CodeGen() {
 }
 
 llvm::Value *translation_unit::CodeGen() {
-switch (this->type) {
- case 1:{
-   this->children[0]->CodeGen();
-   break;
- }
- case 2:{
-   this->children[0]->CodeGen();
-   this->children[1]->CodeGen();
-   break;
- }
- }
+  #ifdef DEBUG
+    cout<<"translation_unit type:"<<this->type<<endl;
+  #endif
+  switch (this->type) {
+    case 1:{
+      this->children[0]->CodeGen();
+      break;
+    }
+    case 2:{
+      this->children[0]->CodeGen();
+      this->children[1]->CodeGen();
+      break;
+    }
+  }
  return nullptr;
 }
 
 llvm::Value* external_declaration::CodeGen() {
+  #ifdef DEBUG
+    cout<<"external_declaration type:"<<this->type<<endl;
+  #endif
   switch (this->type) {
   case 1:{
     this->children[0]->CodeGen();
@@ -1546,6 +1600,9 @@ llvm::Value* external_declaration::CodeGen() {
 
 
 llvm::Value* constant_expression::CodeGen() {
+  #ifdef DEBUG
+    cout<<"constant_expression type:"<<this->type<<endl;
+  #endif
   return this->children[0]->CodeGen();
 }
 

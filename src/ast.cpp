@@ -7,37 +7,37 @@ exprAST* ROOT = new exprAST();
 
 //根据AST创建Json文件
 void exprAST::createJsonFile(string fileName){
-    ofstream outFile;
-    outFile.open(fileName);
-    if(!outFile.is_open()){
-        cout<<"open file \"" << fileName << "\" failed" << endl;
-        return;
-    }
-    Json::Value root = buildJsonAST();
-    outFile << root;
-    outFile.close();
+    // ofstream outFile;
+    // outFile.open(fileName);
+    // if(!outFile.is_open()){
+    //     cout<<"open file \"" << fileName << "\" failed" << endl;
+    //     return;
+    // }
+    // Json::Value root = buildJsonAST();
+    // outFile << root;
+    // outFile.close();
 }
 
 
 //为非叶子结点创建Json类型的AST
-Json::Value nonleafAST::buildJsonAST(){
-    Json::Value root;
-    root["name"] = name;
+// Json::Value nonleafAST::buildJsonAST(){
+//     Json::Value root;
+//     root["name"] = name;
 
-    for(int i=0;i<children.size();i++){
-        root["children"].append(children[i]->buildJsonAST());
-    }
+//     for(int i=0;i<children.size();i++){
+//         root["children"].append(children[i]->buildJsonAST());
+//     }
 
-    return root;
-}
+//     return root;
+// }
 
 
 //为叶子结点创建Json类型的AST
-Json::Value leafAST::buildJsonAST(){
-    Json::Value root;
-    root["name"] = name;
-    return root;
-}
+// Json::Value leafAST::buildJsonAST(){
+//     Json::Value root;
+//     root["name"] = name;
+//     return root;
+// }
 
 
 
