@@ -288,11 +288,11 @@ class type_name : public nonleafAST {public: using nonleafAST::nonleafAST; llvm:
 
 class statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class compound_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen(){};};
+class compound_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
 class declaration_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
-class statement_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen(){};};
+class statement_list : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 
 class expression_statement : public nonleafAST {public: using nonleafAST::nonleafAST; llvm::Value *CodeGen();};
 

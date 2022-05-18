@@ -108,7 +108,8 @@ llvm::Value* IRError(string msg){
 
 
 llvm::Value* findValue(const std::string & name) {
-  llvm::Value * result = generator->funStack.top()->getValueSymbolTable()->lookup(name);
+  //llvm::Value * result = generator->funStack.top()->getValueSymbolTable()->lookup(name);
+  llvm::Value * result = builder.GetInsertBlock()->getParent()->getValueSymbolTable()->lookup(name);
   if (result != nullptr) {
     return result;
   }
@@ -1342,6 +1343,7 @@ llvm::Value* init_declarator::CodeGen() {
   this->clear();
   this->children[0]->CodeGen();
   declarator* decl = dynamic_cast<declarator*>(this->children[0]);
+  //cout << decl->name << endl;
 switch (this->type) {
  case 1:{
    this->decl = decl;
@@ -1604,6 +1606,43 @@ llvm::Value* constant_expression::CodeGen() {
     cout<<"constant_expression type:"<<this->type<<endl;
   #endif
   return this->children[0]->CodeGen();
+}
+
+llvm::Value* statement_list::CodeGen() {
+  switch (this->type) {
+  case 1: {
+    this->children[0]->CodeGen();
+    break;
+  }
+  case 2: {
+    this->children[0]->CodeGen();
+    this->children[1]->CodeGen();
+    break;
+  }
+  }
+  return nullptr;
+}
+
+llvm::Value* compound_statement::CodeGen() {
+  switch (this->type) {
+  case 1: {
+    break;
+  }
+  case 2: {
+    this->children[1]->CodeGen();
+    break;
+  }
+  case 3: {
+    this->children[1]->CodeGen();
+    break;
+  }
+  case 4:{
+    this->children[1]->CodeGen();
+    this->children[2]->CodeGen();
+    break;
+  }
+  }
+  return nullptr;
 }
 
 llvm::Type* build_array(Type *array_type, vector<ConstantInt*> array_size) {
