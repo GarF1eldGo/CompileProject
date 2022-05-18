@@ -218,7 +218,7 @@ llvm::Value* postfix_expression::CodeGen(){
   }
   case 3: {
     // llvm::Value* func = this->children[0]->CodeGen();
-    if((dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("printf") == 0||(dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("scanf") == 0){
+    if(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("printf") == 0||dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("scanf") == 0){
       return IRError("postfix_expression error: printf() or scanf() is not allowed");
     }
     else{
@@ -238,14 +238,14 @@ llvm::Value* postfix_expression::CodeGen(){
       return IRError("postfix_expression error in leaf node: argument_expression_list");
     }
     else{
-      if((dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("printf") == 0){
+      if(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("printf") == 0){
         return builder.CreateCall(generator->printf, *arg, "printf");
       }
-      else if((dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("scanf") == 0){
+      else if(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("scanf") == 0){
         return builder.CreateCall(generator->scanf, *arg, "scanf");
       }
       else{
-        llvm::Function* func_real = generator->module->getFunction((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+        llvm::Function* func_real = generator->module->getFunction(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier);
         if(func_real == nullptr){
           return IRError("postfix_expression error: undefined function");
         }
