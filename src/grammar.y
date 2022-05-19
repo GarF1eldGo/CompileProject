@@ -20,7 +20,7 @@ stack<exprAST*> tokenStack;
 }
 
 //终结符定义与其类型定义
-%token <exprPtr> IDENTIFIER CONSTANT STRING_LITERAL SIZEOF
+%token <exprPtr> IDENTIFIER CONSTANT STRING_LITERAL SIZEOF CHAR_LITERAL
 %token <exprPtr> INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
 %token <exprPtr> AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
 %token <exprPtr> SUB_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN
@@ -636,6 +636,13 @@ primary_expression
 		children.push_back($2);
 		children.push_back(right);
 		$$ = new primary_expression("primary_expression", 4, children);
+	}
+	| CHAR_LITERAL {
+		exprAST* charLiteral = tokenStack.top();
+		tokenStack.pop();
+		vector<exprAST*> children;
+		children.push_back(charLiteral);
+		$$ = new primary_expression("primary_expression", 5, children);
 	}
 	;
 

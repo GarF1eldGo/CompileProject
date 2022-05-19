@@ -17,6 +17,7 @@ identifier {letter}{letgit}*
 
 integer {digit}+
 float {digit}+"."{digit}+
+char \'(\\.|[^"\\])\'
 string \"(\\.|[^"\\])*\"
 
 comment \/\/[^\n]*
@@ -99,10 +100,18 @@ comment \/\/[^\n]*
     return CONSTANT;
     }
 {string} {
-    exprAST* oneString = new stringAST(yytext);
+    // exprAST* oneString = new stringAST(yytext);
+    string str = yytext;
+    str = str.substring(1, str.length()-1);//去掉两侧的双引号
+    exprAST* oneString = new stringAST(str);
     tokenStack.push(oneString);
     return STRING_LITERAL;
     }
+{char} {
+    exprAST* oneChar = new charAST(yytext[1]);//直接读取中间的字符
+    tokenStack.push(oneChar);
+    return CHAR_LITERAL;
+}
 {identifier} {
     exprAST* id = new identifierAST(yytext);
     tokenStack.push(id);
