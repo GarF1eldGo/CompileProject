@@ -13,7 +13,7 @@ int main(){
 	//AST可视化
 	// ROOT->createJsonFile("visualize/ast.json");
 	//IR生成
-	cout<<"ast ok"<<endl;
+	//cout<<"ast ok"<<endl;
 	generator->generate(ROOT);
 
 	return 0;

@@ -894,7 +894,7 @@ iteration_statement
 		children.push_back($4);
 		children.push_back(right);
 		children.push_back($6);
-		$$ = new iteration_statement("iteration_statement", 3, children);
+		$$ = new iteration_statement("iteration_statement", 2, children);
 	}
 	| FOR '(' expression_statement expression_statement expression ')' statement { 
 		exprAST* oneFOR = new keywordAST("for");
@@ -908,7 +908,7 @@ iteration_statement
 		children.push_back($5);
 		children.push_back(right);
 		children.push_back($7);
-		$$ = new iteration_statement("iteration_statement", 4, children);
+		$$ = new iteration_statement("iteration_statement", 3, children);
 	}
 	| FOR '(' declaration expression_statement expression ')' statement {
 		exprAST* oneFOR = new keywordAST("for");
@@ -922,7 +922,7 @@ iteration_statement
 		children.push_back($5);
 		children.push_back(right);
 		children.push_back($7);
-		$$ = new iteration_statement("iteration_statement", 5, children);
+		$$ = new iteration_statement("iteration_statement", 4, children);
 	}
 	;
 

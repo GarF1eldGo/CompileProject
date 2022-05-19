@@ -10,6 +10,7 @@
 #include "llvm/IR/Verifier.h"
 #include <iostream>
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/Bitcode/BitcodeWriter.h"
 #define DEBUG
 // #include "llvm/ADT/APFloat.h"
 // #include "llvm/ADT/Optional.h"
@@ -78,7 +79,8 @@ codeGen::codeGen(){
 
 void codeGen::generate(exprAST* ROOT) {
   ROOT->CodeGen();
-  this->module->print(llvm::outs(), nullptr);
+  //this->module->print(llvm::outs(), nullptr);
+  this->module->dump();
 }
 
 codeGen *generator = new codeGen();
@@ -1533,11 +1535,12 @@ llvm::Value* iteration_statement::CodeGen() {
   }
   case 4: {
     Function* func = builder.GetInsertBlock()->getParent();
-    expression_statement* init = dynamic_cast<expression_statement*>(this->children[2]);
+    //expression_statement* init = dynamic_cast<expression_statement*>(this->children[2]);
     expression_statement* cond = dynamic_cast<expression_statement*>(this->children[3]);
-    expression* incr = this->type == 2 ? nullptr : dynamic_cast<expression*>(this->children[5]);
+    expression* incr = this->type == 2 ? nullptr : dynamic_cast<expression*>(this->children[4]);
     statement* body = dynamic_cast<statement*>(this->type == 2 ? this->children[5] : this->children[6]);
-    init->CodeGen();
+    //init->CodeGen();
+    this->children[2]->CodeGen();
     BasicBlock *loop = BasicBlock::Create(context, "forloop", func);
     BasicBlock *cont = BasicBlock::Create(context, "forcont", func);
     Value* cond_value = cond->CodeGen();
