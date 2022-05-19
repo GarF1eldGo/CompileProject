@@ -9,6 +9,7 @@
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Verifier.h"
 #include <iostream>
+#include "llvm/Support/raw_ostream.h"
 #define DEBUG
 // #include "llvm/ADT/APFloat.h"
 // #include "llvm/ADT/Optional.h"
@@ -106,6 +107,13 @@ Type* get_type(int type) {
 llvm::Value* IRError(string msg){
   cout<<msg<<endl;
   return nullptr;
+}
+
+string type2str(Value *x) {
+  std::string type_str;
+  llvm::raw_string_ostream rso(type_str);
+  x->getType()->print(rso);
+  return rso.str();
 }
 
 
@@ -1311,7 +1319,6 @@ llvm::Value* declarator::CodeGen() {
   this->clear();
   switch (this->type) {
   case 1: {
-    cout << this->children[0] << dynamic_cast<identifierAST*>(this->children[0])->identifier << endl; // -debug
     this->name = dynamic_cast<identifierAST*>(this->children[0])->identifier;
     break;
   }

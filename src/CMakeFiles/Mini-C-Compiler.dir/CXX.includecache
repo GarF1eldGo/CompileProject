@@ -65,6 +65,8 @@ llvm/IR/Verifier.h
 /home/lumina/Documents/CompileProject/src/llvm/IR/Verifier.h
 iostream
 -
+llvm/Support/raw_ostream.h
+/home/lumina/Documents/CompileProject/src/llvm/Support/raw_ostream.h
 
 /home/lumina/Documents/CompileProject/src/code_gen.h
 iostream
