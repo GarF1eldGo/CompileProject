@@ -58,42 +58,43 @@ extern int yydebug;
     CONSTANT = 259,                /* CONSTANT  */
     STRING_LITERAL = 260,          /* STRING_LITERAL  */
     SIZEOF = 261,                  /* SIZEOF  */
-    INC_OP = 262,                  /* INC_OP  */
-    DEC_OP = 263,                  /* DEC_OP  */
-    LEFT_OP = 264,                 /* LEFT_OP  */
-    RIGHT_OP = 265,                /* RIGHT_OP  */
-    LE_OP = 266,                   /* LE_OP  */
-    GE_OP = 267,                   /* GE_OP  */
-    EQ_OP = 268,                   /* EQ_OP  */
-    NE_OP = 269,                   /* NE_OP  */
-    AND_OP = 270,                  /* AND_OP  */
-    OR_OP = 271,                   /* OR_OP  */
-    MUL_ASSIGN = 272,              /* MUL_ASSIGN  */
-    DIV_ASSIGN = 273,              /* DIV_ASSIGN  */
-    MOD_ASSIGN = 274,              /* MOD_ASSIGN  */
-    ADD_ASSIGN = 275,              /* ADD_ASSIGN  */
-    SUB_ASSIGN = 276,              /* SUB_ASSIGN  */
-    LEFT_ASSIGN = 277,             /* LEFT_ASSIGN  */
-    RIGHT_ASSIGN = 278,            /* RIGHT_ASSIGN  */
-    AND_ASSIGN = 279,              /* AND_ASSIGN  */
-    XOR_ASSIGN = 280,              /* XOR_ASSIGN  */
-    OR_ASSIGN = 281,               /* OR_ASSIGN  */
-    CHAR = 282,                    /* CHAR  */
-    SHORT = 283,                   /* SHORT  */
-    INT = 284,                     /* INT  */
-    LONG = 285,                    /* LONG  */
-    FLOAT = 286,                   /* FLOAT  */
-    DOUBLE = 287,                  /* DOUBLE  */
-    VOID = 288,                    /* VOID  */
-    ELLIPSIS = 289,                /* ELLIPSIS  */
-    IF = 290,                      /* IF  */
-    ELSE = 291,                    /* ELSE  */
-    WHILE = 292,                   /* WHILE  */
-    DO = 293,                      /* DO  */
-    FOR = 294,                     /* FOR  */
-    CONTINUE = 295,                /* CONTINUE  */
-    BREAK = 296,                   /* BREAK  */
-    RETURN = 297                   /* RETURN  */
+    CHAR_LITERAL = 262,            /* CHAR_LITERAL  */
+    INC_OP = 263,                  /* INC_OP  */
+    DEC_OP = 264,                  /* DEC_OP  */
+    LEFT_OP = 265,                 /* LEFT_OP  */
+    RIGHT_OP = 266,                /* RIGHT_OP  */
+    LE_OP = 267,                   /* LE_OP  */
+    GE_OP = 268,                   /* GE_OP  */
+    EQ_OP = 269,                   /* EQ_OP  */
+    NE_OP = 270,                   /* NE_OP  */
+    AND_OP = 271,                  /* AND_OP  */
+    OR_OP = 272,                   /* OR_OP  */
+    MUL_ASSIGN = 273,              /* MUL_ASSIGN  */
+    DIV_ASSIGN = 274,              /* DIV_ASSIGN  */
+    MOD_ASSIGN = 275,              /* MOD_ASSIGN  */
+    ADD_ASSIGN = 276,              /* ADD_ASSIGN  */
+    SUB_ASSIGN = 277,              /* SUB_ASSIGN  */
+    LEFT_ASSIGN = 278,             /* LEFT_ASSIGN  */
+    RIGHT_ASSIGN = 279,            /* RIGHT_ASSIGN  */
+    AND_ASSIGN = 280,              /* AND_ASSIGN  */
+    XOR_ASSIGN = 281,              /* XOR_ASSIGN  */
+    OR_ASSIGN = 282,               /* OR_ASSIGN  */
+    CHAR = 283,                    /* CHAR  */
+    SHORT = 284,                   /* SHORT  */
+    INT = 285,                     /* INT  */
+    LONG = 286,                    /* LONG  */
+    FLOAT = 287,                   /* FLOAT  */
+    DOUBLE = 288,                  /* DOUBLE  */
+    VOID = 289,                    /* VOID  */
+    ELLIPSIS = 290,                /* ELLIPSIS  */
+    IF = 291,                      /* IF  */
+    ELSE = 292,                    /* ELSE  */
+    WHILE = 293,                   /* WHILE  */
+    DO = 294,                      /* DO  */
+    FOR = 295,                     /* FOR  */
+    CONTINUE = 296,                /* CONTINUE  */
+    BREAK = 297,                   /* BREAK  */
+    RETURN = 298                   /* RETURN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -106,7 +107,7 @@ union YYSTYPE
 
 	class exprAST* exprPtr;
 
-#line 110 "/home/lumina/Documents/CompileProject/src/grammar.hpp"
+#line 111 "/home/lumina/Documents/CompileProject/src/grammar.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

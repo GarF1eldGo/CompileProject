@@ -1,9 +1,4 @@
-int x = 0;
-
-int add(int a) {
-  return a + 1;
-}
-
 int main() {
-  x = add(x);
+  int x[5];
+  x[3] = 2;
 }
