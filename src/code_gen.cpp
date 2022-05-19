@@ -58,7 +58,9 @@ llvm::Function* codeGen::createPrintf()
 
 llvm::Function* codeGen::createScanf()
 {
-  auto scanf_type = llvm::FunctionType::get(builder.getInt32Ty(), true);
+  std::vector<llvm::Type*> arg_types;
+  arg_types.push_back(builder.getInt8PtrTy());
+  auto scanf_type = llvm::FunctionType::get(builder.getInt32Ty(), llvm::makeArrayRef(arg_types), true);
   auto func = llvm::Function::Create(scanf_type, llvm::Function::ExternalLinkage, llvm::Twine("scanf"), this->module);
   func->setCallingConv(llvm::CallingConv::C);
   return func;
@@ -110,6 +112,7 @@ llvm::Value* IRError(string msg){
 llvm::Value* findValue(const std::string & name) {
   //llvm::Value * result = generator->funStack.top()->getValueSymbolTable()->lookup(name);
   llvm::Value * result = builder.GetInsertBlock()->getParent()->getValueSymbolTable()->lookup(name);
+  // result = result->load();
   if (result != nullptr) {
     return result;
   }

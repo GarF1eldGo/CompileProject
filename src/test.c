@@ -1,9 +1,6 @@
-int x = 0;
-
-int add(int a) {
-  return a + 1;
-}
-
 int main() {
-  x = add(x);
+  int x = 0;
+  printf("ok %d", x);
+  printf("hello");
+  printf("world");
 }
