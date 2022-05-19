@@ -1537,7 +1537,7 @@ yyreduce:
 		tokenStack.pop();
 		vector<exprAST*> children;
 		children.push_back(id);
-		(yyval.exprPtr) = new nonleafAST("declarator", 1, children);
+		(yyval.exprPtr) = new declarator("declarator", 1, children);
 	}
 #line 1543 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
@@ -1551,7 +1551,7 @@ yyreduce:
 		children.push_back(left);
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
-		(yyval.exprPtr) = new nonleafAST("declarator", 2, children);
+		(yyval.exprPtr) = new declarator("declarator", 2, children);
 	}
 #line 1557 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
@@ -1566,7 +1566,7 @@ yyreduce:
 		children.push_back(left);
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
-		(yyval.exprPtr) = new nonleafAST("declarator", 3, children);
+		(yyval.exprPtr) = new declarator("declarator", 3, children);
 	}
 #line 1572 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
@@ -1580,7 +1580,7 @@ yyreduce:
 		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(left);
 		children.push_back(right);
-		(yyval.exprPtr) = new nonleafAST("declarator", 4, children);
+		(yyval.exprPtr) = new declarator("declarator", 4, children);
 	}
 #line 1586 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
@@ -1595,7 +1595,7 @@ yyreduce:
 		children.push_back(left);
 		children.push_back((yyvsp[-1].exprPtr));
 		children.push_back(right);
-		(yyval.exprPtr) = new nonleafAST("declarator", 5, children);
+		(yyval.exprPtr) = new declarator("declarator", 5, children);
 	}
 #line 1601 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
@@ -1609,7 +1609,7 @@ yyreduce:
 		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(left);
 		children.push_back(right);
-		(yyval.exprPtr) = new nonleafAST("declarator", 6, children);
+		(yyval.exprPtr) = new declarator("declarator", 6, children);
 	}
 #line 1615 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;

@@ -108,7 +108,8 @@ llvm::Value* IRError(string msg){
 
 
 llvm::Value* findValue(const std::string & name) {
-  llvm::Value * result = generator->funStack.top()->getValueSymbolTable()->lookup(name);
+  //llvm::Value * result = generator->funStack.top()->getValueSymbolTable()->lookup(name);
+  llvm::Value * result = builder.GetInsertBlock()->getParent()->getValueSymbolTable()->lookup(name);
   if (result != nullptr) {
     return result;
   }
@@ -125,43 +126,51 @@ llvm::Value* primary_expression::CodeGen(){
   cout<<"primary_expression type:"<<this->type<<endl;
 #endif
   switch(this->type){
-  case 1: {
-    llvm::Value* tmp = this->children[0]->CodeGen();
-    llvm::Value* rs = findValue((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
-    if(rs == nullptr){
-      return IRError("primary_expression error in leaf node: IDENTIFIER");
+    case 1: {
+      // llvm::Value* tmp = this->children[0]->CodeGen();
+      llvm::Value* rs = findValue((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+      if(rs == nullptr){
+        return IRError("primary_expression error in leaf node: IDENTIFIER");
+      }
+      else{
+        return  rs;
+      }
+      return rs;
     }
-    else{
-      return  rs;
+    case 2: {
+      // llvm::Value* tmp = this->children[0]->CodeGen();
+      // if(tmp == nullptr){
+      //     return IRError("postfix_expression error in leaf node: primary_expression");
+      // }
+      if((dynamic_cast<constantAST*>(this->children[0]))->type == 1){
+        // return builder.getInt32((int)((dynamic_cast<constantAST*>(this->children[0]))->value));
+        return llvm::ConstantInt::get(builder.getInt32Ty(), (int)(dynamic_cast<constantAST*>(this->children[0])->value));
+      }
+      else{
+        return llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)((dynamic_cast<constantAST*>(this->children[0]))->value)));
+      }
     }
-    return rs;
-  }
-  case 2: {
-    // llvm::Value* tmp = this->children[0]->CodeGen();
-    // if(tmp == nullptr){
-    //     return IRError("postfix_expression error in leaf node: primary_expression");
-    // }
-    if((dynamic_cast<constantAST*>(this->children[0]))->type == 1){
-      // return builder.getInt32((int)((dynamic_cast<constantAST*>(this->children[0]))->value));
-      return llvm::ConstantInt::get(builder.getInt32Ty(), (int)(dynamic_cast<constantAST*>(this->children[0])->value));
+    case 3:{
+      string str = (dynamic_cast<stringAST*>(this->children[0])->value);
+      llvm::Constant *strConst = llvm::ConstantDataArray::getString(context, str);
+      llvm::Value *globalVar = new llvm::GlobalVariable(*generator->module, strConst->getType(), true, llvm::GlobalValue::PrivateLinkage, strConst, "_Const_String_");
+      vector<llvm::Value*> indexList;
+      indexList.push_back(builder.getInt32(0));
+      indexList.push_back(builder.getInt32(0));
+      // var value
+      llvm::Value * varPtr = builder.CreateInBoundsGEP(globalVar, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+      return varPtr;
     }
-    else{
-      return llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)((dynamic_cast<constantAST*>(this->children[0]))->value)));
-    }
-  }
-  case 3:{
-    // 1;
-  }
-  case 4: {
-    llvm::Value* tmp = this->children[1]->CodeGen();
-    if(tmp == nullptr){
-      return IRError("primary_expression error in leaf node: expression");
-    }
-    else{
-      return  tmp;
-    }
+    case 4: {
+      llvm::Value* tmp = this->children[1]->CodeGen();
+      if(tmp == nullptr){
+        return IRError("primary_expression error in leaf node: expression");
+      }
+      else{
+        return  tmp;
+      }
 
-  }
+    }
   }
   return nullptr;
 }
@@ -217,7 +226,7 @@ llvm::Value* postfix_expression::CodeGen(){
   }
   case 3: {
     // llvm::Value* func = this->children[0]->CodeGen();
-    if((dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("printf") == 0||(dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("scanf") == 0){
+    if(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("printf") == 0||dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("scanf") == 0){
       return IRError("postfix_expression error: printf() or scanf() is not allowed");
     }
     else{
@@ -237,14 +246,14 @@ llvm::Value* postfix_expression::CodeGen(){
       return IRError("postfix_expression error in leaf node: argument_expression_list");
     }
     else{
-      if((dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("printf") == 0){
+      if(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("printf") == 0){
         return builder.CreateCall(generator->printf, *arg, "printf");
       }
-      else if((dynamic_cast<identifierAST*>(this->children[0]))->identifier.compare("scanf") == 0){
+      else if(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("scanf") == 0){
         return builder.CreateCall(generator->scanf, *arg, "scanf");
       }
       else{
-        llvm::Function* func_real = generator->module->getFunction((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+        llvm::Function* func_real = generator->module->getFunction(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier);
         if(func_real == nullptr){
           return IRError("postfix_expression error: undefined function");
         }
@@ -266,6 +275,7 @@ llvm::Value* postfix_expression::CodeGen(){
       return builder.CreateFAdd(tmp, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpAddf");
     }
     else{
+      // cout<<tmp->getType()<<endl;
       return IRError("postfix_expression error: bool/char type could not associate with '++' operator");
     }
   }
@@ -366,7 +376,7 @@ llvm::Value* unary_expression::CodeGen(){
     if(tmp == nullptr){
       return IRError("unary_expression error in leaf node: unary_expression");
     }
-    else if(tmp->getType() == llvm::Type::getInt1Ty(context)){
+    else if(tmp->getType() == llvm::Type::getInt32Ty(context)){
       return builder.CreateAdd(tmp, builder.getInt32(1), "tmpAdd");
     }
     else if(tmp->getType() == llvm::Type::getFloatTy(context)){
@@ -1075,7 +1085,7 @@ llvm::Value* assignment_expression::CodeGen(){
           return builder.CreateStore(tmp3, tmp1);
         }
       }
-      else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("MUL_ASSIGN") == 0){
+      else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("*=") == 0){
         if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp3->getType() == llvm::Type::getInt1Ty(context)){
           return IRError("assignment_expression error in leaf node: bool type could not be connected by '*=' operator");
         }
@@ -1093,7 +1103,7 @@ llvm::Value* assignment_expression::CodeGen(){
           return builder.CreateStore(tmpexp, tmp1);
         }
       }
-      else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("DIV_ASSIGN") == 0){
+      else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("/=") == 0){
         if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp3->getType() == llvm::Type::getInt1Ty(context)){
           return IRError("assignment_expression error in leaf node: bool type could not be connected by '/=' operator");
         }
@@ -1110,7 +1120,7 @@ llvm::Value* assignment_expression::CodeGen(){
       else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("MOD_ASSIGN") == 0){
                     
       }
-      else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("ADD_ASSIGN") == 0){
+      else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("+=") == 0){
         if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp3->getType() == llvm::Type::getInt1Ty(context)){
           return IRError("assignment_expression error in leaf node: bool type could not be connected by '+=' operator");
         }
@@ -1128,7 +1138,7 @@ llvm::Value* assignment_expression::CodeGen(){
           return builder.CreateStore(tmpexp, tmp1);
         }
       }
-      else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("SUB_ASSIGN") == 0){
+      else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("-=") == 0){
         if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp3->getType() == llvm::Type::getInt1Ty(context)){
           return IRError("assignment_expression error in leaf node: bool type could not be connected by '-=' operator");
         }
@@ -1342,6 +1352,7 @@ llvm::Value* init_declarator::CodeGen() {
   this->clear();
   this->children[0]->CodeGen();
   declarator* decl = dynamic_cast<declarator*>(this->children[0]);
+  //cout << decl->name << endl;
 switch (this->type) {
  case 1:{
    this->decl = decl;
@@ -1604,6 +1615,43 @@ llvm::Value* constant_expression::CodeGen() {
     cout<<"constant_expression type:"<<this->type<<endl;
   #endif
   return this->children[0]->CodeGen();
+}
+
+llvm::Value* statement_list::CodeGen() {
+  switch (this->type) {
+  case 1: {
+    this->children[0]->CodeGen();
+    break;
+  }
+  case 2: {
+    this->children[0]->CodeGen();
+    this->children[1]->CodeGen();
+    break;
+  }
+  }
+  return nullptr;
+}
+
+llvm::Value* compound_statement::CodeGen() {
+  switch (this->type) {
+  case 1: {
+    break;
+  }
+  case 2: {
+    this->children[1]->CodeGen();
+    break;
+  }
+  case 3: {
+    this->children[1]->CodeGen();
+    break;
+  }
+  case 4:{
+    this->children[1]->CodeGen();
+    this->children[2]->CodeGen();
+    break;
+  }
+  }
+  return nullptr;
 }
 
 llvm::Type* build_array(Type *array_type, vector<ConstantInt*> array_size) {

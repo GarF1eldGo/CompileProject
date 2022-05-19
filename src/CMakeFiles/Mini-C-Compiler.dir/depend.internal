@@ -4,15 +4,6 @@
 src/CMakeFiles/Mini-C-Compiler.dir/ast.cpp.o
  /home/lumina/Documents/CompileProject/src/ast.cpp
  /home/lumina/Documents/CompileProject/src/ast.h
- /usr/include/jsoncpp/json/allocator.h
- /usr/include/jsoncpp/json/config.h
- /usr/include/jsoncpp/json/forwards.h
- /usr/include/jsoncpp/json/json.h
- /usr/include/jsoncpp/json/json_features.h
- /usr/include/jsoncpp/json/reader.h
- /usr/include/jsoncpp/json/value.h
- /usr/include/jsoncpp/json/version.h
- /usr/include/jsoncpp/json/writer.h
  /usr/include/llvm-13/llvm/ADT/APFloat.h
  /usr/include/llvm-13/llvm/ADT/APInt.h
  /usr/include/llvm-13/llvm/ADT/APSInt.h
@@ -163,15 +154,6 @@ src/CMakeFiles/Mini-C-Compiler.dir/code_gen.cpp.o
  /home/lumina/Documents/CompileProject/src/ast.h
  /home/lumina/Documents/CompileProject/src/code_gen.cpp
  /home/lumina/Documents/CompileProject/src/code_gen.h
- /usr/include/jsoncpp/json/allocator.h
- /usr/include/jsoncpp/json/config.h
- /usr/include/jsoncpp/json/forwards.h
- /usr/include/jsoncpp/json/json.h
- /usr/include/jsoncpp/json/json_features.h
- /usr/include/jsoncpp/json/reader.h
- /usr/include/jsoncpp/json/value.h
- /usr/include/jsoncpp/json/version.h
- /usr/include/jsoncpp/json/writer.h
  /usr/include/llvm-13/llvm/ADT/APFloat.h
  /usr/include/llvm-13/llvm/ADT/APInt.h
  /usr/include/llvm-13/llvm/ADT/APSInt.h
@@ -353,15 +335,6 @@ src/CMakeFiles/Mini-C-Compiler.dir/grammar.cpp.o
  /home/lumina/Documents/CompileProject/src/define.cpp
  /home/lumina/Documents/CompileProject/src/grammar.cpp
  /home/lumina/Documents/CompileProject/src/grammar.hpp
- /usr/include/jsoncpp/json/allocator.h
- /usr/include/jsoncpp/json/config.h
- /usr/include/jsoncpp/json/forwards.h
- /usr/include/jsoncpp/json/json.h
- /usr/include/jsoncpp/json/json_features.h
- /usr/include/jsoncpp/json/reader.h
- /usr/include/jsoncpp/json/value.h
- /usr/include/jsoncpp/json/version.h
- /usr/include/jsoncpp/json/writer.h
  /usr/include/llvm-13/llvm/ADT/APFloat.h
  /usr/include/llvm-13/llvm/ADT/APInt.h
  /usr/include/llvm-13/llvm/ADT/APSInt.h
@@ -513,15 +486,6 @@ src/CMakeFiles/Mini-C-Compiler.dir/main.cpp.o
  /home/lumina/Documents/CompileProject/src/code_gen.h
  /home/lumina/Documents/CompileProject/src/grammar.hpp
  /home/lumina/Documents/CompileProject/src/main.cpp
- /usr/include/jsoncpp/json/allocator.h
- /usr/include/jsoncpp/json/config.h
- /usr/include/jsoncpp/json/forwards.h
- /usr/include/jsoncpp/json/json.h
- /usr/include/jsoncpp/json/json_features.h
- /usr/include/jsoncpp/json/reader.h
- /usr/include/jsoncpp/json/value.h
- /usr/include/jsoncpp/json/version.h
- /usr/include/jsoncpp/json/writer.h
  /usr/include/llvm-13/llvm/ADT/APFloat.h
  /usr/include/llvm-13/llvm/ADT/APInt.h
  /usr/include/llvm-13/llvm/ADT/APSInt.h

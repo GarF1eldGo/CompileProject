@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/usr/include/jsoncpp -I/usr/include/llvm-13 -I/usr/include/llvm-c-13 -I/home/lumina/Documents/CompileProject/src -I/usr/lib/llvm-13/include
 
-CXX_FLAGS = 
+CXX_FLAGS = -g
 

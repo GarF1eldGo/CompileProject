@@ -111,7 +111,7 @@ declarator
 		tokenStack.pop();
 		vector<exprAST*> children;
 		children.push_back(id);
-		$$ = new nonleafAST("declarator", 1, children);
+		$$ = new declarator("declarator", 1, children);
 	}
 	| '(' declarator ')' { 
 		exprAST* left = new punctuationAST("(");
@@ -120,7 +120,7 @@ declarator
 		children.push_back(left);
 		children.push_back($2);
 		children.push_back(right);
-		$$ = new nonleafAST("declarator", 2, children);
+		$$ = new declarator("declarator", 2, children);
 	}
 	| declarator '[' constant_expression ']' { 
 		exprAST* left = new punctuationAST("[");
@@ -130,7 +130,7 @@ declarator
 		children.push_back(left);
 		children.push_back($3);
 		children.push_back(right);
-		$$ = new nonleafAST("declarator", 3, children);
+		$$ = new declarator("declarator", 3, children);
 	}
 	| declarator '[' ']' { 
 		exprAST* left = new punctuationAST("[");
@@ -139,7 +139,7 @@ declarator
 		children.push_back($1);
 		children.push_back(left);
 		children.push_back(right);
-		$$ = new nonleafAST("declarator", 4, children);
+		$$ = new declarator("declarator", 4, children);
 	}
 	| declarator '(' parameter_list ')' { 
 		exprAST* left = new punctuationAST("(");
@@ -149,7 +149,7 @@ declarator
 		children.push_back(left);
 		children.push_back($3);
 		children.push_back(right);
-		$$ = new nonleafAST("declarator", 5, children);
+		$$ = new declarator("declarator", 5, children);
 	}
 	| declarator '(' ')' { 
 		exprAST* left = new punctuationAST("(");
@@ -158,7 +158,7 @@ declarator
 		children.push_back($1);
 		children.push_back(left);
 		children.push_back(right);
-		$$ = new nonleafAST("declarator", 6, children);
+		$$ = new declarator("declarator", 6, children);
 	}
 	;
 
