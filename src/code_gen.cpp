@@ -9,6 +9,8 @@
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Verifier.h"
 #include <iostream>
+#include "llvm/Support/raw_ostream.h"
+#include "llvm/Bitcode/BitcodeWriter.h"
 #define DEBUG
 // #include "llvm/ADT/APFloat.h"
 // #include "llvm/ADT/Optional.h"
@@ -58,7 +60,9 @@ llvm::Function* codeGen::createPrintf()
 
 llvm::Function* codeGen::createScanf()
 {
-  auto scanf_type = llvm::FunctionType::get(builder.getInt32Ty(), true);
+  std::vector<llvm::Type*> arg_types;
+  arg_types.push_back(builder.getInt8PtrTy());
+  auto scanf_type = llvm::FunctionType::get(builder.getInt32Ty(), llvm::makeArrayRef(arg_types), true);
   auto func = llvm::Function::Create(scanf_type, llvm::Function::ExternalLinkage, llvm::Twine("scanf"), this->module);
   func->setCallingConv(llvm::CallingConv::C);
   return func;
@@ -76,6 +80,7 @@ codeGen::codeGen(){
 void codeGen::generate(exprAST* ROOT) {
   ROOT->CodeGen();
   this->module->print(llvm::outs(), nullptr);
+  // this->module->dump();
 }
 
 codeGen *generator = new codeGen();
@@ -106,10 +111,19 @@ llvm::Value* IRError(string msg){
   return nullptr;
 }
 
+string type2str(Value *x) {
+  std::string type_str;
+  llvm::raw_string_ostream rso(type_str);
+  x->getType()->print(rso);
+  return rso.str();
+}
+
 
 llvm::Value* findValue(const std::string & name) {
   //llvm::Value * result = generator->funStack.top()->getValueSymbolTable()->lookup(name);
   llvm::Value * result = builder.GetInsertBlock()->getParent()->getValueSymbolTable()->lookup(name);
+  // result = result->load();
+  // result = llvm::LoadInst::LoadInst(result->getType()->getPointerElementType(), result, "load", builder.GetInsertBlock());
   if (result != nullptr) {
     return result;
   }
@@ -126,51 +140,56 @@ llvm::Value* primary_expression::CodeGen(){
   cout<<"primary_expression type:"<<this->type<<endl;
 #endif
   switch(this->type){
-    case 1: {
-      // llvm::Value* tmp = this->children[0]->CodeGen();
-      llvm::Value* rs = findValue((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
-      if(rs == nullptr){
-        return IRError("primary_expression error in leaf node: IDENTIFIER");
-      }
-      else{
-        return  rs;
-      }
+  case 1: {
+    // llvm::Value* tmp = this->children[0]->CodeGen();
+    llvm::Value* rs = findValue((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+    if(rs == nullptr){
+      return IRError("primary_expression error in leaf node: IDENTIFIER");
+    }
+    else{
       return rs;
-    }
-    case 2: {
-      // llvm::Value* tmp = this->children[0]->CodeGen();
-      // if(tmp == nullptr){
-      //     return IRError("postfix_expression error in leaf node: primary_expression");
+      // if (rs->getType()->isPointerTy() && !(rs->getType()->getPointerElementType()->isArrayTy())) {
+      //   return builder.CreateLoad(rs->getType()->getPointerElementType(), rs, "tmpvar");
       // }
-      if((dynamic_cast<constantAST*>(this->children[0]))->type == 1){
-        // return builder.getInt32((int)((dynamic_cast<constantAST*>(this->children[0]))->value));
-        return llvm::ConstantInt::get(builder.getInt32Ty(), (int)(dynamic_cast<constantAST*>(this->children[0])->value));
-      }
-      else{
-        return llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)((dynamic_cast<constantAST*>(this->children[0]))->value)));
-      }
+      // else{
+      //   return rs;
+      // }
     }
-    case 3:{
-      string str = (dynamic_cast<stringAST*>(this->children[0])->value);
-      llvm::Constant *strConst = llvm::ConstantDataArray::getString(context, str);
-      llvm::Value *globalVar = new llvm::GlobalVariable(*generator->module, strConst->getType(), true, llvm::GlobalValue::PrivateLinkage, strConst, "_Const_String_");
-      vector<llvm::Value*> indexList;
-      indexList.push_back(builder.getInt32(0));
-      indexList.push_back(builder.getInt32(0));
-      // var value
-      llvm::Value * varPtr = builder.CreateInBoundsGEP(globalVar, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
-      return varPtr;
+  }
+  case 2: {
+    // llvm::Value* tmp = this->children[0]->CodeGen();
+    // if(tmp == nullptr){
+    //     return IRError("postfix_expression error in leaf node: primary_expression");
+    // }
+    if((dynamic_cast<constantAST*>(this->children[0]))->type == 1){
+      // return builder.getInt32((int)((dynamic_cast<constantAST*>(this->children[0]))->value));
+      return llvm::ConstantInt::get(builder.getInt32Ty(), (int)(dynamic_cast<constantAST*>(this->children[0])->value));
     }
-    case 4: {
-      llvm::Value* tmp = this->children[1]->CodeGen();
-      if(tmp == nullptr){
-        return IRError("primary_expression error in leaf node: expression");
-      }
-      else{
-        return  tmp;
-      }
+    else{
+      return llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)((dynamic_cast<constantAST*>(this->children[0]))->value)));
+    }
+  }
+  case 3:{
+    string str = (dynamic_cast<stringAST*>(this->children[0])->value);
+    llvm::Constant *strConst = llvm::ConstantDataArray::getString(context, str);
+    llvm::Value *globalVar = new llvm::GlobalVariable(*generator->module, strConst->getType(), true, llvm::GlobalValue::PrivateLinkage, strConst, "_Const_String_");
+    vector<llvm::Value*> indexList;
+    indexList.push_back(builder.getInt32(0));
+    indexList.push_back(builder.getInt32(0));
+    // var value
+    llvm::Value * varPtr = builder.CreateInBoundsGEP(globalVar, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+    return varPtr;
+  }
+  case 4: {
+    llvm::Value* tmp = this->children[1]->CodeGen();
+    if(tmp == nullptr){
+      return IRError("primary_expression error in leaf node: expression");
+    }
+    else{
+      return  tmp;
+    }
 
-    }
+  }
   }
   return nullptr;
 }
@@ -193,10 +212,26 @@ llvm::Value* postfix_expression::CodeGen(){
   case 2: {
     llvm::Value* ary = this->children[0]->CodeGen();
     llvm::Value* index = this->children[2]->CodeGen();
+    llvm::Value* aryvalue = nullptr;
+    llvm::Value* indexvalue = nullptr; 
     if(ary == nullptr || index == nullptr){
       return IRError("postfix_expression error in leaf node: postfix_expression or expression");
     }
-    else if(index->getType() != llvm::Type::getInt32Ty(context)){
+    else{
+      if (ary->getType()->isPointerTy() && !(ary->getType()->getPointerElementType()->isArrayTy())) {
+          aryvalue = builder.CreateLoad(ary->getType()->getPointerElementType(), ary, "tmpvar");
+      }
+      else {
+          aryvalue = ary;
+      }
+      if (index->getType()->isPointerTy() && !(index->getType()->getPointerElementType()->isArrayTy())) {
+          indexvalue = builder.CreateLoad(index->getType()->getPointerElementType(), index, "tmpvar");
+      }
+      else {
+          indexvalue = index;
+      }
+    } 
+    if(indexvalue->getType() != llvm::Type::getInt32Ty(context)){
       return IRError("postfix_expression error: only int type can be used as index");
     }
     else{
@@ -219,9 +254,9 @@ llvm::Value* postfix_expression::CodeGen(){
       // }
       vector<llvm::Value*> indexList;
       indexList.push_back(builder.getInt32(0));
-      indexList.push_back(index);
-      llvm::Value * varPtr = builder.CreateInBoundsGEP(ary, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
-      return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
+      indexList.push_back(indexvalue);
+      llvm::Value * varPtr = builder.CreateInBoundsGEP(aryvalue, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+      return varPtr;
     }
   }
   case 3: {
@@ -265,30 +300,56 @@ llvm::Value* postfix_expression::CodeGen(){
   }
   case 5: {
     llvm::Value* tmp = this->children[0]->CodeGen();
+    llvm::Value* tmpvalue = nullptr;
     if(tmp == nullptr){
       return IRError("postfix_expression error in leaf node: postfix_expression");
     }
-    else if(tmp->getType() == llvm::Type::getInt32Ty(context)){
-      return builder.CreateAdd(tmp, builder.getInt32(1), "tmpAdd");
+    else{
+      if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+      }
+      else {
+          tmpvalue = tmp;
+      }
     }
-    else if(tmp->getType() == llvm::Type::getFloatTy(context)){
-      return builder.CreateFAdd(tmp, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpAddf");
+
+    if(tmpvalue->getType() == llvm::Type::getInt32Ty(context)){
+      llvm::Value* result = builder.CreateAdd(tmpvalue, builder.getInt32(1), "tmpAdd");
+      builder.CreateStore(result, tmp, "tmpstore");
+      return result;
+    }
+    else if(tmpvalue->getType() == llvm::Type::getFloatTy(context)){
+      llvm::Value* result = builder.CreateFAdd(tmpvalue, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpAddf");
+      builder.CreateStore(result, tmp, "tmpstore");
+      return result;
     }
     else{
-      // cout<<tmp->getType()<<endl;
       return IRError("postfix_expression error: bool/char type could not associate with '++' operator");
     }
   }
   case 6: {
     llvm::Value* tmp = this->children[0]->CodeGen();
+    llvm::Value* tmpvalue = nullptr;
     if(tmp == nullptr){
       return IRError("postfix_expression error in leaf node: postfix_expression");
     }
-    else if(tmp->getType() == llvm::Type::getInt32Ty(context)){
-      return builder.CreateSub(tmp, builder.getInt32(1), "tmpSub");
+    else{
+      if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+      }
+      else {
+          tmpvalue = tmp;
+      }
     }
-    else if(tmp->getType() == llvm::Type::getFloatTy(context)){
-      return builder.CreateFSub(tmp, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpSubf");
+    if(tmpvalue->getType() == llvm::Type::getInt32Ty(context)){
+      llvm::Value* result = builder.CreateSub(tmpvalue, builder.getInt32(1), "tmpSub");
+      builder.CreateStore(result, tmp, "tmpstore");
+      return result;
+    }
+    else if(tmpvalue->getType() == llvm::Type::getFloatTy(context)){
+      llvm::Value* result = builder.CreateFSub(tmpvalue, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpSubf");
+      builder.CreateStore(result, tmp, "tmpstore");
+      return result;
     }
     else{
       return IRError("postfix_expression error: bool/char type could not associate with '--' operator");
@@ -373,14 +434,27 @@ llvm::Value* unary_expression::CodeGen(){
   }
   case 2: {
     llvm::Value* tmp = this->children[1]->CodeGen();
+    llvm::Value* tmpvalue = nullptr;
     if(tmp == nullptr){
       return IRError("unary_expression error in leaf node: unary_expression");
     }
-    else if(tmp->getType() == llvm::Type::getInt32Ty(context)){
-      return builder.CreateAdd(tmp, builder.getInt32(1), "tmpAdd");
+    else{
+      if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+      }
+      else {
+          tmpvalue = tmp;
+      }
     }
-    else if(tmp->getType() == llvm::Type::getFloatTy(context)){
-      return builder.CreateFAdd(tmp, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpAddf");
+    if(tmpvalue->getType() == llvm::Type::getInt32Ty(context)){
+      llvm::Value* result = builder.CreateAdd(tmpvalue, builder.getInt32(1), "tmpAdd");
+      builder.CreateStore(result, tmp, "tmpstore");
+      return result;
+    }
+    else if(tmpvalue->getType() == llvm::Type::getFloatTy(context)){
+      llvm::Value* result = builder.CreateFAdd(tmpvalue, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpAddf");
+      builder.CreateStore(result, tmp, "tmpstore");
+      return result;
     }
     else{
       return IRError("unary_expression error: bool/char type could not associate with '++' operator");
@@ -388,14 +462,27 @@ llvm::Value* unary_expression::CodeGen(){
   }
   case 3: {
     llvm::Value* tmp = this->children[1]->CodeGen();
+    llvm::Value* tmpvalue = nullptr;
     if(tmp == nullptr){
       return IRError("unary_expression error in leaf node: unary_expression");
     }
-    else if(tmp->getType() == llvm::Type::getInt1Ty(context)){
-      return builder.CreateSub(tmp, builder.getInt32(1), "tmpSub");
+    else{
+      if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+      }
+      else {
+          tmpvalue = tmp;
+      }
     }
-    else if(tmp->getType() == llvm::Type::getFloatTy(context)){
-      return builder.CreateFSub(tmp, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpSubf");
+    if(tmpvalue->getType() == llvm::Type::getInt32Ty(context)){
+      llvm::Value* result = builder.CreateSub(tmpvalue, builder.getInt32(1), "tmpSub");
+      builder.CreateStore(result, tmp, "tmpstore");
+      return result;
+    }
+    else if(tmpvalue->getType() == llvm::Type::getFloatTy(context)){
+      llvm::Value* result = builder.CreateFSub(tmpvalue, llvm::ConstantFP::get(builder.getFloatTy(), llvm::APFloat((float)1)), "tmpSubf");
+      builder.CreateStore(result, tmp, "tmpstore");
+      return result;
     }
     else{
       return IRError("unary_expression error: bool/char type could not associate with '--' operator");
@@ -403,40 +490,44 @@ llvm::Value* unary_expression::CodeGen(){
   }
   case 4: {
     llvm::Value* tmp = this->children[1]->CodeGen();
+    llvm::Value* tmpvalue = nullptr;
     if(tmp == nullptr){
       return IRError("unary_expression error in leaf node: cast_expression");
     }
-    else if(tmp->getType() == llvm::Type::getInt8Ty(context)){
+    else{
+      if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+      }
+      else {
+          tmpvalue = tmp;
+      }
+    }
+    if(tmpvalue->getType() == llvm::Type::getInt8Ty(context)){
       return IRError("unary_expression error: char type could not associate with unary_operator");
     }
     else{
-      llvm::Value* rs = this->children[0]->CodeGen();
+      // llvm::Value* rs = this->children[0]->CodeGen();
       if((dynamic_cast<operatorAST*>(this->children[0]))->op.compare("-") == 0){
-        if(tmp->getType() == llvm::Type::getInt32Ty(context)){
-          return builder.CreateNeg(tmp, "tmpNeg");
+        if(tmpvalue->getType() == llvm::Type::getInt32Ty(context)){
+          return builder.CreateNeg(tmpvalue, "tmpNeg");
         }
-        else if(tmp->getType() == llvm::Type::getFloatTy(context)){
-          return builder.CreateFNeg(tmp, "tmpNegf");
+        else if(tmpvalue->getType() == llvm::Type::getFloatTy(context)){
+          return builder.CreateFNeg(tmpvalue, "tmpNegf");
         }
         else{
           return IRError("unary_expression error: bool type could not associate with '-' operator");
         }
       }
       else if((dynamic_cast<operatorAST*>(this->children[0]))->op.compare("!") == 0){
-        if(tmp->getType() == llvm::Type::getInt1Ty(context)){
-          return builder.CreateNot(tmp, "tmpNot");
+        if(tmpvalue->getType() == llvm::Type::getInt1Ty(context)){
+          return builder.CreateNot(tmpvalue, "tmpNot");
         }
         else{
-          return IRError("unary_expression error: int/float type could not associate with '~' operator");
+          return IRError("unary_expression error: int/float type could not associate with '!' operator");
         }
       }
-      else if((dynamic_cast<operatorAST*>(this->children[0]))->op.compare("-") == 0){
-        if(tmp->getType() == llvm::Type::getInt1Ty(context)){
-          return builder.CreateNot(tmp, "tmpNot");
-        }
-        else{
-          return IRError("unary_expression error: int/float type could not associate with '~' operator");
-        }
+      else if((dynamic_cast<operatorAST*>(this->children[0]))->op.compare("&") == 0){
+        return tmp;
       }
       else{
         return IRError("unary_expression error: illegal operator");
@@ -445,19 +536,29 @@ llvm::Value* unary_expression::CodeGen(){
   }
   case 5: {
     llvm::Value* tmp = this->children[1]->CodeGen();
+    llvm::Value* tmpvalue = nullptr;
+
     if(tmp == nullptr){
       return IRError("unary_expression error in leaf node: unary_expression");
     }
-    else if(tmp->getType() == llvm::Type::getInt1Ty(context)){
+    else{
+      if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+      }
+      else {
+          tmpvalue = tmp;
+      }
+    }
+    if(tmpvalue->getType() == llvm::Type::getInt1Ty(context)){
       return builder.getInt32(1);
     }
-    else if(tmp->getType() == llvm::Type::getInt32Ty(context)){
+    else if(tmpvalue->getType() == llvm::Type::getInt32Ty(context)){
       return builder.getInt32(4);
     }
-    else if(tmp->getType() == llvm::Type::getFloatTy(context)){
+    else if(tmpvalue->getType() == llvm::Type::getFloatTy(context)){
       return builder.getInt32(4);
     }
-    else if(tmp->getType() == llvm::Type::getInt8Ty(context)){
+    else if(tmpvalue->getType() == llvm::Type::getInt8Ty(context)){
       return builder.getInt32(1);
     }
     else {
@@ -465,11 +566,11 @@ llvm::Value* unary_expression::CodeGen(){
     }
   }
   case 6: {
-    llvm::Value* tmp = this->children[1]->CodeGen();
-    if(tmp == nullptr){
-      return IRError("unary_expression error in leaf node: type_name");
-    }
-    else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[2])->children)[0])->type == 8){
+    // llvm::Value* tmp = this->children[1]->CodeGen();
+    // if(tmp == nullptr){
+    //   return IRError("unary_expression error in leaf node: type_name");
+    // }
+    if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[2])->children)[0])->type == 8){
       return builder.getInt32(1);
     }
     else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[2])->children)[0])->type == 4){
@@ -573,18 +674,27 @@ llvm::Value* cast_expression::CodeGen(){
   case 2: {
     llvm::Value* tmp1 = this->children[1]->CodeGen();
     llvm::Value* tmp2 = this->children[3]->CodeGen();
+    llvm::Value* tmpvalue = nullptr;
     // llvm::Value* rs = nullptr;
     if(tmp1==nullptr||tmp2==nullptr){
       return IRError("cast_expression error in leaf node: type_name or cast_expression");
     }
-    else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[1])->children)[0])->type == 2){
-      return typeCast(tmp2, llvm::Type::getInt8Ty(context));
+    else{
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue = tmp2;
+      }
+    }
+    if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[1])->children)[0])->type == 2){
+      return typeCast(tmpvalue, llvm::Type::getInt8Ty(context));
     }
     else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[1])->children)[0])->type == 4){
-      return typeCast(tmp2, llvm::Type::getInt32Ty(context));
+      return typeCast(tmpvalue, llvm::Type::getInt32Ty(context));
     }
     else if(dynamic_cast<typeAST*> ((dynamic_cast<nonleafAST *>(this->children[1])->children)[0])->type == 6){
-      return typeCast(tmp2, llvm::Type::getFloatTy(context));
+      return typeCast(tmpvalue, llvm::Type::getFloatTy(context));
     }
   }
   }
@@ -608,44 +718,76 @@ llvm::Value* multiplicative_expression::CodeGen(){
   case 2: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
     llvm::Value* tmp2 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue2 = nullptr;
     // llvm::Value* rs = nullptr;
     if(tmp1==nullptr||tmp2==nullptr){
       return IRError("multiplicative_expression in leaf node: multiplicative_expression or cast_expression");
     }
-    else if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp2->getType() == llvm::Type::getInt1Ty(context)){
+    else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue2 = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue2 = tmp2;
+      }
+    }
+    if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("multiplicative_expression error: bool type could not associate with '*' operator");
     }
-    else if(tmp1->getType() == llvm::Type::getInt8Ty(context)||tmp2->getType() == llvm::Type::getInt8Ty(context)){
+    else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue2->getType() == llvm::Type::getInt8Ty(context)){
       return IRError("multiplicative_expression error: char type could not associate with '*' operator");
     }
     else{
-      if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
-        tmp1 = typeCast(tmp1, llvm::Type::getFloatTy(context));
-        tmp2 = typeCast(tmp2, llvm::Type::getFloatTy(context));
-        return builder.CreateFMul(tmp1, tmp2, "tmpmulf");
+      if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
+        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getFloatTy(context));
+        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getFloatTy(context));
+        return builder.CreateFMul(tmpvalue1, tmpvalue2, "tmpmulf");
       }
       else{
-        return builder.CreateMul(tmp1, tmp2, "tmpmul");
+        return builder.CreateMul(tmpvalue1, tmpvalue2, "tmpmul");
       }
     }
   }
   case 3: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
     llvm::Value* tmp2 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue2 = nullptr;
     // llvm::Value* rs = nullptr;
     if(tmp1==nullptr||tmp2==nullptr){
       return IRError("multiplicative_expression error in leaf node: multiplicative_expression or cast_expression");
     }
-    else if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp2->getType() == llvm::Type::getInt1Ty(context)){
-      return IRError("multiplicative_expression error: bool type could not associate with '*' operator");
+    else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue2 = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue2 = tmp2;
+      }
     }
-    else if(tmp1->getType() == llvm::Type::getInt8Ty(context)||tmp2->getType() == llvm::Type::getInt8Ty(context)){
-      return IRError("multiplicative_expression error: char type could not associate with '*' operator");
+    if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
+      return IRError("multiplicative_expression error: bool type could not associate with '/' operator");
+    }
+    else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue2->getType() == llvm::Type::getInt8Ty(context)){
+      return IRError("multiplicative_expression error: char type could not associate with '/' operator");
     }
     else{
-      tmp1 = typeCast(tmp1, llvm::Type::getFloatTy(context));
-      tmp2 = typeCast(tmp2, llvm::Type::getFloatTy(context));
-      return builder.CreateFDiv(tmp1, tmp2, "tmpmulf");
+      tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getFloatTy(context));
+      tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getFloatTy(context));
+      return builder.CreateFDiv(tmpvalue1, tmpvalue2, "tmpdivf");
     }
   }
   case 4: {
@@ -671,64 +813,96 @@ llvm::Value* additive_expression::CodeGen(){
   case 2: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
     llvm::Value* tmp2 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue2 = nullptr;
     // llvm::Value* rs = nullptr;
     if(tmp1==nullptr||tmp2==nullptr){
       return IRError("additive_expression error in leaf node: additive_expression or multiplicative_expression");
     }
-    else if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp2->getType() == llvm::Type::getInt1Ty(context)){
+    else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue2 = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue2 = tmp2;
+      }
+    }
+    if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("additive_expression error: bool type could not associate with '+' operator");
     }
-    else if(tmp1->getType() == llvm::Type::getInt8Ty(context)||tmp2->getType() == llvm::Type::getInt8Ty(context)){
-      if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
+    else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue2->getType() == llvm::Type::getInt8Ty(context)){
+      if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
         return IRError("additive_expression error: char type could not connected with float type by '+' operator");
       }
       else{
-        tmp1 = typeCast(tmp1, llvm::Type::getInt32Ty(context));
-        tmp2 = typeCast(tmp2, llvm::Type::getInt32Ty(context));
-        return builder.CreateFAdd(tmp1, tmp2, "tmpaddf");
+        tmpvalue1 = typeCast(tmp1, llvm::Type::getInt32Ty(context));
+        tmpvalue2 = typeCast(tmp2, llvm::Type::getInt32Ty(context));
+        return builder.CreateFAdd(tmpvalue1, tmpvalue2, "tmpaddf");
       }
                 
     }
     else{
-      if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
-        tmp1 = typeCast(tmp1, llvm::Type::getFloatTy(context));
-        tmp2 = typeCast(tmp2, llvm::Type::getFloatTy(context));
-        return builder.CreateFAdd(tmp1, tmp2, "tmpaddf");
+      if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
+        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getFloatTy(context));
+        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getFloatTy(context));
+        return builder.CreateFAdd(tmpvalue1, tmpvalue2, "tmpaddf");
       }
       else{
-        return builder.CreateAdd(tmp1, tmp2, "tmpadd");
+        return builder.CreateAdd(tmpvalue1, tmpvalue2, "tmpadd");
       }
     }
   }
   case 3: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
     llvm::Value* tmp2 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue2 = nullptr;
     // llvm::Value* rs = nullptr;
     if(tmp1==nullptr||tmp2==nullptr){
       return IRError("additive_expression error in leaf node: additive_expression or multiplicative_expression");
     }
-    else if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp2->getType() == llvm::Type::getInt1Ty(context)){
+    else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue2 = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue2 = tmp2;
+      }
+    }
+    if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("additive_expression error: bool type could not associate with '+' operator");
     }
-    else if(tmp1->getType() == llvm::Type::getInt8Ty(context)||tmp2->getType() == llvm::Type::getInt8Ty(context)){
-      if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
+    else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue2->getType() == llvm::Type::getInt8Ty(context)){
+      if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
         return IRError("additive_expression error: char type could not connected with float type by '+' operator");
       }
       else{
-        tmp1 = typeCast(tmp1, llvm::Type::getInt32Ty(context));
-        tmp2 = typeCast(tmp2, llvm::Type::getInt32Ty(context));
-        return builder.CreateFSub(tmp1, tmp2, "tmpsubf");
+        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt32Ty(context));
+        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getInt32Ty(context));
+        return builder.CreateFSub(tmpvalue1, tmpvalue2, "tmpsubf");
       }
                 
     }
     else{
-      if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
-        tmp1 = typeCast(tmp1, llvm::Type::getFloatTy(context));
-        tmp2 = typeCast(tmp2, llvm::Type::getFloatTy(context));
-        return builder.CreateFSub(tmp1, tmp2, "tmpsubf");
+      if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
+        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getFloatTy(context));
+        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getFloatTy(context));
+        return builder.CreateFSub(tmpvalue1, tmpvalue2, "tmpsubf");
       }
       else{
-        return builder.CreateSub(tmp1, tmp2, "tmpsub");
+        return builder.CreateSub(tmpvalue1, tmpvalue2, "tmpsub");
       }
     }
   }
@@ -770,77 +944,141 @@ llvm::Value* relational_expression::CodeGen(){
   case 2: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
     llvm::Value* tmp2 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue2 = nullptr;
     if(tmp1 == nullptr|| tmp2 == nullptr){
       return IRError("relation_expression error in leaf node: relation_expression or shift_expression");
     }
-    else if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp2->getType() == llvm::Type::getInt1Ty(context)){
+    else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue2 = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue2 = tmp2;
+      }
+    }
+    if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("relation_expression error: bool type could not associate with '<' operator");
     }
-    else if(tmp1->getType() != tmp2->getType()){
+    else if(tmpvalue1->getType() != tmpvalue2->getType()){
       return IRError("relation_expression error: two different type connected with '<' operator");
     }
-    else if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
-      return builder.CreateFCmpOLT(tmp1, tmp2, "tmpcmpf");
+    else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
+      return builder.CreateFCmpOLT(tmpvalue1, tmpvalue2, "tmpcmpf");
     }
     else{
-      return builder.CreateICmpSLT(tmp1, tmp2, "tmpcmp");
+      return builder.CreateICmpSLT(tmpvalue1, tmpvalue2, "tmpcmp");
     }
   }
   case 3: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
     llvm::Value* tmp2 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue2 = nullptr;
     if(tmp1 == nullptr|| tmp2 == nullptr){
       return IRError("relation_expression error in leaf node: relation_expression or shift_expression");
     }
-    else if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp2->getType() == llvm::Type::getInt1Ty(context)){
+    else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue2 = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue2 = tmp2;
+      }
+    }
+    if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("relation_expression error: bool type could not associate with '>' operator");
     }
-    else if(tmp1->getType() != tmp2->getType()){
+    else if(tmpvalue1->getType() != tmpvalue2->getType()){
       return IRError("relation_expression error: two different type connected with '>' operator");
     }
-    else if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
-      return builder.CreateFCmpOGT(tmp1, tmp2, "tmpcmpf");
+    else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
+      return builder.CreateFCmpOGT(tmpvalue1, tmpvalue2, "tmpcmpf");
     }
     else{
-      return builder.CreateICmpSGT(tmp1, tmp2, "tmpcmp");
+      return builder.CreateICmpSGT(tmpvalue1, tmpvalue2, "tmpcmp");
     }
   }
   case 4: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
     llvm::Value* tmp2 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue2 = nullptr;
     if(tmp1 == nullptr|| tmp2 == nullptr){
       return IRError("relation_expression error in leaf node: relation_expression or shift_expression");
     }
-    else if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp2->getType() == llvm::Type::getInt1Ty(context)){
+    else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue2 = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue2 = tmp2;
+      }
+    }
+    if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("relation_expression error: bool type could not associate with '<=' operator");
     }
-    else if(tmp1->getType() != tmp2->getType()){
+    else if(tmpvalue1->getType() != tmpvalue2->getType()){
       return IRError("relation_expression error: two different type connected with '<=' operator");
     }
-    else if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
-      return builder.CreateFCmpOLE(tmp1, tmp2, "tmpcmpf");
+    else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
+      return builder.CreateFCmpOLE(tmpvalue1, tmpvalue2, "tmpcmpf");
     }
     else{
-      return builder.CreateICmpSLE(tmp1, tmp2, "tmpcmp");
+      return builder.CreateICmpSLE(tmpvalue1, tmpvalue2, "tmpcmp");
     }
   }
   case 5: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
     llvm::Value* tmp2 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue2 = nullptr;
     if(tmp1 == nullptr|| tmp2 == nullptr){
       return IRError("relation_expression error in leaf node: relation_expression or shift_expression");
     }
-    else if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp2->getType() == llvm::Type::getInt1Ty(context)){
+    else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue2 = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue2 = tmp2;
+      }
+    }
+    if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("relation_expression error: bool type could not associate with '>=' operator");
     }
-    else if(tmp1->getType() != tmp2->getType()){
+    else if(tmpvalue1->getType() != tmpvalue2->getType()){
       return IRError("relation_expression error: two different type connected with '>=' operator");
     }
-    else if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
-      return builder.CreateFCmpOGE(tmp1, tmp2, "tmpcmpf");
+    else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
+      return builder.CreateFCmpOGE(tmpvalue1, tmpvalue2, "tmpcmpf");
     }
     else{
-      return builder.CreateICmpSGE(tmp1, tmp2, "tmpcmp");
+      return builder.CreateICmpSGE(tmpvalue1, tmpvalue2, "tmpcmp");
     }
   }
   }
@@ -864,39 +1102,71 @@ llvm::Value* equality_expression::CodeGen(){
   case 2: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
     llvm::Value* tmp2 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue2 = nullptr;
     if(tmp1 == nullptr|| tmp2 == nullptr){
       return IRError("equality_expression error in leaf node: equality_expression or relation_expression");
     }
-    else if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp2->getType() == llvm::Type::getInt1Ty(context)){
+    else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue2 = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue2 = tmp2;
+      }
+    }
+    if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("equality_expression error: bool type could not associate with '==' operator");
     }
-    else if(tmp1->getType() != tmp2->getType()){
+    else if(tmpvalue1->getType() != tmpvalue2->getType()){
       return IRError("equality_expression error: two different type connected with '==' operator");
     }
-    else if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
-      return builder.CreateFCmpOEQ(tmp1, tmp2, "tmpcmpf");
+    else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
+      return builder.CreateFCmpOEQ(tmpvalue1, tmpvalue2, "tmpcmpf");
     }
     else{
-      return builder.CreateICmpEQ(tmp1, tmp2, "tmpcmp");
+      return builder.CreateICmpEQ(tmpvalue1, tmpvalue2, "tmpcmp");
     }
   }
   case 3: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
     llvm::Value* tmp2 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue2 = nullptr;
     if(tmp1 == nullptr|| tmp2 == nullptr){
       return IRError("equality_expression error in leaf node: equality_expression or relation_expression");
     }
-    else if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp2->getType() == llvm::Type::getInt1Ty(context)){
+    else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp2->getType()->isPointerTy() && !(tmp2->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue2 = builder.CreateLoad(tmp2->getType()->getPointerElementType(), tmp2, "tmpvar");
+      }
+      else {
+          tmpvalue2 = tmp2;
+      }
+    }
+    if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("equality_expression error: bool type could not associate with '!=' operator");
     }
-    else if(tmp1->getType() != tmp2->getType()){
+    else if(tmpvalue1->getType() != tmpvalue2->getType()){
       return IRError("equality_expression error: two different type connected with '!=' operator");
     }
-    else if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp2->getType() == llvm::Type::getFloatTy(context)){
-      return builder.CreateFCmpONE(tmp1, tmp2, "tmpcmpf");
+    else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
+      return builder.CreateFCmpONE(tmpvalue1, tmpvalue2, "tmpcmpf");
     }
     else{
-      return builder.CreateICmpNE(tmp1, tmp2, "tmpcmp");
+      return builder.CreateICmpNE(tmpvalue1, tmpvalue2, "tmpcmp");
     }
   }
   }
@@ -1051,17 +1321,26 @@ llvm::Value* assignment_expression::CodeGen(){
   switch(this->type){
   case 1: {
     llvm::Value* tmp = this->children[0]->CodeGen();
+    llvm::Value* tmpvalue = nullptr;
     if(tmp == nullptr){
       return IRError("assignment_expression error in leaf node: conditional_expression");
     }
     else{
-      return tmp;
+      if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+      }
+      else {
+          tmpvalue = tmp;
+      }
+      return tmpvalue;
     }
   }
   case 2: {
     llvm::Value* tmp1 = this->children[0]->CodeGen();
-    llvm::Value* tmp2 = this->children[1]->CodeGen();
+    // llvm::Value* tmp2 = this->children[1]->CodeGen();
     llvm::Value* tmp3 = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue1 = nullptr;
+    llvm::Value* tmpvalue3 = nullptr;
     if(tmp1 == nullptr|| tmp3 == nullptr){
       return IRError("assignment_expression error in leaf node: assignment_expression or conditional_expression");
     }
@@ -1069,91 +1348,114 @@ llvm::Value* assignment_expression::CodeGen(){
     //     return IRError("assignment_expression error in leaf node: two different type could not be connected by assignment_operator");
     // }
     else{
+      if (tmp1->getType()->isPointerTy() && !(tmp1->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue1 = builder.CreateLoad(tmp1->getType()->getPointerElementType(), tmp1, "tmpvar");
+      }
+      else {
+          tmpvalue1 = tmp1;
+      }
+      if (tmp3->getType()->isPointerTy() && !(tmp3->getType()->getPointerElementType()->isArrayTy())) {
+          tmpvalue3 = builder.CreateLoad(tmp3->getType()->getPointerElementType(), tmp3, "tmpvar");
+      }
+      else {
+          tmpvalue3 = tmp3;
+      }
+
+
       if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("=") == 0){
-        if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp3->getType() == llvm::Type::getInt1Ty(context)){
+        if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue3->getType() == llvm::Type::getInt1Ty(context)){
           return IRError("assignment_expression error in leaf node: bool type could not be connected by assignment_operator");
         }
-        else if(tmp1->getType() == llvm::Type::getInt8Ty(context)||tmp3->getType() == llvm::Type::getInt8Ty(context)){
+        else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue3->getType() == llvm::Type::getInt8Ty(context)){
           return IRError("assignment_expression error in leaf node: char type could not be connected by assignment_operator");
         }
-        else if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp3->getType() == llvm::Type::getFloatTy(context)){
-          tmp1 = typeCast(tmp1, llvm::Type::getFloatTy(context));
-          tmp3 = typeCast(tmp2, llvm::Type::getFloatTy(context));
-          return builder.CreateStore(tmp3, tmp1);
+        else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue3->getType() == llvm::Type::getFloatTy(context)){
+          tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getFloatTy(context));
+          tmpvalue3 = typeCast(tmpvalue3, llvm::Type::getFloatTy(context));
+          builder.CreateStore(tmpvalue3, tmp1);
+          return tmpvalue3;
         }
         else{
-          return builder.CreateStore(tmp3, tmp1);
+          builder.CreateStore(tmpvalue3, tmp1);
+          return tmpvalue3;
         }
       }
       else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("*=") == 0){
-        if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp3->getType() == llvm::Type::getInt1Ty(context)){
+        if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue3->getType() == llvm::Type::getInt1Ty(context)){
           return IRError("assignment_expression error in leaf node: bool type could not be connected by '*=' operator");
         }
-        else if(tmp1->getType() == llvm::Type::getInt8Ty(context)||tmp3->getType() == llvm::Type::getInt8Ty(context)){
+        else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue3->getType() == llvm::Type::getInt8Ty(context)){
           return IRError("assignment_expression error in leaf node: char type could not be connected by '*=' operator");
         }
-        else if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp3->getType() == llvm::Type::getFloatTy(context)){
-          tmp1 = typeCast(tmp1, llvm::Type::getFloatTy(context));
-          tmp3 = typeCast(tmp2, llvm::Type::getFloatTy(context));
-          llvm::Value* tmpexp = builder.CreateFMul(tmp1, tmp3, "tmpmulf");
-          return builder.CreateStore(tmpexp, tmp1);
+        else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue3->getType() == llvm::Type::getFloatTy(context)){
+          tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getFloatTy(context));
+          tmpvalue3 = typeCast(tmpvalue3, llvm::Type::getFloatTy(context));
+          llvm::Value* tmpexp = builder.CreateFMul(tmpvalue1, tmpvalue3, "tmpmulf");
+          builder.CreateStore(tmpexp, tmp1);
+          return tmpexp;
         }
         else{
-          llvm::Value* tmpexp = builder.CreateMul(tmp1, tmp3, "tmpmul");
-          return builder.CreateStore(tmpexp, tmp1);
+          llvm::Value* tmpexp = builder.CreateMul(tmpvalue1, tmpvalue3, "tmpmul");
+          builder.CreateStore(tmpexp, tmp1);
+          return tmpexp;
         }
       }
       else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("/=") == 0){
-        if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp3->getType() == llvm::Type::getInt1Ty(context)){
+        if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue3->getType() == llvm::Type::getInt1Ty(context)){
           return IRError("assignment_expression error in leaf node: bool type could not be connected by '/=' operator");
         }
-        else if(tmp1->getType() == llvm::Type::getInt8Ty(context)||tmp3->getType() == llvm::Type::getInt8Ty(context)){
+        else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue3->getType() == llvm::Type::getInt8Ty(context)){
           return IRError("assignment_expression error in leaf node: char type could not be connected by '/=' operator");
         }
         else{
-          tmp1 = typeCast(tmp1, llvm::Type::getFloatTy(context));
-          tmp3 = typeCast(tmp2, llvm::Type::getFloatTy(context));
-          llvm::Value* tmpexp = builder.CreateFDiv(tmp1, tmp3, "tmpdivf");
-          return builder.CreateStore(tmpexp, tmp1);
+          tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getFloatTy(context));
+          tmpvalue3 = typeCast(tmpvalue3, llvm::Type::getFloatTy(context));
+          llvm::Value* tmpexp = builder.CreateFDiv(tmpvalue1, tmpvalue3, "tmpdivf");
+          builder.CreateStore(tmpexp, tmp1);
+          return tmpexp;
         }
       }
       else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("MOD_ASSIGN") == 0){
                     
       }
       else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("+=") == 0){
-        if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp3->getType() == llvm::Type::getInt1Ty(context)){
+        if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue3->getType() == llvm::Type::getInt1Ty(context)){
           return IRError("assignment_expression error in leaf node: bool type could not be connected by '+=' operator");
         }
-        else if(tmp1->getType() == llvm::Type::getInt8Ty(context)||tmp3->getType() == llvm::Type::getInt8Ty(context)){
+        else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue3->getType() == llvm::Type::getInt8Ty(context)){
           return IRError("assignment_expression error in leaf node: char type could not be connected by '+=' operator");
         }
-        else if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp3->getType() == llvm::Type::getFloatTy(context)){
-          tmp1 = typeCast(tmp1, llvm::Type::getFloatTy(context));
-          tmp3 = typeCast(tmp2, llvm::Type::getFloatTy(context));
-          llvm::Value* tmpexp = builder.CreateFAdd(tmp1, tmp3, "tmpaddf");
-          return builder.CreateStore(tmpexp, tmp1);
+        else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue3->getType() == llvm::Type::getFloatTy(context)){
+          tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getFloatTy(context));
+          tmpvalue3 = typeCast(tmpvalue3, llvm::Type::getFloatTy(context));
+          llvm::Value* tmpexp = builder.CreateFAdd(tmpvalue1, tmpvalue3, "tmpaddf");
+          builder.CreateStore(tmpexp, tmp1);
+          return tmpexp;
         }
         else{
-          llvm::Value* tmpexp = builder.CreateAdd(tmp1, tmp3, "tmpadd");
-          return builder.CreateStore(tmpexp, tmp1);
+          llvm::Value* tmpexp = builder.CreateAdd(tmpvalue1, tmpvalue3, "tmpadd");
+          builder.CreateStore(tmpexp, tmp1);
+          return tmpexp;
         }
       }
       else if((dynamic_cast<operatorAST*>(this->children[1]))->op.compare("-=") == 0){
-        if(tmp1->getType() == llvm::Type::getInt1Ty(context)||tmp3->getType() == llvm::Type::getInt1Ty(context)){
+        if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue3->getType() == llvm::Type::getInt1Ty(context)){
           return IRError("assignment_expression error in leaf node: bool type could not be connected by '-=' operator");
         }
-        else if(tmp1->getType() == llvm::Type::getInt8Ty(context)||tmp3->getType() == llvm::Type::getInt8Ty(context)){
+        else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue3->getType() == llvm::Type::getInt8Ty(context)){
           return IRError("assignment_expression error in leaf node: char type could not be connected by '-=' operator");
         }
-        else if(tmp1->getType() == llvm::Type::getFloatTy(context)||tmp3->getType() == llvm::Type::getFloatTy(context)){
-          tmp1 = typeCast(tmp1, llvm::Type::getFloatTy(context));
-          tmp3 = typeCast(tmp2, llvm::Type::getFloatTy(context));
-          llvm::Value* tmpexp = builder.CreateFSub(tmp1, tmp3, "tmpsubf");
-          return builder.CreateStore(tmpexp, tmp1);
+        else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue3->getType() == llvm::Type::getFloatTy(context)){
+          tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getFloatTy(context));
+          tmpvalue3 = typeCast(tmpvalue3, llvm::Type::getFloatTy(context));
+          llvm::Value* tmpexp = builder.CreateFSub(tmpvalue1, tmpvalue3, "tmpsubf");
+          builder.CreateStore(tmpexp, tmp1);
+          return tmpexp;
         }
         else{
-          llvm::Value* tmpexp = builder.CreateSub(tmp1, tmp3, "tmpsub");
-          return builder.CreateStore(tmpexp, tmp1);
+          llvm::Value* tmpexp = builder.CreateSub(tmpvalue1, tmpvalue3, "tmpsub");
+          builder.CreateStore(tmpexp, tmp1);
+          return tmpexp;
         }
       }
       // logical operator unfinished
@@ -1208,9 +1510,9 @@ llvm::Value* assignment_operator::CodeGen(){
 // }
 
 Value* expression::CodeGen() {
-  #ifdef DEBUG
-    cout<<"expression type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"expression type:"<<this->type<<endl;
+#endif
   switch (this->type) {
   case 1:{
     return this->children[0]->CodeGen();
@@ -1226,9 +1528,9 @@ Value* expression::CodeGen() {
 
 //done
 llvm::Value* parameter_declaration::CodeGen() {
-  #ifdef DEBUG
-    cout<<"parameter_declaration type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"parameter_declaration type:"<<this->type<<endl;
+#endif
   this->clear();
   Type* type_spec = get_type(dynamic_cast<typeAST*>(this->children[0])->type);
   this->children[1]->CodeGen();
@@ -1243,9 +1545,9 @@ llvm::Value* parameter_declaration::CodeGen() {
 
 //done
 llvm::Value* parameter_list::CodeGen() {
-  #ifdef DEBUG
-    cout<<"parameter_list type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"parameter_list type:"<<this->type<<endl;
+#endif
   this->clear();
   switch (this->type) {
   case 1: {
@@ -1272,9 +1574,9 @@ llvm::Value* parameter_list::CodeGen() {
 
 //done 
 llvm::Value* function_definition::CodeGen() {
-  #ifdef DEBUG
-    cout<<"function_definition type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"function_definition type:"<<this->type<<endl;
+#endif
   Type* type_spec = get_type(dynamic_cast<typeAST*>(this->children[0])->type);
   llvm::Type*  return_type = type_spec;
   declarator *prototype = dynamic_cast<declarator*>(this->children[1]);
@@ -1297,9 +1599,10 @@ llvm::Value* function_definition::CodeGen() {
 
 //done
 llvm::Value* declarator::CodeGen() {
-  #ifdef DEBUG
-    cout<<"declarator type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"declarator type:"<<this->type<<endl;
+#endif
+  this->clear();
   switch (this->type) {
   case 1: {
     this->name = dynamic_cast<identifierAST*>(this->children[0])->identifier;
@@ -1312,7 +1615,7 @@ llvm::Value* declarator::CodeGen() {
   case 3: {
     //int a[][3]
     this->children[0]->CodeGen();
-    this->name = dynamic_cast<identifierAST*>(this->children[0])->identifier;
+    this->name = dynamic_cast<declarator*>(this->children[0])->name;
     this->array_size = dynamic_cast<declarator*>(this->children[0])->array_size;
     this->array_size.push_back(cast<ConstantInt>(this->children[2]->CodeGen()));
     break;
@@ -1320,7 +1623,7 @@ llvm::Value* declarator::CodeGen() {
   case 4: {
     // int a[]
     this->children[0]->CodeGen();
-    this->name = dynamic_cast<identifierAST*>(this->children[0])->identifier;
+    this->name = dynamic_cast<declarator*>(this->children[0])->name;
     this->array_size = dynamic_cast<declarator*>(this->children[0])->array_size;
     this->array_size.push_back(0);
     break;
@@ -1346,32 +1649,32 @@ llvm::Value* declarator::CodeGen() {
 }
 
 llvm::Value* init_declarator::CodeGen() {
-  #ifdef DEBUG
-    cout<<"init_declarator type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"init_declarator type:"<<this->type<<endl;
+#endif
   this->clear();
   this->children[0]->CodeGen();
   declarator* decl = dynamic_cast<declarator*>(this->children[0]);
   //cout << decl->name << endl;
-switch (this->type) {
- case 1:{
-   this->decl = decl;
-   this->value = nullptr;
-   break;
- }
- case 2:{
-   this->decl = decl;
-   this->value = this->children[2]->CodeGen();
-   break;
- }
- }
- return nullptr;
+  switch (this->type) {
+  case 1:{
+    this->decl = decl;
+    this->value = nullptr;
+    break;
+  }
+  case 2:{
+    this->decl = decl;
+    this->value = this->children[2]->CodeGen();
+    break;
+  }
+  }
+  return nullptr;
 }
 
 llvm::Value* init_declarator_list::CodeGen() {
-  #ifdef DEBUG
-    cout<<"init_declarator_list type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"init_declarator_list type:"<<this->type<<endl;
+#endif
   this->clear();
   switch (this->type) {
   case 1: {
@@ -1392,9 +1695,9 @@ llvm::Value* init_declarator_list::CodeGen() {
 
 //done
 llvm::Value* declaration::CodeGen() {
-  #ifdef DEBUG
-    cout<<"declaration type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"declaration type:"<<this->type<<endl;
+#endif
   this->children[0]->CodeGen();
   this->children[1]->CodeGen();
   Type* type_spec = get_type(dynamic_cast<typeAST*>(this->children[0])->type);
@@ -1414,9 +1717,9 @@ llvm::Value* declaration::CodeGen() {
 
 //done
 llvm::Value* declaration_list::CodeGen() {
-  #ifdef DEBUG
-    cout<<"declaration_list type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"declaration_list type:"<<this->type<<endl;
+#endif
   switch (this->type) {
   case 1: {
     this->children[0]->CodeGen();
@@ -1434,16 +1737,16 @@ llvm::Value* declaration_list::CodeGen() {
 
 //done
 llvm::Value *statement::CodeGen() { 
-  #ifdef DEBUG
-    cout<<"statement type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"statement type:"<<this->type<<endl;
+#endif
   this->children[0]->CodeGen(); 
 }
 
 llvm::Value *expression_statement::CodeGen() {
-  #ifdef DEBUG
-    cout<<"expression_statement type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"expression_statement type:"<<this->type<<endl;
+#endif
   switch (this->type) {
   case 1:{
     break;
@@ -1457,9 +1760,9 @@ llvm::Value *expression_statement::CodeGen() {
 }
 
 llvm::Value *selection_statement::CodeGen() {
-  #ifdef DEBUG
-    cout<<"selection_statement type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"selection_statement type:"<<this->type<<endl;
+#endif
   switch (this->type) {
   case 1: {
     Function *func = builder.GetInsertBlock()->getParent();
@@ -1492,9 +1795,9 @@ llvm::Value *selection_statement::CodeGen() {
 }
 
 llvm::Value* iteration_statement::CodeGen() {
-  #ifdef DEBUG
-    cout<<"iteration_statement type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"iteration_statement type:"<<this->type<<endl;
+#endif
   switch (this->type) {
   case 1:{
     //     BasicBlock *ThenBB = BasicBlock::Create(context, "then", func);
@@ -1516,11 +1819,12 @@ llvm::Value* iteration_statement::CodeGen() {
   }
   case 4: {
     Function* func = builder.GetInsertBlock()->getParent();
-    expression_statement* init = dynamic_cast<expression_statement*>(this->children[2]);
+    //expression_statement* init = dynamic_cast<expression_statement*>(this->children[2]);
     expression_statement* cond = dynamic_cast<expression_statement*>(this->children[3]);
-    expression* incr = this->type == 2 ? nullptr : dynamic_cast<expression*>(this->children[5]);
+    expression* incr = this->type == 2 ? nullptr : dynamic_cast<expression*>(this->children[4]);
     statement* body = dynamic_cast<statement*>(this->type == 2 ? this->children[5] : this->children[6]);
-    init->CodeGen();
+    //init->CodeGen();
+    this->children[2]->CodeGen();
     BasicBlock *loop = BasicBlock::Create(context, "forloop", func);
     BasicBlock *cont = BasicBlock::Create(context, "forcont", func);
     Value* cond_value = cond->CodeGen();
@@ -1540,9 +1844,9 @@ llvm::Value* iteration_statement::CodeGen() {
 }
 
 llvm::Value* jump_statement::CodeGen() {
-  #ifdef DEBUG
-    cout<<"jump_statement type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"jump_statement type:"<<this->type<<endl;
+#endif
   switch (this->type) {
   case 0: {
   }
@@ -1562,27 +1866,27 @@ llvm::Value* jump_statement::CodeGen() {
 }
 
 llvm::Value *translation_unit::CodeGen() {
-  #ifdef DEBUG
-    cout<<"translation_unit type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"translation_unit type:"<<this->type<<endl;
+#endif
   switch (this->type) {
-    case 1:{
-      this->children[0]->CodeGen();
-      break;
-    }
-    case 2:{
-      this->children[0]->CodeGen();
-      this->children[1]->CodeGen();
-      break;
-    }
+  case 1:{
+    this->children[0]->CodeGen();
+    break;
   }
- return nullptr;
+  case 2:{
+    this->children[0]->CodeGen();
+    this->children[1]->CodeGen();
+    break;
+  }
+  }
+  return nullptr;
 }
 
 llvm::Value* external_declaration::CodeGen() {
-  #ifdef DEBUG
-    cout<<"external_declaration type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"external_declaration type:"<<this->type<<endl;
+#endif
   switch (this->type) {
   case 1:{
     this->children[0]->CodeGen();
@@ -1611,9 +1915,9 @@ llvm::Value* external_declaration::CodeGen() {
 
 
 llvm::Value* constant_expression::CodeGen() {
-  #ifdef DEBUG
-    cout<<"constant_expression type:"<<this->type<<endl;
-  #endif
+#ifdef DEBUG
+  cout<<"constant_expression type:"<<this->type<<endl;
+#endif
   return this->children[0]->CodeGen();
 }
 

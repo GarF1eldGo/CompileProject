@@ -2662,7 +2662,7 @@ yyreduce:
 		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(right);
 		children.push_back((yyvsp[0].exprPtr));
-		(yyval.exprPtr) = new iteration_statement("iteration_statement", 3, children);
+		(yyval.exprPtr) = new iteration_statement("iteration_statement", 2, children);
 	}
 #line 2668 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
@@ -2681,7 +2681,7 @@ yyreduce:
 		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(right);
 		children.push_back((yyvsp[0].exprPtr));
-		(yyval.exprPtr) = new iteration_statement("iteration_statement", 4, children);
+		(yyval.exprPtr) = new iteration_statement("iteration_statement", 3, children);
 	}
 #line 2687 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;
@@ -2700,7 +2700,7 @@ yyreduce:
 		children.push_back((yyvsp[-2].exprPtr));
 		children.push_back(right);
 		children.push_back((yyvsp[0].exprPtr));
-		(yyval.exprPtr) = new iteration_statement("iteration_statement", 5, children);
+		(yyval.exprPtr) = new iteration_statement("iteration_statement", 4, children);
 	}
 #line 2706 "/home/lumina/Documents/CompileProject/src/grammar.cpp"
     break;

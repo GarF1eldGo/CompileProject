@@ -1,9 +1,6 @@
-int x = 0;
-
-int add(int a) {
-  return a + 1;
-}
-
 int main() {
-  x = add(x);
+  int x = 0;
+  for(int i=0;i<=4;i++){
+    x += 1;
+  }
 }
