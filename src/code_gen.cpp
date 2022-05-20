@@ -11,7 +11,7 @@
 #include <iostream>
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Bitcode/BitcodeWriter.h"
-#define DEBUG
+//#define DEBUG
 // #include "llvm/ADT/APFloat.h"
 // #include "llvm/ADT/Optional.h"
 // #include "llvm/ADT/STLExtras.h"
@@ -143,7 +143,6 @@ llvm::Value* primary_expression::CodeGen(){
   case 1: {
     // llvm::Value* tmp = this->children[0]->CodeGen();
     llvm::Value* rs = findValue((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
-    cout << "rs = " << rs  << " " << type2str(rs) << endl;
     if(rs == nullptr){
       return IRError("primary_expression error in leaf node: IDENTIFIER");
     }
@@ -254,12 +253,10 @@ llvm::Value* postfix_expression::CodeGen(){
       //   llvm::Value * varPtr = builder.CreateInBoundsGEP(ary_real, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
       //   return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
       // }
-      cout << aryvalue << " " << type2str(aryvalue) << endl;
       vector<llvm::Value*> indexList;
-      indexList.push_back(indexvalue);
+      indexList.push_back(builder.getInt32(0));
       indexList.push_back(indexvalue);
       llvm::Value * varPtr = builder.CreateInBoundsGEP(aryvalue, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
-      cout << aryvalue << " " << type2str(aryvalue) << endl;
       return varPtr;
     }
   }
@@ -1557,8 +1554,6 @@ Value* expression::CodeGen() {
     case 1:{
       llvm::Value* tmp = this->children[0]->CodeGen();
       llvm::Value* tmpvalue;
-      cout << tmp << " " << endl;
-      cout << type2str(tmp);
       if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
         tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
       }
@@ -1903,6 +1898,7 @@ llvm::Value* iteration_statement::CodeGen() {
     builder.CreateCondBr(cond_value, loop, cont);
     builder.SetInsertPoint(loop);
     this->children[4]->CodeGen();
+    cond_value = this->children[2]->CodeGen();
     builder.CreateCondBr(cond_value, loop, cont);
     builder.SetInsertPoint(cont);
     break;
@@ -2001,6 +1997,10 @@ llvm::Value* external_declaration::CodeGen() {
       if (!list[i]->decl->is_array()) {
         GlobalVariable *gVar = generator->module->getNamedGlobal(list[i]->decl->name);
         gVar->setInitializer(cast<Constant>(list[i]->value));
+      } else {
+        GlobalVariable *gVar = generator->module->getNamedGlobal(list[i]->decl->name);
+        ConstantAggregateZero* const_array_2 = ConstantAggregateZero::get(type_local);
+        gVar->setInitializer(const_array_2);
       }
     }
     
