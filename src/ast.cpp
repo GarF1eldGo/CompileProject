@@ -136,6 +136,11 @@ punctuationAST::punctuationAST(string punctuation)
     this->name = "punctuation";
 }
 
+charAST::charAST(char value){
+  this->value = value;
+  this->name = "char";
+}
+
 
 
 /*

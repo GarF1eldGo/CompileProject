@@ -17,6 +17,7 @@ identifier {letter}{letgit}*
 
 integer {digit}+
 float {digit}+"."{digit}+
+char \'(\\.|[^"\\])\'
 string \"(\\.|[^"\\])*\"
 
 comment \/\/[^\n]*
@@ -98,8 +99,15 @@ comment \/\/[^\n]*
     tokenStack.push(oneInt);
     return CONSTANT;
     }
+{char} {
+    exprAST* oneChar = new charAST(yytext[1]);
+    tokenStack.push(oneChar);
+    return CHAR_LITERAL;
+}
 {string} {
-    exprAST* oneString = new stringAST(yytext);
+    string str = yytext;
+    str = str.substr(1, str.size()-2);//去掉左右双引号
+    exprAST* oneString = new stringAST(str);
     tokenStack.push(oneString);
     return STRING_LITERAL;
     }

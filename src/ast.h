@@ -161,6 +161,12 @@ public:
 };
 
 
+//字符结点
+class charAST : public leafAST{
+public:
+  char value;
+  charAST(char value);
+};
 
 /*
   ===========================非叶子结点的相关类================================
