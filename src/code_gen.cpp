@@ -75,8 +75,8 @@ codeGen::codeGen() {
 
 void codeGen::generate(exprAST* ROOT) {
   ROOT->CodeGen();
-  this->module->print(llvm::outs(), nullptr);
-  // this->module->dump();
+  //this->module->print(llvm::outs(), nullptr);
+  this->module->dump();
 }
 
 codeGen* generator = new codeGen();
@@ -160,6 +160,7 @@ llvm::Value* primary_expression::CodeGen() {
       }
     }
     case 3: {
+      //bug
       string str = (dynamic_cast<stringAST*>(this->children[0])->value);
       llvm::Constant* strConst = llvm::ConstantDataArray::getString(context, str);
       llvm::Value* globalVar = new llvm::GlobalVariable(*generator->module, strConst->getType(), true, llvm::GlobalValue::PrivateLinkage, strConst, "_Const_String_");
@@ -168,6 +169,8 @@ llvm::Value* primary_expression::CodeGen() {
       indexList.push_back(builder.getInt32(0));
       // var value
       llvm::Value* varPtr = builder.CreateInBoundsGEP(globalVar, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+      // varPtr = builder.CreateInBoundsGEP(varPtr, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+      // cout << varPtr << " " << varPtr->getType()->isPointerTy() << " " << varPtr->getType()->getPointerElementType()->isPointerTy() << " " << type2str(varPtr)<< endl;
       return varPtr;
     }
     case 4: {
@@ -236,9 +239,11 @@ llvm::Value* postfix_expression::CodeGen() {
         //    return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
         //  }
         vector<llvm::Value*> indexList;
+        cout << type2str(aryvalue) << endl;
         indexList.push_back(builder.getInt32(0));
         indexList.push_back(indexvalue);
         llvm::Value* varPtr = builder.CreateInBoundsGEP(aryvalue, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
+        cout << type2str(varPtr) << endl;
         return varPtr;
       }
     }
@@ -374,6 +379,7 @@ vector<llvm::Value*>* argument_expression_list::ArgGen() {
         return nullptr;
       } else {
         vector<llvm::Value*>* args = new vector<llvm::Value*>;
+        cout << tmp << " " << tmp->getType()->isPointerTy() << endl;
         args->push_back(tmp);
         return args;
       }
@@ -485,6 +491,7 @@ llvm::Value* unary_expression::CodeGen() {
             return IRError("unary_expression error: int/float type could not associate with '!' operator");
           }
         } else if ((dynamic_cast<operatorAST*>(this->children[0]))->op.compare("&") == 0) {
+          cout << tmp << " " << type2str(tmp) << endl;
           return tmp;
         } else {
           return IRError("unary_expression error: illegal operator");
@@ -1175,6 +1182,12 @@ llvm::Value* assignment_expression::CodeGen() {
       if (tmp == nullptr) {
         return IRError("assignment_expression error in leaf node: conditional_expression");
       } else {
+        // cout << tmp << " "  << type2str(tmp) << " " << tmp->getType()->isPointerTy() << endl;;
+        // cout << tmp->getType()->getPointerElementType()->isArrayTy() << endl;
+        // cout << tmp->getType()->getPointerElementType()->getTypeID() << " " << Type::TypeID::PointerTyID << " " << type2str(tmp)<< endl;
+        if (tmp->getType() == Type::getInt8PtrTy(context)) {
+          return tmp;
+        }
         if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
           tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
         } else {
@@ -1519,7 +1532,7 @@ llvm::Value* declaration::CodeGen() {
     Type* type_spec_local = type_spec;
     int is_array = decl_list[i]->decl->is_array();
     if (is_array) {
-      type_spec_local = build_array(type_spec, decl_list[i]->decl->array_size);
+      type_spec_local = build_array_with_size(type_spec, decl_list[i]->decl->array_size);
     }
     AllocaInst* alloc = builder.CreateAlloca(type_spec_local, nullptr, decl_list[i]->decl->name);
     if (!is_array && decl_list[i]->value) {
@@ -1786,6 +1799,17 @@ llvm::Type* build_array(Type* array_type, vector<ConstantInt*> array_size) {
     return ArrayType::get(array_type, 0);
   }
 }
+
+
+llvm::Type* build_array_with_size(Type* array_type, vector<ConstantInt*> array_size) {
+  ArrayType* array = ArrayType::get(array_type, array_size.back()->getZExtValue());
+  for (int i = (int)array_size.size() - 2; i >= 0; --i) {
+    array = ArrayType::get(array, array_size[i]->getZExtValue());
+  }
+  return array;
+}
+
+
 // codeGen * codegen = new codeGen();
 
 // codeGen::~codeGen() {}

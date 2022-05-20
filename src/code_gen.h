@@ -69,5 +69,5 @@ llvm::Value* typeCast(llvm::Value* src, llvm::Type* dst);
 
 llvm::Type *build_array(Type *array_type, vector<ConstantInt *> array_size);
 
-
+llvm::Type *build_array_with_size(Type *array_type, vector<ConstantInt *> array_size);
 #endif

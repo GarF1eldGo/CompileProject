@@ -1,30 +1,3 @@
-#include<stdio.h>
-#define max 100000
-
-
-void quickSort(int numArray[],int left,int right);
-
-int main(){
-    int num = 0;
-    scanf("%d",&num);
-
-    //读取数据
-    int numArray[max];
-    for(int i=0;i<num;i++){
-        scanf("%d",&numArray[i]);
-    }
-
-    //快速排序
-    quickSort(numArray,0,num-1);
-    
-    //输出数据
-    for(int i=0;i<num;i++){
-        printf("%d\n",numArray[i]);
-    }
-}
-
-
-
 void quickSort(int numArray[],int left,int right){
     int i,j,temp,key;
     if(left>=right)
@@ -44,3 +17,24 @@ void quickSort(int numArray[],int left,int right){
     quickSort(numArray,left,i-1);
     quickSort(numArray,i+1,right);
 }
+
+int main(){
+    int num = 0;
+    scanf("%d",&num);
+
+    //读取数据
+    int numArray[100000];
+    for(int i=0;i<num;i++){
+        scanf("%d",&numArray[i]);
+    }
+
+    //快速排序
+    quickSort(numArray,0,num-1);
+    
+    //输出数据
+    for(int i=0;i<num;i++){
+        printf("%d\n",numArray[i]);
+    }
+}
+
+
