@@ -191,6 +191,9 @@ llvm::Value* primary_expression::CodeGen(){
     }
 
   }
+  case 5:{
+    return llvm::ConstantInt::get(builder.getInt8Ty(), (uint8_t)(dynamic_cast<charAST*>(this->children[0])->value));
+  }
   }
   return nullptr;
 }
@@ -288,9 +291,9 @@ llvm::Value* postfix_expression::CodeGen(){
     }
     else{
       if(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("printf") == 0){
-        for(int i=0; i<=arg->size()-1;i++){
+        for(int i=1; i<=arg->size()-1;i++){
           llvm::Value* tmpvalue;
-          if ((*arg)[i]->getType()->isPointerTy() && (*arg)[i]->getType()->getPointerElementType() != llvm::Type::getInt8Ty(context)) {
+          if ((*arg)[i]->getType()->isPointerTy()) {
               tmpvalue = builder.CreateLoad((*arg)[i]->getType()->getPointerElementType(), (*arg)[i], "tmpvar");
           }
           else {

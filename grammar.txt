@@ -17,6 +17,7 @@ primary_expression
 	| CONSTANT
 	| STRING_LITERAL
 	| '(' expression ')'
+	| CHAR_LITERAL
 	;
 
 // 后缀表达式
