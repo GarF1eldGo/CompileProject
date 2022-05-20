@@ -1,0 +1,61 @@
+; ModuleID = 'module'
+source_filename = "module"
+
+@_Const_String_ = private constant [4 x i8] c"%d\0A\00"
+@_Const_String_.1 = private constant [4 x i8] c"%d\0A\00"
+@_Const_String_.2 = private constant [3 x i8] c"%d\00"
+
+declare i32 @printf(i8* %0, ...)
+
+declare i32 @scanf(i8* %0, ...)
+
+define i32 @main() {
+main:
+  %sum = alloca i32, align 4
+  store i32 0, i32* %sum, align 4
+  %i = alloca i32, align 4
+  store i32 0, i32* %i, align 4
+  %tmpvar = load i32, i32* %i, align 4
+  %tmpcmp = icmp slt i32 %tmpvar, 5
+  br i1 %tmpcmp, label %forloop, label %forcont
+
+forloop:                                          ; preds = %forloop, %main
+  %tmpvar1 = load i32, i32* %i, align 4
+  %printf = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @_Const_String_, i32 0, i32 0), i32 %tmpvar1)
+  %tmpvar2 = load i32, i32* %sum, align 4
+  %tmpvar3 = load i32, i32* %i, align 4
+  %tmpadd = add i32 %tmpvar2, %tmpvar3
+  store i32 %tmpadd, i32* %sum, align 4
+  %tmpvar4 = load i32, i32* %i, align 4
+  %tmpAdd = add i32 %tmpvar4, 1
+  store volatile i32 %tmpAdd, i32* %i, align 4
+  %tmpvar5 = load i32, i32* %i, align 4
+  %tmpcmp6 = icmp slt i32 %tmpvar5, 5
+  br i1 %tmpcmp6, label %forloop, label %forcont
+
+forcont:                                          ; preds = %forloop, %main
+  %i7 = alloca i32, align 4
+    store i32 0, i32* %i7, align 4
+  %tmpvar10 = load i32, i32* %i, align 4
+  %tmpcmp11 = icmp slt i32 %tmpvar10, 10
+  br i1 %tmpcmp11, label %forloop8, label %forcont9
+
+forloop8:                                         ; preds = %forloop8, %forcont
+  %tmpvar12 = load i32, i32* %i, align 4
+  %printf13 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @_Const_String_.1, i32 0, i32 0), i32 %tmpvar12)
+  %tmpvar14 = load i32, i32* %sum, align 4
+  %tmpvar15 = load i32, i32* %i, align 4
+  %tmpadd16 = add i32 %tmpvar14, %tmpvar15
+  store i32 %tmpadd16, i32* %sum, align 4
+  %tmpvar17 = load i32, i32* %i, align 4
+  %tmpAdd18 = add i32 %tmpvar17, 1
+  store volatile i32 %tmpAdd18, i32* %i, align 4
+  %tmpvar19 = load i32, i32* %i, align 4
+  %tmpcmp20 = icmp slt i32 %tmpvar19, 10
+  br i1 %tmpcmp20, label %forloop8, label %forcont9
+
+forcont9:                                         ; preds = %forloop8, %forcont
+  %tmpvar21 = load i32, i32* %sum, align 4
+  %printf22 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @_Const_String_.2, i32 0, i32 0), i32 %tmpvar21)
+  ret i32 0
+}

@@ -45,12 +45,8 @@ llvm/IR/Verifier.h
 /home/lumina/Documents/CompileProject/src/code_gen.cpp
 code_gen.h
 /home/lumina/Documents/CompileProject/src/code_gen.h
-iostream
--
 ast.h
 /home/lumina/Documents/CompileProject/src/ast.h
-llvm/Bitcode/BitcodeWriter.h
-/home/lumina/Documents/CompileProject/src/llvm/Bitcode/BitcodeWriter.h
 llvm/IR/BasicBlock.h
 /home/lumina/Documents/CompileProject/src/llvm/IR/BasicBlock.h
 llvm/IR/Constants.h
@@ -67,8 +63,12 @@ llvm/IR/Value.h
 /home/lumina/Documents/CompileProject/src/llvm/IR/Value.h
 llvm/IR/Verifier.h
 /home/lumina/Documents/CompileProject/src/llvm/IR/Verifier.h
+iostream
+-
 llvm/Support/raw_ostream.h
 /home/lumina/Documents/CompileProject/src/llvm/Support/raw_ostream.h
+llvm/Bitcode/BitcodeWriter.h
+/home/lumina/Documents/CompileProject/src/llvm/Bitcode/BitcodeWriter.h
 
 /home/lumina/Documents/CompileProject/src/code_gen.h
 iostream

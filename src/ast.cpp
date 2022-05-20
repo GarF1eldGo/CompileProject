@@ -68,7 +68,7 @@ nonleafAST::nonleafAST(string name, int type, vector<exprAST*> children){
 //     this->name = name;
 //     this->type = type;
 // }
-
+//
 
 /*
 ===========================叶子结点的相关类================================
@@ -88,10 +88,17 @@ stringAST::stringAST(string value)
 
   value.pop_back();
   value = value.erase(0, 1);
-  value += '\n';
-  cout << value << endl;
-    this->value = value;
-    this->name = "string";
+  string res;
+  for (int i = 0; i < value.length(); ++i) {
+    if (value[i] == '\\' && value[i + 1] == 'n') {
+      res += '\n';
+      ++i;
+    } else {
+      res += value[i];
+    }
+  }
+  this->value = res;
+  this->name = "string";
 }
 
 
