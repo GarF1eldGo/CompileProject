@@ -148,7 +148,7 @@ llvm::Value* primary_expression::CodeGen(){
     }
     else{
       return rs;
-      // if (rs->getType()->isPointerTy() && !(rs->getType()->getPointerElementType()->isArrayTy())) {
+      // if (rs->getType()->isPointerTy() && (rs->getType()->getPointerElementType()->isArrayTy())) {
       //   return builder.CreateLoad(rs->getType()->getPointerElementType(), rs, "tmpvar");
       // }
       // else{
@@ -174,8 +174,8 @@ llvm::Value* primary_expression::CodeGen(){
     llvm::Constant *strConst = llvm::ConstantDataArray::getString(context, str);
     llvm::Value *globalVar = new llvm::GlobalVariable(*generator->module, strConst->getType(), true, llvm::GlobalValue::PrivateLinkage, strConst, "_Const_String_");
     vector<llvm::Value*> indexList;
-    indexList.push_back(builder.getInt32(0));
-    indexList.push_back(builder.getInt32(0));
+    indexList.push_back(builder.getInt32(1));
+    indexList.push_back(builder.getInt32(str.length()-2));
     // var value
     llvm::Value * varPtr = builder.CreateInBoundsGEP(globalVar, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
     return varPtr;
@@ -253,7 +253,7 @@ llvm::Value* postfix_expression::CodeGen(){
       //   return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
       // }
       vector<llvm::Value*> indexList;
-      indexList.push_back(builder.getInt32(0));
+      indexList.push_back(indexvalue);
       indexList.push_back(indexvalue);
       llvm::Value * varPtr = builder.CreateInBoundsGEP(aryvalue, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
       return varPtr;
@@ -282,12 +282,32 @@ llvm::Value* postfix_expression::CodeGen(){
     }
     else{
       if(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("printf") == 0){
+        for(int i=0; i<=arg->size()-1;i++){
+          llvm::Value* tmpvalue;
+          if ((*arg)[i]->getType()->isPointerTy() && (*arg)[i]->getType()->getPointerElementType() != llvm::Type::getInt8Ty(context)) {
+              tmpvalue = builder.CreateLoad((*arg)[i]->getType()->getPointerElementType(), (*arg)[i], "tmpvar");
+          }
+          else {
+              tmpvalue = (*arg)[i];
+          }
+          (*arg)[i] = tmpvalue;
+        }
         return builder.CreateCall(generator->printf, *arg, "printf");
       }
       else if(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier.compare("scanf") == 0){
         return builder.CreateCall(generator->scanf, *arg, "scanf");
       }
       else{
+        for(int i=0; i<=arg->size()-1;i++){
+          llvm::Value* tmpvalue;
+          if ((*arg)[i]->getType()->isPointerTy() && (*arg)[i]->getType()->getPointerElementType() != llvm::Type::getInt8Ty(context)) {
+              tmpvalue = builder.CreateLoad((*arg)[i]->getType()->getPointerElementType(), (*arg)[i], "tmpvar");
+          }
+          else {
+              tmpvalue = (*arg)[i];
+          }
+          (*arg)[i] = tmpvalue;
+        }
         llvm::Function* func_real = generator->module->getFunction(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier);
         if(func_real == nullptr){
           return IRError("postfix_expression error: undefined function");
@@ -1322,17 +1342,22 @@ llvm::Value* assignment_expression::CodeGen(){
   case 1: {
     llvm::Value* tmp = this->children[0]->CodeGen();
     llvm::Value* tmpvalue = nullptr;
+    
     if(tmp == nullptr){
       return IRError("assignment_expression error in leaf node: conditional_expression");
     }
     else{
-      if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
-          tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
-      }
-      else {
-          tmpvalue = tmp;
-      }
-      return tmpvalue;
+      // if(tmp->getType()->isPointerTy()){
+      //   cout<<tmp->getType()->getPointerElementType()->isIntegerTy()<<endl;
+      // }
+      // // cout<<tmp->getType()->getPointerElementType()<<endl;
+      // if (tmp->getType()->isPointerTy() && (tmp->getType()->getPointerElementType() != llvm::Type::getInt8Ty(context))) {
+      //     tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+      // }
+      // else {
+      //     tmpvalue = tmp;
+      // }
+      return tmp;
     }
   }
   case 2: {
@@ -1514,13 +1539,32 @@ Value* expression::CodeGen() {
   cout<<"expression type:"<<this->type<<endl;
 #endif
   switch (this->type) {
-  case 1:{
-    return this->children[0]->CodeGen();
-  }
-  case 2:{
-    this->children[0]->CodeGen();
-    return this->children[2]->CodeGen();
-  }
+    case 1:{
+      llvm::Value* tmp = this->children[0]->CodeGen();
+      llvm::Value* tmpvalue;
+      if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
+        tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+      }
+      else{
+        tmpvalue = tmp;
+      }
+      return tmpvalue;
+
+    }
+    case 2:{
+      this->children[0]->CodeGen();
+      
+
+      llvm::Value* tmp = this->children[2]->CodeGen();
+      llvm::Value* tmpvalue;
+      if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
+        tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+      }
+      else{
+        tmpvalue = tmp;
+      }
+      return tmpvalue;
+    }
   }
   return nullptr;
 }
@@ -1664,7 +1708,15 @@ llvm::Value* init_declarator::CodeGen() {
   }
   case 2:{
     this->decl = decl;
-    this->value = this->children[2]->CodeGen();
+    llvm::Value* tmp = this->children[2]->CodeGen();
+    llvm::Value* tmpvalue;
+    if (tmp->getType()->isPointerTy() && !(tmp->getType()->getPointerElementType()->isArrayTy())) {
+      tmpvalue = builder.CreateLoad(tmp->getType()->getPointerElementType(), tmp, "tmpvar");
+    }
+    else{
+      tmpvalue = tmp;
+    }
+    this->value = tmpvalue;
     break;
   }
   }
