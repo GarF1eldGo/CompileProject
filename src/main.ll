@@ -1,12 +1,1 @@
-; ModuleID = 'module'
-source_filename = "module"
-
-declare i32 @printf(i8* %0, ...)
-
-declare i32 @scanf(i8* %0, ...)
-
-define i32 @main() {
-main:
-  %x = alloca [0 x [4 x i32]], align 4
-  ret void
-}
+Mini-C-Compiler: /usr/include/llvm-13/llvm/IR/Type.h:381: llvm::Type* llvm::Type::getPointerElementType() const: Assertion `getTypeID() == PointerTyID' failed.

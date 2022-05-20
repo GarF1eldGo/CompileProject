@@ -238,6 +238,7 @@ llvm::Value* postfix_expression::CodeGen(){
       vector<llvm::Value*> indexList;
       indexList.push_back(builder.getInt32(0));
       indexList.push_back(index);
+      cout << type2str(ary) <<  " " << ary->getType()->isPointerTy() << endl;
       llvm::Value * varPtr = builder.CreateInBoundsGEP(ary, llvm::ArrayRef<llvm::Value*>(indexList), "tmpvar");
       return builder.CreateLoad(varPtr->getType()->getPointerElementType(), varPtr, "tmpvar");
     }
@@ -248,12 +249,18 @@ llvm::Value* postfix_expression::CodeGen(){
       return IRError("postfix_expression error: printf() or scanf() is not allowed");
     }
     else{
-      llvm::Function* func_real = generator->module->getFunction((dynamic_cast<identifierAST*>(this->children[0]))->identifier);
+      cout << (dynamic_cast<identifierAST*>(this->children[0])) << endl; //debug
+      llvm::Function* func_real = generator->module->getFunction(dynamic_cast<identifierAST*>(dynamic_cast<primary_expression*>(dynamic_cast<postfix_expression*>(this->children[0])->children[0])->children[0])->identifier);
       if(func_real == nullptr){
         return IRError("postfix_expression error: undefined function");
       }
       else{
-        return builder.CreateCall(func_real, nullptr, "tmpcall");
+        vector<llvm::Value *> arg = vector<llvm::Value *>();
+        if (func_real->getReturnType() == builder.getVoidTy()) {
+          return builder.CreateCall(func_real, arg, "");
+        } else {
+          return builder.CreateCall(func_real, arg, "tmpcall");
+        }
       }
     }
   }
@@ -276,7 +283,11 @@ llvm::Value* postfix_expression::CodeGen(){
           return IRError("postfix_expression error: undefined function");
         }
         else{
+          if (func_real->getReturnType() == builder.getVoidTy()) {
+          return builder.CreateCall(func_real, *arg, "");
+        } else {
           return builder.CreateCall(func_real, *arg, "tmpcall");
+        }
         }
       }
     }
@@ -1306,8 +1317,9 @@ llvm::Value* function_definition::CodeGen() {
   BasicBlock *BB = BasicBlock::Create(context, prototype->name, func);
   builder.SetInsertPoint(BB);
   compound_statement *body = dynamic_cast<compound_statement*>(this->children[2]);
-  Value* ret_val = body->CodeGen();
-  builder.CreateRet(ret_val);
+  //Value* ret_val =
+  body->CodeGen();
+  //builder.CreateRet(ret_val);
   verifyFunction(*func);
   return func;
 }
@@ -1425,7 +1437,7 @@ llvm::Value* declaration::CodeGen() {
       type_spec_local = build_array(type_spec, decl_list[i]->decl->array_size);
     }
     AllocaInst *alloc = builder.CreateAlloca(type_spec_local, nullptr, decl_list[i]->decl->name);
-    if (!is_array) {
+    if (!is_array && decl_list[i]->value) {
       builder.CreateStore(decl_list[i]->value, alloc);
     }
   }
@@ -1465,10 +1477,11 @@ llvm::Value *expression_statement::CodeGen() {
 #endif
   switch (this->type) {
   case 1:{
+    //nop
     break;
   }
   case 2:{
-    this->children[0]->CodeGen();
+    return this->children[0]->CodeGen();
     break;
   }
   }
@@ -1483,12 +1496,16 @@ llvm::Value *selection_statement::CodeGen() {
   case 1: {
     Function *func = builder.GetInsertBlock()->getParent();
     BasicBlock *ThenBB = BasicBlock::Create(context, "then", func);
+    BasicBlock *ElseBB = BasicBlock::Create(context, "else", func);
     BasicBlock *MergeBB = BasicBlock::Create(context, "merge", func);
     Value* cond = this->children[2]->CodeGen();
-    builder.CreateCondBr(cond, ThenBB, nullptr);
+    builder.CreateCondBr(cond, ThenBB, ElseBB);
     builder.SetInsertPoint(ThenBB);
     this->children[4]->CodeGen();
     builder.CreateBr(MergeBB);
+    builder.SetInsertPoint(ElseBB);
+    builder.CreateBr(MergeBB);
+    builder.SetInsertPoint(MergeBB);
     break;
   }
   case 2: {
@@ -1504,6 +1521,7 @@ llvm::Value *selection_statement::CodeGen() {
     builder.SetInsertPoint(ElseBB);
     this->children[6]->CodeGen();
     builder.CreateBr(MergeBB);
+    builder.SetInsertPoint(MergeBB);
     break;
   }
   }
@@ -1544,6 +1562,7 @@ llvm::Value* iteration_statement::CodeGen() {
     BasicBlock *loop = BasicBlock::Create(context, "forloop", func);
     BasicBlock *cont = BasicBlock::Create(context, "forcont", func);
     Value* cond_value = cond->CodeGen();
+    cout << cond_value << endl;
     builder.CreateCondBr(cond_value, loop, cont);
     builder.SetInsertPoint(loop);
     body->CodeGen();

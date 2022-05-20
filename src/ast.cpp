@@ -85,6 +85,11 @@ constantAST::constantAST(int type, double value)
 
 stringAST::stringAST(string value)
 {
+
+  value.pop_back();
+  value = value.erase(0, 1);
+  value += '\n';
+  cout << value << endl;
     this->value = value;
     this->name = "string";
 }

@@ -1,6 +1,11 @@
-int main() {
-  int x = 0;
-  for(int i=0;i<=4;i++){
-    x += 1;
-  }
-}
+int main(){
+    int A[25][25];
+    int B[25][25];
+
+    int Ma,Na;
+    for(int i=0;i<Ma;i++){
+      for(int j=0;j<Na;j++){
+        A[i][j]++;
+      }
+    }
+} 
