@@ -105,9 +105,7 @@ comment \/\/[^\n]*
     return CHAR_LITERAL;
 }
 {string} {
-    string str = yytext;
-    str = str.substr(1, str.size()-2);//去掉左右双引号
-    exprAST* oneString = new stringAST(str);
+    exprAST* oneString = new stringAST(yytext);
     tokenStack.push(oneString);
     return STRING_LITERAL;
     }
