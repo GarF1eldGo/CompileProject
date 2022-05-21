@@ -107,7 +107,7 @@ int main(){
         }
 
         scanf("%c",&inputStr[0]);
-        if(inputStr[0] == '\n'){
+        if(inputStr[0] == 10){
             emptyLine = 1;
         }
         else{
@@ -116,7 +116,7 @@ int main(){
             while(!newLine){
                 scanf("%c",&inputStr[tempIndex]);
                 tempIndex++;
-                if(inputStr[tempIndex-1] == '\n'){
+                if(inputStr[tempIndex-1] == 10){
                     inputStr[tempIndex-1] = 0;
                     newLine = 1;
                 }
