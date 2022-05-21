@@ -878,8 +878,8 @@ llvm::Value* additive_expression::CodeGen(){
         return IRError("additive_expression error: char type could not connected with float type by '+' operator");
       }
       else{
-        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt8Ty(context));
-        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getInt8Ty(context));
+        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt32Ty(context));
+        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getInt32Ty(context));
         return builder.CreateAdd(tmpvalue1, tmpvalue2, "tmpadd");
       }
                 
@@ -926,8 +926,8 @@ llvm::Value* additive_expression::CodeGen(){
         return IRError("additive_expression error: char type could not connected with float type by '+' operator");
       }
       else{
-        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt8Ty(context));
-        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getInt8Ty(context));
+        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt32Ty(context));
+        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getInt32Ty(context));
         return builder.CreateSub(tmpvalue1, tmpvalue2, "tmpsub");
       }
                 
