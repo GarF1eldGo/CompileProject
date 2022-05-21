@@ -52,16 +52,16 @@ int main(){
     int maxInput = 100;
     int nameLen = 5;
 
-    char courseName[100][5] = {0};
-    int credit[100] = {0};
-    char preCourse[100][200] = {0};
-    int score[100] = {0};
+    char courseName[100][5];
+    int credit[100];
+    char preCourse[100][200];
+    int score[100];
     
     int curNum = 0; 
 
     int emptyLine = 0;
     
-    char inputStr[300] = {0};
+    char inputStr[300];
 
     int tempIndex = 1;
     int newLine = 0;
@@ -76,10 +76,10 @@ int main(){
     int takenCredit = 0;
     int remainCredit = 0;
 
-    char takenCourseName[100][5] = {0};
+    char takenCourseName[100][5];
     int takenIndex = 0;
 
-    int untakenCourseIndex[100] = {0};
+    int untakenCourseIndex[100];
     int untakenIndex = 0;
 
 
@@ -97,7 +97,32 @@ int main(){
 
     int result = 0;
 
-    char tempName[5] = {0};
+    char tempName[5];
+
+    for(int i=0;i<100;i++){
+        credit[i] = 0;
+        score[i] = 0;
+        untakenCourseIndex[i] = 0;
+        preCourseTrue[i] = 0;
+        token[i] = 0;
+    }
+
+    for(int i=0;i<100;i++){
+        for(int j=0;j<5;j++){
+            courseName[i][j] = 0;
+            takenCourseName[i][j] = 0;
+        }
+    }
+
+    for(int i=0;i<100;i++){
+        for(int j=0;j<200;j++){
+            preCourse[i][j] = 0;
+        }
+    }
+
+    for(int i=0;i<300;i++){
+        inputStr[i] = 0;
+    }
 
 
     while(!emptyLine){
