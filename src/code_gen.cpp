@@ -1418,6 +1418,8 @@ llvm::Value* assignment_expression::CodeGen(){
         }
         else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue3->getType() == llvm::Type::getInt8Ty(context)){
           // return IRError("assignment_expression error in leaf node: char type could not be connected by assignment_operator");
+          tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt8Ty(context));
+          tmpvalue3 = typeCast(tmpvalue3, llvm::Type::getInt8Ty(context));
           builder.CreateStore(tmpvalue3, tmp1);
           return tmpvalue3;
         }
