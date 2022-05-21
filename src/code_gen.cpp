@@ -79,8 +79,10 @@ codeGen::codeGen(){
 
 void codeGen::generate(exprAST* ROOT) {
   ROOT->CodeGen();
-  //this->module->print(llvm::outs(), nullptr);
-  this->module->dump();
+  this->module->print(llvm::outs(), nullptr);
+
+  // this->module->dump();
+
 }
 
 codeGen *generator = new codeGen();
@@ -1159,13 +1161,17 @@ llvm::Value* equality_expression::CodeGen(){
     if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("equality_expression error: bool type could not associate with '==' operator");
     }
-    else if(tmpvalue1->getType() != tmpvalue2->getType()){
-      return IRError("equality_expression error: two different type connected with '==' operator");
-    }
+    // else if(tmpvalue1->getType() != tmpvalue2->getType()){
+    //   return IRError("equality_expression error: two different type connected with '==' operator");
+    // }
     else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
       return builder.CreateFCmpOEQ(tmpvalue1, tmpvalue2, "tmpcmpf");
     }
     else{
+      if(tmpvalue1->getType() != tmpvalue2->getType()){
+        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt8Ty(context));
+        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getInt8Ty(context));
+      }
       return builder.CreateICmpEQ(tmpvalue1, tmpvalue2, "tmpcmp");
     }
   }
@@ -1407,7 +1413,9 @@ llvm::Value* assignment_expression::CodeGen(){
           return IRError("assignment_expression error in leaf node: bool type could not be connected by assignment_operator");
         }
         else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue3->getType() == llvm::Type::getInt8Ty(context)){
-          return IRError("assignment_expression error in leaf node: char type could not be connected by assignment_operator");
+          // return IRError("assignment_expression error in leaf node: char type could not be connected by assignment_operator");
+          builder.CreateStore(tmpvalue3, tmp1);
+          return tmpvalue3;
         }
         else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue3->getType() == llvm::Type::getFloatTy(context)){
           tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getFloatTy(context));

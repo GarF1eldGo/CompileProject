@@ -8,6 +8,14 @@ int main() {
       s[i] = 'a';
     }
   }
-  printf("%s", s);
+  for (i = 0; i < 10; ++i) {
+    if (s[i] == 0) {
+      
+    }
+    else{
+      printf("%c", s[i]);
+    }
+  }
+  printf("\n");
   return 0;
 }
