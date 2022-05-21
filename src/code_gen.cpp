@@ -1200,13 +1200,17 @@ llvm::Value* equality_expression::CodeGen(){
     if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
       return IRError("equality_expression error: bool type could not associate with '!=' operator");
     }
-    else if(tmpvalue1->getType() != tmpvalue2->getType()){
-      return IRError("equality_expression error: two different type connected with '!=' operator");
-    }
+    // else if(tmpvalue1->getType() != tmpvalue2->getType()){
+    //   return IRError("equality_expression error: two different type connected with '!=' operator");
+    // }
     else if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
       return builder.CreateFCmpONE(tmpvalue1, tmpvalue2, "tmpcmpf");
     }
     else{
+      if(tmpvalue1->getType() != tmpvalue2->getType()){
+        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt8Ty(context));
+        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getInt8Ty(context));
+      }
       return builder.CreateICmpNE(tmpvalue1, tmpvalue2, "tmpcmp");
     }
   }
