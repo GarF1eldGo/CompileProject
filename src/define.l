@@ -17,7 +17,7 @@ identifier {letter}{letgit}*
 
 integer {digit}+
 float {digit}+"."{digit}+
-char \'(\\.|[^"\\])\'
+char \'(\\n|[^'\\])\'
 string \"(\\.|[^"\\])*\"
 
 comment \/\/[^\n]*
@@ -100,7 +100,7 @@ comment \/\/[^\n]*
     return CONSTANT;
     }
 {char} {
-    exprAST* oneChar = new charAST(yytext[1]);
+    exprAST* oneChar = new charAST(yytext);
     tokenStack.push(oneChar);
     return CHAR_LITERAL;
 }

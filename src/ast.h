@@ -165,7 +165,7 @@ public:
 class charAST : public leafAST{
 public:
   char value;
-  charAST(char value);
+  charAST(string str);
 };
 
 /*

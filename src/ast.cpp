@@ -136,8 +136,19 @@ punctuationAST::punctuationAST(string punctuation)
     this->name = "punctuation";
 }
 
-charAST::charAST(char value){
-  this->value = value;
+charAST::charAST(string str){
+  str = str.substr(1, str.length() - 2);
+  char res;
+  for(int i=0;i<str.length();i++){
+    if(str[i] == '\\' && str[i+1] == 'n'){
+      res = '\n';
+      i++;
+    }
+    else{
+      res = str[i];
+    }
+  }
+  this->value = res;
   this->name = "char";
 }
 
