@@ -878,9 +878,9 @@ llvm::Value* additive_expression::CodeGen(){
         return IRError("additive_expression error: char type could not connected with float type by '+' operator");
       }
       else{
-        tmpvalue1 = typeCast(tmp1, llvm::Type::getInt32Ty(context));
-        tmpvalue2 = typeCast(tmp2, llvm::Type::getInt32Ty(context));
-        return builder.CreateFAdd(tmpvalue1, tmpvalue2, "tmpaddf");
+        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt8Ty(context));
+        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getInt8Ty(context));
+        return builder.CreateAdd(tmpvalue1, tmpvalue2, "tmpadd");
       }
                 
     }
@@ -919,16 +919,16 @@ llvm::Value* additive_expression::CodeGen(){
       }
     }
     if(tmpvalue1->getType() == llvm::Type::getInt1Ty(context)||tmpvalue2->getType() == llvm::Type::getInt1Ty(context)){
-      return IRError("additive_expression error: bool type could not associate with '+' operator");
+      return IRError("additive_expression error: bool type could not associate with '-' operator");
     }
     else if(tmpvalue1->getType() == llvm::Type::getInt8Ty(context)||tmpvalue2->getType() == llvm::Type::getInt8Ty(context)){
       if(tmpvalue1->getType() == llvm::Type::getFloatTy(context)||tmpvalue2->getType() == llvm::Type::getFloatTy(context)){
         return IRError("additive_expression error: char type could not connected with float type by '+' operator");
       }
       else{
-        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt32Ty(context));
-        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getInt32Ty(context));
-        return builder.CreateFSub(tmpvalue1, tmpvalue2, "tmpsubf");
+        tmpvalue1 = typeCast(tmpvalue1, llvm::Type::getInt8Ty(context));
+        tmpvalue2 = typeCast(tmpvalue2, llvm::Type::getInt8Ty(context));
+        return builder.CreateSub(tmpvalue1, tmpvalue2, "tmpsub");
       }
                 
     }
