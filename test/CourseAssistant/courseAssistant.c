@@ -1,11 +1,13 @@
 
-int myStrcmp(char preCourseName[],int len1,char takenCourseName[][5],int len2){
+int myStrcmp(char preCourseName[5],int len1,char takenCourseName[100][5],int len2){
     int flag = 1;
+    int i = 0;
+    int j = 0;
 
-    for(int i=0;i<len2;i++){
+    for(i=0;i<len2;i++){
         flag = 1;
 
-        for(int j=0;j<5;j++){
+        for(j=0;j<5;j++){
             if(preCourseName[j] == 0 && takenCourseName[i][j] != 0){
                 flag = 0;
             }
@@ -17,7 +19,7 @@ int myStrcmp(char preCourseName[],int len1,char takenCourseName[][5],int len2){
             }
         }
 
-        if(flag){
+        if(flag > 0){
             return 1;
         }
     }
@@ -25,27 +27,34 @@ int myStrcmp(char preCourseName[],int len1,char takenCourseName[][5],int len2){
 }
 
 
-int boolExpression(char name[],char token[],int begin1,int len1,int preCourseTrue[],int begin2,int len2){
+int boolExpression(char name[5],char token[100],int begin1,int len1,int preCourseTrue[100],int begin2,int len2){
 
     int result = preCourseTrue[begin2];
-
+    int i = 0;
     int courseIndex = begin2+1;
     int flag = 1;
-    for(int i=begin1;i<len1 && flag == 1;i++){
+    for(i=begin1;i<len1 && flag == 1;i++){
         if(token[i] == ','){
-            result = result && preCourseTrue[courseIndex];
+            if (result == 1 && preCourseTrue[courseIndex] == 1) {
+              result = 1;
+            }
+            else{
+              result = 0;
+            }
             courseIndex++;
         }
         else if(token[i] == ';'){
-            result = result || boolExpression(name,token,i+1,len1,preCourseTrue,courseIndex,len2);
-            flag = 0;
+          if (result == 1 || (boolExpression(name,token,i+1,len1,preCourseTrue,courseIndex,len2) == 1)) {
+            result = 1;
+          }
+          flag = 0;
         }
     }
-
-
+    
     return result;
 }
 
+char preCourse[100][200];
 
 int main(){
     int maxNum = 100;
@@ -54,7 +63,7 @@ int main(){
 
     char courseName[100][5];
     int credit[100];
-    char preCourse[100][200];
+    
     int score[100];
     
     int curNum = 0; 
@@ -71,7 +80,7 @@ int main(){
     int index = 0;
 
 
-    double gpa = 0;
+    float gpa = 0.0;
     int tryCredit = 0;
     int takenCredit = 0;
     int remainCredit = 0;
@@ -84,7 +93,7 @@ int main(){
 
 
     int creditNum = 0;
-    double scoreNum = 0;
+    float scoreNum = 0.0;
 
     int j = 0;
 
@@ -98,8 +107,11 @@ int main(){
     int result = 0;
 
     char tempName[5];
+    int i = 0;
+    int k = 0;
+    int m = 0;
 
-    for(int i=0;i<100;i++){
+    for(i=0;i<100;i++){
         credit[i] = 0;
         score[i] = 0;
         untakenCourseIndex[i] = 0;
@@ -107,27 +119,26 @@ int main(){
         token[i] = 0;
     }
 
-    for(int i=0;i<100;i++){
-        for(int j=0;j<5;j++){
+    for(i=0;i<100;i++){
+        for(j=0;j<5;j++){
             courseName[i][j] = 0;
             takenCourseName[i][j] = 0;
         }
     }
 
-    for(int i=0;i<100;i++){
-        for(int j=0;j<200;j++){
+    for(i=0;i<100;i++){
+        for(j=0;j<200;j++){
             preCourse[i][j] = 0;
         }
     }
 
-    for(int i=0;i<300;i++){
+    for(i=0;i<300;i++){
         inputStr[i] = 0;
     }
 
+    while(emptyLine == 0){
 
-    while(!emptyLine){
-
-        for(int i=0;i<300;i++){
+        for(i=0;i<300;i++){
             inputStr[i] = 0;
         }
 
@@ -138,7 +149,7 @@ int main(){
         else{
             tempIndex = 1;
             newLine = 0;
-            while(!newLine){
+            while(newLine == 0){
                 scanf("%c",inputStr[tempIndex]);
                 tempIndex++;
                 if(inputStr[tempIndex-1] == 10){
@@ -193,9 +204,11 @@ int main(){
         }
 
     }
+    
 
 
-    for(int i=0;i<curNum;i++){
+
+    for(i=0;i<curNum;i++){
         
         
         creditNum = credit[i];
@@ -237,35 +250,36 @@ int main(){
 
     printf("Possible Courses to Take Next\n");
 
-    if(remainCredit == 0.0){
+    if(remainCredit == 0){
         printf("  None - Congratulations!\n");
         return 0;
     }
 
-    for(int i=0;i<untakenIndex;i++){
+
+    for(i=0;i<untakenIndex;i++){
         
         j = untakenCourseIndex[i];
         
         if(preCourse[j][0] == 0){
             printf("%c%c",32,32);
-            for(int k=0;courseName[j][k] != 0;k++){
+            for(k=0;courseName[j][k] != 0;k++){
                 printf("%c",courseName[j][k]);
             }
             printf("%c",10);
         }
         else{
 
-            for(int i=0;i<100;i++){
-                preCourseTrue[i] = 0;
-                token[i] = 0;
+            for(m=0;m<100;m++){
+                preCourseTrue[m] = 0;
+                token[m] = 0;
             }
             trueIndex = 0;
             tokenIndex = 0;
 
-            for(int k=0;preCourse[j][k] != 0;k++){
+            for(k=0;preCourse[j][k] != 0;k++){
             
-                for(int i=0;i<5;i++){
-                    tempName[i] = 0;
+                for(m=0;m<5;m++){
+                    tempName[m] = 0;
                 }
                 tempIndex = 0;
 
@@ -280,7 +294,7 @@ int main(){
                 }
 
 
-                if(myStrcmp(tempName,tempIndex,takenCourseName,takenIndex)){
+                if(myStrcmp(tempName,tempIndex,takenCourseName,takenIndex) > 0){
                     preCourseTrue[trueIndex] = 1;
                 }
                 else{
@@ -291,9 +305,9 @@ int main(){
 
             result = boolExpression(courseName[j],token,0,tokenIndex,preCourseTrue,0,trueIndex);
             
-            if(result){
+            if(result > 0){
                 printf("%c%c",32,32);
-                for(int k=0;courseName[j][k] != 0;k++){
+                for(k=0;courseName[j][k] != 0;k++){
                     printf("%c",courseName[j][k]);
                 }
                 printf("%c",10);
@@ -301,4 +315,5 @@ int main(){
 
         }
     }
+    return 0;
 }
