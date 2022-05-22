@@ -50,8 +50,7 @@ int boolExpression(char name[100],char token[100],int begin1,int len1,int preCou
           flag = 0;
         }
     }
-
-
+    
     return result;
 }
 char preCourse[100][200];
