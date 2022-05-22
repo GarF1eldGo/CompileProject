@@ -1,5 +1,9 @@
-void quickSort(int numArray[],int left,int right){
-    int i,j,temp,key;
+void quickSort(int numArray[100000],int left,int right){
+    int i = 0;
+    int j = 0;
+    int temp = 0;
+    int key = 0;
+
     if(left>=right)
         return;
     key = numArray[left];
@@ -16,25 +20,28 @@ void quickSort(int numArray[],int left,int right){
     numArray[i] = key;
     quickSort(numArray,left,i-1);
     quickSort(numArray,i+1,right);
+    return ;
 }
 
 int main(){
     int num = 0;
-    scanf("%d",&num);
+    int i = 0;
+    int numArray[100000];
+    scanf("%d", num);
 
     //读取数据
-    int numArray[100000];
-    for(int i=0;i<num;i++){
-        scanf("%d",&numArray[i]);
+    for(i=0;i<num;i++){
+        scanf("%d", numArray[i]);
     }
 
     //快速排序
     quickSort(numArray,0,num-1);
     
     //输出数据
-    for(int i=0;i<num;i++){
+    for(i=0;i<num;i++){
         printf("%d\n",numArray[i]);
     }
+    return 0;
 }
 
 

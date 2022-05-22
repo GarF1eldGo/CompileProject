@@ -302,6 +302,9 @@ llvm::Value* postfix_expression::CodeGen(){
               tmpvalue = (*arg)[i];
           }
           (*arg)[i] = tmpvalue;
+          if((*arg)[i]->getType() == Type::getFloatTy(context)){
+            (*arg)[i] = builder.CreateFPExt((*arg)[i], Type::getDoubleTy(context), "tmpdouble");
+          }
         }
         return builder.CreateCall(generator->printf, *arg, "printf");
       }

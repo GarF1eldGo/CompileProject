@@ -1,21 +1,47 @@
-char s[10];
+void quickSort(int numArray[100000],int left,int right){
+    int i = 0;
+    int j = 0;
+    int temp = 0;
+    int key = 0;
 
-int main() {
-  int i = 0;
-  scanf("%s", s);
-  for (i = 0; i < 5; ++i) {
-    if (s[i] == 'c') {
-      s[i] = 'a';
+    if(left>=right)
+        return;
+    key = numArray[left];
+    i = left;
+    j = right;
+    while(i<j){
+        while(i<j && numArray[j]>=key)
+            j--;
+        numArray[i] = numArray[j];
+        while(i<j && numArray[i]<=key)
+            i++;
+        numArray[j] = numArray[i];
     }
-  }
-  for (i = 0; i < 10; ++i) {
-    if (s[i] == 0) {
-      
-    }
-    else{
-      printf("%c", s[i]);
-    }
-  }
-  printf("\n");
-  return 0;
+    numArray[i] = key;
+    quickSort(numArray,left,i-1);
+    quickSort(numArray,i+1,right);
+    return ;
 }
+
+int main(){
+    int num = 0;
+    int i = 0;
+    int numArray[100000];
+    scanf("%d", num);
+
+    //读取数据
+    for(i=0;i<num;i++){
+        scanf("%d", numArray[i]);
+    }
+
+    //快速排序
+    quickSort(numArray,0,num-1);
+    
+    //输出数据
+    for(i=0;i<num;i++){
+        printf("%d\n",numArray[i]);
+    }
+    return 0;
+}
+
+
