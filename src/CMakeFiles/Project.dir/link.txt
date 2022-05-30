@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/Project.dir/main.o -o Project   -L/home/lumina/Documents/CompileProject/src  -ljsoncpp libparser.a -Wl,-Bstatic -ll -Wl,-Bdynamic 

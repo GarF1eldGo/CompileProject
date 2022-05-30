@@ -1,4 +1,0 @@
-/home/lumina/Documents/CompileProject/src/CMakeFiles/edit_cache.dir
-/home/lumina/Documents/CompileProject/src/CMakeFiles/Project.dir
-/home/lumina/Documents/CompileProject/src/CMakeFiles/rebuild_cache.dir
-/home/lumina/Documents/CompileProject/src/CMakeFiles/parser.dir
