@@ -1,0 +1,12 @@
+.cache/
+.vscode/
+CmakeFiles/
+src/CMakeFiles/
+src/visualize/ast.json
+src/.gdb_history
+src/Mini-C-Compiler
+src/main.ll
+src/test.c
+.projectile
+compile_commands.json
+llvm.sh
