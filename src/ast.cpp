@@ -1,51 +1,45 @@
 #include "ast.h"
 
-
-//ROOT表示AST的根节点
+// ROOT表示AST的根节点
 exprAST* ROOT = new exprAST();
 
-
 //根据AST创建Json文件
-void exprAST::createJsonFile(string fileName){
-    // ofstream outFile;
-    // outFile.open(fileName);
-    // if(!outFile.is_open()){
-    //     cout<<"open file \"" << fileName << "\" failed" << endl;
-    //     return;
-    // }
-    // Json::Value root = buildJsonAST();
-    // outFile << root;
-    // outFile.close();
+void exprAST::createJsonFile(string fileName) {
+  ofstream outFile;
+  outFile.open(fileName);
+  if (!outFile.is_open()) {
+    cout << "open file \"" << fileName << "\" failed" << endl;
+    return;
+  }
+  Json::Value root = buildJsonAST();
+  outFile << root;
+  outFile.close();
 }
 
-
 //为非叶子结点创建Json类型的AST
-// Json::Value nonleafAST::buildJsonAST(){
-//     Json::Value root;
-//     root["name"] = name;
+Json::Value nonleafAST::buildJsonAST() {
+  Json::Value root;
+  root["name"] = name;
 
-//     for(int i=0;i<children.size();i++){
-//         root["children"].append(children[i]->buildJsonAST());
-//     }
+  for (int i = 0; i < children.size(); i++) {
+    root["children"].append(children[i]->buildJsonAST());
+  }
 
-//     return root;
-// }
-
+  return root;
+}
 
 //为叶子结点创建Json类型的AST
-// Json::Value leafAST::buildJsonAST(){
-//     Json::Value root;
-//     root["name"] = name;
-//     return root;
-// }
-
-
+Json::Value leafAST::buildJsonAST() {
+  Json::Value root;
+  root["name"] = name;
+  return root;
+}
 
 //非终结符结点的构造函数
-nonleafAST::nonleafAST(string name, int type, vector<exprAST*> children){
-    this->name = name;
-    this->type = type;
-    this->children = children;
+nonleafAST::nonleafAST(string name, int type, vector<exprAST*> children) {
+  this->name = name;
+  this->type = type;
+  this->children = children;
 }
 
 // //非终结符结点的构造函数
@@ -62,7 +56,6 @@ nonleafAST::nonleafAST(string name, int type, vector<exprAST*> children){
 //     va_end(ap);//清理保留的内存
 // }
 
-
 // nonleafAST::nonleafAST(string name, int type)
 // {
 //     this->name = name;
@@ -74,18 +67,13 @@ nonleafAST::nonleafAST(string name, int type, vector<exprAST*> children){
 ===========================叶子结点的相关类================================
 */
 
-
-constantAST::constantAST(int type, double value)
-{
-    this->type = type;
-    this->value = value;
-    this->name = "constant";
+constantAST::constantAST(int type, double value) {
+  this->type = type;
+  this->value = value;
+  this->name = "constant";
 }
 
-
-stringAST::stringAST(string value)
-{
-
+stringAST::stringAST(string value) {
   value.pop_back();
   value = value.erase(0, 1);
   string res;
@@ -101,58 +89,45 @@ stringAST::stringAST(string value)
   this->name = "string";
 }
 
-
-operatorAST::operatorAST(string op)
-{
-    this->op = op;
-    this->name = "operator";
+operatorAST::operatorAST(string op) {
+  this->op = op;
+  this->name = "operator";
 }
 
-
-identifierAST::identifierAST(string identifier)
-{
-    this->identifier = identifier;
-    this->name = "identifier";
+identifierAST::identifierAST(string identifier) {
+  this->identifier = identifier;
+  this->name = "identifier";
 }
 
-
-typeAST::typeAST(int type)
-{
+typeAST::typeAST(int type) {
   this->type = type;
   this->name = "type";
 }
 
-
-keywordAST::keywordAST(string keyword)
-{
-    this->keyword = keyword;
-    this->name = "keyword";
+keywordAST::keywordAST(string keyword) {
+  this->keyword = keyword;
+  this->name = "keyword";
 }
 
-
-punctuationAST::punctuationAST(string punctuation)
-{
-    this->punctuation = punctuation;
-    this->name = "punctuation";
+punctuationAST::punctuationAST(string punctuation) {
+  this->punctuation = punctuation;
+  this->name = "punctuation";
 }
 
-charAST::charAST(string str){
+charAST::charAST(string str) {
   str = str.substr(1, str.length() - 2);
   char res;
-  for(int i=0;i<str.length();i++){
-    if(str[i] == '\\' && str[i+1] == 'n'){
+  for (int i = 0; i < str.length(); i++) {
+    if (str[i] == '\\' && str[i + 1] == 'n') {
       res = '\n';
       i++;
-    }
-    else{
+    } else {
       res = str[i];
     }
   }
   this->value = res;
   this->name = "char";
 }
-
-
 
 /*
 ===========================非叶子结点的相关类================================
@@ -171,14 +146,12 @@ charAST::charAST(string str){
 //     va_end(ap);//清理保留的内存
 // }
 
-
 // nonleafAST* new_nonleafAST(string name, int type, vector<exprAST*>children)
-// {   
+// {
 //     if(!strcmp(name.c_str(),"primary_expression")){
 //         return new primaryExprAST(name,type,children);
 //     }
 //     else if(!strcmp(name.c_str(),"postfix_expression")){
 //     }
-
 
 // }
