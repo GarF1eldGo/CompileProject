@@ -10,3 +10,4 @@ src/test.c
 .projectile
 compile_commands.json
 llvm.sh
+.DS_Store
