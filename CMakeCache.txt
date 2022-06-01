@@ -257,6 +257,9 @@ ZLIB_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libz.so
 //Dependencies for the target
 deadblock_LIB_DEPENDS:STATIC=general;LLVM;
 
+//Dependencies for the target
+obfuscate_LIB_DEPENDS:STATIC=general;LLVM;
+
 //Path to a library.
 pkgcfg_lib_PC_LIBXML_xml2:FILEPATH=/usr/lib/x86_64-linux-gnu/libxml2.so
 
@@ -367,7 +370,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

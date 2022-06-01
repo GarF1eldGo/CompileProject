@@ -16,3 +16,5 @@ LLVM_MAP_COMPONENTS_TO_LIBNAMES(REQ_LLVM_LIBRARIES core)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${REQ_LLVM_LIBRARIES})
 
 add_subdirectory(DeadBlock)
+add_subdirectory(Obfuscate)
+

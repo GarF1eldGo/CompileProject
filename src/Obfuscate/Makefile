@@ -145,14 +145,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/lumina/Documents/CompileProject && $(CMAKE_COMMAND) -E cmake_progress_start /home/lumina/Documents/CompileProject/CMakeFiles /home/lumina/Documents/CompileProject/src/DeadBlock//CMakeFiles/progress.marks
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/all
+	cd /home/lumina/Documents/CompileProject && $(CMAKE_COMMAND) -E cmake_progress_start /home/lumina/Documents/CompileProject/CMakeFiles /home/lumina/Documents/CompileProject/src/Obfuscate//CMakeFiles/progress.marks
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Obfuscate/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lumina/Documents/CompileProject/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/clean
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Obfuscate/clean
 .PHONY : clean
 
 # The main clean target
@@ -162,12 +162,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/preinstall
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Obfuscate/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/preinstall
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Obfuscate/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -176,76 +176,76 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/rule:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/rule
-.PHONY : src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/rule
+src/Obfuscate/CMakeFiles/install-obfuscate-stripped.dir/rule:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Obfuscate/CMakeFiles/install-obfuscate-stripped.dir/rule
+.PHONY : src/Obfuscate/CMakeFiles/install-obfuscate-stripped.dir/rule
 
 # Convenience name for target.
-install-deadblock-stripped: src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/rule
+install-obfuscate-stripped: src/Obfuscate/CMakeFiles/install-obfuscate-stripped.dir/rule
 
-.PHONY : install-deadblock-stripped
+.PHONY : install-obfuscate-stripped
 
 # fast build rule for target.
-install-deadblock-stripped/fast:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/build.make src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/build
-.PHONY : install-deadblock-stripped/fast
+install-obfuscate-stripped/fast:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/Obfuscate/CMakeFiles/install-obfuscate-stripped.dir/build.make src/Obfuscate/CMakeFiles/install-obfuscate-stripped.dir/build
+.PHONY : install-obfuscate-stripped/fast
 
 # Convenience name for target.
-src/DeadBlock/CMakeFiles/install-deadblock.dir/rule:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/CMakeFiles/install-deadblock.dir/rule
-.PHONY : src/DeadBlock/CMakeFiles/install-deadblock.dir/rule
+src/Obfuscate/CMakeFiles/install-obfuscate.dir/rule:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Obfuscate/CMakeFiles/install-obfuscate.dir/rule
+.PHONY : src/Obfuscate/CMakeFiles/install-obfuscate.dir/rule
 
 # Convenience name for target.
-install-deadblock: src/DeadBlock/CMakeFiles/install-deadblock.dir/rule
+install-obfuscate: src/Obfuscate/CMakeFiles/install-obfuscate.dir/rule
 
-.PHONY : install-deadblock
+.PHONY : install-obfuscate
 
 # fast build rule for target.
-install-deadblock/fast:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/install-deadblock.dir/build.make src/DeadBlock/CMakeFiles/install-deadblock.dir/build
-.PHONY : install-deadblock/fast
+install-obfuscate/fast:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/Obfuscate/CMakeFiles/install-obfuscate.dir/build.make src/Obfuscate/CMakeFiles/install-obfuscate.dir/build
+.PHONY : install-obfuscate/fast
 
 # Convenience name for target.
-src/DeadBlock/CMakeFiles/deadblock.dir/rule:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/CMakeFiles/deadblock.dir/rule
-.PHONY : src/DeadBlock/CMakeFiles/deadblock.dir/rule
+src/Obfuscate/CMakeFiles/obfuscate.dir/rule:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Obfuscate/CMakeFiles/obfuscate.dir/rule
+.PHONY : src/Obfuscate/CMakeFiles/obfuscate.dir/rule
 
 # Convenience name for target.
-deadblock: src/DeadBlock/CMakeFiles/deadblock.dir/rule
+obfuscate: src/Obfuscate/CMakeFiles/obfuscate.dir/rule
 
-.PHONY : deadblock
+.PHONY : obfuscate
 
 # fast build rule for target.
-deadblock/fast:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/deadblock.dir/build.make src/DeadBlock/CMakeFiles/deadblock.dir/build
-.PHONY : deadblock/fast
+obfuscate/fast:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/Obfuscate/CMakeFiles/obfuscate.dir/build.make src/Obfuscate/CMakeFiles/obfuscate.dir/build
+.PHONY : obfuscate/fast
 
-deadblock.o: deadblock.cpp.o
+obfuscate.o: obfuscate.cpp.o
 
-.PHONY : deadblock.o
+.PHONY : obfuscate.o
 
 # target to build an object file
-deadblock.cpp.o:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/deadblock.dir/build.make src/DeadBlock/CMakeFiles/deadblock.dir/deadblock.cpp.o
-.PHONY : deadblock.cpp.o
+obfuscate.cpp.o:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/Obfuscate/CMakeFiles/obfuscate.dir/build.make src/Obfuscate/CMakeFiles/obfuscate.dir/obfuscate.cpp.o
+.PHONY : obfuscate.cpp.o
 
-deadblock.i: deadblock.cpp.i
+obfuscate.i: obfuscate.cpp.i
 
-.PHONY : deadblock.i
+.PHONY : obfuscate.i
 
 # target to preprocess a source file
-deadblock.cpp.i:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/deadblock.dir/build.make src/DeadBlock/CMakeFiles/deadblock.dir/deadblock.cpp.i
-.PHONY : deadblock.cpp.i
+obfuscate.cpp.i:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/Obfuscate/CMakeFiles/obfuscate.dir/build.make src/Obfuscate/CMakeFiles/obfuscate.dir/obfuscate.cpp.i
+.PHONY : obfuscate.cpp.i
 
-deadblock.s: deadblock.cpp.s
+obfuscate.s: obfuscate.cpp.s
 
-.PHONY : deadblock.s
+.PHONY : obfuscate.s
 
 # target to generate assembly for a file
-deadblock.cpp.s:
-	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/deadblock.dir/build.make src/DeadBlock/CMakeFiles/deadblock.dir/deadblock.cpp.s
-.PHONY : deadblock.cpp.s
+obfuscate.cpp.s:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/Obfuscate/CMakeFiles/obfuscate.dir/build.make src/Obfuscate/CMakeFiles/obfuscate.dir/obfuscate.cpp.s
+.PHONY : obfuscate.cpp.s
 
 # Help Target
 help:
@@ -259,12 +259,12 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... install-deadblock"
-	@echo "... install-deadblock-stripped"
-	@echo "... deadblock"
-	@echo "... deadblock.o"
-	@echo "... deadblock.i"
-	@echo "... deadblock.s"
+	@echo "... install-obfuscate"
+	@echo "... install-obfuscate-stripped"
+	@echo "... obfuscate"
+	@echo "... obfuscate.o"
+	@echo "... obfuscate.i"
+	@echo "... obfuscate.s"
 .PHONY : help
 
 

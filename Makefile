@@ -101,7 +101,7 @@ install/fast: preinstall/fast
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"deadblock\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"deadblock\" \"obfuscate\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -266,6 +266,45 @@ deadblock/fast:
 	$(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/deadblock.dir/build.make src/DeadBlock/CMakeFiles/deadblock.dir/build
 .PHONY : deadblock/fast
 
+#=============================================================================
+# Target rules for targets named install-obfuscate-stripped
+
+# Build rule for target.
+install-obfuscate-stripped: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 install-obfuscate-stripped
+.PHONY : install-obfuscate-stripped
+
+# fast build rule for target.
+install-obfuscate-stripped/fast:
+	$(MAKE) $(MAKESILENT) -f src/Obfuscate/CMakeFiles/install-obfuscate-stripped.dir/build.make src/Obfuscate/CMakeFiles/install-obfuscate-stripped.dir/build
+.PHONY : install-obfuscate-stripped/fast
+
+#=============================================================================
+# Target rules for targets named install-obfuscate
+
+# Build rule for target.
+install-obfuscate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 install-obfuscate
+.PHONY : install-obfuscate
+
+# fast build rule for target.
+install-obfuscate/fast:
+	$(MAKE) $(MAKESILENT) -f src/Obfuscate/CMakeFiles/install-obfuscate.dir/build.make src/Obfuscate/CMakeFiles/install-obfuscate.dir/build
+.PHONY : install-obfuscate/fast
+
+#=============================================================================
+# Target rules for targets named obfuscate
+
+# Build rule for target.
+obfuscate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 obfuscate
+.PHONY : obfuscate
+
+# fast build rule for target.
+obfuscate/fast:
+	$(MAKE) $(MAKESILENT) -f src/Obfuscate/CMakeFiles/obfuscate.dir/build.make src/Obfuscate/CMakeFiles/obfuscate.dir/build
+.PHONY : obfuscate/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -281,10 +320,13 @@ help:
 	@echo "... acc_gen"
 	@echo "... install-deadblock"
 	@echo "... install-deadblock-stripped"
+	@echo "... install-obfuscate"
+	@echo "... install-obfuscate-stripped"
 	@echo "... intrinsics_gen"
 	@echo "... omp_gen"
 	@echo "... Mini-C-Compiler"
 	@echo "... deadblock"
+	@echo "... obfuscate"
 .PHONY : help
 
 
