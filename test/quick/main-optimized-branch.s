@@ -37,12 +37,12 @@ quickSort:                              # @quickSort
 	decl	%edx
 	movl	24(%rsp), %esi
 	movq	%rbx, %rdi
-	callq	quickSort
+	callq	quickSort@PLT
 	movl	8(%rsp), %esi
 	incl	%esi
 	movl	20(%rsp), %edx
 	movq	%rbx, %rdi
-	callq	quickSort
+	callq	quickSort@PLT
 .LBB0_11:                               # %then
 	addq	$32, %rsp
 	.cfi_def_cfa_offset 16
@@ -107,53 +107,62 @@ quickSort:                              # @quickSort
 main:                                   # @main
 	.cfi_startproc
 # %bb.0:                                # %main
-	subq	$400008, %rsp                   # imm = 0x61A88
-	.cfi_def_cfa_offset 400016
-	movl	$0, 4(%rsp)
-	movl	$0, (%rsp)
-	leaq	4(%rsp), %rsi
-	movl	$.L_Const_String_, %edi
+	pushq	%rbx
+	.cfi_def_cfa_offset 16
+	subq	$400016, %rsp                   # imm = 0x61A90
+	.cfi_def_cfa_offset 400032
+	.cfi_offset %rbx, -16
+	movl	$0, 12(%rsp)
+	movl	$0, 8(%rsp)
+	leaq	.L_Const_String_(%rip), %rdi
+	leaq	12(%rsp), %rsi
 	xorl	%eax, %eax
-	callq	scanf
-	movl	$0, (%rsp)
-	cmpl	$0, 4(%rsp)
-	jle	.LBB1_2
+	callq	scanf@PLT
+	movl	$0, 8(%rsp)
+	cmpl	$0, 12(%rsp)
+	jle	.LBB1_3
+# %bb.1:                                # %forloop.preheader
+	leaq	.L_Const_String_.1(%rip), %rbx
 	.p2align	4, 0x90
-.LBB1_1:                                # %forloop
+.LBB1_2:                                # %forloop
                                         # =>This Inner Loop Header: Depth=1
-	movslq	(%rsp), %rax
-	leaq	8(%rsp,%rax,4), %rsi
-	movl	$.L_Const_String_.1, %edi
+	movslq	8(%rsp), %rax
+	leaq	16(%rsp,%rax,4), %rsi
+	movq	%rbx, %rdi
 	xorl	%eax, %eax
-	callq	scanf
-	incl	(%rsp)
-	movl	(%rsp), %eax
-	cmpl	4(%rsp), %eax
-	jl	.LBB1_1
-.LBB1_2:                                # %forcont
-	movl	4(%rsp), %edx
+	callq	scanf@PLT
+	incl	8(%rsp)
+	movl	8(%rsp), %eax
+	cmpl	12(%rsp), %eax
+	jl	.LBB1_2
+.LBB1_3:                                # %forcont
+	movl	12(%rsp), %edx
 	decl	%edx
-	leaq	8(%rsp), %rdi
+	leaq	16(%rsp), %rdi
 	xorl	%esi, %esi
-	callq	quickSort
-	movl	$0, (%rsp)
-	cmpl	$0, 4(%rsp)
-	jle	.LBB1_4
+	callq	quickSort@PLT
+	movl	$0, 8(%rsp)
+	cmpl	$0, 12(%rsp)
+	jle	.LBB1_6
+# %bb.4:                                # %forloop14.preheader
+	leaq	.L_Const_String_.2(%rip), %rbx
 	.p2align	4, 0x90
-.LBB1_3:                                # %forloop12
+.LBB1_5:                                # %forloop14
                                         # =>This Inner Loop Header: Depth=1
-	movslq	(%rsp), %rax
-	movl	8(%rsp,%rax,4), %esi
-	movl	$.L_Const_String_.2, %edi
+	movslq	8(%rsp), %rax
+	movl	16(%rsp,%rax,4), %esi
+	movq	%rbx, %rdi
 	xorl	%eax, %eax
-	callq	printf
-	incl	(%rsp)
-	movl	(%rsp), %eax
-	cmpl	4(%rsp), %eax
-	jl	.LBB1_3
-.LBB1_4:                                # %forcont13
+	callq	printf@PLT
+	incl	8(%rsp)
+	movl	8(%rsp), %eax
+	cmpl	12(%rsp), %eax
+	jl	.LBB1_5
+.LBB1_6:                                # %forcont12
 	xorl	%eax, %eax
-	addq	$400008, %rsp                   # imm = 0x61A88
+	addq	$400016, %rsp                   # imm = 0x61A90
+	.cfi_def_cfa_offset 16
+	popq	%rbx
 	.cfi_def_cfa_offset 8
 	retq
 .Lfunc_end1:

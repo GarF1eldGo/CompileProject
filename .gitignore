@@ -1,8 +1,7 @@
 .cache/
 .vscode/
-CmakeFiles/
-src/CMakeFiles/
-src/visualize/ast.json
+CMakeFiles
+ast.json
 src/.gdb_history
 src/Mini-C-Compiler
 src/main.ll

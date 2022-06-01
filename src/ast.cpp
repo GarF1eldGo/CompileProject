@@ -8,7 +8,7 @@ void exprAST::createJsonFile(string fileName) {
   ofstream outFile;
   outFile.open(fileName);
   if (!outFile.is_open()) {
-    cout << "open file \"" << fileName << "\" failed" << endl;
+    cerr << "open file \"" << fileName << "\" failed" << endl;
     return;
   }
   Json::Value root = buildJsonAST();

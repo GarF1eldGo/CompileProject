@@ -75,6 +75,18 @@ CMAKE_BINARY_DIR = /home/lumina/Documents/CompileProject
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -131,28 +143,16 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lumina/Documents/CompileProject/CMakeFiles /home/lumina/Documents/CompileProject//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /home/lumina/Documents/CompileProject && $(CMAKE_COMMAND) -E cmake_progress_start /home/lumina/Documents/CompileProject/CMakeFiles /home/lumina/Documents/CompileProject/src/DeadBlock//CMakeFiles/progress.marks
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lumina/Documents/CompileProject/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/clean
 .PHONY : clean
 
 # The main clean target
@@ -162,109 +162,90 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lumina/Documents/CompileProject && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named acc_gen
+# Convenience name for target.
+src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/rule:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/rule
+.PHONY : src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/rule
 
-# Build rule for target.
-acc_gen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 acc_gen
-.PHONY : acc_gen
+# Convenience name for target.
+install-deadblock-stripped: src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/rule
 
-# fast build rule for target.
-acc_gen/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_gen.dir/build.make CMakeFiles/acc_gen.dir/build
-.PHONY : acc_gen/fast
-
-#=============================================================================
-# Target rules for targets named omp_gen
-
-# Build rule for target.
-omp_gen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 omp_gen
-.PHONY : omp_gen
-
-# fast build rule for target.
-omp_gen/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/omp_gen.dir/build.make CMakeFiles/omp_gen.dir/build
-.PHONY : omp_gen/fast
-
-#=============================================================================
-# Target rules for targets named intrinsics_gen
-
-# Build rule for target.
-intrinsics_gen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 intrinsics_gen
-.PHONY : intrinsics_gen
-
-# fast build rule for target.
-intrinsics_gen/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/intrinsics_gen.dir/build.make CMakeFiles/intrinsics_gen.dir/build
-.PHONY : intrinsics_gen/fast
-
-#=============================================================================
-# Target rules for targets named Mini-C-Compiler
-
-# Build rule for target.
-Mini-C-Compiler: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Mini-C-Compiler
-.PHONY : Mini-C-Compiler
-
-# fast build rule for target.
-Mini-C-Compiler/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/Mini-C-Compiler.dir/build.make src/CMakeFiles/Mini-C-Compiler.dir/build
-.PHONY : Mini-C-Compiler/fast
-
-#=============================================================================
-# Target rules for targets named install-deadblock-stripped
-
-# Build rule for target.
-install-deadblock-stripped: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 install-deadblock-stripped
 .PHONY : install-deadblock-stripped
 
 # fast build rule for target.
 install-deadblock-stripped/fast:
-	$(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/build.make src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/build
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/build.make src/DeadBlock/CMakeFiles/install-deadblock-stripped.dir/build
 .PHONY : install-deadblock-stripped/fast
 
-#=============================================================================
-# Target rules for targets named install-deadblock
+# Convenience name for target.
+src/DeadBlock/CMakeFiles/install-deadblock.dir/rule:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/CMakeFiles/install-deadblock.dir/rule
+.PHONY : src/DeadBlock/CMakeFiles/install-deadblock.dir/rule
 
-# Build rule for target.
-install-deadblock: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 install-deadblock
+# Convenience name for target.
+install-deadblock: src/DeadBlock/CMakeFiles/install-deadblock.dir/rule
+
 .PHONY : install-deadblock
 
 # fast build rule for target.
 install-deadblock/fast:
-	$(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/install-deadblock.dir/build.make src/DeadBlock/CMakeFiles/install-deadblock.dir/build
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/install-deadblock.dir/build.make src/DeadBlock/CMakeFiles/install-deadblock.dir/build
 .PHONY : install-deadblock/fast
 
-#=============================================================================
-# Target rules for targets named deadblock
+# Convenience name for target.
+src/DeadBlock/CMakeFiles/deadblock.dir/rule:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/DeadBlock/CMakeFiles/deadblock.dir/rule
+.PHONY : src/DeadBlock/CMakeFiles/deadblock.dir/rule
 
-# Build rule for target.
-deadblock: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 deadblock
+# Convenience name for target.
+deadblock: src/DeadBlock/CMakeFiles/deadblock.dir/rule
+
 .PHONY : deadblock
 
 # fast build rule for target.
 deadblock/fast:
-	$(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/deadblock.dir/build.make src/DeadBlock/CMakeFiles/deadblock.dir/build
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/deadblock.dir/build.make src/DeadBlock/CMakeFiles/deadblock.dir/build
 .PHONY : deadblock/fast
+
+deadblock.o: deadblock.cpp.o
+
+.PHONY : deadblock.o
+
+# target to build an object file
+deadblock.cpp.o:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/deadblock.dir/build.make src/DeadBlock/CMakeFiles/deadblock.dir/deadblock.cpp.o
+.PHONY : deadblock.cpp.o
+
+deadblock.i: deadblock.cpp.i
+
+.PHONY : deadblock.i
+
+# target to preprocess a source file
+deadblock.cpp.i:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/deadblock.dir/build.make src/DeadBlock/CMakeFiles/deadblock.dir/deadblock.cpp.i
+.PHONY : deadblock.cpp.i
+
+deadblock.s: deadblock.cpp.s
+
+.PHONY : deadblock.s
+
+# target to generate assembly for a file
+deadblock.cpp.s:
+	cd /home/lumina/Documents/CompileProject && $(MAKE) $(MAKESILENT) -f src/DeadBlock/CMakeFiles/deadblock.dir/build.make src/DeadBlock/CMakeFiles/deadblock.dir/deadblock.cpp.s
+.PHONY : deadblock.cpp.s
 
 # Help Target
 help:
@@ -278,13 +259,12 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... acc_gen"
 	@echo "... install-deadblock"
 	@echo "... install-deadblock-stripped"
-	@echo "... intrinsics_gen"
-	@echo "... omp_gen"
-	@echo "... Mini-C-Compiler"
 	@echo "... deadblock"
+	@echo "... deadblock.o"
+	@echo "... deadblock.i"
+	@echo "... deadblock.s"
 .PHONY : help
 
 
@@ -296,6 +276,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lumina/Documents/CompileProject && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

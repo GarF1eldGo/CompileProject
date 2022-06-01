@@ -1,8 +1,0 @@
-/home/lumina/Documents/CompileProject/CMakeFiles/rebuild_cache.dir
-/home/lumina/Documents/CompileProject/CMakeFiles/edit_cache.dir
-/home/lumina/Documents/CompileProject/src/CMakeFiles/rebuild_cache.dir
-/home/lumina/Documents/CompileProject/src/CMakeFiles/acc_gen.dir
-/home/lumina/Documents/CompileProject/src/CMakeFiles/edit_cache.dir
-/home/lumina/Documents/CompileProject/src/CMakeFiles/omp_gen.dir
-/home/lumina/Documents/CompileProject/src/CMakeFiles/intrinsics_gen.dir
-/home/lumina/Documents/CompileProject/src/CMakeFiles/Mini-C-Compiler.dir
