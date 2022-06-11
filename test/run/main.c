@@ -1,12 +1,10 @@
-int add(int a, int b) {
+int func(int x, int y) {
   return 0;
-  return a + b;
+  return x + y;
 }
 
 int main() {
-  int k = add(1, 2);
-  if (1 == 0) {
-    printf("hello");
-  }
+  int a = func(1, 1);
+  printf("%d\n", a);
   return 0;
 }

@@ -1,17 +1,17 @@
 	.text
 	.file	"module"
-	.globl	add                             # -- Begin function add
+	.globl	func                            # -- Begin function func
 	.p2align	4, 0x90
-	.type	add,@function
-add:                                    # @add
+	.type	func,@function
+func:                                   # @func
 	.cfi_startproc
-# %bb.0:                                # %add
+# %bb.0:                                # %func
 	movl	%edi, -4(%rsp)
 	movl	%esi, -8(%rsp)
 	xorl	%eax, %eax
 	retq
 .Lfunc_end0:
-	.size	add, .Lfunc_end0-add
+	.size	func, .Lfunc_end0-func
 	.cfi_endproc
                                         # -- End function
 	.globl	main                            # -- Begin function main
@@ -23,9 +23,13 @@ main:                                   # @main
 	pushq	%rax
 	.cfi_def_cfa_offset 16
 	movl	$1, %edi
-	movl	$2, %esi
-	callq	add@PLT
+	movl	$1, %esi
+	callq	func@PLT
 	movl	%eax, 4(%rsp)
+	leaq	.L_Const_String_(%rip), %rdi
+	movl	%eax, %esi
+	xorl	%eax, %eax
+	callq	printf@PLT
 	xorl	%eax, %eax
 	popq	%rcx
 	.cfi_def_cfa_offset 8
@@ -37,7 +41,7 @@ main:                                   # @main
 	.type	.L_Const_String_,@object        # @_Const_String_
 	.section	.rodata,"a",@progbits
 .L_Const_String_:
-	.asciz	"hello"
-	.size	.L_Const_String_, 6
+	.asciz	"%d\n"
+	.size	.L_Const_String_, 4
 
 	.section	".note.GNU-stack","",@progbits

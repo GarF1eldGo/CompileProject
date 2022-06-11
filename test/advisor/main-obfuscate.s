@@ -1053,12 +1053,12 @@ preCourse:
 	.type	.L_Const_String_,@object        # @_Const_String_
 	.data
 .L_Const_String_:
-	.asciz	"%c"
+	.asciz	"\017I"
 	.size	.L_Const_String_, 3
 
 	.type	.L_Const_String_.1,@object      # @_Const_String_.1
 .L_Const_String_.1:
-	.asciz	"%c"
+	.asciz	"\017I"
 	.size	.L_Const_String_.1, 3
 
 	.type	.L_Const_String_.2,@object      # @_Const_String_.2
@@ -1098,32 +1098,32 @@ preCourse:
 
 	.type	.L_Const_String_.8,@object      # @_Const_String_.8
 .L_Const_String_.8:
-	.asciz	"%c%c"
+	.asciz	"\017I\017I"
 	.size	.L_Const_String_.8, 5
 
 	.type	.L_Const_String_.9,@object      # @_Const_String_.9
 .L_Const_String_.9:
-	.asciz	"%c"
+	.asciz	"\017I"
 	.size	.L_Const_String_.9, 3
 
 	.type	.L_Const_String_.10,@object     # @_Const_String_.10
 .L_Const_String_.10:
-	.asciz	"%c"
+	.asciz	"\017I"
 	.size	.L_Const_String_.10, 3
 
 	.type	.L_Const_String_.11,@object     # @_Const_String_.11
 .L_Const_String_.11:
-	.asciz	"%c%c"
+	.asciz	"\017I\017I"
 	.size	.L_Const_String_.11, 5
 
 	.type	.L_Const_String_.12,@object     # @_Const_String_.12
 .L_Const_String_.12:
-	.asciz	"%c"
+	.asciz	"\017I"
 	.size	.L_Const_String_.12, 3
 
 	.type	.L_Const_String_.13,@object     # @_Const_String_.13
 .L_Const_String_.13:
-	.asciz	"%c"
+	.asciz	"\017I"
 	.size	.L_Const_String_.13, 3
 
 	.section	".note.GNU-stack","",@progbits

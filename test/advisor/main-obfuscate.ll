@@ -2,20 +2,20 @@
 source_filename = "module"
 
 @preCourse = global [100 x [200 x i8]] zeroinitializer
-@_Const_String_ = private global [3 x i8] c"%c\00"
-@_Const_String_.1 = private global [3 x i8] c"%c\00"
+@_Const_String_ = private global [3 x i8] c"\0FI\00"
+@_Const_String_.1 = private global [3 x i8] c"\0FI\00"
 @_Const_String_.2 = private global [12 x i8] c"mzk\10\0A\0F\1A\04\1BL \00"
 @_Const_String_.3 = private global [21 x i8] c"bE_XY\0Ak^^OGZ^ON\10\0A\0FN \00"
 @_Const_String_.4 = private global [21 x i8] c"bE_XY\0AiEGZFO^ON\10\0A\0FN \00"
 @_Const_String_.5 = private global [24 x i8] c"iXONC^Y\0AxOGKCDCDM\10\0A\0FN  \00"
 @_Const_String_.6 = private global [31 x i8] c"zEYYCHFO\0AiE_XYOY\0A^E\0A~KAO\0AdOR^ \00"
 @_Const_String_.7 = private global [27 x i8] c"\0A\0AdEDO\0A\07\0AiEDMXK^_FK^CEDY\0B \00"
-@_Const_String_.8 = private global [5 x i8] c"%c%c\00"
-@_Const_String_.9 = private global [3 x i8] c"%c\00"
-@_Const_String_.10 = private global [3 x i8] c"%c\00"
-@_Const_String_.11 = private global [5 x i8] c"%c%c\00"
-@_Const_String_.12 = private global [3 x i8] c"%c\00"
-@_Const_String_.13 = private global [3 x i8] c"%c\00"
+@_Const_String_.8 = private global [5 x i8] c"\0FI\0FI\00"
+@_Const_String_.9 = private global [3 x i8] c"\0FI\00"
+@_Const_String_.10 = private global [3 x i8] c"\0FI\00"
+@_Const_String_.11 = private global [5 x i8] c"\0FI\0FI\00"
+@_Const_String_.12 = private global [3 x i8] c"\0FI\00"
+@_Const_String_.13 = private global [3 x i8] c"\0FI\00"
 
 declare i32 @printf(i8*, ...)
 
